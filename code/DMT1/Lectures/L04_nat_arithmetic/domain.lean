@@ -124,8 +124,8 @@ def exp : Nat → Nat → Nat
 | n, (m' + 1) => n * exp n m'
 
 
-/-!
-## Relations
+/- @@@
+## Predicates
 
 Predicates represent *properties* of objects or tuples of
 objects. Here we represent several predicates on individual
