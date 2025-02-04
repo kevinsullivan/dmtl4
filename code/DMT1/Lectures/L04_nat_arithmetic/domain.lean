@@ -27,7 +27,18 @@ def th : Nat := Nat.succ (Nat.succ (Nat.succ Nat.zero))
 
 
 ## Operations
+-/
 
+-- inductive Nat where
+-- | zero: Nat
+-- | succ (n: Nat): Nat
+
+-- def zero: Nat := Nat.zero
+-- def one: Nat := Nat.succ zero
+-- def two: Nat := Nat.succ one
+-- def three: Nat := Nat.succ two
+
+/-!
 ### Unary Operations
 @@@ -/
 
@@ -52,6 +63,25 @@ def pred2 : Nat → Nat
 #eval pred2 2
 #eval pred2 5
 
+
+def pred_2nd: Nat → Nat
+| 0 => 0
+| 1 => 0
+| n'' + 2 => n''
+
+#eval pred_2nd 5
+
+inductive Tree: Type
+| empty
+| node (n: Nat) (l r: Tree)
+
+def size: Tree → Nat
+| Tree.empty => 0
+| Tree.node _ l r => 1 + size l + size r
+
+def sum: Tree → Nat
+| Tree.empty => 0
+| Tree.node n l r => n + sum l + sum r
 
 def dec : Nat → Nat := pred     -- read this carefully and understand it
 
@@ -87,14 +117,15 @@ def sub : Nat → Nat → Nat
 
 def mul : Nat → Nat → Nat
 | _, 0 => 0
-| n, (m' + 1) => add n (mul n m')
+| n, (m' + 1) => n + (mul n m') -- add n (mul n m')
 
 def exp : Nat → Nat → Nat
 | _, 0 => 1
 | n, (m' + 1) => n * exp n m'
 
-/- @@@
-## Predicates
+
+/-!
+## Relations
 
 Predicates represent *properties* of objects or tuples of
 objects. Here we represent several predicates on individual
