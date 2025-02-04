@@ -1,39 +1,80 @@
 namespace DMT1.Lectures.L04_nat_arithmetic.domain
 
-/-!
+/- @@@
+
+
 # Domain: natural number arithmetic
 
 ## The Nat Type
 
 We use Lean's definition of the Nat type.
--/
+@@@ -/
 
-/-!
+#check Nat
+
+/- @@@
+inductive Nat where
+  | zero : Nat
+  | succ (n : Nat) : Nat
+@@@ -/
+
+def z : Nat := Nat.zero
+def o : Nat := Nat.succ Nat.zero
+def o' : Nat := Nat.succ z
+def th : Nat := Nat.succ (Nat.succ (Nat.succ Nat.zero))
+
+/- @@@
+
+
 ## Operations
 
 ### Unary Operations
--/
+@@@ -/
 
 def id : Nat → Nat
 | n => n
 
 def inc : Nat → Nat
-| n => n + 1       -- Nat.succ n
+| n => Nat.succ n       -- Nat.succ n
 
 def pred : Nat → Nat
 | 0 => 0        -- Nat.zero
-| n' + 1 => n'  -- Nat.succ n'
+| Nat.succ n' => n'  -- Nat.succ n'
+
+def pred2 : Nat → Nat
+| 0 => 0
+| 1 => 0
+| Nat.succ (Nat.succ n'') => n''
+
+
+#eval pred 0
+#eval pred2 0
+#eval pred2 2
+#eval pred2 5
+
 
 def dec : Nat → Nat := pred     -- read this carefully and understand it
 
 def fac : Nat → Nat
 | 0 => 1
-| (n' + 1) => (n' + 1) * fac n'
+| (Nat.succ n') => (Nat.succ n') * fac n'
 
 
-/-!
+inductive Tree : Type
+| empty
+| node (n : Nat) (l r : Tree)
+
+def size : Tree → Nat
+| Tree.empty => 0
+| Tree.node _ l r => 1 + size l + size r
+
+def sum : Tree → Nat
+| Tree.empty => 0
+| Tree.node n l r => n + sum l + sum r
+
+/- @@@
 ### Binary Operations
--/
+@@@ -/
 
 def add : Nat → Nat → Nat
 | n, 0 => n
@@ -52,13 +93,19 @@ def exp : Nat → Nat → Nat
 | _, 0 => 1
 | n, (m' + 1) => n * exp n m'
 
-/-!
-## Relations
+/- @@@
+## Predicates
 
-### Unary Relations
--/
+Predicates represent *properties* of objects or tuples of
+objects. Here we represent several predicates on individual
+(unary) and pairs of (binary) natural numbers. The first,
+isEven, indicates whether a given number "has the property
+of being zero", for example.
 
-def isEq0 : Nat → Bool
+### Unary Predicates
+@@@ -/
+
+def isZero : Nat → Bool
 | 0 => true
 | _ => false
 
@@ -71,9 +118,13 @@ def isOdd : Nat → Bool
 | n => !(isEven n)
 
 
-/-!
-### Binary Relations
--/
+/- @@@
+### Binary Predicates
+
+We also define several binary (two-argument) predicates on the
+natural numbers, representing these predicates as functions from
+pairs of natural numbers to Boolean.
+@@@ -/
 
 def eq : Nat → Nat → Bool
 | 0, 0 => true

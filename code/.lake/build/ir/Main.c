@@ -15,11 +15,13 @@ extern "C" {
 #endif
 LEAN_EXPORT lean_object* _lean_main(lean_object*);
 static lean_object* l_main___closed__3;
-lean_object* l_IO_println___at_Lean_instEval___spec__1(lean_object*, lean_object*);
+lean_object* lean_string_push(lean_object*, uint32_t);
 static lean_object* l_main___closed__1;
 LEAN_EXPORT lean_object* l_hello;
 static lean_object* l_main___closed__4;
+lean_object* l_IO_print___at_IO_println___spec__1(lean_object*, lean_object*);
 static lean_object* l_hello___closed__1;
+LEAN_EXPORT lean_object* l_IO_println___at_main___spec__1(lean_object*, lean_object*);
 static lean_object* l_main___closed__2;
 lean_object* lean_string_append(lean_object*, lean_object*);
 static lean_object* _init_l_hello___closed__1() {
@@ -36,6 +38,16 @@ _start:
 lean_object* x_1; 
 x_1 = l_hello___closed__1;
 return x_1;
+}
+}
+LEAN_EXPORT lean_object* l_IO_println___at_main___spec__1(lean_object* x_1, lean_object* x_2) {
+_start:
+{
+uint32_t x_3; lean_object* x_4; lean_object* x_5; 
+x_3 = 10;
+x_4 = lean_string_push(x_1, x_3);
+x_5 = l_IO_print___at_IO_println___spec__1(x_4, x_2);
+return x_5;
 }
 }
 static lean_object* _init_l_main___closed__1() {
@@ -79,7 +91,7 @@ _start:
 {
 lean_object* x_2; lean_object* x_3; 
 x_2 = l_main___closed__4;
-x_3 = l_IO_println___at_Lean_instEval___spec__1(x_2, x_1);
+x_3 = l_IO_println___at_main___spec__1(x_2, x_1);
 return x_3;
 }
 }

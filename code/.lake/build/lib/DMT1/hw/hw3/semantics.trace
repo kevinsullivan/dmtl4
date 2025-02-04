@@ -1,8 +1,0 @@
-{"log":
- [{"message":
-   ".> LEAN_PATH=././.lake/build/lib DYLD_LIBRARY_PATH= /Users/sullivan/.elan/toolchains/leanprover--lean4---stable/bin/lean ././././DMT1/hw/hw3/semantics.lean -R ./././. -o ././.lake/build/lib/DMT1/hw/hw3/semantics.olean -i ././.lake/build/lib/DMT1/hw/hw3/semantics.ilean -c ././.lake/build/ir/DMT1/hw/hw3/semantics.c --json",
-   "level": "trace"},
-  {"message":
-   "././././DMT1/hw/hw3/semantics.lean:113:0: ∀ (e : Expr) (i : Interp), eval e i = true : Prop",
-   "level": "info"}],
- "depHash": "14594643334576480563"}

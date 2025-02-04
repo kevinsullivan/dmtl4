@@ -1,9 +1,0 @@
-{"log":
- [{"message":
-   ".> LEAN_PATH=././.lake/build/lib DYLD_LIBRARY_PATH= /Users/sullivan/.elan/toolchains/leanprover--lean4---stable/bin/lean ././././DMT1/hw/hw3/domain.lean -R ./././. -o ././.lake/build/lib/DMT1/hw/hw3/domain.olean -i ././.lake/build/lib/DMT1/hw/hw3/domain.ilean -c ././.lake/build/ir/DMT1/hw/hw3/domain.c --json",
-   "level": "trace"},
-  {"message": "././././DMT1/hw/hw3/domain.lean:27:0: \"F\"", "level": "info"},
-  {"message": "././././DMT1/hw/hw3/domain.lean:28:0: \"T\"", "level": "info"},
-  {"message": "././././DMT1/hw/hw3/domain.lean:41:0: \"T\"", "level": "info"},
-  {"message": "././././DMT1/hw/hw3/domain.lean:42:0: \"F\"", "level": "info"}],
- "depHash": "1357290708146147451"}

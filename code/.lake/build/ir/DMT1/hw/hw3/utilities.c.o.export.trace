@@ -1,5 +1,0 @@
-{"log":
- [{"message":
-   ".> /Users/sullivan/.elan/toolchains/leanprover--lean4---stable/bin/leanc -c -o ././.lake/build/ir/DMT1/hw/hw3/utilities.c.o.export ././.lake/build/ir/DMT1/hw/hw3/utilities.c -O3 -DNDEBUG -DLEAN_EXPORTING",
-   "level": "trace"}],
- "depHash": "9573036395225891233"}
