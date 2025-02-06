@@ -176,6 +176,26 @@ the natural numbers is called Nat.rec.
 
 def fac : Nat → Nat := Nat.rec facBase facStep
 
+#check Nat.rec
+
+-- Nat.rec.{u}
+--   {motive : Nat → Sort u} function
+--   (zero : motive Nat.zero) answer to zero
+--   (succ : (n : Nat) → motive n → motive n.succ) step function
+--   (t : Nat) :
+-- motive t
+
+#check List.rec
+
+-- List.rec.{u_1, u}
+--   {α : Type u}
+--   {motive : List α → Sort u_1}
+--   (nil : motive [])
+--   (cons : (head : α) → (tail : List α) → motive tail → motive (head :: tail))
+--   (t : List α) :
+-- motive t
+
+
 /-!
 Let's break that down. We are defining fac as the name of
 a function that takes a Nat argument and returns a Nat
