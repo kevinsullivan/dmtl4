@@ -1,5 +1,5 @@
 // Lean compiler output
-// Module: DMT1.Lectures.L04_nat_arithmetic.domain
+// Module: DMT1.Lectures.L04_natArithmetic.domain
 // Imports: Init
 #include <lean/lean.h>
 #if defined(__clang__)

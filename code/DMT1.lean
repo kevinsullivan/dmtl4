@@ -24,6 +24,6 @@ import DMT1.Lectures.L03_modelTheory.truthTable
 import DMT1.Lectures.L03_modelTheory.properties
 import DMT1.Lectures.L03_modelTheory.validity
 
-import DMT1.Lectures.L04_nat_arithmetic.syntax
-import DMT1.Lectures.L04_nat_arithmetic.semantics
-import DMT1.Lectures.L04_nat_arithmetic.domain
+import DMT1.Lectures.L04_natArithmetic.syntax
+import DMT1.Lectures.L04_natArithmetic.semantics
+import DMT1.Lectures.L04_natArithmetic.domain

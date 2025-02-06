@@ -23,13 +23,17 @@
   - [Semantic Validity](./DMT1/Lectures/L03_modelTheory/validity.lean.md)
   
 - [Arithmetic](./Arithmetic.md)
-  - [Syntax and Semantics](./DMT1/Lectures/L04_nat_arithmetic/arithLang.lean.md)
-
+  - [Syntax](./DMT1/Lectures/L04_natArithmetic/syntax.lean.md)
+  - [Semantics](./DMT1/Lectures/L04_natArithmetic/semantics.lean.md)
+  - [Domain (Induction)](./DMT1/Lectures/L04_natArithmetic/domain.lean.md)
+  - [Examples](./DMT1/Lectures/L04_natArithmetic/examples.lean.md)
+  
 - [Assignments](){-}
 
   - [Lean and VSCode](./Assignments/a1.md)
-  - [Extend Syntax for Propositional Logic](./Assignments/a2.md)
-  - [Extend Semantics for Propositional Logic](./Assignments/a3.md)
+  - [Syntax of Propositional Logic](./Assignments/a2.md)
+  - [Semantics of Propositional Logic](./Assignments/a3.md)
+  - [The Language of Arithmetic](./Assignments/a4.md)
 
 ---
 
