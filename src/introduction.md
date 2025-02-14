@@ -4,9 +4,6 @@
   - [Acknowledgements](#acknowledgements)
   - [Two Pillars of Computer Science](#two-pillars-of-computer-science)
   - [Stepping Back: Some Problems](#stepping-back-some-problems)
-  - [The Pillar Ignored](#the-pillar-ignored)
-  - [The Practical Problem](#the-practical-problem)
-  - [The Radical Purpose of This Course](#the-radical-purpose-of-this-course)
   - [The Secret Sauce](#the-secret-sauce)
   - [Design Constraints](#design-constraints)
   - [The Solution](#the-solution)
@@ -30,44 +27,33 @@ This work expresses cetain technical juddgments by the author based on observati
 
 ## Two Pillars of Computer Science
 
-Computation and reasoning are two great partially intertwined pillars of computer science. Consequently we have languages for expressing *conputations*, namely *programming* languages, and languages for expressing *propositions* over diverse structures (or *worlds*) and for *reasoning* about (1) their logical properties, of being unsatisfiable, satisfiable, or valid, and (2) whether they are true or not for any given  structures (in any given world).  
+Computation and reasoning are two great intertwined pillars of computer science. Consequently we have languages for expressing *conputations*, namely *programming* languages, and languages for *reasoning* about propositions over diverse structures (or *worlds*). For decades, the computer science fieldhas excelled at teaching computational thinking and skills in reading, writing, and evolving programming code. By contrast, the field has done exceptionally poorly in teaching reasoning and the formal languages and thought processes needed to reason effectively, e.g., about such things as the critical *properties* that software systems should have, e.g., that they are secure.
 
-The use of programming langauges to specify computations is familiar territory even to the earliest computer science students. Expressions in reasoning languages, by contrast, express propositions about given *worlds* along with valid forms of reasoning about the truth in particular worlds, or unsatisfiability, satisfiability, or validity in the space of all possible worlds. The wwo pillars of the field, then, are *computation* enabled by *programming* Languages and *reasoning* enabled by what may call *reasoning languages*.
+The use of programming langauges to specify computations is familiar territory even to the earliest computer science students. The very first course in computer science is invariably a course in programming and programming languages. Programming is then one of the primary areas of emphasis throughout the entire undergraduate curriculum. Students of CS thus today generally graduate with high proficiency in computational thinking and in the use of programming languages that support it. 
 
-In languages like the one we use in this course, these two forms of language are interwoven intricately into a unified linguistic whole enabled by an amazing conceptual unification called the the Curry-Howard Correspondence (CHC). The CHC is the insight that formalized deductive reasoning of certains kinds (namely natural deduction) can be cast as computation, but with propositions and proofs rather than ordinary data and function  types.
+Recognizing the essential foundational character or reasoning, the *second* course in the undergraduate CS curriculum is typically "CS2: Discrete Mathematics and Theory" (DMT1). It is in this course that students gain their first, and usually their last, exposure to formal reasoning, languages that support it, or applications thereof. Such courses are generally paper-and-pencil affairs covering propositional and first-order logic and set theory, proof construction by induction (but usually only on natural numbers), and maybe a few related topics, such as graphs and combinatorics.
 
-This idea, of the CHC, is the principle that this book attempts to exploit to engage computer scientists, in particular, in the topic of formal expression and reasoning. We aim to teach logic, proof, and automated mathematical reasoning in terms that computer science students and practitioners already understand and love. We have thus adopted Lean 4 as both the unified *programming and reasoning* language for this course.
+The problem that this course addresses has two parts. On the supply (of talent) side, the problem is that, as far as this researcher and educator see, students almost invariably find these courses to be boring, abstract, disconnected from their interest in computing, and deeply forgettable. Anecdotally, most graduate students incoming to this researchers courses remember almost nothing from their early DMT courses, and few have ever had to use reasoning langauges and methods after taking DMT1.
+
+On the demand side, we are now seeing very rapidly growing demand for graduating engineers who do actually understand formal reasoning and languages, but the supply is miniscule. This explosion in demand for reasoning skills is happening at the same time we're seeing a drop-off in demand for "mere" computational thinking and programming.
+
+The conclusions of the author include the following: (1) Our field has failed to train generations of graduating computer scientists in the thought processes and the formal languages needed to be productive with *reasoning* in advanced industrial practice. (2) The standard DMT1 course is, for far too many students, not a productive or memorable experience, as evinced by ample observation of the exceptionally poor state of knowledge of most incoming graduate students in computer science, in the author's experience. (3) It is time to replace the standard DMT1 course with something entirely new, different, and far better. 
+
+The course presented here is offered as a model for an entirely new approach. At the highest level, it teaches all of the core material in any DMT1 course but with all of the context formalized in the reasoning language, Lean 4. In languages like this, supported by wonderful tooling, reasoning is linked to comptuation by the amazing unification known as the the *Curry-Howard Correspondence* (CHC). The CHC holds that formalized deductive reasoning of certains kinds (natural deduction, which is perhaps the core concept in any DMT course) is a form of computing, but not only with the usual data and function types but with now axioms, propositions, and proofs as first-class citizens. 
+
+Lean 4 is so beautifully expressive of such a broad range of mathematical concepts that a significant community of mathematicians have organized around it to drive the development of formalized versions of mathematics across a very broad range of fields. Meanwhile, CS students remain stuck learning a logic (first-order predicate logic and set theory) that is *not* suitable as a foundation for formalizing abstract mathemtics in a way that makes it readily mechanizabe. This course adopts, *type theory*, here as implemented by Lean 4, as a far better choice even for early CS students.
 
 ## Stepping Back: Some Problems
 
-That we arrived here is entirely understandable. The demand for programming was voracious, and the cost of reasoning was prohibitively high. Theory, languages, tools, thriving communitities, and real demand drives curriculuar choices. But now the winds are turbulent. Generative and related AI still appear to hold promising of reduced demand for entirely hand-typed programming code. But what's even more impressive is now rapidly growing demand for students with real fluency not only in programming language and thinking, but in the abstractions and dynamics of reasoning, including, but not limited to, reasoning about computations.
+That we've arrived at a point where reasoning technology is advancing at extraordinary speed but where are students are by and large entirely unprepared to understand or use it. Of course, for many decades, the demand for programming was voracious, and at the same time cost and difficulty of reasoning were prohibitively high. But now the tables are turned. Generative and related AI promise to reduce demand for programming code while the needs of industry and national security are driving significant increases in demand for formal reasoning. 
 
-This goal for this course is to contribute to addressing this shortfall by radically replacing the traditional undergraduate CS2  course in discrete mathematics around the wildly successful reasoning and computation language, Lean 4. The course is scope for one undergraduate semester. The material on theory extensions and SMT solvers is recommended at this level as optional, and shuold probably be skipped on a first teaching of the course.
+This course aims to help address the resulting shortfall in talent by radically replacing the traditional undergraduate DMT1 course with a new one, covering essentiall the same basic content, but now using the wildly successful reasoning and computation language and toolset of Lean 4. The course is scoped for a full undergraduate semester or as the first half of an introductory graduate course in formal languages and reasoning. Big changes in in circumstances make now a great time to consider such a transition in CS pedagogy. They include the following:
 
-## The Pillar Ignored
-
-To the extent that reasoning and the theories, languages, and tools that support it, are taught, they generally appear in a standard second course for majors, namely *discrete mathematics and theory (DMT1)*. This course teaches students to use propositional logic (syntax, semantics, model theory), first-order predicate logic and set theory, proof-theoretic validity and proof construction skills, and induction, typically only for proofs and only over natural numbers.
-
-The overarching intellectual construct as seen by students is untyped, but properly stratified, first order logical and set theory. These courses are also generally paper-and-pencil affairs. In the end, I am afraid to suggested, they are received as among the least relevant, least memorable courses in the entire curriculum. There is little apparent connection to students' known intrinsic interests in *computation*, and little or no perceived utility in the subject matter. The result, over generations of students, is that even top BS graduates and entering graduate students generally have graduate no experience with reasoning or with contemporary enabling theories, languages, tools, communities, and industrial needs. 
-
-## The Practical Problem
-
-This state of affairs is understandable as the outcome of a decades-long history during which reasoning languages were arcane, tool support was minimal, one needed graduate education to use them, very few people used them, and demand came only from rare exceptional projects.
-
-Times have now changed. We now have clearly successful reasoning theories, languages, technologies, and communities enabling deep and substantially automated reasoning across many domains of discourse  employing the natural abstractions and notations of all of the respective domains.  Exponentiating the effect is rapidly growing industrial demand for graduates who are prepared to *hit the ground running* when it comes to useing these capabilities for productive reasoning.
-
-In this author's experience, few if any incoming graduate students have any degree of fluency in any of the reasoning languages of computer science, not even in important aspects of propositional logic.Most new graduate students incoming to a recent class did not confidently know how to reason about implications. Yet we take for granted that all incoming grad students will have working fluency in at least one and almost certainly multiple styles of *computational* thought and expression.
-
-## The Radical Purpose of This Course
-
-The author has developed this course as a model for full-out replacement for the traditional undergraduate course in discrete mathematics and theory, and as a first major unit of a graduate course for students with little prior experience with formal langauges and reasoning. Several big changes in in circumstances make right now a great time to consider this significant transition in CS pedagogy. They include the following:
-
-- Rapidly increasing industrial demand for formal reasoning about systems that undergird our society
-- The emergence of type-theory-based formalisms with exceptional expressiveness and broad applications
-- The development of superb automated tooling for using reasoning languages effectively in practice
-- The distinct possibility that routine program generation is increasinly handled by generative AIs
-
-The author thus proposes that now it is finally time to remediate the deep imbalance in our pedagogy, until now focused overwhelmingly on languages and methods programming, and barely at all on reasoning. This course is thus offered as a wholesale replacement for the traditional second undergraduate course in computer science, discrete mathematics and theory (DMT). 
+- Rapidly increasing industrial demand for formal, machine-supported and machine-checked reasoning about critical properties software-intensive systems that undergird our society
+- The emergence of type-theory-based formalisms with exceptional expressiveness and broad applications that have attracted large communities of researchers in mathematics, which gtends to validate the proposition that there's something new and remarkable in them
+- The development of superb tooling for using reasoning languages effectively in practice
+- The profound intertwining of computation and reasoning afforded by such langauges
+- The real possibility that mere routine programming will increasingly be done by "AIs"
 
 ## The Secret Sauce
 
