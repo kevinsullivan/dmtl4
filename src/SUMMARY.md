@@ -54,10 +54,11 @@
   - [Relations](./DMT1/Lectures/L08_setsRelationsFunctions.02_relations.lean.md)
   - [Properties of Sets and Relations](./DMT1/Lectures/L08_setsRelationsFunctions.03_propertiesOfRelations.lean.md)
 
-- [Proof Construction by Induction](./proofByInduction.md)
-  - [Induction Axioms](./inductionAxioms.md)
-  - [Inductive Proofs](./DMT1/Lectures/L09_induction/01_sets.lean.md)
-  - [Structural vs Generative Recursion](./structuralRecursion.md)
+- [Induction](./proofByInduction.md)
+  - [Axioms](./inductionAxioms.md)
+  - [Proofs](./DMT1/Lectures/L09_induction/01_sets.lean.md)
+  - [Structural Recursion](./structuralRecursion.md)
+  - [Generative Recursion](./generativeRecursion.md)
   - [Well-Founded Relations and Termination](./wellFoundedRelations.md)
 
 - [Assignments](){-}
