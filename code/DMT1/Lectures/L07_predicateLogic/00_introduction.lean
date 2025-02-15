@@ -16,6 +16,7 @@ theory: sets of objects and ways of speaking about *all* of
 the elements in a given set, or *at least one* element of a
 given set as satisfying some condition.
 
+<!-- toc -->
 
 ## Overview
 

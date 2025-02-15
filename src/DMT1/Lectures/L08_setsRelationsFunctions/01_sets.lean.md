@@ -7,6 +7,9 @@ namespace DMT1.Lectures.setsRelationsFunctions.sets
 
 # Set Theory
 
+<!-- toc -->
+
+
 A set is intuitively understood as a *collection* of objects.
 Such a collection can be finite or infinite. Infinite sets can
 vary in the degrees of their infinite sizes. For example, the

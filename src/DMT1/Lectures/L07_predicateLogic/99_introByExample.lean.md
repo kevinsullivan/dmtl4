@@ -1,5 +1,8 @@
 # Propositions as Types by Example
 
+<!-- toc -->
+
+
 
 We will introduce the idea of representing
 propositions as types with some simple examples

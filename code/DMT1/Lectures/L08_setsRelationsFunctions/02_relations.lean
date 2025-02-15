@@ -10,6 +10,9 @@ namespace DMT1.Lectures.setsRelationsFunctions.relations
 /- @@@
 # Binary Relations
 
+<!-- toc -->
+
+
 Just as a set can be viewed as a collection of
 individual objects of some type, α, specified by a
 membership predicate on α, so we will now view at

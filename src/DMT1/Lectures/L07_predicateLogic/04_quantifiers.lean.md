@@ -1,4 +1,7 @@
 
+<!-- toc -->
+
+
 Suppose:
 
 - α is any type (such as Nat or A ∨ B)

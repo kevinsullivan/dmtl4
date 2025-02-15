@@ -10,6 +10,10 @@ have both arithmetic and relational expressions.
 The former will evaluate to natural numbers, when
 we get to the semantics (e.g., 3 + 2), while the
 latter will evaluate to Booleans (e.g., 3 < 2).
+
+<!-- toc -->
+
+
 @@@ -/
 
 /- @@@

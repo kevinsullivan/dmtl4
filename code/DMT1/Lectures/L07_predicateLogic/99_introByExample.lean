@@ -1,5 +1,8 @@
 /- @@@
 # Propositions as Types by Example
+
+<!-- toc -->
+
 @@@ -/
 
 

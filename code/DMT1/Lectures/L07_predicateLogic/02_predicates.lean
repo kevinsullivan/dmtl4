@@ -1,5 +1,8 @@
 /- @@@
 # Proposition, Predicate, and Connective Types
+
+<!-- toc -->
+
 @@@ -/
 
 

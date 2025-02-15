@@ -12,6 +12,9 @@ logic with natural number arithmetic as a theory extension. That
 means we can now write propositional logic expressions that have
 arithmetic *relational* (Boolean-valued!) expressions in natural
 number arithmetic. Let's start from the bottom up.
+
+<!-- toc -->
+
 -/
 
 

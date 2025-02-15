@@ -8,6 +8,9 @@ namespace DMT1.Lectures.natArithmetic.semantics
 Given syntactic operator and predicate terms, return
 their fixed semantic meanings as Nat- and Bool-valued
 functions.
+
+<!-- toc -->
+
 ```lean
 open DMT1.Lectures.natArithmetic.domain
 open DMT1.Lectures.natArithmetic.syntax

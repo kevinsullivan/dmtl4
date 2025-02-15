@@ -1,5 +1,8 @@
 # Quantifiers: Universal Generalization (∀)
 
+<!-- toc -->
+
+
 Quantifiers are part of the syntax of predicate logic.
 They allow one to assert that every object (∀) of some
 type has some property, or that there exists (∃) (there is)

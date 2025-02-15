@@ -6,6 +6,9 @@ namespace DMT1.Lectures.natArithmetic.domain
 /- @@@
 # Domain: natural number arithmetic
 
+<!-- toc -->
+
+
 ## The Nat Type
 
 We use Lean's definition of the Nat type.

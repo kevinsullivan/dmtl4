@@ -10,6 +10,9 @@ namespace DMT1.Lectures.natArithmetic.arithLang.demo
 
 # Our Natural Number Arithmetic Language!
 
+<!-- toc -->
+
+
 ```lean
 open DMT1.Lectures.natArithmetic.syntax
 

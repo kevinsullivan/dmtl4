@@ -1,6 +1,4 @@
 
-<!-- toc -->
-
 # Semantics
 
 The idea of semantics in Propositional Logic is simple:
@@ -8,6 +6,8 @@ provided that we have a function that maps each variable
 expression to a Boolean value, then  every expression in
 propositional logic has a Boolean value as its meaning.
 We will call such a function a *variable interpretation*.
+
+<!-- toc -->
 
 For literal expressions the mapping to Boolean values is
 fixed: the meaning of ⊤ is Boolean *true*, and for ⊥ it

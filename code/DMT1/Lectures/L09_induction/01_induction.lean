@@ -3,6 +3,9 @@ import Mathlib.Tactic.Ring
 /- @@@
 # Induction
 
+<!-- toc -->
+
+
 Suppose that you have some arbitrary type, α, and
 that, for *any* value (t : α), you want produce a
 corresponding output of some output type. Such an

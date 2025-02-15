@@ -192,6 +192,9 @@ example : @isWellOrdering Nat Nat predRel :=
 /- @@@
 ### Equality is an equivalence relation.
 
+<!-- toc -->
+
+
 To show that that equality on a type, α, (@Eq α), is
 an equivalence relation, we have to show that it's
 reflexive, symmetric, and transitive. We'll give the

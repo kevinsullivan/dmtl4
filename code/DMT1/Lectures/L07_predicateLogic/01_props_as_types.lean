@@ -1,6 +1,9 @@
 /- @@@
 # Propositional Logic with Proof-Theoretic Validity
 
+<!-- toc -->
+
+
 In this chapter, we re-develop propositional logic in type theory,
 but now with a *proof-theoretic* rather thana model-theoretic notion
 of what it means for a proposition to be *valid*. Rather than checking

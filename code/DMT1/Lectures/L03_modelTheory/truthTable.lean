@@ -1,6 +1,9 @@
 /- @@@
 # Truth Tables
 
+<!-- toc -->
+
+
 Given expression, *e*, a truth table for *e* is a list
 of all 2^n interpretations for *e* with each one paired
 with the value of *e* under it. The primary function that

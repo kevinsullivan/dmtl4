@@ -1,4 +1,7 @@
-/- @@@# Quantifiers
+/- @@@ Quantifiers
+
+<!-- toc -->
+
 
 Suppose:
 

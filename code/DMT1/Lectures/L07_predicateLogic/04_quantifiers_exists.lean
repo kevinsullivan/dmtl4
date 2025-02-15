@@ -1,6 +1,9 @@
 /- @@@
 # Quantifiers: Existential Quantification (∃)
 
+<!-- toc -->
+
+
 We now turn to the second of the two quantifiers in
 predicate logic: the existential operator, *∃.* It is
 used to write propositions of the form, *∃ (x : T), P x*.

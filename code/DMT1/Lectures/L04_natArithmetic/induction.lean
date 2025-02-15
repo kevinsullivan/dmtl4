@@ -8,6 +8,9 @@ As such a function consumes a natural number value
 and returns another natural number value, it's type
 must be *Nat → Nat*. But can we compute the value of
 the function for *any* n?
+
+<!-- toc -->
+
 @@@ -/
 
 /- @@@

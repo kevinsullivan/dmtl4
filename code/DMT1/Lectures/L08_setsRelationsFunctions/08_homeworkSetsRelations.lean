@@ -5,6 +5,9 @@ namespace DMT1.Lectures.setsRelationsFunctions.homeworksSetsRelations
 /-
 Homework #8 Properties of Relations.
 
+<!-- toc -->
+
+
 You must be able to do this homework on your own.
 If getting to that point requires collaboration, you
 may collaborate with up to two other people. In this

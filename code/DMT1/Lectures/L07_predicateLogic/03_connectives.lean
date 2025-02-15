@@ -1,6 +1,9 @@
 /- @@@
 # The Logical Connectives in Type Theory
 
+<!-- toc -->
+
+
 If you come to understand the following ideas, and can use them, then
 you've understood how to represent complex logical expressions in type
 theory.

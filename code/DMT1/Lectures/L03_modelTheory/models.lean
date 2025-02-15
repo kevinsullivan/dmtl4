@@ -2,8 +2,13 @@
 
 # Models
 
+
+
 As a final chapter in our unit on propositional logic, we
 now present the concepts of models and counter-examples.
+
+<!-- toc -->
+
 @@@ -/
 
 import DMT1.Lectures.L03_modelTheory.truthTable

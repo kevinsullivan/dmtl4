@@ -1,5 +1,8 @@
 # Proposition, Predicate, and Connective Types
 
+<!-- toc -->
+
+
 
 ## Predicates
 Last time we developed two examples where we represented
