@@ -1,5 +1,4 @@
 # Generative Recursion
  
-This material was not covered in earlier versions and could come too late. Proof by
-decending through well ordered relations.
+This material was not covered in earlier versions. Proof of decent through well ordered relations. Expressing and having these concepts checked automatically. Need to pick a few examples.
 

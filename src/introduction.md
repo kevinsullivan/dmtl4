@@ -2,13 +2,16 @@
 
 - [Discrete Mathematics and Theory in Lean 4](#discrete-mathematics-and-theory-in-lean-4)
   - [Acknowledgements](#acknowledgements)
-  - [Two Pillars of Computer Science](#two-pillars-of-computer-science)
+  - [Disclaimers](#disclaimers)
+  - [A Couple of Pillars](#a-couple-of-pillars)
   - [Some Problems](#some-problems)
   - [Secret Sauce](#secret-sauce)
   - [Design Constraints](#design-constraints)
   - [This Solution](#this-solution)
   - [An Example](#an-example)
   - [Status](#status)
+  - [Invitation](#invitation)
+  - [Errata](#errata)
   - [Paths Forward](#paths-forward)
   - [Humility](#humility)
 
@@ -18,15 +21,17 @@
 
 This course was developed with support provided in part by a research grant from the National Science Foundation, #1909414, SHF: Small: Explicating and Exploiting the Physical Semantics of Code.
 
+## Disclaimers 
+
 Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
 
 The views expressed in this article are those of the author(s) and do not necessarily reflect the views, policies, or positions of the University of Virginia.
 
 This work expresses cetain technical juddgments by the author based on observation and experience but not always on outcomes of scientific testing. No IRBs have been needed or sought. No student or other human subjects data is reported here or has been reported outside of official reporting channels. 
 
-## Two Pillars of Computer Science
+## A Couple of Pillars
 
-Computation and reasoning are two great intertwined pillars of computer science. Consequently we have languages for expressing *conputations*, namely *programming* languages, and languages for *reasoning* about propositions over diverse *worlds*. For decades, we in computer science have excelled at teaching computational thinking and the use of programming languages. By contrast, we have done exceptionally poorly in teaching reasoning and the formal languages and thought processes needed to reason formally in practice.
+Computation and systematized reasoning are two great intertwined pillars of computer science. Consequently we have languages for expressing *conputations*, namely *programming* languages, and languages for *reasoning* about propositions over diverse *worlds*. For decades, we in computer science have excelled at teaching computational thinking and the use of programming languages. By contrast, we have done exceptionally poorly in teaching reasoning and the formal languages and thought processes needed to reason formally in practice.
 
 The use of programming langauges is familiar territory even to the earliest computer science students. The very first course in computer science is invariably a course in programming, and implicitly in programming languages. Programming then remains one of the primary areas of emphasis throughout the entire undergraduate curriculum. Students of CS thus today generally graduate with high proficiency in computational thinking and in the use of programming languages that support it.
 
@@ -148,6 +153,16 @@ of this semester, the online document should be a reasonable polished presentati
 undergraduate course. Most of the raw material is already online but only in a raw and not
 previously disseminated form from last semester's undergraduate course.
 
+## Invitation
+
+If you with to discuss these materials, drop me a line with DMTL4 as the subject line.
+It's my last name at Virginia, Edu.
+
+## Errata
+
+If you want to alert us to errors in these materials, feel free to deposit an issue
+in the course repository (currently, Feb 2025) on GitHub.
+
 ## Paths Forward
 
 From here, advanced courses in several areas are possible at both undergraduate and graduate
@@ -157,7 +172,7 @@ provable security, machine learning (e.g., see AlphaProof), robotics, quantum co
 ## Humility
 
 There are issues and opportunities for improvement at all levels of this document, from the
-lexical to the conceptual to the issue of my judgment. If you feel inclined to provide input,
-even of the more critical variety, please don't hesitate to send it along.
+lexical to the conceptual and beyond! If you feel inclined to provide input, whether friendly
+or more stern, please don't hesitate to send it along in whatever way you see as most fit.
 
 &copy; Kevin Sullivan 2024-2025.
