@@ -64,21 +64,23 @@ demonstrated strength of Lean 4 is in its enabling communities to express rich t
 in the clear, abstract, generalized terms of the particular domain itself, across a wide
 range of domains in graduate- and beyond-level mathematics. 
 
-The entire course is set up this way. Predicate logic is through its standard shallow
-embedding in Lean 4, with first-order logic described as a special case. This course can
-then teach general concepts as being general, with reflexivity of a binary relation on a
-set as an example. You could say, given a particular set, s, and a particular binary
-relation, r on s, what it means for r to be reflexive is that for any object o is in,
-(o,o) is in r. That's ok, but it expands one's mind greatly to be able to say, isntead,
-that given any binary relation r on any set s, what it means for r to be reflexive is
-that for any o in s, r o o.
+The entire course is set up this way. Predicate logic is presented through its standard 
+shallow embedding in Lean 4. First-order logic is described as a special case. 
+
+This course  can then teach general concepts as being general, with reflexivity of a
+binary relation on a set as an example. In a first-order course, you can formally express
+the what it means for some particular set, s, and some particular binary relation, r on
+s, for r to be "reflexive." That's ok, but it expands one's mathematical agility to be
+able to say, and express formally that reflexivity is a property of *any* binary
+relation r on *any* set s of objects of *any* type, T. The expressiveness of first-order
+logic is well short of being able to express many of the most important ideas expected
+to be taught in this class.
 
 It's not just a nicety, either, to have *reflexive* as a predicate on any binary relation
-on any set. It means that this predicate can be applied to any compatible relation so as
-to produce the proposition that that particular relation is reflexive, about which you
-might well want to reason. The application of predicates to particulars in this manner
-is ubiquitous in formal reasoning, reading, and writing. Being able to formally state
-propositions about relations by applying predicates to them and then also knowing how
+on any set of terms of any type. It means that this predicate can be applied to any 
+particular relation so as to produce the proposition that it is reflexive,. The 
+application of predicates to particulars in this manner is ubiquitous in formal 
+reasoning, reading, and writing. Being able to formally state propositions about relations by applying predicates to them and then also knowing how
 to construct machine-checked proofs of them can perhaps be taken as evidence of deeper
 undertanding and broader potential to use formal reasoning productively in practice.
  
@@ -138,8 +140,8 @@ between formal and *natural* natural language.
 
 ## Status
 
-The status of this online book is *fully drafted and under active editing*. In this
-spring of 2025, the author is teaching an introductory graduate course called *software
+The status of this online book is *now drafted and under revisions: work in progress*. In
+this spring of 2025, the author is teaching an introductory graduate course called *software
 logic.* The undergraduate course presented here is now serving the dual purpose of getting
 graduate students up to speed, but now with added content and at double speed. By the end
 of this semester, the online document should be a reasonable polished presentation of the
@@ -148,10 +150,14 @@ previously disseminated form from last semester's undergraduate course.
 
 ## Paths Forward
 
-From here, advanced courses in several areas are possible at both undergraduate and graduate levels, including programming language design and implementation, software verification, provable security, machine learning (e.g., see AlphaProof), and ultimately the higher mathematics of robotics, quantum computing, cyber-physical systems, control systems, concurrent systems, and many other domains. 
+From here, advanced courses in several areas are possible at both undergraduate and graduate
+levels: cyberphysical systems, programming language design and implementation, verification,
+provable security, machine learning (e.g., see AlphaProof), robotics, quantum computing, etc.
 
 ## Humility
 
-There are issues and opportunities for improvement at all levels of this document, from the lexical to the conceptual. If you feel inclined to provide input, even of the more critical variety, please don't hesitate to send it along.
+There are issues and opportunities for improvement at all levels of this document, from the
+lexical to the conceptual to the issue of my judgment. If you feel inclined to provide input,
+even of the more critical variety, please don't hesitate to send it along.
 
 &copy; Kevin Sullivan 2024-2025.
