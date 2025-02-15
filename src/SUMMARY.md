@@ -41,7 +41,7 @@
 - [Mathlib](./mathlib.md)
 
 - [Predicate Logic](./predLogic.md)
-  - [Introduction by Example](./DMT1/Lectures/L07_predicateLogic/00_introByExample.lean.md)
+  - [Introduction](./DMT1/Lectures/L07_predicateLogic/00_introduction.lean.md)
   - [Propositions as Types](./DMT1/Lectures/L07_predicateLogic/01_props_as_types.lean.md)
   - [Predicates](./DMT1/Lectures/L07_predicateLogic/02_predicates.lean.md)
   - [Connectives](./DMT1/Lectures/L07_predicateLogic/03_connectives.lean.md)

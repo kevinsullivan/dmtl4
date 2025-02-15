@@ -1,11 +1,11 @@
 /- @@@
 # Propositional Logic with Proof-Theoretic Validity
 
-In this lecture, we'll show how we can re-develop propositional
-logic, in type theory, now with a *proof-theoretic* rather than
-a model-theoretic notion of what it means for a proposition to be
-*valid*. Rather than checking all interpretations, we will embed
-the axioms of propositional logic into Lean theory as follows:
+In this chapter, we re-develop propositional logic in type theory,
+but now with a *proof-theoretic* rather thana model-theoretic notion
+of what it means for a proposition to be *valid*. Rather than checking
+all interpretations, we will embed the axioms of propositional logic
+into Lean and then we weil *reason* about validity using them:
 
 - We will represent any given proposition as a *type*
 - We will represent the proofs of a proposition as the *values* of its type
@@ -23,7 +23,7 @@ To make all of this concrete, we'll do the following in the rest of this lecture
 @@@ -/
 
 /- @@@
-## Propositions as Types; Values as Proofs of Validity
+## Propositions as Types; Values as Proofs
 
 We now represent two propositions as type: Kevin is from Charlottesville,
 and Carter is from Charlottesville. We'll use K and C as shorted names for
@@ -74,7 +74,7 @@ def proofOfNat    : Nat             := 1
 
 
 /- @@@
-## Logical Connectives And Their Meanings
+## The Axioms Behind The Logical Connectives
 
 Ok, so we've represented two propositions as types, each with
 three values. We will consider each such value as a "proof" of

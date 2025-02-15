@@ -12,8 +12,9 @@
   - [Status](#status)
   - [Invitation](#invitation)
   - [Errata](#errata)
-  - [Paths Forward](#paths-forward)
+  - [Student Paths Forward](#student-paths-forward)
   - [Humility](#humility)
+  - [Research Path Forward](#research-path-forward)
 
 ## Acknowledgements
 
@@ -163,7 +164,7 @@ It's my last name at Virginia, Edu.
 If you want to alert us to errors in these materials, feel free to deposit an issue
 in the course repository (currently, Feb 2025) on GitHub.
 
-## Paths Forward
+## Student Paths Forward
 
 From here, advanced courses in several areas are possible at both undergraduate and graduate
 levels: cyberphysical systems, programming language design and implementation, verification,
@@ -171,8 +172,11 @@ provable security, machine learning (e.g., see AlphaProof), robotics, quantum co
 
 ## Humility
 
-There are issues and opportunities for improvement at all levels of this document, from the
-lexical to the conceptual and beyond! If you feel inclined to provide input, whether friendly
-or more stern, please don't hesitate to send it along in whatever way you see as most fit.
+There are surely problems and opportunities for improvement throughout this document. If you 
+feel inclined to provide input, please do send it along.
+
+## Research Path Forward
+
+Natural experiment.
 
 &copy; Kevin Sullivan 2024-2025.
