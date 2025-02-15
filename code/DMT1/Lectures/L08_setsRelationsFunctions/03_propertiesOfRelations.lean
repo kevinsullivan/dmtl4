@@ -9,6 +9,9 @@ import Mathlib.Data.Real.Basic
 There are many important properties of relations. In this
 section we'll formally define some of the most important.
 The definitions/specifications speak for themselves.
+
+<!-- toc -->
+
 @@@ -/
 
 namespace DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
@@ -182,7 +185,7 @@ def predRel : Rel Nat Nat := fun a b => b = a.succ
 example : @isWellOrdering Nat Nat predRel :=
   fun s nonempty =>
   -- ∃ m ∈ s, ¬∃ n ∈ s, predRel n m
-  _
+  sorry
 
 /- @@@
 ## Examples
@@ -191,8 +194,6 @@ example : @isWellOrdering Nat Nat predRel :=
 
 /- @@@
 ### Equality is an equivalence relation.
-
-<!-- toc -->
 
 
 To show that that equality on a type, α, (@Eq α), is

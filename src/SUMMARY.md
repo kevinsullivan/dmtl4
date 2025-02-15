@@ -51,8 +51,8 @@
 
 - [Sets and Relations](./setTheory)
   - [Sets](./DMT1/Lectures/L08_setsRelationsFunctions/01_sets.lean.md)
-  - [Relations](./DMT1/Lectures/L08_setsRelationsFunctions.02_relations.lean.md)
-  - [Properties of Sets and Relations](./DMT1/Lectures/L08_setsRelationsFunctions.03_propertiesOfRelations.lean.md)
+  - [Relations](./DMT1/Lectures/L08_setsRelationsFunctions/02_relations.lean.md)
+  - [Properties of Sets and Relations](./DMT1/Lectures/L08_setsRelationsFunctions/03_propertiesOfRelations.lean.md)
 
 - [Induction](./proofByInduction.md)
   - [Axioms](./inductionAxioms.md)

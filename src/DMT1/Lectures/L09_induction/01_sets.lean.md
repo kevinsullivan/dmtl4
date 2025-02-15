@@ -1,1 +1,1 @@
-# Inductive Proofs
+# Proofs
