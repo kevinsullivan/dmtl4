@@ -3,7 +3,7 @@
 - [Discrete Mathematics and Theory in Lean 4](#discrete-mathematics-and-theory-in-lean-4)
   - [Acknowledgements](#acknowledgements)
   - [Two Pillars of Computer Science](#two-pillars-of-computer-science)
-  - [Stepping Back: Some Problems](#stepping-back-some-problems)
+  - [Some Problems](#some-problems)
   - [Secret Sauce](#secret-sauce)
   - [Design Constraints](#design-constraints)
   - [This Solution](#this-solution)
@@ -42,7 +42,7 @@ The course presented here is thus offered as a model for an entirely new approac
 
 Lean 4 is so beautifully expressive of such a broad range of mathematical concepts that a significant community of mathematicians have organized around it to drive the development of formalized versions of mathematics across a very broad range of fields. Meanwhile, CS students remain stuck learning a logic (first-order predicate logic and set theory) that is *not* suitable as a foundation for formalized or automated abstract mathemtics. This course, on the other hand, adopts, *type theory*, here as implemented by Lean 4, as a far better choice, even for early CS students.
 
-## Stepping Back: Some Problems
+## Some Problems
 
 That we've arrived at a point where reasoning technology is advancing at extraordinary speed but where are students are by and large entirely unprepared to understand or use it. Of course, for many decades, the demand for programming was voracious, and at the same time cost and difficulty of reasoning were prohibitively high. But now the tables are turned. Generative and related AI promise to reduce demand for programming code while the needs of industry and national security are driving significant increases in demand for formal reasoning. 
 
