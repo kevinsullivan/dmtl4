@@ -172,11 +172,11 @@ provable security, machine learning (e.g., see AlphaProof), robotics, quantum co
 
 ## Humility
 
-There are surely problems and opportunities for improvement throughout this document. If you 
-feel inclined to provide input, please do send it along.
+There are surely problems and opportunities for improvement in concept and document. For now, GitHub Issues is a good place to comment should you want to. We particularly welcome feedback on what's not quite working for you?
 
 ## Research
 
-Natural experiments potentially accessible.
+- Natural experiments potentially accessible
+- Constructive mathematical concept inventories
 
 &copy; Kevin Sullivan 2024-2025.
