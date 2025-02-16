@@ -169,13 +169,7 @@ And.intro
   )
 ```
 
-B. Formally state and prove that congruenceModN for any
-given n
-We define congruence mod n as a binary relation
-on the natural numbers  m and n are congruent mod k
-
-Formally state and prove the proposition that
-
+B. Next ... tbd
 
 ```lean
 end DMT1.Lectures.setsRelationsFunctions.homeworksSetsRelations

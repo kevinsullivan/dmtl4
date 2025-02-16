@@ -10,11 +10,12 @@
   - [This Solution](#this-solution)
   - [An Example](#an-example)
   - [Status](#status)
-  - [Invitation](#invitation)
-  - [Errata](#errata)
-  - [Student Paths Forward](#student-paths-forward)
+  - [Evaluation](#evaluation)
+  - [Use for DMT1](#use-for-dmt1)
+  - [Student Paths](#student-paths)
+  - [Research Paths](#research-paths)
   - [Humility](#humility)
-  - [Research](#research)
+  - [Invitation](#invitation)
 
 ## Acknowledgements
 
@@ -154,29 +155,31 @@ of this semester, the online document should be a reasonable polished presentati
 undergraduate course. Most of the raw material is already online but only in a raw and not
 previously disseminated form from last semester's undergraduate course.
 
-## Invitation
+## Evaluation
 
-If you with to discuss these materials, drop me a line with DMTL4 as the subject line.
-It's my last name at Virginia, Edu.
+It is a challenge toto teach this course using Lean 4 for significant net advantage over more traditional courses. The hard problem, now cracked I hope, was overcome difficulties with Lean details impairing students' capacity to learn the underlying concepts. I am now satisfied that we can teach DMT1 using this kind of technology to real advantage and cover all of the required concepts without undue haste. It did take learning, with evolving tradeoffs in both directions along the way. 
 
-## Errata
+## Use for DMT1
 
-If you want to alert us to errors in these materials, feel free to deposit an issue
-in the course repository (currently, Feb 2025) on GitHub.
+A conservative offering would cover chapters in this book on propositional logic, arithmetic, predicate logic (skipping theory extensions and SMT), set theory, and back to induction at the end. A bow-tie we didn't quite reach on the last offering was to explcitly relate termination back to one of those properties of relation, of being well founded. I plan to reduce coverage of SMT by 80% or more on the next offering and expect that will free up enough time to really nail down induction in its full generality at the end of the course.
 
-## Student Paths Forward
+## Student Paths
 
 From here, advanced courses in several areas are possible at both undergraduate and graduate
 levels: cyberphysical systems, programming language design and implementation, verification,
 provable security, machine learning (e.g., see AlphaProof), robotics, quantum computing, etc.
 
-## Humility
-
-There are surely problems and opportunities for improvement in concept and document. For now, GitHub Issues is a good place to comment should you want to. We particularly welcome feedback on what's not quite working for you?
-
-## Research
+## Research Paths
 
 - Natural experiments potentially accessible
 - Constructive mathematical concept inventories
+
+## Humility
+
+There are surely problems and opportunities for improvement, in concept and presentation, here. Reach out if you wish.
+
+## Invitation
+
+If you with to discuss, or alert us privately to possible issues, please do email me with DMTL4 in the subject line. It's my last name at Virginia, Edu.
 
 &copy; Kevin Sullivan 2024-2025.
