@@ -176,13 +176,14 @@ def isTotalOrder {α  β : Type} : Rel α α → Prop :=
 
 def isLinearOrder {α  β : Type} := @isTotalOrder α β
 
-def isWellOrdering  {α  β : Type} : Rel α α → Prop :=
+def isWellFounded  {α  β : Type} : Rel α α → Prop :=
   fun r => ∀ (s : Set α), s ≠ ∅ → ∃ m, (m ∈ s ∧ ¬∃ n ∈ s, r n m)
+-- See [TPIL4](https://leanprover.github.io/theorem_proving_in_lean4/induction_and_recursion.html#well-founded-recursion-and-induction).
 
 def predRel : Rel Nat Nat := fun a b => b = a.succ
 
 
-example : @isWellOrdering Nat Nat predRel :=
+example : @isWellFounded Nat Nat predRel :=
   fun s nonempty =>
   -- ∃ m ∈ s, ¬∃ n ∈ s, predRel n m
   sorry
