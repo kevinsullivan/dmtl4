@@ -2,6 +2,8 @@ import DMT1.Lectures.L08_setsRelationsFunctions.«03_propertiesOfRelations»
 
 namespace DMT1.Lectures.setsRelationsFunctions.homeworksSetsRelations
 
+open DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
+
 /-
 Homework #8 Properties of Relations.
 
@@ -66,8 +68,8 @@ is equal to f applied to the input, a, i.e., f a = f a.
 -/
 fun a =>
   Exists.intro
-  (_)
-  (_)
+  (sorry)
+  (sorry)
 
 
 /-!d
@@ -93,6 +95,7 @@ fun (h : isSingleValued acctsOf) =>
   -- ∀ x y z, r x y → r x z → y = z
   let a1 : acctsOf "Mary" 1 := Or.inl ⟨ rfl, rfl ⟩
   let a2 : acctsOf "Mary" 2 := Or.inr (Or.inl ⟨ rfl, rfl ⟩)
+  -- TODO
   let contra := h _ _ _ _ _
   _
 )
@@ -136,7 +139,7 @@ Complete the following definition of the binary relation,
 congruence mod n.
 -/
 
-def congruentModN (n : Nat) : Rel Nat Nat := fun a b => _
+def congruentModN (n : Nat) : Rel Nat Nat := fun a b => sorry
 
 -- Test cases will succeed when you give the right definition
 example : congruentModN 4 8 12 := rfl
@@ -156,16 +159,16 @@ relation is reflexive, symmetric, and transitive.
 And.intro
   -- It's reflexive
   (
-    _
+    sorry
   )
 
   (
     And.intro
     -- It's symmetric
-    (_)
+    (sorry)
 
     -- It's transitive
-    (_)
+    (sorry)
   )
 
 /-

@@ -53,6 +53,7 @@
   - [Sets](./DMT1/Lectures/L08_setsRelationsFunctions/01_sets.lean.md)
   - [Relations](./DMT1/Lectures/L08_setsRelationsFunctions/02_relations.lean.md)
   - [Properties of Sets and Relations](./DMT1/Lectures/L08_setsRelationsFunctions/03_propertiesOfRelations.lean.md)
+  - [Examples](./DMT1/Lectures/L08_setsRelationsFunctions/04_examples.lean.md)
 
 - [Induction](./proofByInduction.md)
   - [Axioms](./inductionAxioms.md)
