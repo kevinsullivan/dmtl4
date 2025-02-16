@@ -14,7 +14,7 @@
   - [Errata](#errata)
   - [Student Paths Forward](#student-paths-forward)
   - [Humility](#humility)
-  - [Research Path Forward](#research-path-forward)
+  - [Research](#research)
 
 ## Acknowledgements
 
@@ -175,8 +175,8 @@ provable security, machine learning (e.g., see AlphaProof), robotics, quantum co
 There are surely problems and opportunities for improvement throughout this document. If you 
 feel inclined to provide input, please do send it along.
 
-## Research Path Forward
+## Research
 
-Natural experiment.
+Natural experiments potentially accessible.
 
 &copy; Kevin Sullivan 2024-2025.
