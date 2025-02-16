@@ -4,7 +4,7 @@ namespace DMT1.Lectures.setsRelationsFunctions.homeworksSetsRelations
 
 open DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
 
-/-
+/- @@@
 Homework #8 Properties of Relations.
 
 <!-- toc -->
@@ -18,17 +18,17 @@ and email addresses of all the collaborators. Each
 collaborator must work with every other one on this
 assignment. You may not just split the problems one
 or two for each person.
--/
+@@@ -/
 
-/-!
+/- @@@!
 We've importd all of the definitions of properties of relations
 from L03_properties_of_relations so you can use them here with no
 problem. Use View > Editor Layout > Split Down to have two panes
 open, one looking at the property definitions file and one open
 on this one.
--/
+@@@ -/
 
-/-
+/- @@@
 PROBLEM #1 [25 points]. We've see that, in Lean, every function
 of type α → β is total. Any such function in Lean must be defined
 *for all* values of the intput type, α. If you fail to provide an
@@ -41,20 +41,20 @@ other words, (a, b) is in the relation exactly when b = f a. We
 can now define a function that takes any function from any type,
 α to any type β, and that returns the corresponding relation with
 exactly this membership predicate.
--/
+@@@ -/
 
 def funToRel { α β : Type} : (f : α → β) → Rel α β :=
   fun f => fun a b => f a = b
 
-/-!
+/- @@@!
 Now we can propose, and prove, that every relation that is
 obtained from any function has the property of being total
 as defined by our isTotal predicate on binary relations. We
 give a good amount of the proof in English, and a little bit
 of it in Lean. You finish the missing formal parts.
--/
+@@@ -/
 example {α β : Type} (f : α → β) : isTotal (funToRel f) :=
-/-
+/- @@@
 by the definition of total, what is to be proved is that
 ∀ (x : α), ∃ (y : β), r x y. We first assume an arbitrary
 input value a, then we show there exists a corresponding
@@ -65,21 +65,21 @@ we need to prove ((funToRel f) a (f a)). By the definition
 of funToRel we need to show that (a, (f a)) is in the
 relation but that requires exactly that the output, f a,
 is equal to f applied to the input, a, i.e., f a = f a.
--/
+@@@ -/
 fun a =>
   Exists.intro
   (sorry)
   (sorry)
 
 
-/-!d
+/- @@@!d
 PROBLEM #2 [25 points]
 
 We repeat here the definition of the bank account
 number relation from the relations.lean file. Here
 you are to state and prove the proposition that this
 relation is not single-valued.
--/
+@@@ -/
 
 def acctsOf : Rel String Nat := fun s n =>
   s = "Mary" ∧ n = 1 ∨
@@ -100,14 +100,14 @@ fun (h : isSingleValued acctsOf) =>
   _
 )
 
-/-!
+/- @@@!
 PROBLEM #3 [25 points]
 
 State formally and prove the proposition that the
 successor relation on natural numbers (Nat.succ) is
 an injective function. You can use funToRel applied
 to Nat.succ to define that relation if you want.
--/
+@@@ -/
 
 def succRel := funToRel Nat.succ
 
@@ -130,14 +130,14 @@ And.intro
   (_)   -- ok, you have to prove the rest
 
 
-/-!
+/- @@@!
 PROBLEM #4 [25 points]
 
 A. Given (non-zero) natural numbers a, b, and n, we
 say that a is congruent to b mod n if a mod n = b mod n.
 Complete the following definition of the binary relation,
 congruence mod n.
--/
+@@@ -/
 
 def congruentModN (n : Nat) : Rel Nat Nat := fun a b => sorry
 
@@ -147,14 +147,14 @@ example : congruentModN 5 25 50 := rfl
 example : ¬congruentModN 4 4 9 := fun h => nomatch h
 
 
-/-!
+/- @@@!
 Now prove the proposition that congruence mod n is an equivalence relation
--/
+@@@ -/
 example (n : Nat) : @isEquivalence Nat Nat (congruentModN n) :=
-/-
+/- @@@
 By the definition of equivalence, what we need to show is that the
 relation is reflexive, symmetric, and transitive.
--/
+@@@ -/
 
 And.intro
   -- It's reflexive
@@ -171,14 +171,8 @@ And.intro
     (sorry)
   )
 
-/-
-B. Formally state and prove that congruenceModN for any
-given n
-We define congruence mod n as a binary relation
-on the natural numbers  m and n are congruent mod k
-
-Formally state and prove the proposition that
-
--/
+/- @@@
+B. Next ... tbd
+@@@ -/
 
 end DMT1.Lectures.setsRelationsFunctions.homeworksSetsRelations
