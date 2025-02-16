@@ -4,7 +4,7 @@ import Mathlib.Logic.Relation
 namespace DMT1.Lectures.setsRelationsFunctions.sets
 
 /- @@@
-# Set Theory
+# Theory of Sets
 
 <!-- toc -->
 
@@ -57,7 +57,7 @@ the property of any given *n* that determines whether it is to
 be considered in, or not in, the set. Here the condition is that
 *n* is even.
 
-### Representing Sets as Predicates
+### Specifying and Representing Sets as Predicates
 
 In Lean, a set, a, is represented by a membership *predicate:*
 one that takes a single argument, let's call it *a*, of some type,
@@ -358,7 +358,9 @@ example : small 1 := (Or.inr (Or.inl rfl))
 example : small 3 := Or.inr (Or.inr (Or.inr (Or.inl (Eq.refl 3))))
 
 /- @@@
-## Set Theory Operations
+## Another Version: Set Operations
+
+TODO: Combine thee sections
 
 We now turn to the operations and corresponding notations of
 set theory. Along the way we'll introduce two special sets:
