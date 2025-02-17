@@ -58,7 +58,7 @@ the property of any given *n* that determines whether it is to
 be considered in, or not in, the set. Here the condition is that
 *n* is even.
 
-### Specifying and Representing Sets as Predicates
+### Specification and Representation
 
 In Lean, a set, a, is represented by a membership *predicate:*
 one that takes a single argument, let's call it *a*, of some type,
@@ -243,13 +243,77 @@ learning set theory is largely reduced to learning the set
 algebraic concepts (the objects and operations of set theory)
 and in particular how each concept reduces to underlying logic.
 
+### Universal and Empty Sets
+
+With membership notation under our belts, we can now better
+present the concepts and notations of the universal and the
+empty set of elements of a given type.
+
+#### Universal set
+
+The universal set of a values of a given type is the set
+of *all* values of that type. The membership predicate for
+the *universal* set is thus true for every element of the
+set. *True* is the (degenerate, parameterless) predicate
+that satisfies this condition. It is true for any value,
+so every value is in a set with True as its membership
+predicate.
+
+To be precise, the membership predicate for the universal
+set of objects of any type *T*, is *λ (a : T) => True.*
+When it is applied to any value, *t*, of type T, the result
+is just the proposition, *True*, for which we always have
+the proof, *True.intro*.
+
+In Lean, the universal set of objects of a given type is
+written as *univ*. The definition of *univ* is in Lean's
+*Set* namespace, so you can use *univ* either by first
+opening the *Set* namespace, or by writing *Set.univ*.
+
+```lean
+open Set
+
+#reduce univ        -- fun _a => True
+#reduce univ 0      --           True
+#reduce univ 123456 --           True
+```
+
+#### Empty set
+
+The empty set of values of a given type, usually
+denoted as ∅, is the set
+containing *no* values of that (or any) type. It's
+membership predicate is thus false for every value of
+the type. No value is a member. Formally, the membership
+predicate for an empty set of values of type T is
+*λ (t : T) => False*.
+
+Again we emphasize that set theory in Lean is built on and
+corresponds directly with the logic you've been learning all
+along. We've now seen that (1) sets are specified by membership
+predicates; (2) the universal set is specified by the predicate
+that is true for any value; (3) the empty set is specified by
+the predicate that is false for any value; (4) the ∈ operation
+builds the proposition that a given value satisfies the membership
+predicate of a given set; (5) proving propositions in set theory
+reduces to proving corresponding underlying logical propositions.
+
+At an abstract level, Set theory, like arithmetic, is a mathematical
+system involving objects and operations on these objects. In arithmetic,
+the objects are numbers and the operations are addition, multiplication,
+etc.  In Boolean algebra, the objects are true and false and operations
+include *and, or,* and *not*. In set theory, the objects are sets and
+the operations include set membership (∈), intersection (∩), union (∪),
+difference (\), complement (ᶜ) and more. We now turn to operations on
+sets beyond mere membership.
+
 ## Operations on Sets
 
 Specifying sets, from set theory, as predicates in propositional
 logic, paves the way to:
 
 - (1) specifying *operations* on sets as definitions in predicate logic,
-- (2) proving propositions in set theory by proving the propositions to which they reduce.
+- (2) proving propositions in set theory by proving the propositions to which they desugar.
 
 To acquire the skill of proving propositions in set theory you
 *must* learn how each operation is formally defined in predicate logic,
@@ -294,7 +358,6 @@ where that is defined as the number *being equal to 0, *or* being
 equal to 1 *or*, ..., *or* being equal to 4.* The first predicate
 can be understood as specifying the set of even numbers; the second
 predicate, a set of small numbers.
-
 
 Self test: What *proposition* is specified by the expression,
 *small 1*? You should be able to answer this question without
@@ -353,18 +416,9 @@ example : small 1 := (Or.inr (Or.inl rfl))
 example : small 3 := Or.inr (Or.inr (Or.inr (Or.inl (Eq.refl 3))))
 ```
 
-## Another Version: Set Operations
+### Membership Again
 
-TODO: Combine thee sections
-
-We now turn to the operations and corresponding notations of
-set theory. Along the way we'll introduce two special sets:
-the *universal* set of objects of a given type, and the *empty*
-set of objects of a given type. A universal set contains every
-value of its member type. The empty set contains no values of
-its member type.
-
-### Membership
+TODO: Combine with preceding section
 
 We've already seen that we can think of a predicate as defining
 a set, and that a value is a member of a set if and only if it
@@ -434,78 +488,11 @@ proof in place of the *_*.
 example : 3 ∈ small_set := Or.inr (Or.inr (Or.inr (Or.inl rfl)))
 ```
 
-### Take-Away
-
 A take-away is that the set theory expression, x ∈ X,
 simply means, that x satisfies the membership predicate
 that defines the set X. To prove x ∈ X, substitute x for
 the formal parameter in the membership predicate (apply
 the predicate to x) and prove the resulting proposition.
-
-### Two Special Sets
-
-With membership notation under our belts, we can now better
-present the concepts and notations of the universal and the
-empty set of elements of a given type.
-
-#### Universal set
-
-The universal set of a values of a given type is the set
-of *all* values of that type. The membership predicate for
-the *universal* set is thus true for every element of the
-set. *True* is the (degenerate, parameterless) predicate
-that satisfies this condition. It is true for any value,
-so every value is in a set with True as its membership
-predicate.
-
-To be precise, the membership predicate for the universal
-set of objects of any type *T*, is *λ (a : T) => True.*
-When it is applied to any value, *t*, of type T, the result
-is just the proposition, *True*, for which we always have
-the proof, *True.intro*.
-
-In Lean, the universal set of objects of a given type is
-written as *univ*. The definition of *univ* is in Lean's
-*Set* namespace, so you can use *univ* either by first
-opening the *Set* namespace, or by writing *Set.univ*.
-
-```lean
-open Set
-
-#reduce univ        -- fun _a => True
-#reduce univ 0      --           True
-#reduce univ 123456 --           True
-```
-
-#### Empty set
-
-The empty set of values of a given type, usually
-denoted as ∅, is the set
-containing *no* values of that (or any) type. It's
-membership predicate is thus false for every value of
-the type. No value is a member. Formally, the membership
-predicate for an empty set of values of type T is
-*λ (t : T) => False*.
-
-Again we emphasize that set theory in Lean is built on and
-corresponds directly with the logic you've been learning all
-along. We've now seen that (1) sets are specified by membership
-predicates; (2) the universal set is specified by the predicate
-that is true for any value; (3) the empty set is specified by
-the predicate that is false for any value; (4) the ∈ operation
-builds the proposition that a given value satisfies the membership
-predicate of a given set; (5) proving propositions in set theory
-reduces to proving corresponding underlying logical propositions.
-
-At an abstract level, Set theory, like arithmetic, is a mathematical
-system involving objects and operations on these objects. In arithmetic,
-the objects are numbers and the operations are addition, multiplication,
-etc.  In Boolean algebra, the objects are true and false and operations
-include *and, or,* and *not*. In set theory, the objects are sets and
-the operations include set membership (∈), intersection (∩), union (∪),
-difference (\), complement (ᶜ) and more. We now turn to operations on
-sets beyond mere membership.
-
 
 ### Intersection
 
@@ -603,7 +590,9 @@ example : 6 ∉ even_and_small_set :=
   fun (h : 6 ∈ even_and_small_set) => nomatch h
 ```
 
-### A Remark on Set Theory Notation
+#### A Remark on Notation
+
+TODO: Clarify here.
 
 One place where meanings of predicates and sets differ in
 Lean is in the availability of certain notations. Lean gives
@@ -655,7 +644,7 @@ example : 7 ∈ ev_set := _   -- stuck
 example : 7 ∉ ev_set := λ h => sorry
 ```
 
-### Set Complement
+### Complement
 Given a set s of elements of type α, the complement of s,
 denoted sᶜ, is the set of all elements of type α that are
 *not* in s. Thus *compl (s : Set α) : Set α := {a | a ∉ s}.*
@@ -684,7 +673,7 @@ example : 5 ∈ small_setᶜ := sorry
 ```
 
 
-### Set Difference
+### Difference
 
 ```lean
 #reduce Set.diff
@@ -701,6 +690,13 @@ example : 6 ∈ ev_set \ small_set := ⟨ rfl, λ h => nomatch h ⟩
 ```lean
 #reduce @Set.Subset
 -- fun {α} s₁ s₂ => ∀ ⦃a : α⦄, a ∈ s₁ → s₂ a
+```
+
+### Product
+
+```lean
+#reduce Set.prod
+-- fun s t p => p.fst ∈ s ∧ p.snd ∈ t
 ```
 
 ### Powerset

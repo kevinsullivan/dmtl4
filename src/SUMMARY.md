@@ -18,9 +18,9 @@
 - [Model Theory](./modelTheory.md)
   - [Models](./DMT1/Lectures/L03_modelTheory/models.lean.md)
   - [Truth Tables](./DMT1/Lectures/L03_modelTheory/truthTable.lean.md)
-  - [**Counterexamples**](./DMT1/Lectures/L03_modelTheory/counterexamples.lean.md)
-  - [Properties of Expressions](./DMT1/Lectures/L03_modelTheory/properties.lean.md)
-  - [Semantic Validity](./DMT1/Lectures/L03_modelTheory/validity.lean.md)
+  - [Counterexamples](./DMT1/Lectures/L03_modelTheory/counterexamples.lean.md)
+  - [Propertiesx](./DMT1/Lectures/L03_modelTheory/properties.lean.md)
+  - [Validity](./DMT1/Lectures/L03_modelTheory/validity.lean.md)
   
 - [Arithmetic](./arithmetic.md)
   - [Domain](./DMT1/Lectures/L04_natArithmetic/domain.lean.md)
@@ -52,7 +52,7 @@
 - [Sets and Relations](./setTheory)
   - [Sets](./DMT1/Lectures/L08_setsRelationsFunctions/01_sets.lean.md)
   - [Relations](./DMT1/Lectures/L08_setsRelationsFunctions/02_relations.lean.md)
-  - [Properties of Sets and Relations](./DMT1/Lectures/L08_setsRelationsFunctions/03_propertiesOfRelations.lean.md)
+  - [Properties](./DMT1/Lectures/L08_setsRelationsFunctions/03_propertiesOfRelations.lean.md)
   - [Examples](./DMT1/Lectures/L08_setsRelationsFunctions/04_examples.lean.md)
 
 - [Induction](./proofByInduction.md)
