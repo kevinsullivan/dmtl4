@@ -57,7 +57,7 @@ the property of any given *n* that determines whether it is to
 be considered in, or not in, the set. Here the condition is that
 *n* is even.
 
-### Specifying and Representing Sets as Predicates
+### Specification and Representation
 
 In Lean, a set, a, is represented by a membership *predicate:*
 one that takes a single argument, let's call it *a*, of some type,
@@ -358,18 +358,9 @@ example : small 1 := (Or.inr (Or.inl rfl))
 example : small 3 := Or.inr (Or.inr (Or.inr (Or.inl (Eq.refl 3))))
 
 /- @@@
-## Another Version: Set Operations
+### Membership Again
 
-TODO: Combine thee sections
-
-We now turn to the operations and corresponding notations of
-set theory. Along the way we'll introduce two special sets:
-the *universal* set of objects of a given type, and the *empty*
-set of objects of a given type. A universal set contains every
-value of its member type. The empty set contains no values of
-its member type.
-
-### Membership
+TODO: Combine with preceding section
 
 We've already seen that we can think of a predicate as defining
 a set, and that a value is a member of a set if and only if it
@@ -456,9 +447,7 @@ the predicate to x) and prove the resulting proposition.
 With membership notation under our belts, we can now better
 present the concepts and notations of the universal and the
 empty set of elements of a given type.
-@@@ -/
 
-/- @@@
 #### Universal set
 
 The universal set of a values of a given type is the set
@@ -618,7 +607,7 @@ example : 6 ∉ even_and_small_set :=
   fun (h : 6 ∈ even_and_small_set) => nomatch h
 
 /- @@@
-### A Remark on Set Theory Notation
+#### A Remark on Set Theory Notation
 
 One place where meanings of predicates and sets differ in
 Lean is in the availability of certain notations. Lean gives

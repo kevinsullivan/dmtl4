@@ -249,7 +249,7 @@ Specifying sets, from set theory, as predicates in propositional
 logic, paves the way to:
 
 - (1) specifying *operations* on sets as definitions in predicate logic,
-- (2) proving propositions in set theory by proving the propositions to which they desugar.
+- (2) proving propositions in set theory by proving the propositions to which they reduce.
 
 To acquire the skill of proving propositions in set theory you
 *must* learn how each operation is formally defined in predicate logic,
