@@ -161,7 +161,7 @@ It is a challenge toto teach this course using Lean 4 for significant net advant
 
 ## Use for DMT1
 
-A conservative offering would cover chapters in this book on propositional logic, arithmetic, predicate logic (skipping theory extensions and SMT), set theory, and back to induction at the end. A bow-tie we didn't quite reach on the last offering was to explcitly relate termination back to one of those properties of relation, of being well founded. I plan to reduce coverage of SMT by 80% or more on the next offering and expect that will free up enough time to really nail down induction in its full generality at the end of the course.
+A conservative offering could cover chapters on propositional logic, arithmetic, and induction for arithmetic function definitions, then skip theory extensions and SMT, and proceed to predicate logic, set theory, before a final return to induction generalized to proof construction. A possible capstone would be on termination via well founded relations, as they now have full command of the concept of properties of relations. I plan to reduce coverage of SMT by 80% on the next offering to have more time for this stuff at the end.
 
 ## Student Paths
 
