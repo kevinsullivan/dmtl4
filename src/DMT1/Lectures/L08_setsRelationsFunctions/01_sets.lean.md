@@ -704,6 +704,23 @@ example : 6 ∈ ev_set \ small_set := ⟨ rfl, λ h => nomatch h ⟩
 ```lean
 #reduce @Set.powerset
 -- fun {α} s t => ∀ ⦃a : α⦄, a ∈ t → s a
+```
+
+
+### Powerset of Product
+
+This set is important because its elements, being subsets
+of the product set on sets s and t can be seen as representing
+the set of all binary relations on these two sets. An element
+of this set is isomorphic to and can be taken as specifying a
+binary relation from s to t.
+
+When mathematicians want to assume that, r is some binary
+relation on sets, s and t, one can therefore write either
+r ⊆ s × t, or r ∈ 𝒫 (s × t.)
+
+```lean
+#reduce Set.powerset (Set.prod _ _)
 
 end DMT1.Lectures.setsRelationsFunctions.sets
 ```
