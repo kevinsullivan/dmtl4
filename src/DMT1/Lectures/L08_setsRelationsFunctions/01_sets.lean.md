@@ -721,6 +721,7 @@ r ⊆ s × t, or r ∈ 𝒫 (s × t.)
 
 ```lean
 #reduce Set.powerset (Set.prod _ _)
+-- fun t => t ⊆ prod ?m.3518 ?m.3519 (where the ?metavariables are placeholders for the missing sets )
 
 end DMT1.Lectures.setsRelationsFunctions.sets
 ```
