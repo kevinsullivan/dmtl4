@@ -14,9 +14,9 @@ dependencies you will need.
 
 First, install [`mdbook`][4].  
 
-Additionally, install [`mdbook-toc`][7] and [`mdbook-mermaid][8]. To do so,
-download the appropriate tarball for you system architecture and unpack it into
-a directory on your path.
+Additionally, install [`mdbook-toc`][7], [`mdbook-mermaid`][8] and
+[`mdbook-image-size`][9]. To do so, download the appropriate tarball for you
+system architecture and unpack it into a directory on your path.
 
 Then, install the Haskell installer, [`ghcup`][5].  
 
@@ -83,3 +83,4 @@ Note, rust users can install the mdbook extensions with cargo.
 [6]: https://brew.sh
 [7]: https://github.com/badboy/mdbook-toc/releases/tag/0.14.2
 [8]: https://github.com/badboy/mdbook-mermaid/releases/tag/v0.14.1
+[9]: https://github.com/lhybdv/mdbook-image-size/releases/tag/0.2.0
