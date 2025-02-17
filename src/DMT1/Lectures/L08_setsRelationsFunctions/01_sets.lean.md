@@ -113,22 +113,30 @@ def aNatProp : Nat → Prop := λ n => True
 
 def s := setOf aNatProp   -- abstract from prop to set
 #check 1 ∈ s              -- gain set language and notations
-
-def t : Nat → Prop := s   -- strips set abstraction
+#check (s 1)              -- this "works" but is unpreferred
+def t : Nat → Prop := s   -- t defined as s stripped setness
 ```
 
-The real advantage of the ability to strip set abstractions to
-their underlying logical representations in Lean is that one can
-these use the machinery of logical reasoning to reason about set
-theoretical propositions. If one likes to think in proof strategy
-terms, this one could be called proof "by the definition of," but
-proof "by the underlying representation of" might be even better.
+Good to know Lean details.
+
+- Define a set, s, by applying setOf to a predicate: α → Prop
+- Beyond α → Prop, being a set brings operations and notations
+- Check membership of object a in set s using a ∈ s, not (s a)
+
+The real advantage, in Lean, of representing sets as predicates
+is that it confers the ability to strip set theory abstractions to
+their underlying logical representations, at which point one can
+then use all the machinery of predicate logic, now well understood,
+to reason about propositions *in set theory*. If one likes to think
+in proof strategy terms, this one could be called proof "by the
+definition of," though proof "by the underlying representation of"
+is probably a better term.
 
 ### Set Notations
 
 In the language of set theory, there are two especially
 common notations for represeting sets. They are *display*
-and *set comprehension* notation.
+and (set) *comprehension* notation.
 
 #### Display Notation
 
@@ -142,16 +150,20 @@ give a set a name, as in, *let s = { 0, 1, 2, 3, 4 }*, or
 Lean supports display notation as a set theory notation.
 One is still just definining a membership predicate, but
 it looks like the math you'll see in innumerable books and
-articles.
+articles. Moreover, when you look at such notations from
+now on, even if you've seen them before, you can think
+about how they can be seen as expressions of membership
+predicates.
+
 
 The corresponding predicate in this case, computed by Lean,
-is *λ n => n = 0 ∨ n = 1 ∨ n = 2 ∨ n = 3 ∨ n = 4*. In the
-following example, Lean doesn't infer that the set type is
-Set Nat, so we have to tell it so explicitly.
+is *fun b => b = 0 ∨ b ∈ {1, 2, 3, 4}*. In the following
+example, Lean doesn't infer that the set type is Set Nat,
+so we have to tell it so explicitly.
 
 ```lean
-def s1 : Set Nat := { 0, 1, 2, 3, 4 }
-#reduce s1   -- the predicate that represents this set
+def       s1 : Set Nat := { 0, 1, 2, 3, 4 } -- repped as ...
+#reduce   s1   -- fun b => b = 0 ∨ b ∈ {1, 2, 3, 4}
 ```
 
 #### Comprehension Notation
@@ -622,21 +634,6 @@ example : 6 ∉ even_and_small_set :=
 #check Set
 ```
 
-
-#### A Remark on Notation
-
-TODO: Clarify here.
-
-One place where meanings of predicates and sets differ in
-Lean is in the availability of certain notations. Lean gives
-us notations appropriate to treating even_and_small as just
-a predicate, not a set, so set notation operations are not
-provided in this case. For example, the *is member of set*
-predicate, ∈, can't be used to with just a predicate. It's
-meant for cases where the predicate is meant to represent a
-mathematical set. Set operations and notations, such as ∈,
-are provided to support the mathematical concepts involved
-in *set theory*.
 
 ### Union
 
