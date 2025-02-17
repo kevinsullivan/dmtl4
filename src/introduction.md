@@ -13,6 +13,7 @@
   - [Evaluation](#evaluation)
   - [Use for DMT1](#use-for-dmt1)
   - [Student Paths](#student-paths)
+  - [Tool Paths](#tool-paths)
   - [Research Paths](#research-paths)
   - [Humility](#humility)
   - [Invitation](#invitation)
@@ -147,17 +148,14 @@ between formal and *natural* natural language.
 
 ## Status
 
-The status of this online book is *now drafted and under revisions: work in progress*. In
-this spring of 2025, the author is teaching an introductory graduate course called *software
-logic.* The undergraduate course presented here is now serving the dual purpose of getting
-graduate students up to speed, but now with added content and at double speed. By the end
-of this semester, the online document should be a reasonable polished presentation of the
-undergraduate course. Most of the raw material is already online but only in a raw and not
-previously disseminated form from last semester's undergraduate course.
+The status of this online book is *drafted work in progress*. The material through the second
+chapter on induction reflects the content, edited, from my Fall 2024 undergraduate class offering.
+It's also the first part of an introductory graduate *software logic* course that I'm teaching
+this Spring of 2025. There are a few concept/chapter placeholders at the end for material not previously taught at all, including formalized reasoning about induction through well founded relations. (Students have learned and demonstrated the abilty to reason formally about properties of relations, though, and should be able to handle proofs involving this property without much more difficulty than they've already done involving other properties of relations). The entire document still needs a good editing. Some parts are still rough. A most notably rough one is the first, on talking about languages.
 
 ## Evaluation
 
-It is a challenge toto teach this course using Lean 4 for significant net advantage over more traditional courses. The hard problem, now cracked I hope, was overcome difficulties with Lean details impairing students' capacity to learn the underlying concepts. I am now satisfied that we can teach DMT1 using this kind of technology to real advantage and cover all of the required concepts without undue haste. It did take learning, with evolving tradeoffs in both directions along the way. 
+It is a challenge toto teach this course using Lean 4 for significant net advantage over more traditional courses. The hard problem, now cracked I hope, was reduce the added burden imposed by conceptually irrelevant aspects of Lean sufficiently to not impair students' capacity to learn the underlying concepts. At this point I believe that we can teach DMT1 using this kind of technology to the significant net advantage of our students, while covering all the essential concepts of any DMT1 class without undue haste.
 
 ## Use for DMT1
 
@@ -169,9 +167,14 @@ From here, advanced courses in several areas are possible at both undergraduate 
 levels: cyberphysical systems, programming language design and implementation, verification,
 provable security, machine learning (e.g., see AlphaProof), robotics, quantum computing, etc.
 
+## Tool Paths
+
+Working knowledge of the concepts of this course will provide students with easy access to
+understanding the concepts underpinning and the use of a broad range reasoning technologies. Dafny and Z3 are good next steps and there are surely others. A small enhancement to this course would be a much shorter "highlight" on Z3 then another on one Dafny, just to show that there's a whole new world of reasoning systems out there.
+
 ## Research Paths
 
-- Natural experiments potentially accessible
+- Natural experiments potentially accessible (IRBs)
 - Constructive mathematical concept inventories
 
 ## Humility

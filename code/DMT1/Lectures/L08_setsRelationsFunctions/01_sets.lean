@@ -93,11 +93,53 @@ its definition. Right click on Set and select *go to definition*.
 -- a predicate taking an argument (a : α) yielding a proposition that might or might not be true
 
 /- @@@
+In this class we distinguish two uses of the same predicate
+when defining a set in Lean. First, a one-place predicate can
+be understoood as specifying a set: namely of all and only those
+objects that can be proven to satisfy it. Second, Lean then also
+uses such a predicate to *represent* that set, for purposes of
+further reasoning and computation.
+
+The documentation at the site of the definition of *Set* in Lean
+emphasizes that, "A set is a collection of elements of some type α.
+Although Set is defined as α → Prop, this is an implementation
+detail which should not be relied on. Instead, setOf and membership
+of a set (∈) should be used to convert between sets and predicates."
+@@@ -/
+
+def aNatProp : Nat → Prop := λ n => True
+#check 1 ∈ aNatProp       -- won't work
+
+def s := setOf aNatProp   -- abstract from prop to set
+#check 1 ∈ s              -- gain set language and notations
+#check (s 1)              -- this "works" but is unpreferred
+def t : Nat → Prop := s   -- t defined as s stripped setness
+
+/- @@@
+Good to know Lean details.
+
+- Define a set, s, by applying setOf to a predicate: α → Prop
+- Beyond α → Prop, being a set brings operations and notations
+- Check membership of object a in set s using a ∈ s, not (s a)
+@@@ -/
+
+/- @@@
+The real advantage, in Lean, of representing sets as predicates
+is that it confers the ability to strip set theory abstractions to
+their underlying logical representations, at which point one can
+then use all the machinery of predicate logic, now well understood,
+to reason about propositions *in set theory*. If one likes to think
+in proof strategy terms, this one could be called proof "by the
+definition of," though proof "by the underlying representation of"
+is probably a better term.
+@@@ -/
+
+/- @@@
 ### Set Notations
 
 In the language of set theory, there are two especially
 common notations for represeting sets. They are *display*
-and *set comprehension* notation.
+and (set) *comprehension* notation.
 
 #### Display Notation
 
@@ -111,16 +153,20 @@ give a set a name, as in, *let s = { 0, 1, 2, 3, 4 }*, or
 Lean supports display notation as a set theory notation.
 One is still just definining a membership predicate, but
 it looks like the math you'll see in innumerable books and
-articles.
+articles. Moreover, when you look at such notations from
+now on, even if you've seen them before, you can think
+about how they can be seen as expressions of membership
+predicates.
+
 
 The corresponding predicate in this case, computed by Lean,
-is *λ n => n = 0 ∨ n = 1 ∨ n = 2 ∨ n = 3 ∨ n = 4*. In the
-following example, Lean doesn't infer that the set type is
-Set Nat, so we have to tell it so explicitly.
+is *fun b => b = 0 ∨ b ∈ {1, 2, 3, 4}*. In the following
+example, Lean doesn't infer that the set type is Set Nat,
+so we have to tell it so explicitly.
 @@@ -/
 
-def s1 : Set Nat := { 0, 1, 2, 3, 4 }
-#reduce s1   -- the predicate that represents this set
+def       s1 : Set Nat := { 0, 1, 2, 3, 4 } -- repped as ...
+#reduce   s1   -- fun b => b = 0 ∨ b ∈ {1, 2, 3, 4}
 
 /- @@@
 #### Comprehension Notation
@@ -602,22 +648,8 @@ of an impossibility using nomatch) and we'll be done.
 example : 6 ∉ even_and_small_set :=
   fun (h : 6 ∈ even_and_small_set) => nomatch h
 
-/- @@@
-#### A Remark on Notation
+#check Set
 
-TODO: Clarify here.
-
-One place where meanings of predicates and sets differ in
-Lean is in the availability of certain notations. Lean gives
-us notations appropriate to treating even_and_small as just
-a predicate, not a set, so set notation operations are not
-provided in this case. For example, the *is member of set*
-predicate, ∈, can't be used to with just a predicate. It's
-meant for cases where the predicate is meant to represent a
-mathematical set. Set operations and notations, such as ∈,
-are provided to support the mathematical concepts involved
-in *set theory*.
-@@@ -/
 
 /- @@@
 ### Union
@@ -736,6 +768,6 @@ r ⊆ s × t, or r ∈ 𝒫 (s × t.)
 @@@-/
 
 #reduce Set.powerset (Set.prod _ _)
--- fun t => t ⊆ prod ?m.3518 ?m.3519 (where the ?metavariables are placeholders for the missing sets )
+-- fun t => t ⊆ prod ?m.3518 ?m.3519 (? placeholders for sets )
 
 end DMT1.Lectures.setsRelationsFunctions.sets

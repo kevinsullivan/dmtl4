@@ -94,6 +94,36 @@ its definition. Right click on Set and select *go to definition*.
 -- a predicate taking an argument (a : α) yielding a proposition that might or might not be true
 ```
 
+In this class we distinguish two uses of the same predicate
+when defining a set in Lean. First, a one-place predicate can
+be understoood as specifying a set: namely of all and only those
+objects that can be proven to satisfy it. Second, Lean then also
+uses such a predicate to *represent* that set, for purposes of
+further reasoning and computation.
+
+The documentation at the site of the definition of *Set* in Lean
+emphasizes that, "A set is a collection of elements of some type α.
+Although Set is defined as α → Prop, this is an implementation
+detail which should not be relied on. Instead, setOf and membership
+of a set (∈) should be used to convert between sets and predicates."
+
+```lean
+def aNatProp : Nat → Prop := λ n => True
+#check 1 ∈ aNatProp       -- won't work
+
+def s := setOf aNatProp   -- abstract from prop to set
+#check 1 ∈ s              -- gain set language and notations
+
+def t : Nat → Prop := s   -- strips set abstraction
+```
+
+The real advantage of the ability to strip set abstractions to
+their underlying logical representations in Lean is that one can
+these use the machinery of logical reasoning to reason about set
+theoretical propositions. If one likes to think in proof strategy
+terms, this one could be called proof "by the definition of," but
+proof "by the underlying representation of" might be even better.
+
 ### Set Notations
 
 In the language of set theory, there are two especially
@@ -588,7 +618,10 @@ of an impossibility using nomatch) and we'll be done.
 ```lean
 example : 6 ∉ even_and_small_set :=
   fun (h : 6 ∈ even_and_small_set) => nomatch h
+
+#check Set
 ```
+
 
 #### A Remark on Notation
 
@@ -721,7 +754,7 @@ r ⊆ s × t, or r ∈ 𝒫 (s × t.)
 
 ```lean
 #reduce Set.powerset (Set.prod _ _)
--- fun t => t ⊆ prod ?m.3518 ?m.3519 (where the ?metavariables are placeholders for the missing sets )
+-- fun t => t ⊆ prod ?m.3518 ?m.3519 (? placeholders for sets )
 
 end DMT1.Lectures.setsRelationsFunctions.sets
 ```
