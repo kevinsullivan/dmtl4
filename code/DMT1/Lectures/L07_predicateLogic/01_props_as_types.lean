@@ -1,25 +1,58 @@
 /- @@@
-# Propositional Logic with Proof-Theoretic Validity
+# Propositions as Types with Values as Proofs
 
 <!-- toc -->
-
 
 In this chapter, we re-develop propositional logic in type theory,
 but now with a *proof-theoretic* rather thana model-theoretic notion
 of what it means for a proposition to be *valid*. Rather than checking
-all interpretations, we will embed the axioms of propositional logic
-into Lean and then we weil *reason* about validity using them:
+all interpretations, we will embed the axioms of predicate logic, which
+include upgraded forms of the "axioms" from our study of propositional
+logic, into Lean 4, so as to be able to *reason* rather than *compute*
+about the validity of any given proposition, or not.
 
-- We will represent any given proposition as a *type*
-- We will represent the proofs of a proposition as the *values* of its type
-- The values of a type are given by its constructors; picking the right constructors is the trick
-- We (and Lean) will accept any value/proof of a proposition/type as a proof of its validity/truth
-- If a proposition/type demonstrably has *no* values (no proofs), we'll consider it to be false
-- We will represent elimination axioms as functions that take proof arguments and return proof results
+## Why Predicate Logic in Type Theory?
+
+Rather that start by teaching predicate logic as traditionally seen
+in DMT1, namely in the variant known as first-order predicate logic,
+this course jumps straight to teaching the immensely more powerful
+and computationally useful language of higher-order predicate logic
+and proofs though their standard embedding into the logic of Lean 4.
+
+This embedding defines a language of *higher-order* predicate logic.
+Whereas in first-order theory, one can quantify only over elements
+of sets, one cannot quantify over relations, functions, predicates,
+types. There is thus no way within first-order logic to even speak
+of what it means for *any* relation to be transivitive. And yet the
+ability to grasp work with such higher-order abstractions is essential
+for any real degree of fluency in mathematics. It's also now essential
+if one hopes to find work in applied type theory!
+
+So here's how we will proceed.
+
+We will represent any given proposition as *types*
+- *False* by a type with no constructors and so no proofs
+- *True* by type that defines a single constant proof term
+- *And* and *Or* by polymorphic *product-* and *sum-style* types
+- *Implication* as a function type, taking and returning proofs
+- *Negation* as a function from a proposition to False
+- *Iff* as a product-like type over the two component implications
+
+We will represent the proofs of a proposition as the *values* of its type
+  - False demonstrably has no proofs (which is what we will take as falsity)
+  - True defines True.intro as its one constant proof term
+  - *And.intro (p : P) (q : Q)* will represent a proof of *P ∧ Q*
+  - Either *Or.inl (p : P)* or *Or.inr (q : Q)* will represent a proof of (P ∨ Q)
+  - Any function (body) of type, *P → Q*, will prove the implication *(P → Q)*
+  - And function (body) of type, *P → False* will serve as a proof of *¬P*
+
+We (and Lean) will judge a proposition to be true if and only if we have a proof of it
+- If we are given or may assume we have a proof of P, we can analyze (pattern match) on it
+- We will represent elimination axioms as functions that take and proof terms as arguments
 
 To make all of this concrete, we'll do the following in the rest of this lecture:
 
-- represent two propositions as corresponding types
+- represent a few propositions as corresponding types
 - use cleverly designed constructors to express introduction rules
 - use functions that consume and return proof values to express elimination rules
 - use all of this machinery to prove an interesting identity (*And* is commutative)
@@ -28,39 +61,52 @@ To make all of this concrete, we'll do the following in the rest of this lecture
 /- @@@
 ## Propositions as Types; Values as Proofs
 
-We now represent two propositions as type: Kevin is from Charlottesville,
-and Carter is from Charlottesville. We'll use K and C as shorted names for
-these propositions. We'll go on to define three *values* of each type, each
-one to be considered as a proof.
+The first point is that although representing propositions as types and
+values as proofs sounds exotic, we can make very rapid progress developing
+the idea. Let's just start with some examples/
+
+We will first represent two propositions as type: K is from Charlottesville,
+and C is from Charlottesville. In Lean, we'll represent these propositions
+as types that we'll call *K* and *C*. To express the fact that a proposition
+is true, it will have to have a proof, but we represent proofs as terms of a
+type, and to have terms we need constructors. Here we define the same-named
+constructors
 @@@ -/
 
 -- Kevin is from Charlottesville
 inductive K : Type where                            -- proposition as a type
-| cvilleBirthCert                                   -- a proof as a value
-| cvilleDriversLicense                              -- another proof
-| cvilleUtilityBill                                 -- a third proof
+| birthCert                                   -- a proof as a value
+| driversLicense                              -- another proof
+| utilityBill                                 -- a third proof
 
 -- Proposition: Carter is from Charlottesville
 inductive C : Type where
-| cvilleBirthCert
-| cvilleDriversLicense
+| birthCert
+| driversLicense
 | cvilleUtilityBill
 
--- Kervin is from LA
-inductive KLA : Type where
+/- @@@
+Clearly Kevin and Carter are both from CVille, as there
+are proofs of that fact for each of them. Here's how we
+might assert and then prove that K is from CVille. First
+we pick a name for our proof: kIsFromCVille. Next we say
+what proposition it will prove: K.
+@@@ -/
 
--- later we'll replace these two propositions with one predicate
--- we can also see here that a proposition can have multiple proofs
+def kIsFromCville : K := K.birthCert
 
-open K
-open C
 
--- We can now "give proofs" of our two respective propositions
+/- @@@
+Now let's suppose Mary is not from CVille. To express this
+idea, a proposition, we define a type, *M*, but as we want
+it to be judged false, we specify that there are no proofs
+of it at all.
+@@@ -/
 
---  proof name  proposition/type    proof/value
-def pfK      : K :=              K.cvilleDriversLicense
-def pfC      : C :=              C.cvilleUtilityBill
-def pfKLA    : KLA :=            sorry
+inductive Mary : Type where
+
+-- But we can't prove it!
+def maryIsFromCVille    : Mary :=            sorry
 
 /- @@@
 We've introduced no new Lean constructs at this point. We've just
