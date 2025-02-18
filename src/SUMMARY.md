@@ -68,6 +68,7 @@
   - [Syntax of Propositional Logic](./Assignments/a2.md)
   - [Semantics of Propositional Logic](./Assignments/a3.md)
   - [The Language of Arithmetic](./Assignments/a4.md)
+  - [HW #8 Propositions as Types](./DMT1/hw/hw8/hw8.lean.md)
 
 ---
 
