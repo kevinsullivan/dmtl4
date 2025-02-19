@@ -137,7 +137,7 @@ The first  illustrates how students would write propositional logic expressions.
 - def andAssociative  := ((P ∧ Q) ∧ R) ↔ (P ∧ (Q ∧ R))
 - def equivalence     := (P ↔ Q) ↔ ((P ⇒ Q) ∧ (Q ⇒ P))
 
-This one, second, specifies the generalized property of a relation of being well ordered.
+This one, second, specifies the generalized property of a relation of being well founded.
 
 - def isWellFounded  {α  β : Type} : Rel α α → Prop := fun r => ∀ (s : Set α), s ≠ ∅ → ∃ m, (m ∈ s ∧ ¬∃ n ∈ s, r n m)
 
