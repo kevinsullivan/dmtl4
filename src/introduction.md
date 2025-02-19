@@ -1,11 +1,11 @@
-# Discrete Mathematics and Theory in Lean 4
+# Preface
 
-- [Discrete Mathematics and Theory in Lean 4](#discrete-mathematics-and-theory-in-lean-4)
+- [Preface](#preface)
   - [Acknowledgements](#acknowledgements)
   - [Disclaimers](#disclaimers)
   - [A Couple of Pillars](#a-couple-of-pillars)
   - [Some Problems](#some-problems)
-  - [Secret Sauce](#secret-sauce)
+  - [New Approach](#new-approach)
   - [Design Constraints](#design-constraints)
   - [This Solution](#this-solution)
   - [An Example](#an-example)
@@ -62,7 +62,7 @@ This course aims to help address the resulting shortfall in talent by radically 
 - The profound intertwining of computation and reasoning afforded by such langauges
 - The real possibility that mere routine programming will increasingly be done by "AIs"
 
-## Secret Sauce
+## New Approach
 
 The idea is to simultaneously gain a deeper understanding of reasoning while also
 seeing it as a form computation, albeit now over reasoning rather than computational
@@ -70,41 +70,41 @@ terms. For example, we begin with propositional logic---syntax, semantics, valid
 soundness, etc.--through its standard deep embedding into (the logic of) Lean 4. A
 demonstrated strength of Lean 4 is in its enabling communities to express rich theories
 in the clear, abstract, generalized terms of the particular domain itself, across a wide
-range of domains in graduate- and beyond-level mathematics. 
+range of domains in graduate- and beyond-level mathematics.
 
-The entire course is set up this way. Predicate logic is presented through its standard 
-shallow embedding in Lean 4. First-order logic is described as a special case. 
+The entire course is set up this way. Predicate logic is presented through its standard
+shallow embedding in Lean 4. First-order logic is described as a special case. Set theory
+is built directly on predicate logic. Etc.
 
-This course  can then teach general concepts as being general, with reflexivity of a
-binary relation on a set as an example. In a first-order course, you can formally express
-the what it means for some particular set, s, and some particular binary relation, r on
-s, for r to be "reflexive." That's ok, but it expands one's mathematical agility to be
-able to say, and express formally that reflexivity is a property of *any* binary
-relation r on *any* set s of objects of *any* type, T. The expressiveness of first-order
-logic is well short of being able to express many of the most important ideas expected
-to be taught in this class.
+This course can then express generalized mathematical concepts, such as the property of
+a relation of being reflexive (or whatever). In a first-order course, you can formally
+express what it means for a particular binary relation, r, to be "reflexive." That's ok.
+But one really hopes the student will acquire is an understanding of the property itself:
+the property of any binary relation, r, on any set, s, of being reflexive. This generalized
+concept can then be *applied* to any particular relation to speak of its being reflexive,
+or not. The first-order theory of the traditional DMT1 course isn't expressive enough to
+represent generalized properties of higher-order things, such as relations, functions, or
+types. Lean is not much harder to learn and is really a better language for expressing
+and working with core DMT1 concepts. It's really better to learn from the outset to be
+able to say things like this: reflexivity is a property of *any* binary relation on *any*
+set of objects of *any* type. None of those *anys* can be said in first-order logic as one
+cannot quantify over relations, sets, or types.
 
-It's not just a nicety, either, to have *reflexive* as a predicate on any binary relation
-on any set of terms of any type. It means that this predicate can be applied to any 
-particular relation so as to produce the proposition that it is reflexive,. The 
-application of predicates to particulars in this manner is ubiquitous in formal 
-reasoning, reading, and writing. Being able to formally state propositions about relations by applying predicates to them and then also knowing how
-to construct machine-checked proofs of them can perhaps be taken as evidence of deeper
-undertanding and broader potential to use formal reasoning productively in practice.
- 
-Another principle is that all of the core concepts taught in the traditional course must
+It's not just a nicety, either, to have *reflexive* as a predicate on any binary
+relation on any set of terms of any type. It means that this predicate can be applied
+to any particular relation so as to produce the proposition that it is reflexive. The
+application of predicates to particulars is ubiquitous in formal reasoning.  
+
+Another principle is that all of the main concepts taught in the traditional course must
 be taught in the new course: propositional logic, predicate logic, sets, induction. This
-course covers the same topics but in different ways. For example, induction is first seen
-as a way to construct recursive functions. Later the same machine is used to construct 
-recursive proof terms.
+course covers the same topics but in different ways. 
 
-The deepest difference is that this course is rooted in type theory, whereas first-order
-set theory and predicate logic are the foundations for the traditional course. This course
-instead teaches sets theory as embedded in Lean with one-place predicates both specifying
-and subsequently representing sets. With standard concrete notations, set theory in Lean
-appears to be *plenty good enough* for teaching CS2-level set concepts. And the pleasures
-of having all of this content being handled by Lean, rather than by oneself using paper and 
-pencil, are significant.
+But it's not only topic coverage. Notations matter. Embeddings of mathematical concepts 
+in Lean often come with the standard notations of the field as a paper-and-pencil affair. 
+Differences in surface syntax in having to read and write in set theory as embedded in
+Lean and as learned using paper and pencil are minor, while the gain in capabilities at
+one's fingertips is substantial. They include automated syntax and proof checking, among
+other things. Having a superb supportive community of experts is a tremendous human asset.
 
 ## Design Constraints
 
@@ -114,11 +114,11 @@ This course was developed under a few key constraints:
 - Avoid assiduously overwhelming early students with the complexity of modern proof assistants
 - Formalize every concept in the uniform logic of the proof assistant using conventional notations
 - Ensure that first-order theory is a special case of the more expressive theory of the course
-- Provide students with a deeply computational perspective, from great tooling to Curry-Howard 
-
+- Provide students with a deeply computational perspective, from great tooling to Curry-Howard
+  
 ## This Solution
 
-The solution, now tested in practice (but not scientifically evaluated yet), has a few 
+The solution, now tested in practice (but not scientifically evaluated yet), has a few
 key elements:
 
 - Make standard embeddings propositional and predicate logic in Lean a path to Lean 4 itself
@@ -139,12 +139,12 @@ The first  illustrates how students would write propositional logic expressions.
 
 This one, second, specifies the generalized property of a relation of being well ordered.
 
-- def isWellOrdering  {α  β : Type} : Rel α α → Prop := fun r => ∀ (s : Set α), s ≠ ∅ → ∃ m, (m ∈ s ∧ ¬∃ n ∈ s, r n m)
+- def isWellFounded  {α  β : Type} : Rel α α → Prop := fun r => ∀ (s : Set α), s ≠ ∅ → ∃ m, (m ∈ s ∧ ¬∃ n ∈ s, r n m)
 
 By the end of the course students should be able to read and explain what this definition 
 means, and *apply* it to particulars in the process of making richer claims about them.
-The undergraduate does emphasize from start to finish practicing the skill of translating
-between formal and *natural* natural language.
+The undergraduate course does emphasize ongoing practice in the skills of translating between 
+formal and *natural* natural language.
 
 ## Status
 
