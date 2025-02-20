@@ -353,11 +353,38 @@ propositional logical also valid in Lean?
 
 -- ¬(P ∨ Q) -> ¬P ∧ ¬Q
 
-example : ~(P ⊕ Q) -> (~P) × (~Q) :=
+example : (~(P ⊕ Q)) -> (~P) × (~Q) :=
+fun (h : (~(P ⊕ Q))) =>
+  _
+
+example : (~P) × (~Q) → (~(P ⊕ Q)) :=
 _
 
-example : (~P) × (~Q) → ~(P ⊕ Q) :=
+/- @@@
+In classical logic we know it's false that both P
+and ¬P are true. Is that also true in constructive
+logic? Prove it if you can.
+@@@ -/
+example : ~(P × (~P)) := _
+
+/- @@@
+What about the axiom of negation elimination? That is,
+¬¬P ↔ P. Is it valid in both directions, one direction,
+or neither?
+@@@ -/
+
+example : P → (~(~P)) :=
+λ p => fun np => _
+
+/- @@@
+Ok, so, even in constructive logic, from a proof of
+P we can derive a proof of ¬¬P. How about in the other
+direction?
+-/
+example : (~(~P)) → P :=
 _
+
+
 
 
 /- @@@
