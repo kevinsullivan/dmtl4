@@ -283,8 +283,8 @@ the the disjunction.
 
 -- P ∧ (Q ∨ R) → (P ∧ Q ∨ P ∧ R)
 example : P × (Q ⊕ R) → (P × Q ⊕ P × R)
-| ⟨ p, Sum.inl q ⟩ => Sum.inl ⟨ p, q ⟩
-| ⟨ p, Sum.inr r ⟩ => Sum.inr ⟨ p, r ⟩
+| Prod.mk p (Sum.inl q)  => Sum.inl (Prod.mk p q)
+| ⟨ p, Sum.inr r ⟩ => Sum.inr ⟨ p, r ⟩ -- w/ notation
 -- you write the second missing case
 
 /-@@@
@@ -311,7 +311,9 @@ into our current embedding of predicate logic in Lean
 @@@ -/
 
 /-
-No longer valid in constructive logic of Lean, or whatever.
+One of the  valid theorems of proposition logic
+is this part of one of DeMorgan's Laws explaining
+how negation distributes over conjunctions.
 -/
 -- ¬(P ∧ Q) → (¬P ∨ ¬Q)
 example : (~(P × Q)) → (~P) ⊕ (~Q) :=
@@ -319,11 +321,18 @@ example : (~(P × Q)) → (~P) ⊕ (~Q) :=
     -- show P → Empty
   fun (h : ~(P × Q)) =>
     Sum.inr _
--- stuck!!!
 
-/-
-What about other direction?
--/
+/- @@@
+At this point we're stuck. In constructive logic,
+just knowing that P ∧ Q is false is not enough to
+give you a proof of either ¬P or of ¬Q. This is an
+example of a theorem in propositional logic (valid)
+that is not valid in the constructive logic of Lean.
+@@@ -/
+
+/- @@@
+What about in the other direction?
+@@@ -/
 
 example: (~P) ⊕ (~Q) → (~(P × Q)) :=
 fun (h : (~P) ⊕ ~Q) =>
@@ -333,12 +342,22 @@ fun (h : (~P) ⊕ ~Q) =>
     | Sum.inr nq => nq pandq.snd
 
 
-/-
-¬(P ∨ Q) -> ¬P ∧ ¬Q
+/- HOMEWORK 9!
+The other of DeMorgan's laws explains how negation
+distributes over disjunctions. In the forward direction
+it proposes that if you know what P or Q is false, which
+means neither is true, then at least one of them must be
+false. Classically that makes sense. Is this theorem of
+propositional logical also valid in Lean?
 -/
 
+-- ¬(P ∨ Q) -> ¬P ∧ ¬Q
 
--- Your answers here
+example : ~(P ⊕ Q) -> (~P) × (~Q) :=
+_
+
+example : (~P) × (~Q) → ~(P ⊕ Q) :=
+_
 
 
 /- @@@
