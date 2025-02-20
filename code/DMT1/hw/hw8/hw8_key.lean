@@ -383,17 +383,3 @@ direction?
 -/
 example : (~(~P)) → P :=
 _
-
-
-
-
-/- @@@
-## Extra Credit
-
-Not all of the axioms that are valid in propositional
-logic are valid in our embedding of constructive logic
-into Lean. One that's not is negation elimination: that
-is, *¬¬P → P*. Try to prove it in the stype we've used
-here here and explain exactly where things go wrong (in
-a comment).
--/
