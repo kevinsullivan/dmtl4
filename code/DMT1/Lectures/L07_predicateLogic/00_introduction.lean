@@ -1,6 +1,8 @@
 /- @@@
 # Introduction
 
+<!-- toc -->
+
 In predicate logic, whether first- or higher-order (as we
 discuss later), one speaks of worlds characterized in terms
 of entities (and in some predicate logics types of entities);
@@ -15,8 +17,6 @@ proposition about them is true. Predicate logics also support set
 theory: sets of objects and ways of speaking about *all* of
 the elements in a given set, or *at least one* element of a
 given set as satisfying some condition.
-
-<!-- toc -->
 
 ## Overview
 

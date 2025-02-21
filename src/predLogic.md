@@ -1,5 +1,7 @@
 # Predicate Logic
 
+<!-- toc -->
+
 In propositional logic, syntactic variable expressions
 are interpreted only over sets of Boolean state values.
 
