@@ -1,4 +1,4 @@
-# Propositions as Types with Values as Proofs
+# Propositions as Types, Values as Truths by Proofs
 
 <!-- toc -->
 
@@ -71,7 +71,7 @@ constructors
 
 ```lean
 -- Kevin is from Charlottesville
-inductive K : Type where                            -- proposition as a type
+inductive K : Type where                      -- proposition as a type
 | birthCert                                   -- a proof as a value
 | driversLicense                              -- another proof
 | utilityBill                                 -- a third proof
