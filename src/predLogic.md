@@ -4,7 +4,7 @@ In propositional logic, syntactic variable expressions
 are interpreted only over sets of Boolean state values.
 
 - PressureTooHigh /\ ORingsFailing
-- (GreenLight \/ RedLight) /\ ~(GreenLight /\ RedLight)
+- (GreenLight \\/ RedLight) /\ ~(GreenLight /\ RedLight)
 
 ## Limited Expressiveness of Propositional Logic
 
@@ -143,5 +143,4 @@ of type *T* (a first-order quantification), if *R* relates *t1* to *t2* then it 
 
 We can then *apply* such generalized definition of a property of a relation to any particular binary relation on a type of values (let's say, *isFriend*, on values of type, *Person*) to derive the proposition that *that* relation is symmetric. The expression, *symmetric Person isFriend*, would then reduce to the first-order proposition, *∀ t1 t2 : Person, *isFriend t1 t2 <->  isFriend t2 t1*.
 
-The rest of this chapter presents the standard embedding of this higher-order predicate logic Lean. The result is a predicate logic in which one can express mathematics at high levels of abstraction and generality. The result has been an explosion in the community of mathematicians now using Lean 4 to formalize and verify theorems in many branches of advanced mathematics.
-
+The rest of this chapter presents the standard embedding of this higher-order predicate logic Lean. The result is a predicate logic in which one can express mathematics at high levels of abstraction and generality. The result has been an explosion in the community of mathematicians now using Lean 4 to formalize and verify theorems in many branches of advanced mathematics. And that perhaps in turn has sparked deep interest in advanced computer science in the use of Lean 4 for research and development in trustworthy computing systems.
