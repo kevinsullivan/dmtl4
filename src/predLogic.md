@@ -133,14 +133,16 @@ As an one example, in Lean one can define the *generalized property,* of a binar
 ```lean
 def symmetric := 
 ∀ (T : Type) 
-  (R : T -> T -> Prop) 
+  (R : T → T → Prop) 
   (t1 t2 : T),
-r t1 t2 <-> r t2 t1
+r t1 t2 ↔ r t2 t1
 ```
 
 That is, for any type of objects, *T* (quantification over types), and for any binary relation, *R,* on values of this type (quantification over relations), what it means for *R* to be symmetric is that for any two objects, *t1, t2*
 of type *T* (a first-order quantification), if *R* relates *t1* to *t2* then it also relates *t2* to *t1*.
 
-We can then *apply* such generalized definition of a property of a relation to any particular binary relation on a type of values (let's say, *isFriend*, on values of type, *Person*) to derive the proposition that *that* relation is symmetric. The expression, *symmetric Person isFriend*, would then reduce to the first-order proposition, *∀ t1 t2 : Person, *isFriend t1 t2 <->  isFriend t2 t1*.
+We can then *apply* such generalized definition to any particular binary relation on any type of values (let's say, *isFriend*, on values of type, *Person*) to derive the proposition that *that* relation is symmetric. The expression, *symmetric Person isFriend*, would then reduce to the first-order proposition, *∀ t1 t2 : Person, *isFriend t1 t2 <->  isFriend t2 t1*. 
 
-The rest of this chapter presents the standard embedding of this higher-order predicate logic Lean. The result is a predicate logic in which one can express mathematics at high levels of abstraction and generality. The result has been an explosion in the community of mathematicians now using Lean 4 to formalize and verify theorems in many branches of advanced mathematics. And that perhaps in turn has sparked deep interest in advanced computer science in the use of Lean 4 for research and development in trustworthy computing systems.
+For the working mathematician it's crucial to be able to reason and speak in terms of such abstract and generalized properties of complex things. We speak of relations being symmetric, reflexive, transitive, well founded, and so on, without having to think about specific relations. We think of operation being commutative, associative, invertible, again in precise but abstract and general terms, independent of particular operations. In the first-order logic of the usual CS2: DMT1 class, that's just not possible. In Lean 4, it is completely natural and incredibly useful.
+
+The result has been an explosion in the community of mathematicians using Lean 4 to formalize and verify theorems in many branches of advanced mathematics. That in turn has sparked deep interest in computer science in the use of Lean 4 for research and development in trustworthy computing, among many other areas. The rest of this chapter skips over first-order logic to introduce predicate logic through its higher-order, much more useful and relevant variant, in Lean.
