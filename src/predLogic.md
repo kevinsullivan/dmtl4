@@ -51,45 +51,55 @@ one, of the elements of a given set has a given property.
 
 It's on the foundation of a simple predicate logic that
 most of contemporary mathematics rests. To give a sense
-how this could one, note that one can encode the natural
-numbers as either the empty set representing zero, or as a
+how this could work, note that one can encode the natural
+numbers as: either the empty set, encoding zero, or as a
 set containing the set representing a one-smaller number.
+The nesting level represents the value, just as for *Nat*
+in Lean.
 
-The most salient point here, though, is that the choice
-of predicate logic as a formal *language* comes with this
-much richer range of formal representations of real world
-situations. A set of possible world situations no longer
-has to be represented only using Boolean variables, but
-is now represented by *objects*, *functions* from tuples
-of objects to other objects, *sets* of objects with given
-properties, and *relations* that associate objects that,
-together, have certain properties, such as one particular
-number being *less than* another.
+The larger point here is that the choice of any given
+logic in which to reason about the world brings with it
+a form of structure in terms of which one can represent
+specific states of the real world, over which expressions
+are evaluated.
 
-To start to write practical predicate logic expressions,
-one must have specified such a formal semantic domain, i.e.,
-a form of world state representations over which expressions
-in predicate logic will be written and evaluated. The syntax
-of predicate logic then provides for *constant* symbols,
-interpreted as referring to domain objects; *variables*,
-also (when *free*, not *bound* by a quantifier, discussed
-later) to be interpreted as referring to objects; *function*
-names, interpreted as referring to functions in the semantic
-domain; and set/relation symbols used to refer to sets and
-relations in the semantic domain. An expression in predicate
-logic is then evaluted by mapping these syntactic elements
-to their semantic meanings and checking if the resultis true
-in the semantic domain.
+## Semantic Domains for Predicate Logic
 
-Without elaborating, we will note that what we've described
-here is a *formal* semantics. The particular representation
-of the real world, the form of structure over which predicate
-logic expressions can be evaluated, will have its own intended
-meanings in the real world. To have a complete understanding
-of the soundness of formal reasoning over formal structures,
-one must also consider the real semantics of the structures.
+In particular, predicate logic brings along with it a much
+richer form of structure (than vector of Boolean) that one
+use to represent real world conditions of interest. A set
+of possible world situations no longer has to be encoded
+just as a vector of binary Boolean values. We can represent
+a world now in essentially *relational* terms. Predicate
+logic is the core theory underpinning relational databases.
+Our world state representation structures can now have:
 
-## First-Order Predicate Logic
+- *objects* representing corresponding objects in the real domain (e.g., "Tom", "Mary")
+- *functions* from objects to objects  in the real world (e.g., motherOf Tom = Mary)
+- *relations* among objects in the real world (e.g., youngerThan Tom Mary)
+- *sets of objects* (e.g., { "Tom", "Mary" }) [unary relation]
+
+To know how to use predicate logic effectively, it really
+helps to think about how you want to represent the space of
+all of the possible worlds about which you might speak, and
+how to represent specific individual worlds in that space.
+Think in relational terms.
+@@@ -/
+
+/- @@@
+The syntax of predicate logic is then set up to provide
+nice ways to talk about such world representations. The
+syntax provides *constant* symbols (referring to fixed
+domain objects); (free) *variables*, also interpreted as
+referring to objects; *function* symbols (and arguments,
+interpreted as referring to functions in the world); and
+*predicate* symbols refering to relations in the domain. 
+Predicate logic inherits the connectives of propositional 
+logic, adds two kinds of quantified expressions, and puts
+it all together into a syntax of *well formed formula* in
+predicate logic.
+
+## Limited Expressiveness of First-Order Predicate Logic
 
 The variant of predicate logic taught in typical DMT1 courses
 is called first-order predicate logic. The logic of Lean is a
@@ -97,40 +107,50 @@ higher-order logic. The difference is in the generality of what
 can be expressed in each of these logic.
 
 To see the difference concretely, let's consider what properties
-a *friendOf* relation should have on some new social network? It
+a *friendOf* relation should have on some new social network. It
 could be *symmetric*, as it is on *FB*; or one might prefer for
-it not necessarily symmetric. I *follow* Bill Gates on a site
-but on that site he doesn't follow me.
+it not necessarily to be symmetric. Maybe a *follows* relation
+would be better. I follow Bill Gates but he doesn't follow me.
 
 In first-order logic we can use the *universal quantifer* syntax
-to specify that our *friendOf* relation will be symmetric. We can
-write this as *∀ p1 p2, friendOf p1 p2 ↔ friendOf p2 p1.* Here, the
-variables, *p1* and *p2*, are *bound* by the quantifer to range over
-all objects in the semantic domain. The predicate after the comma
-then asserting that for any such pair, if the first is a *friendOf*
-the second, then the second is necessarily a *friendOf* the first.
+to specify that our *friendOf* relation is (to be) symmetric. We can
+write this as *∀x∀y(friendOf(x,y)↔friendOf(y,x)).* The variables,
+*x* and *y*, are *bound* by the quantifer to range over all objects
+in the semantic domain. The predicate after the comma then checks
+whether all such pairs of objects satisfy the following predicate.
 
 A major restriction on expressiveness imposed by first-order logic
-is that quantified variables can be range only over objects and not
-over such things as sets of objects, functions, or relations. In first
-order theory we can express the notion that that some *particular*
-relation is symmetric; and to say that we had to generalize over all
-pairs of objects in the domain. But what we can't say in first-order
-logic is that *any* relation, *r*, is symmetric if for every pair of
-objects, *p1* and *p2*, if *r* relates *p1* to *p2*, then *r* also
-relates *p2* to *p1*. We cannot express the *property* of a relation
+is that quantified variables can be range only over objects. One
+cannot quantify over all sets of objects, functions, or relations.
+In first order theory we can express the idea that some particular
+relation is symmetric.
+
+```lean
+
+```
+
+What we can't express in first-order logic
+is the concept of symmetry as a generalized property that *any* given
+binary relation on *any* set of objects of *any* kind might or might
+not have. And yet being able to reason fluently with concepts at this
+level of generality is essential for any literate mathematician.  in terms of We cannot express the *property* of a relation
 of *being symmetric,* a crucial degree of mathematical generality*,
 in first order theory because we cannot talk about *all relations*.
 
-## Higher-Order Predicate Logic
+## The Enhanced Expressiveness of Higher-Order Logic in Lean
 
 The most crucial property of Lean for this course, and for research
 worldwide on the formalization of advanced mathematics, is that Lean
-implements a higher-order logic in which you can quantify over such
-things: not only objects of given types, but over types themselves,
-along with sets, functions, propositions, predicates, and so forth.
+implements a higher-order logic in which you can express concepts of
+great generality by quantifying not only over elementary values but
+over such things as types, functions, propositions and predicates,
+and so forth.  
 
-As an one example, in Lean one can define the *generalized property,* of a binary relation on objects of any type, of being *symmetric* like this:
+As an one example, in higher order predicate logic
+in Lean, one can define *generalized* properties of relations: for
+example the property of a binary relation r on a set s of values of
+some type T that r relates any two values in one direction only if
+it it also relates them in the other order. 
 
 ```lean
 def symmetric := 
