@@ -182,7 +182,7 @@ def andCommutative'' : P × Q → Q × P := λ ⟨ p, q ⟩ => ⟨ q, p ⟩
 ```
 
 
-### Representing P ∨ Q as P ⊕ Q (Sum Types)
+### Representing Sum P Q (P ⊕ Q) with Or P Q (P ∨ Q)
 
 As we represented the conjunction of propositions as a
 product type, we will represent a disjunction as what is
@@ -301,7 +301,7 @@ and give it a concrete notation, such as *~*.
 ```lean
 def neg (A : Type) := A → Empty
 notation: max "~"A => neg A
-example : ~N := λ h => nomatch h
+example : ~N := λ (h : N) => nomatch h
 ```
 
 ## Summing Up
@@ -317,7 +317,7 @@ the the disjunction.
 ```lean
 example : P × (Q ⊕ R) → (P × Q ⊕ P × R)
 | ⟨ p, Sum.inl q ⟩ => Sum.inl ⟨ p, q ⟩
--- you write the second missing case
+| ⟨ p, Sum.inr r ⟩ => Sum.inr ⟨ p, r ⟩
 ```
 
 ## Homework
