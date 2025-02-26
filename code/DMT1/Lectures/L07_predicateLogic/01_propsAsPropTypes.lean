@@ -33,8 +33,10 @@ of propositions.
 ## False replaces Empty
 @@@ -/
 
+#check Empty
 #check False
 -- inductive False : Prop
+
 
 /- @@@
 ## Set-Up for Running Example
@@ -79,7 +81,7 @@ theorem r : N := _    -- No. There's no proof term for it!
 Lean 4 defines separate logical connectives just for types
 in Prop.
 
-### P × Q (Product Types) becomes P ∧ Q
+### Prod P Q (P × Q, Product Types) becomes And P Q (P ∧ Q)
 
 Here as a reminder is Lean's definition of the polymorphic
 pair type in Lean 4, followed by its definition of *And*.
@@ -89,7 +91,7 @@ pair type in Lean 4, followed by its definition of *And*.
 
 namespace hide
 
-structure Prod (α : Type u) (β : Type v) where
+structure Prod (α : Type u) (β : Type v)  where
   mk ::
   fst : α
   snd : β
@@ -109,8 +111,11 @@ We now make the following replacements:
 - replace Prod.fst and Prod.snd with And.left and And.right
 @@@ -/
 
-abbrev PAndQ := P ∧ Q    -- Representing the proposition, P ∧ Q
-def pandq : P ∧ Q := And.intro P.mk Q.mk  -- Representing proof!
+#check P
+#check @And
+
+abbrev PAndQ : Prop := P ∧ Q    -- Representing the proposition, P ∧ Q
+theorem pandq : P ∧ Q := And.intro P.mk Q.mk  -- Representing proof!
 example : P ∧ Q := ⟨ P.mk, Q.mk ⟩       -- Notation for Prod.mk
 
 
@@ -121,7 +126,13 @@ example : P ∧ Q := ⟨ P.mk, Q.mk ⟩       -- Notation for Prod.mk
 #check pandq.right
 
 /- @@@
-All of the usual theorems then go through as before
+@@@ -/
+
+/- @@@
+All of the usual theorems then go through as before.
+Here we're actually seeing the form of a proof of an
+*implication* in type theory: and it's a function from
+proof of premise to proof of conclusion.
 @@@ -/
 
 def andCommutative : P ∧ Q → Q ∧ P
@@ -162,8 +173,9 @@ inductive Sum (α : Type u) (β : Type v) where
 inductive Or (a b : Prop) : Prop where
   | inl (h : a) : Or a b
   | inr (h : b) : Or a b
-
 @@@ -/
+
+def porq := P ∨ Q
 
 -- Proof of *or* by proof of left side
 def porq1 : Or P Q := Or.inl P.mk
@@ -189,7 +201,7 @@ example : P ∨ Q → Q ∨ P
 Implications continue to be represented by function types.
 @@@ -/
 
-example : P ∧ Q → P := λ h => h.left
+example : P ∧ Q → P := fun (h : P ∧ Q) => h.left
 
 
 /- @@@
@@ -199,6 +211,8 @@ Negation continues to be represented as the existence
 of a function from a type to an empty type, but now
 instead of (Empty : Type) we use (False : Prop).
 @@@ -/
+
+#check Empty
 
 -- Can't prove that P is false, as it has a proof
 def falseP : P → False
@@ -228,9 +242,56 @@ In class exercise. Take this example from last time
 and fix it to use Prop.
 @@@ -/
 
-example : P × (Q ⊕ R) → (P × Q ⊕ P × R)
-| ⟨ p, Sum.inl q ⟩ => Sum.inl ⟨ p, q ⟩
+example : P ∧ (Q ∨ R) → (P ∧ Q ∨ P ∧ R)
+| ⟨ p, Or.inl q ⟩ => Or.inl ⟨ p, q ⟩
+| ⟨ p, Or.inr r ⟩ => Or.inr ⟨ p, r ⟩
 -- you write the second missing case
+
+
+/- @@@
+- ∧
+- ∨
+- ¬
+- →
+- ↔
+@@@ -/
+
+#check Iff
+
+/- @@@
+structure Iff (a b : Prop) : Prop where
+  intro ::
+  mp : a → b
+  mpr : b → a
+@@@ -/
+
+-- our example is set up so that we have proofs of P and Q to return
+example : P ↔ Q := Iff.intro (fun _ : P => Q.mk) (fun _ : Q => P.mk)
+
+/- @@@
+Universal quantifier
+@@@ -/
+
+def allPQ : ∀ (_ : P), Q := fun (_ : P) => Q.mk
+-- P → Q
+-- Wait, what?
+
+-- Hover over #reduce.
+#reduce ∀ (p : P), Q
+-- (∀ (p : P), Q) literall *is* P → Q
+
+/- @@@
+So that's our first taste of the two quantifiers of a
+predicate logic: *for all* (∀) and *there exists* (∃).
+What we've seen here is a special case of the more general
+form of a universally quantified proposition.
+
+To see the general form of quantified propositions, we now
+need to meet predicates: as a concept, and as that concept
+is embedded (very naturally) in Lean. That takes us into the
+next chapter, on *predicates*.
+@@@ -/
+
 
 /-@@@
 ## Homework
@@ -239,30 +300,17 @@ Write and prove the following propositions from the
 identities file in the propositional logic chapter.
 Use the space below. If you ever get to the point where
 you're sure there's no possible proof, just say so and
-explain why. Use ×, ⊕, and ~ as notations for logical
-and, or, and not when translating these propositions
-into our current embedding of predicate logic in Lean
-(just as we did in the preceding example).
+explain why. Use the standard logical notations now,
+instead of the notations for Prod and Sum. That is,
+just use the standard logical notations in which the
+propositions are written here.
 
-- P ∧ (Q ∧ R) → (P ∧ Q) ∧ R   -- and is associative
-- P ∨ (Q ∨ R) → (P ∨ Q) ∨ R   -- or is associative
+- P ∧ (Q ∧ R) → (P ∧ Q) ∧ R   -- and associative (1 way)
+- P ∨ (Q ∨ R) → (P ∨ Q) ∨ R   -- or associative (1 way)
 - ¬(P ∧ Q) → ¬P ∨ ¬Q
 - ¬(P ∨ Q) → ¬P ∧ ¬Q
 - ¬(P ∧ N)
 - (P ∨ N)
-
 @@@ -/
 
 -- Your answers here
-
-
-/- @@@
-## Extra Credit
-
-Not all of the axioms that are valid in propositional
-logic are valid in our embedding of constructive logic
-into Lean. One that's not is negation elimination: that
-is, *¬¬P → P*. Try to prove it in the stype we've used
-here here and explain exactly where things go wrong (in
-a comment).
--/
