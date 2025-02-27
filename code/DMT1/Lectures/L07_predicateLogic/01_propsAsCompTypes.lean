@@ -346,7 +346,7 @@ into our current embedding of predicate logic in Lean
 -- Your answers here
 
 /- @@@
-## Extra Credit
+Extra credit:
 
 Not all of the axioms that are valid in propositional
 logic are valid in our embedding of constructive logic
