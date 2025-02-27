@@ -41,16 +41,21 @@ Lean Detail: The *deriving Repr* annotation simply asks Lean to
 generate code to pretty print values of the given type, e.g., when
 one uses #eval/#reduce to produce a reduced value to be displayed.
 
-## ... With Values Defined to Encode Bona Fide Proofs
+## ... So That Values Encode Proofs Down to Axioms
 
-Correspondingly we will consider the values of these types,
-when there are any, as proofs of the propositions encoded in
-their types. Moreover, we will routinely ask Lean to check
-that a proof term really does encode a correct proof. Here
-are two examples. We can think of *p* as the name bound to
-a proof of *P,* namely *P.mk*, which Lean typechecks without
-fail. The *example* construct also forces typechecking of a
-given value but does not bind an enduring name to it.
+Correspondingly we will define our types so that their values
+represent bona fide proofs of the propositions they represent,
+all the way down to axioms, including the constructors, that we
+take as introduction rules, of the types representing our basic
+propositions: *P, Q, R, N*. We will routinely ask Lean to check
+that a proof term really does encode a correct proof, which it
+does by checking that the *proof term* is a value of the type
+representing the proposition to be proved.
+
+Here are two examples where we ask Lean to confirm that we
+have a good proof term. Here *p* is a name bound to a term,
+*P.mk*, that typechecks as a proof of *P.* The *example*
+construct also forces typechecking without binding a name.
 @@@ -/
 
 def p : P := P.mk
@@ -69,10 +74,10 @@ def r : N := _    -- No. There's no proof term for it!
 ## Representing The Logical Connectives
 
 We see how to represent elementary propositions, such
-as *P* and *Q*, and *N*m as types. But what about
-compound propositions such as *P ∧ Q, P ∨ Q, P → Q,*
-or *¬P?* We will now show how the logical connectives
-are embedded in Lean.
+as *P* and *Q*, and *N* as types. But what about building
+larger, compound propositions such as *P ∧ Q, P ∨ Q, P → Q,*
+or *¬P* from the individual smaller ones? We will now show
+how this is done for each of these connectives.
 
 ### Represent P ∧ Q as the Product Type P × Q
 

@@ -331,7 +331,6 @@ into our current embedding of predicate logic in Lean
 -- Your answers here
 ```
 
-
 ## Extra Credit
 
 Not all of the axioms that are valid in propositional
