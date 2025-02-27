@@ -1,4 +1,4 @@
-# Propositions as Types
+# Propositions as Computational Types
 
 <!-- toc -->
 

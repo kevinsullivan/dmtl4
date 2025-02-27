@@ -1,5 +1,5 @@
 /- @@@
-# Propositions as Types in Prop
+# Propositions as Logical Types
 
 <!-- toc -->
 

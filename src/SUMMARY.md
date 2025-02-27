@@ -40,11 +40,13 @@
 
 - [Mathlib](./mathlib.md)
 
-- [Predicate Logic](./predLogic.md)
+- [(Higher-Order) Predicate Logic](./predLogic.md)
   - [Introduction](./DMT1/Lectures/L07_predicateLogic/00_introduction.lean.md)
-  - [Propositions as Types](./DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean.md)
-  - [Connectives](./DMT1/Lectures/L07_predicateLogic/03_connectives.lean.md)
-  - [Predicates](./DMT1/Lectures/L07_predicateLogic/02_predicates.lean.md)
+  - [Propositions as Data Types](./DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean.md)
+  - [Propositions as Logical Types](./DMT1/Lectures/L07_predicateLogic/01_propsAsPropTypes.lean.md)
+  - [Inference Rules](./DMT1/Lectures/L07_predicateLogic/02_inferenceRules.lean.md)
+  - [Classical Reasoning](./DMT1/Lectures/L07_predicateLogic/03_negationContradictionClassical.lean.md)
+  - [Predicates](./DMT1/Lectures/L07_predicateLogic/04_predicates.lean.md)
   - [Quantifiers](./DMT1/Lectures/L07_predicateLogic/04_quantifiers.lean.md)
     - [For All](./DMT1/Lectures/L07_predicateLogic/04_quantifiers_all.lean.md)
     - [Exists](./DMT1/Lectures/L07_predicateLogic/04_quantifiers_exists.lean.md)
@@ -72,5 +74,6 @@
 
 ---
 
+[Set Up for This Course](./build.md)
 [Learning Resources](./resources.md)
-[Getting Started](./build.md)
+
