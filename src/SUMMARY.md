@@ -44,7 +44,6 @@
   - [Introduction](./DMT1/Lectures/L07_predicateLogic/00_introduction.lean.md)
   - [Propositions as Data Types](./DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean.md)
   - [Propositions as Logical Types](./DMT1/Lectures/L07_predicateLogic/01_propsAsLogicalTypes.lean.md)
-  - [Inference Rules](./DMT1/Lectures/L07_predicateLogic/02_inferenceRules.lean.md)
   - [Classical Reasoning](./DMT1/Lectures/L07_predicateLogic/03_negationContradictionClassical.lean.md)
   - [Predicates](./DMT1/Lectures/L07_predicateLogic/04_predicates.lean.md)
   - [Quantifiers](./DMT1/Lectures/L07_predicateLogic/04_quantifiers.lean.md)
