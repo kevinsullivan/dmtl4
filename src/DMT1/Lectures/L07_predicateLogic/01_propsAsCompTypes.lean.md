@@ -76,7 +76,7 @@ larger, compound propositions such as *P ∧ Q, P ∨ Q, P → Q,*
 or *¬P* from the individual smaller ones? We will now show
 how this is done for each of these connectives.
 
-### Represent P ∧ Q as the Product Type P × Q
+### Represent P ∧ Q as a Product Type P × Q
 
 We will represent the proposition, *P ∧ Q*, as the type,
 *Prod P Q* in Lean. This is the type that represents all
@@ -174,7 +174,7 @@ def andCommutative'' : P × Q → Q × P := λ ⟨ p, q ⟩ => ⟨ q, p ⟩
 ```
 
 
-### Represent P ∨ Q as the Sum Type P ⊕ Q
+### Represent P ∨ Q as a Sum Type P ⊕ Q
 
 As we represented the conjunction of propositions as a
 product type, we will represent a disjunction as what is
@@ -234,7 +234,7 @@ example : P ⊕ Q → Q ⊕ P
 ```
 
 
-### Represent Implications as Function Types
+### Represent P → Q as the Function Type P → Q
 
 We can now represent a logical implication, *P → Q* as
 the corresponding total function type, *P → Q*, viewing
@@ -246,19 +246,22 @@ if *P* is true, this function can then that so is *Q*,
 
 
 
-### Represent Negation as A *Function to Empty* Type
+### Represent ¬N as The Function Type N → Empty
 
 If a proposition, *P*, has any proofs, it is judged to
 be true (valid). The way represent a false proposition
 is as a type with no values. Here, *N* is such a type.
-We would thus judge *N* to be false.
+We say *N* is an uninhabited type, and we would just *N*
+to represent a false proposition.
 
 Now comes the fun part: Given that it's false, we would
-expect ¬N to be true. We will represent the propsition,
-¬N, as the function type, *N → Empty*, where *Empty* is
-a standard definition in Lean of a type with no values.
+expect ¬N to be true. So what will we take to represent
+a proof of ¬N? The proximate answer is that we will take
+a proof that *N* is uninhabited to be a proof of *¬N*.
+But what will constitute a proof of uninhabitedness?
+The answer is any function of type, *N → Empty*.
 
-The tricky underpinning of this strategy is that if a
+The idea is that if a
 type, say *N*, has one or more values, then no (total)
 function from *N* to empty can be defined, as there will
 be some value of *N* for which some value of type *Empty*
