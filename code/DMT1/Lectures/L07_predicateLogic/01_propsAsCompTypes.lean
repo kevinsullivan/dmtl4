@@ -337,7 +337,6 @@ into our current embedding of predicate logic in Lean
 
 -- Your answers here
 
-
 /- @@@
 ## Extra Credit
 
