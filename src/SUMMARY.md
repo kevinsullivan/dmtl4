@@ -44,11 +44,11 @@
   - [Introduction](./DMT1/Lectures/L07_predicateLogic/00_introduction.lean.md)
   - [Propositions as Data Types](./DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean.md)
   - [Propositions as Logical Types](./DMT1/Lectures/L07_predicateLogic/01_propsAsLogicalTypes.lean.md)
-  - [Classical Reasoning](./DMT1/Lectures/L07_predicateLogic/03_negationContradictionClassical.lean.md)
   - [Predicates](./DMT1/Lectures/L07_predicateLogic/04_predicates.lean.md)
   - [Quantifiers](./DMT1/Lectures/L07_predicateLogic/04_quantifiers.lean.md)
     - [For All](./DMT1/Lectures/L07_predicateLogic/04_quantifiers_all.lean.md)
     - [Exists](./DMT1/Lectures/L07_predicateLogic/04_quantifiers_exists.lean.md)
+  - [Classical Reasoning](./DMT1/Lectures/L07_predicateLogic/03_negationContradiction.lean.md)
 
 - [Sets and Relations](./setTheory)
   - [Sets as Unary Predicates](./DMT1/Lectures/L08_setsRelationsFunctions/01_sets.lean.md)

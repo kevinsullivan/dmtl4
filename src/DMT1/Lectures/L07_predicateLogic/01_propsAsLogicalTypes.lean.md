@@ -27,21 +27,15 @@ In this chapter, we run through exactly the same examples as
 in the last, but now using Prop instead of Type as the type
 of propositions.
 
-## False replaces Empty
-
-```lean
-#check Empty
-#check False
--- inductive False : Prop
-```
-
-
-## Set-Up for Running Example
+## Types in Prop Replace Types in Type
 
 We can represent elementary propositions, and their truth or
 falsing, by defining types that either do or do not have any
-values. Here we define three true propositions, *P, Q, R,* and
-one false one, *N*, the negation of which will then be true.
+values. Here we define three ropositions, *P, Q, R,* each of
+which has a proof term, and one proposition, *N*, that has no
+constructors and thus no proofs, and which we would thus judge
+to be false.
+
 ```lean
 inductive P : Prop  where | mk
 inductive Q : Prop  where | mk
@@ -50,8 +44,35 @@ inductive N : Prop  where
 ```
 
 
+## (False : Prop) Replaces (Empty : Type)
 
-## Proofs are Values of "Logical" Types
+In Lean, *False* is an uninhabited type in Prop, representing
+the proposition, *False* (⊥). Be sure to visit the definition
+of *False* to see that it's just like *Empty* except that it's
+a reasoning/propositional type rather than a computational type.
+
+```lean
+#check Empty
+#check False
+-- inductive False : Prop
+```
+
+
+## (True : Prop) replaces (Unit : Type)
+
+*True* in Lean is a proposition, a logical reasoning type,
+analogous to the computational type, *Unit*. Both have one
+constant constructor, so there's always a value of *Unit*
+available, and there's always a proof of *True*.
+
+```lean
+#check Unit
+#check True
+-- inductive False : Prop
+```
+
+
+## Proofs Are Now Values of Reasoning Types
 
 We continue to represent proofs as values of a given type,
 and we can use Lean to check that proofs are correct relative
@@ -73,12 +94,12 @@ can't prove them in Lean.
 theorem r : N := _    -- No. There's no proof term for it!
 ```
 
-## The Logical Connectives
+## Logical Connectives Are Polymorphic Prop Builders
 
 Lean 4 defines separate logical connectives just for types
 in Prop.
 
-### Prod P Q (P × Q, Product Types) becomes And P Q (P ∧ Q)
+### Replace (P × Q) with (P ∧ Q)
 
 Here as a reminder is Lean's definition of the polymorphic
 pair type in Lean 4, followed by its definition of *And*.
@@ -184,8 +205,6 @@ example : P ∨ Q → Q ∨ P
 | Or.inl p => Or.inr p
 | Or.inr q => Or.inl q
 ```
-
-
 
 
 
