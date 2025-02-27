@@ -41,12 +41,11 @@ inductive CarterIsFromCville : Prop where
 | cvilleUtilityBill
 ```
 
-### Generalizing by Parameeterization
-
 And now we can write our *generalized* predicate. We will
 call it IsFromCharlottesville. It will be parameterized by
-a *Person* type, an ordinary data type, that we now define.
-It has three values: Carter, Kevin, and Tammy.
+(generalized over) the possible values of a *Person* type,.
+Here this will be the following ordinary data type. In this
+example, it has just three values: Carter, Kevin, and Tammy.
 
 ```lean
 inductive Person : Type where | Carter | Kevin | Tammy
@@ -68,7 +67,7 @@ whatever else the predicate might require.
 
 
 ```lean
--- Generalization: proosition that <p> is from CVille
+-- Generalization: proposition that <p> is from CVille
 inductive PIsFromCville : Person → Prop where
 | cvilleBirthCert       (p : Person) : PIsFromCville p
 | cvilleDriversLicense  (p : Person) : PIsFromCville p
