@@ -198,7 +198,7 @@ sets. For more information, you might see the [Wikipedia
 article](https://en.wikipedia.org/wiki/Axiom_of_choice)
 on this topic.
 
-### Demorgan's Law Example: ¬(P ∧ Q) ↔ (¬P ∨ ¬Q)
+### Demorgan's Law Example: ¬(P ∧ Q) → (¬P ∨ ¬Q)
 
 We've already gotten stuck trying to prove that for
 any propositions, *P* and *Q*, ¬(P ∧ Q) → ¬P ∨ ¬Q.

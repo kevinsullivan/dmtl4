@@ -205,7 +205,7 @@ on this topic.
 @@@ -/
 
 /- @@@
-### Demorgan's Law Example: ¬(P ∧ Q) ↔ (¬P ∨ ¬Q)
+### Demorgan's Law Example: ¬(P ∧ Q) → (¬P ∨ ¬Q)
 
 We've already gotten stuck trying to prove that for
 any propositions, *P* and *Q*, ¬(P ∧ Q) → ¬P ∨ ¬Q.
