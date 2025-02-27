@@ -63,7 +63,7 @@ give term of this type, because there are none.
 def r : N := _    -- No. There's no proof term for it!
 ```
 
-## The Propositional Logic Connectives
+## Representing The Logical Connectives
 
 We see how to represent elementary propositions, such
 as *P* and *Q*, and *N*m as types. But what about
@@ -71,7 +71,7 @@ compound propositions such as *P ∧ Q, P ∨ Q, P → Q,*
 or *¬P?* We will now show how the logical connectives
 are embedded in Lean.
 
-### Representing P ∧ Q as the Product Type P × Q
+### Represent P ∧ Q as the Product Type P × Q
 
 We will represent the proposition, *P ∧ Q*, as the type,
 *Prod P Q* in Lean. This is the type that represents all
@@ -169,7 +169,7 @@ def andCommutative'' : P × Q → Q × P := λ ⟨ p, q ⟩ => ⟨ q, p ⟩
 ```
 
 
-### Representing P ∨ Q as the Sum Type P ⊕ Q
+### Represent P ∨ Q as the Sum Type P ⊕ Q
 
 As we represented the conjunction of propositions as a
 product type, we will represent a disjunction as what is
@@ -229,9 +229,6 @@ example : P ⊕ Q → Q ⊕ P
 ```
 
 
-
-
-
 ### Represent Implications as Function Types
 
 We can now represent a logical implication, *P → Q* as
@@ -244,9 +241,7 @@ if *P* is true, this function can then that so is *Q*,
 
 
 
-
-
-### Represent Negation as Function to Empty
+### Represent Negation as A *Function to Empty* Type
 
 If a proposition, *P*, has any proofs, it is judged to
 be true (valid). The way represent a false proposition

@@ -293,15 +293,21 @@ notation: max "~"A => neg A
 example : ~N := λ (h : N) => nomatch h
 
 /- @@@
-## Summing Up
+## Example: How And Distributes Over Or
 
 With that, we've embedded most of the propositional
 part of predicate logic into Lean, and are now able
 to write (and even prove) interesting propositions.
 Here's a last example before you set off on your own
-homework. We'll prove P ∧ (Q ∨ R) → P ∧ Q ∨ P ∧ R.
-Notice that we *must* do a case analysis to deal
-the the disjunction.
+homework. We'll prove that *and* distributes over *or*
+in much the same way that multiplication distributes
+over addition in ordinary arithmetic. In partiulcar,
+P ∧ (Q ∨ R) → P ∧ Q ∨ P ∧ R.
+
+Be sure to take time to see not only what's being
+stated, but why it's true. If you have a proof of
+a disjunction, you can do a case analysis and then
+reason about each case separately.
 @@@ -/
 
 example : P × (Q ⊕ R) → (P × Q ⊕ P × R)
