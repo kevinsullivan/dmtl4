@@ -147,7 +147,7 @@ negElim -- eliminate double negation obtained by
 ```
 
 
-### The Axiom of the Excluded Middle
+### The Equivalent Axiom of the Excluded Middle
 
 Another way to enable classical reasoning in Lean is to
 add a different non-constructive axiom, namely the law of
@@ -198,22 +198,37 @@ sets. For more information, you might see the [Wikipedia
 article](https://en.wikipedia.org/wiki/Axiom_of_choice)
 on this topic.
 
-### Example: Demorgan's Non-Constructive Law
+### Demorgan's Law Example: ¬(P ∧ Q) ↔ (¬P ∨ ¬Q)
 
 We've already gotten stuck trying to prove that for
 any propositions, *P* and *Q*, ¬(P ∧ Q) → ¬P ∨ ¬Q.
-We can show that this formula is valid in classical
-reasoning using the axiom of the excluded middle. It
-is available in Lean 4 in the *Classical* namespace
-as *Classical.em*. We'll thus now switch to using
-the standard statement of this axiom.
-
+We can however prove that this formula is valid in
+classical logic by using the axiom of the excluded
+middle. It is available in Lean 4 in the *Classical*
+namespace as *Classical.em*. We'll thus now switch
+to using Lean's standard statement of this axiom.
 ```lean
 end myClassical
 
 #check Classical.em
 -- Classical.em (p : Prop) : p ∨ ¬p
+```
 
+The axiom of the excluded middle takes any
+proposition, *P*, for which we might have a
+proof of *P*, or of *¬P*, or *neither,* and it
+eliminates that third, *middle*, possibility.
+It forces any proposition to have a *Boolean*
+truth value. That in turn returns us to our
+earliest form of reasoning about the validity
+of a proposition over a some finite number of
+combinations of the *Boolean* truth values of
+its constituent elementary propositions. Here
+we will show that DeMorgan's Law for negation
+over conjunction is true under each of the four
+possible combinations of Boolean truth values
+for *P* and *Q*.
+```lean
 example (P Q : Prop) : ¬(P ∧ Q) → ¬P ∨ ¬ Q :=
 fun (h : ¬(P ∧ Q)) =>
 ```
@@ -230,6 +245,7 @@ do that by case analysis as when reasoning
 from the truth of any disjunction.
 ```lean
 let pornp := Classical.em P
+-- TRICK! Do case analysis on *pornp*
 match pornp with
 -- Case P is true (and we have a proof of it)
 | Or.inl p => -- we now do case analysis on Q ∨ ¬Q

@@ -1,31 +1,27 @@
-# Propositions as Computational Types
+# Propositions as Computing Types
 
 <!-- toc -->
 
-By the term, *computational types*, we mean types of data
-that are designed to support computations on ordinary data.
+In this chapter you'll see how elegantly one can embed a
+higher-order predicate logic into Lean by representing:
 
-The purpose of this chapter is to see that "no new magic" is
-needed to represent propositions as types, with their proofs
-being their values, using ordinary computational types.
+- elementary propositions as ordinary inductive data types
+- *and* and *or* connectives as inductive *type builders*
+- *negation* as the function type from any *P* to *Empty*
+- All and only the values of such types type check as proofs
 
-## Some Fundamental Computational Types
+To prove a proposition, you represent it as a type in the
+way we are about to explain, then you specify a program that
+constructs any value of that type. And that works as a proof.
 
-First, we review a few fundamental types. The first
-three are meant to help the reader see that there are
-types with two values (Bool), one value (Unit), and no
-values at all, Empty. In VSCode you can right click on
-the type names and select *go to definition* to visit
-the definitions of these types in Lean's libraries. You
-know how to read this kind of code now.
+This chapter covers a few fundamental programming concepts:
 
-```lean
-#check Bool
-#check Unit
-#check Empty
-```
+- the polymorphic product and sum types
+- empty (uninabited) types, including *Empty*
+- function types to and from empty types
 
-## Set-Up for Running Example
+
+## Represent Propositions as Types, Specified ...
 
 We can represent elementary propositions, and their truth or
 falsing, by defining types that either do or do not have any
@@ -42,41 +38,32 @@ Lean Detail: The *deriving Repr* annotation simply asks Lean to
 generate code to pretty print values of the given type, e.g., when
 one uses #eval/#reduce to produce a reduced value to be displayed.
 
-## Proofs are Values of "Logical" Types
+## ... With Values Defined to Encode Bona Fide Proofs
 
-One of the powers of Lean is that it checks proofs for deductive
-correctness. In practice we'll gnerally
-accept taht a proposition is true if there's any proofs of it.
-But with proofs as values, that means that all we have to do is
-have Lean check that we've given it a value of the right type.
-
-
-We have been doing this fromt the start with *def* in Lean. It
-binds a name/identifier, *p*, to a value of type *P*, here to
-*P.mk.* The point here is that Lean typechecks such bindings.
-When proofs are values, it's Lean's typechecker that assures
-that only correctly constructed values will typecheck as proofs.
-The example construct forces typechecking but without binding a
-name.
+Correspondingly we will consider the values of these types,
+when there are any, as proofs of the propositions encoded in
+their types. Moreover, we will routinely ask Lean to check
+that a proof term really does encode a correct proof. Here
+are two examples. We can think of *p* as the name bound to
+a proof of *P,* namely *P.mk*, which Lean typechecks without
+fail. The *example* construct also forces typechecking of a
+given value but does not bind an enduring name to it.
 
 ```lean
 def p : P := P.mk
 example : Q := Q.mk
 ```
 
-Now recall that we've represented the false proposition, N,
-as a type with no proof terms. If we try to prove *N* by
-giving Lean a term to typecheck, we get stuck, because there
-is no such term, as we defined *N* to be an empty type. It's
-good news that we can't prove *N* is true, as we've meant
-from the beginning for it to be false. What we haven't yet
-got is the idea of negation, and that the negation of false
-shold be true.
+We defined the type *N* to be uninhabited to illustrate
+the idea that we represent the falsity of a proposition
+by the uninhabitedness of the type that represents it.
+So if we try to prove *N* we get stuck being unable to
+give term of this type, because there are none.
 ```lean
 def r : N := _    -- No. There's no proof term for it!
 ```
 
-## The Logical Connectives
+## The Propositional Logic Connectives
 
 We see how to represent elementary propositions, such
 as *P* and *Q*, and *N*m as types. But what about
@@ -84,7 +71,7 @@ compound propositions such as *P ∧ Q, P ∨ Q, P → Q,*
 or *¬P?* We will now show how the logical connectives
 are embedded in Lean.
 
-### Representing P ∧ Q as P × Q (Product Types)
+### Representing P ∧ Q as the Product Type P × Q
 
 We will represent the proposition, *P ∧ Q*, as the type,
 *Prod P Q* in Lean. This is the type that represents all
@@ -182,7 +169,7 @@ def andCommutative'' : P × Q → Q × P := λ ⟨ p, q ⟩ => ⟨ q, p ⟩
 ```
 
 
-### Representing Sum P Q (P ⊕ Q) with Or P Q (P ∨ Q)
+### Representing P ∨ Q as the Sum Type P ⊕ Q
 
 As we represented the conjunction of propositions as a
 product type, we will represent a disjunction as what is
@@ -200,14 +187,15 @@ represent disjunctions and their proofs.
 ```
 
 
-`Sum α β`, or `α ⊕ β`, is the disjoint union of types `α` and `β`.
-An element of `α ⊕ β` is either of the form `.inl a` where `a : α`, or `.inr b` where `b : β`.
+Here is the definition of the polymorphic Sum type (type
+builder) in Lean.
 
+
+```lean
 inductive Sum (α : Type u) (β : Type v) where
-  /-- Left injection into the sum type `α ⊕ β`. If `a : α` then `.inl a : α ⊕ β`. -/
   | inl (val : α) : Sum α β
-  /-- Right injection into the sum type `α ⊕ β`. If `b : β` then `.inr b : α ⊕ β`. -/
   | inr (val : β) : Sum α β
+```
 
 ```lean
 -- Proof of *or* by proof of left side
@@ -244,7 +232,7 @@ example : P ⊕ Q → Q ⊕ P
 
 
 
-### Implication as Function Type
+### Represent Implications as Function Types
 
 We can now represent a logical implication, *P → Q* as
 the corresponding total function type, *P → Q*, viewing
@@ -258,13 +246,12 @@ if *P* is true, this function can then that so is *Q*,
 
 
 
-### Negation as Proof of Emptiness
+### Represent Negation as Function to Empty
 
-If a proposition, *P*, has any proofs, it must be judged
-as true. So the only way represent a false proposition
-is as a type with no values whatsoever. In this file, *N*
-is a proposition represented as a type with no values. It
-is thus false, in our view.
+If a proposition, *P*, has any proofs, it is judged to
+be true (valid). The way represent a false proposition
+is as a type with no values. Here, *N* is such a type.
+We would thus judge *N* to be false.
 
 Now comes the fun part: Given that it's false, we would
 expect ¬N to be true. We will represent the propsition,
