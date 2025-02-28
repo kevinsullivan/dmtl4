@@ -173,12 +173,30 @@ example :
   (∀ (P : Prop), (P ∨ ¬P)) →
   (∀ (P : Prop), ¬¬P → P) :=
 fun hEm =>
--- Now *use* that disjunction proof: by case analysis
+  (
+    fun P =>
+    (
+      fun nnp =>
+      (
+        -- use em to get a proof of P ∨ ¬P
+        let pornp := hEm P
+        -- then use case analysis
+        match pornp with
+        | Or.inl p => p
+        | Or.inr np => False.elim (nnp np)
+      )
+    )
+  )
+```
+
+
+```lean
+fun hEm =>
   fun P =>
     fun nnp =>
       match (em P) with
-      | Or.inl _ => by assumption     -- tactic! proof is in context
-      | Or.inr _ => by contradiction  -- tactic! context can't happen
+      | Or.inl _ => by assumption     -- a lean "tactic!"
+      | Or.inr _ => by contradiction  -- a lean "tactic!"
 ```
 
 If fact it's an equivalence, in that you can prove that
@@ -244,14 +262,17 @@ point we only have two cases to consider. Wd
 do that by case analysis as when reasoning
 from the truth of any disjunction.
 ```lean
-let pornp := Classical.em P
+let pornp : P ∨ ¬P := Classical.em P
 -- TRICK! Do case analysis on *pornp*
 match pornp with
 -- Case P is true (and we have a proof of it)
 | Or.inl p => -- we now do case analysis on Q ∨ ¬Q
   match (Classical.em Q) with
   -- case P is valid and so is Q
-  | Or.inl q => _   -- impossible case: finish it!
+  | Or.inl q =>
+    let f : False := h (And.intro p q)
+    False.elim f
+  -- impossible case: finish it!
   -- case ¬P is true, so ¬P ∨ ¬Q is
   | Or.inr nq => Or.inr nq
 -- Case P is false, in which case ¬P ∨ ¬Q is, too
