@@ -11,7 +11,7 @@ are due before class Tuesday.
 
 
 /- @@@
-### #1
+### #1 Double Negation Introduction
 
 You've now seen that the proposition, ¬¬P → P,
 is not constructively valid. But what about this
@@ -27,7 +27,7 @@ _
 
 
 /- @@@
-### #2
+### #2 From a Contradiction Anything Goes
 
 Formally state and then prove that, for any
 proposition, *P*, *P → ¬P → 0 = 1*.
@@ -38,7 +38,7 @@ proposition, *P*, *P → ¬P → 0 = 1*.
 
 
 /- @@@
-### #3
+### #3 Contradictions Are Impossibilities
 
 Suppose P is any proposition. Prove ¬(P ∧ ¬P).
 This theorem goes by the name, *no contradiction.*
@@ -51,13 +51,13 @@ _
 
 
 /- @@@
-### #4
+### #4 The Resolution Inference Rule
 
 There's an inference rule in propositional logic called
-resolution. It's widely used in automated theorem provers
+*resolution*. It's widely used in automated theorem provers
 and satisfiability solvers. Suppose A, B, and P are any
 propositions. Then (A ∨ P) → (¬P ∨ B) → A ∨ B is valid.
-Hint: case analysis on P ∨ ¬P.
+Prove it formally. Hint: case analysis on P ∨ ¬P.
 
 A. Bind the name, *resolution*, to this proposition.
 
@@ -94,7 +94,7 @@ some other axioms you might not have heard of before.
 -- Classical.em (p : Prop) : p ∨ ¬p
 
 /- @@@
-### 1. A Zoo of Axioms
+### #1. A Zoo of Axioms
 
 In introducing our own definition of excluded middle
 in our notes above, we defined it as an axiom. Lean 4
@@ -135,7 +135,7 @@ curious reader.
 @@@ -/
 
 /- @@@
-### 2. Classical Reasoning
+### #2. Classical Reasoning
 
 We've seen that if you accept excluded middle as an axiom,
 you can then prove negation elimination, which is the *key
