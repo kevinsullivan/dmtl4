@@ -49,8 +49,7 @@
   - [Quantifiers](./DMT1/Lectures/L07_predicateLogic/04_quantifiers.lean.md)
     - [For All](./DMT1/Lectures/L07_predicateLogic/04_quantifiers_all.lean.md)
     - [Exists](./DMT1/Lectures/L07_predicateLogic/04_quantifiers_exists.lean.md)
-  - [Classical Reasoning](./DMT1/Lectures/L07_predicateLogic/03_negationContradiction.lean.md)
-
+  
 - [Sets and Relations](./setTheory)
   - [Sets as Unary Predicates](./DMT1/Lectures/L08_setsRelationsFunctions/01_sets.lean.md)
   - [Relations as n-ary Predicates](./DMT1/Lectures/L08_setsRelationsFunctions/02_relations.lean.md)
