@@ -31,17 +31,17 @@ Then in predicate logic we also have two forms of quantifier expressions
 ## Universal Quantifier: ∀ (a : α), Pr a
 
 Here we have the form of a "universally quantified" proposition. It can be pronounced
-and is to be understood as asserting that "*every* (a : α) satisfies P", or "P is true
-of every  (a : α)", or "every (a : α) has property P", or "for any a there's a proof
-of (P a)", or just "for all a, P a".
+and is to be understood as asserting that "*every* (a : α) satisfies Pr", or "Pr is true
+of every  (a : α)", or "every (a : α) has property Pr", or "for any a there's a proof
+of (rP a)", or just "for all a, Pr a".
 
 ### Introduction
 
-To prove that every (a : α) has property P it will suffice to show that there'ss a way
-to turn any such (a : α) into a proof of P a. In constructive logic, this is a job for
-a function. If α is any type (including Prop), a proof of ∀ (a : α), P a, is a function,
-pf : (a : α) → P a. That is the type of a function that takes any argument of type α and
-that returns proofs the corresponding propositions P a, one proposition/type for each a.
+To prove that every (a : α) has property Pr it will suffice to show that there'ss a way
+to turn any such (a : α) into a proof of Pr a. In constructive logic, this is a job for
+a function. If α is any type (including Prop), a proof of ∀ (a : α), Pr a, is a function,
+pf : (a : α) → Pr a. That is the type of a function that takes any argument of type α and
+that returns proofs the corresponding propositions Pr a, one proposition/type for each a.
 That's it! It's the same as for any implication.
 
 ```lean
@@ -49,7 +49,7 @@ def pf : ∀ (a : α), Pr a := (fun (a : α) => sorry)
 ```
 
 Now to use a proof of an implication, apply it, as a function to any value (b : α) to
-get a proof of P b.
+get a proof of Pr b.
 
 ```lean
 axiom b : α
@@ -57,7 +57,7 @@ axiom b : α
 #check pf b
 ```
 
-We can call constructing a proof of (∀ a, P a) a universal generalization. We can
+We can call constructing a proof of (∀ a, Pr a) a universal generalization. We can
 call the application of a generliation to a value to get a value-specific proof
 universal specialization.
 

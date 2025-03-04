@@ -46,10 +46,10 @@ inductive N : Prop  where
 
 ## (False : Prop) Replaces (Empty : Type)
 
-In Lean, *False* is an uninhabited type in Prop, representing
-the proposition, *False* (⊥). Be sure to visit the definition
-of *False* to see that it's just like *Empty* except that it's
-a reasoning/propositional type rather than a computational type.
+In Lean, *False* is represented as an uninhabited type in Prop.
+Be sure to visit the definition of *False* to see that it's just
+like *Empty* except that it's a "reasoning" type rather than a
+*computational* type (such as *Bool → Empty*).
 
 ```lean
 #check Empty
@@ -57,22 +57,63 @@ a reasoning/propositional type rather than a computational type.
 -- inductive False : Prop
 ```
 
+### Introduction
+
+As there can be no proof of *False*, there is no introduction rule
+for it. In Lean that means it has no constructors. The only way to
+derive a proof of *False* is if one is in a context in which one has
+already made conflicting assumptions. In the following example, you
+can see that from the inconsistent assumption, *1 = 0*, we can derive
+a proof of False.
+
+```lean
+example : 0 = 1 → False :=
+  fun h =>
+    let (f : False) := nomatch h
+    -- this example continues below
+```
+
+Now having derived a proof of false, from our inconsistent
+assumption, we can use the axiom of false elimination (*False.elim*
+in Lean) to succeed≥ The underlying reasoning is that *we are in a
+a situation that can never actually occur -- you can never have a
+proof of *1 = 0 to pass as an argument* -- so we can just ignore
+reasoning any further in this situation and declare success.
+
+```lean
+    -- Here then is the last line of the proof
+    False.elim f
+```
+
 
 ## (True : Prop) replaces (Unit : Type)
 
 *True* in Lean is a proposition, a logical reasoning type,
-analogous to the computational type, *Unit*. Both have one
-constant constructor, so there's always a value of *Unit*
-available, and there's always a proof of *True*.
+analogous to the computational type, *Unit*, but in *Prop*.
 
 ```lean
 #check Unit
 #check True
--- inductive False : Prop
+```
+
+### Introduction
+
+There's always a constant (unconditional) proof of *True*,
+as the constructor, *True.intro*. There's always a proof of
+*True*.
+
+### Elimination
+
+There's nothing useful one can do with a proof of True other
+than to signal that a computation has completed. There's thus
+no really useful elimination rule for true. Exercise: explain
+what the recursor/induction axiom says about it.
+```lean
+#check True.rec
 ```
 
 
-## Proofs Are Now Values of Reasoning Types
+## Proofs Are Now Values of "Reasoning" Types
 
 We continue to represent proofs as values of a given type,
 and we can use Lean to check that proofs are correct relative
@@ -94,7 +135,7 @@ can't prove them in Lean.
 theorem r : N := _    -- No. There's no proof term for it!
 ```
 
-## Logical Connectives Are Polymorphic Prop Builders
+## And and Or Connectives Are Polymorphic Types (in Prop)
 
 Lean 4 defines separate logical connectives just for types
 in Prop.
@@ -208,26 +249,70 @@ example : P ∨ Q → Q ∨ P
 
 
 
-### Implication as Function Type
+## Implications Are Represented as Function Types
 
 Implications continue to be represented by function types.
 
+To prove an implication, we simply exhibit a function of
+the specified type. Such functions might not exist, and in
+the case that would show the implication to be false. On the
+other hand, *any* function definition of the given type will
+do to prove an implication.
+
+### Introduction
+
+Here for example we prove the implication stating that if
+both P and Q are true then P is. The reasoning is just as
+before: assume we're given a proof of P ∧ Q, and from it,
+derive a proof of P. That shows that it P ∧ Q is true then
+so much be P.
+
 ```lean
-example : P ∧ Q → P := fun (h : P ∧ Q) => h.left
+def pandQImpP : P ∧ Q → P := fun (h : P ∧ Q) => h.left
 ```
 
+### Elimination
 
-### Negation as Proof of Emptiness
+To *use* a proof of an implication, we just *apply* it,
+as a function, to an argument of the right type. It will
+ll then reduce to term that will serve as a proof of the
+conclusion of the implication.
 
-Negation continues to be represented as the existence
-of a function from a type to an empty type, but now
-instead of (Empty : Type) we use (False : Prop).
+In other words, the way to *use* a proof of an implication
+is to apply it. Function application is the elimination rule
+for proofs of implications. Such proofs *are* in the form of
+functions. Here we show that if we assume we have a proof of
+*P ∧ Q → P* and we have a proof of *P ∧ Q* then we can derive
+a proof of *P* by applying the former to the latter.
 
 ```lean
-#check Empty
+example (P Q : Prop) : (P ∧ Q → P) → (P ∧ Q) → P :=
+λ pq2p pq => (pq2p pq)
 
--- Can't prove that P is false, as it has a proof
-def falseP : P → False
+-- Test yourself: what are the types of pq2p and pq?
+```
+
+## Negations Are Represented as Function Types to False
+
+Negation is the most complex of the connectives that we
+have seen so far. First, we represent a propostion, *¬P*
+as the function type, *P → False*, where *False* is Lean's
+standard *empty* (uninhabited) reasoning type.
+
+### Introduction
+
+To prove a negation, such as the proposition, *¬P*, we
+assume *P*, show that that leads to a contradiction, in
+the sense that it's shown that there can be no proof of
+*P*. That proves *P → False*. The negation introduction
+axiom then let's us conclude *¬P*.
+
+```lean
+-- You can prove a falsehood
+def oneNeZero : ¬(1 = 0) := fun (h : 1 = 0) => nomatch h
+
+-- It's not true that P is false, as defined above
+example : P → False
 | P.mk => _   -- can't return value of Empty type!
 
 
@@ -235,18 +320,16 @@ def falseP : P → False
 def notr : N → False := fun r => nomatch r
 ```
 
-Again, we prove that a proposition, say *N*, is false
-by proving that it has no proofs, and we do that by
-proving that there *is* a function from that type to
-*False*. Lean defines *not* (rather than *neg* as we
-defined it previously) along with ¬ as a notation to
-this end.
+### Elimination
 
-```lean
-#check Not
--- def Not (a : Prop) : Prop := a → False
-example : ¬N := λ h => nomatch h
-```
+A proof of a negation is a special case of a proof of an
+implication. Both proofs are in the form of *functions*.
+The way we *use* a proof of a negation, as with a proof
+of any implication, is by applying it. This is generally
+done in the *context of conflicting assumptions* that let
+us derive a proof of false. In Lean one then generally
+uses *False.elim*
+
 
 ## Summing Up
 
