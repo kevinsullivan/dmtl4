@@ -34,10 +34,11 @@ Type, the Boolean operators (functions) commonly
 used in programming (&&, ||, !).
 @@@ -/
 
-#check (true && (true || )
+#check true && (true || !true)
+
 
 /- @@@
-## Ways to Understand Implication
+## Implication
 
 Suppose you have an implication expression, say
 *P → C*. There are two useful but distinct ways
@@ -58,7 +59,7 @@ show that *Q* is true, because if you also know that
 your new goal. We develop this perspective thoroughly
 when we get to predicate logic and deductive reasoning.
 
-#### We need to define a few missing Boolean function
+#### Missing Boolean functionss
 But
 it doesn't define all the ones we need, including the
 likes of implies and iff. In other words, Lean doesn't
@@ -97,5 +98,17 @@ def iff : Bool → Bool → Bool
 
 -- Problem #1 (combinatorics): How many binary Boolean functions are there?
 -- Problem #2 (Boolean algebra): Write a specification of the exclusive or function (xor)
+
+/- @@@
+## Conclusion
+
+Boolean algebra comprises the set of two Boolean values
+along with the collection of functions from Booleans to
+Boolean values. These functions include negation (unary),
+conjunction, implication. These objects, both values and
+functions, are *denotations* of propositional logic syntax
+elements: of constants and variables and of the syntactic
+operators, such as ∧ (mapping to &&).
+@@@-/
 
 end DMT1.Lectures.propLogic.semantics.domain
