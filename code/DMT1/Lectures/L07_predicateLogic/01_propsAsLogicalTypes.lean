@@ -87,7 +87,6 @@ reasoning any further in this situation and declare success.
     -- Here then is the last line of the proof
     False.elim f
 
-
 /-@@@
 ## (True : Prop) replaces (Unit : Type)
 
@@ -277,6 +276,11 @@ so much be P.
 
 def pandQImpP : P ∧ Q → P := fun (h : P ∧ Q) => h.left
 
+
+example (A : Prop) : False → A := fun f => nomatch f
+
+
+
 /- @@@
 ### Elimination
 
@@ -316,7 +320,9 @@ axiom then let's us conclude *¬P*.
 @@@ -/
 
 -- You can prove a falsehood
-def oneNeZero : ¬(1 = 0) := fun (h : 1 = 0) => nomatch h
+def oneNeZero : ¬(1 = 0) := fun (h : 1 = 0) =>
+  let f : False := nomatch h
+  False.elim f
 
 -- It's not true that P is false, as defined above
 example : P → False
@@ -336,8 +342,11 @@ of any implication, is by applying it. This is generally
 done in the *context of conflicting assumptions* that let
 us derive a proof of false. In Lean one then generally
 uses *False.elim*
-
 @@@ -/
+
+def noContra (A B : Prop) : A → ¬A → B :=
+λ (a : A) (na : ¬A) => (na a).elim
+
 
 /- @@@
 ## Summing Up
