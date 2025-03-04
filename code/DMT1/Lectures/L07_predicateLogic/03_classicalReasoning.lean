@@ -206,7 +206,7 @@ fun hEm =>
 @@@ -/
 
 /- @@@
-If fact it's an equivalence, in that you can prove that
+In fact it's an equivalence, in that you can prove that
 negation elimination implies excluded middle, as well. You
 can thus add either one as an axiom, derive the other and
 then use either classical reasoning principle as you wish.
