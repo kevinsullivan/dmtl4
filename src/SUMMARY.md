@@ -1,10 +1,10 @@
 
 # Summary
 
-[Preface](./introduction.md)
+[Preface](./preface.md)
 
 ---
-****
+
 - [Languages](./languages.md)
   
 - [Propositional Logic](./propLogic.md)
