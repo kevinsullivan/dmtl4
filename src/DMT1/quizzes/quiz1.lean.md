@@ -7,7 +7,8 @@ to reason about negations. Show that if *P* is
 false the so is *P ∧ Q.
 ```lean
 example (P Q : Prop) : ¬P → ¬(P ∧ Q) :=
-_
+fun (h : ¬P) =>
+  fun (pandq : P ∧ Q) => h pandq.left
 ```
 
 This problem tests your understanding of classical
@@ -21,5 +22,13 @@ open Classical
 example (P Q : Prop) : P ∧ Q → Q ∧ P :=
 let ponp := em P
 let qonq := em Q
-_
+match ponp with
+| Or.inl p =>
+  match qonq with
+  | Or.inl q => fun h => ⟨ q, p ⟩
+  | Or.inr nq =>
+    fun h => False.elim (nq h.right)
+| Or.inr np =>
+  fun h =>
+  False.elim (np h.left)
 ```
