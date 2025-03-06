@@ -21,8 +21,7 @@ additional-js = [
     "assets/mermaid.min.js",
     "assets/mermaid-init.js",
 ]
-
-# additional-css = ["assets/mermaid.css"]
+# additional-css = ["css/custom.css"]
 
 mathjax-support = true
 
