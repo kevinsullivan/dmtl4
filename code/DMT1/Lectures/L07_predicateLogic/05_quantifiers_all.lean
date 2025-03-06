@@ -21,53 +21,41 @@ the first value of a type has some property, *and* so
 does the second, *and* so does the third, through all
 of them.
 
-In this chapter we address the first case: of propositions
-in the form of universal generalizations (using ∀). We will
-cover existential quantification in the next chapter.
+In this chapter we address universal generalizations
+(∀ propositions). We cover existential quantification
+in the next chapter.
 
 ## Introduction Rule (How to Prove ∀ (x : T), P)
 
-So what does a proof of a universal generalization,
-*∀ (x : T), P x*, require? In the logic of Lean, it
-requires one to show that a proof can be obtained
-for each proposition, *P x,* for each possible value,
-*x : T*. Being able to construct a proof of *P x* for
-any value *x : T* shows *∀ (x : T), P x.* The way we
-show this in Lean, in turn, is by defining a *function*
-that, when given *any* *t : T*, returns a proof of *P t*
-for that specific *t*. The existence of such a function
-demonstrates that we can construct a proof of *P x* for
-any *x : T*, showing that *every x : T* has property *P*.
+In predicate logic, the way to prove *∀ (a : A), P a*
+is to (1) *assume* that you've got an arbitrary value,
+*a : A*, and then in that context, (2) give a proof of
+*P a*. The reasoning is that if any arbitrary value *a*
+satisfies *P* then every value of *a* must do so.
 
-There's another way to say it that you will hear in
-less formal presentations. To show *∀ x, P x*, *assume*
-you have an *arbitrary* value, *x,* and show that you
-can prove *P x.* That will prove that all values of *x*
-satisfy *P*.
-
-TLDR: To prove *∀ (x : T), P x* show that there's a proof
-of *P x* for every possible value of *x*. Do this in Lean
-by defining a function that takes any value, *x : T* and
-that returns a proof of *P x* for each such *x* value.
+In Lean 4, a proof of a universal generalization has
+exactly the same sense, and is presented as a *function:*
+one that takes an arbitrary value, *(a : A)*, and that,
+in that context constructs and returns a proof of *P a*.
+The existence of such a function (which must be *total*
+in Lean) shows that from *any* *a* one can construct a
+proof of *P a*. That shows that every *a* satisfies *P*.
 @@@ -/
 
 /- @@@
 ### Example
 
-Here's a trivial example. We assert that for every
-natural number value, *n*, there is a proof of the
-corresponding proposition, *True*. In this case the
-resulting proposition doesn't depend on the value of
-the argument, *n*. The proof of the generalization is
-a function that takes any natural number, *n,* ignores
-it, and returns a proof of *True*.
+Here's a trivial example. We assert that every natural
+number, *n*, satisfies the proposition, *True*. This is
+of course true, but let's see a proof of it.
 @@@ -/
 
-example : ∀ (n : ℕ), True := fun n => True.intro
+example : ∀ (n : ℕ), True :=
+  fun n =>    -- assume an arbitrary n
+  True.intro  -- show that that n satisfies True
 
 /- @@@
 ### Function Types and ∀ Propositions
-
 We now see that the logical proposition, *∀ (n : Nat),
 True*, is equivalent to the function type, Nat → True.
 Given any natural number, *n*, such a function returns
@@ -82,17 +70,11 @@ The function arrow, *X → Y* is indeed just a notation
 for *∀ (x : X), Y*, the special case of a dependent
 function type where the return type, here *Y*, doesn't
 depend on (vary with) the argument value.
-@@@ -/
 
-/- @@@
-### Examples
-
-To further illustrate the equivalence of function
-arrow and this special case of ∀, here we define
-the natural number squaring function, declaring
-its type using ∀ rather than →. But then when we
-#check it's type, Lean reports it as *Nat → Nat*,
-using its default notation, →, for this type.
+Here's another example: we define the natural number
+squaring function, declaring its type using ∀ rather
+than →. When we #check it's type, Lean reports it as
+*Nat → Nat*, using its default notation, →, for this type.
 @@@ -/
 
 def square : ∀ (n : Nat), Nat := fun n => n^2
@@ -101,12 +83,9 @@ def square : ∀ (n : Nat), Nat := fun n => n^2
 
 
 /- @@@
-This next example shows that a proof of *∀ (f :
-False), False* is literally a function of type
-False → False. Given any proof, *f*, of *False*,
-it's ok to "return a value of type False" because
-there are *no* cases in which that will ever have
-to be done.
+Here's a purely logical example, showing that
+from any proof of *False* we can have a proof of
+*False*.
 @@@ -/
 
 def fimpf : ∀ (f : False), False := fun f => f

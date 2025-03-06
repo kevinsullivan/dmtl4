@@ -2,9 +2,12 @@
 import Mathlib.Util.Delaborators
 ```
 
+
 This section should be left as an option for interested
 students in DMT1. It can be included in an introductory
 graduate course or late undergraduate elective.
+
+<!-- toc -->
 
 # Dependent Types
 

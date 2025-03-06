@@ -49,8 +49,8 @@
   - [Quantifiers](./DMT1/Lectures/L07_predicateLogic/05_quantifiers.lean.md)
     - [For All](./DMT1/Lectures/L07_predicateLogic/05_quantifiers_all.lean.md)
     - [Exists](./DMT1/Lectures/L07_predicateLogic/05_quantifiers_exists.lean.md)
-  - [Dependent Type Theory]()
-  -   
+  - [Dependent Type Theory](./DMT1/Lectures/L07_predicateLogic/06_dependentTypes.lean.md)
+  
 - [Sets and Relations](./setTheory)
   - [Sets as Unary Predicates](./DMT1/Lectures/L08_setsRelationsFunctions/01_sets.lean.md)
   - [Relations as n-ary Predicates](./DMT1/Lectures/L08_setsRelationsFunctions/02_relations.lean.md)
