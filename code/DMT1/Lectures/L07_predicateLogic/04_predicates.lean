@@ -43,28 +43,28 @@ inductive CarterIsFromCville : Prop where
 | driversLicense
 
 /- @@@
-### Domain of Discourse
+### Domain of Application
 
 To reduce repetition, we can abstract the variation in
-these two results to a formal parameter to be bound to a
-person: a terms of a Person type. The Person type here
+these two results to a variable-valued formal parameter,
+here of a type we will now call Person. Our Person type
 defines just three *people* (Carter, Kevin, and Tammy).
 @@@ -/
 
 inductive Person : Type where | Carter | Kevin | Tammy
-
 open Person
 
 /- @@@
 ### Generalization
 
-Now we define IsFromCville as an *inductively defined*
-predicate. This type builder takes a Person term as an
-argument and reduces to a propositions (about that person
-being from Cville). The constructors then define the terms
-of this type. Given any person, *p*, *birthCert p* will
-typecheck as proof that *p isFromCville*, and similarly
-for driversLicense.
+Now we define *IsFromCville* as a predicate on people (on
+terms of type Person), represented as an *inductive family*
+of propositions, one for each person, with the specified
+ways to prove such propositions. The proof constructors are
+the introduction rules for constructing proofs of any given
+proposition of this kind. Given any Person, *p*, *birthCert
+p* will typecheck as proof that *p isFromCville*, and so will
+*driversLicense p*.
 @@@ -/
 
 
