@@ -1,9 +1,10 @@
 [book]
+title = "Reasoning and Computation"
 authors = ["Kevin Sullivan"]
 language = "en"
 multilingual = false
+description = "Discrete Mathematics and Theory for CS Students in Lean 4"
 src = "src"
-title = "Reasoning and Computation"
 
 [tags]
 "1.0.0" = { "releaseNotes" = "Empty Book", "releaseDate" = "Foo" }
@@ -32,7 +33,7 @@ lean = "# "
 
 [preprocessor.toc]
 command = "mdbook-toc"
-depth = 3
+depth = 2
 
 [preprocessor.mermaid]
 command = "mdbook-mermaid"
