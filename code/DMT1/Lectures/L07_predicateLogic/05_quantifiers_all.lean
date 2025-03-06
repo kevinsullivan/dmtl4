@@ -83,6 +83,18 @@ def fimpf : ∀ (f : False), False := fun f => f
 #check (fimpf)  -- a value/proof of type False → False
 
 /- @@@
+### Discussion
+@@@ -/
+
+
+#check Nat → False
+example : Nat → False := fun n => _ -- stuck
+example : ¬(Nat → False) :=
+  fun (h : Nat → False) =>
+    h 0
+
+
+/- @@@
 ### Elimination Rule
 
 Suppose you have a proof of *∀ (a : A), P a*. How do you use

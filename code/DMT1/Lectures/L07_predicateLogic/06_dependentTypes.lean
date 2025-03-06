@@ -176,4 +176,4 @@ to construct a value of the List5 type, because there will be no way to
 construct the required second element of such a dependent pair.
 @@@-/
 
-example : List5 Nat := ⟨ [1,2,3,4], rfl ⟩
+example : List5 Nat := ⟨ [1,2,3,4], rfl ⟩   -- Error: length != 5
