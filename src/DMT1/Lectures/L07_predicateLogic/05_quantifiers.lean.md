@@ -1,7 +1,7 @@
 
 <!-- toc -->
 
-UNDER CONSTRUCTION
+TEMPORARILY UNDER CONSTRUCTION
 
 Suppose:
 
@@ -25,6 +25,8 @@ Then in predicate logic we also have two forms of quantifier expressions
 #check ∀ (a : α), Pr a    -- this is a proposition
 #check ∃ (a : α), Pr a    -- this is a proposition
 ```
+
+
 
 ## Universal Quantifier: ∀ (a : α), Pr a
 

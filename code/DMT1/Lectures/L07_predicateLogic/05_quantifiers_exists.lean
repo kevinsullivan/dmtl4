@@ -44,8 +44,28 @@ Apply Exists.intro to a witness (of the right type),
 and a proof that particular witness *does* have that
 property, as demonstrated by a formally checked proof
 of it.
+-/
 
-In type theory, proofs of existence are *dependent pairs*.
+#check Exists.intro
+
+/- @@@
+```lean
+Exists.intro.{u}
+  {α : Sort u}    -- Given any type α
+  {p : α → Prop}  -- Given any predicate, p, on α
+  (w : α)         -- Provide a witness, a, of type α
+  (h : p w) :     -- And a proof of the proposition (p a)
+Exists p
+```
+@@@ -/
+
+/-
+In type theory, proofs of existence are *dependent pairs*,
+of the form, *⟨a : α, h : p a⟩. Note carefully that the type
+of the second element, namely a proof of *(p a)*, depends on
+the value of the first element, *a*.
+
+### Example: There is some even number
 
 Here's a simple example showing that there exists an even
 number, with *4* as a witness.
@@ -66,6 +86,11 @@ Lean provides ⟨ _, _ ⟩ as a notation for Exists.intro.
 example : ∃ (n : Nat), isEven n := ⟨ 4, rfl ⟩
 
 /- @@@
+We will study the equality relation shortly. For now,
+know that *rfl* produces a proof that a value equals
+itself, and that's exactly what we need to construct
+the second element of this pair.
+
 English language rendering: We are to prove that some
 natural number is even. To do so we need to choose a
 number (will will cleverly pick 4) and then also give
@@ -75,11 +100,14 @@ proposition resulting from the application of isEven
 @@@ -/
 
 /- @@@
+### Example: There's a Blue Dog
+
 Another example: Suppose we have a proof that Iris is
 a blue dog. Can we prove that there exists a blue dog?
 @@@ -/
 
 namespace bluedog
+
 variable
   (Dog : Type)                 -- There are dogs
   (Iris : Dog)                 -- Iris is one
@@ -88,6 +116,7 @@ variable
 
 -- A proof that there exists a blue dog
 example : ∃ (d : Dog), Blue d := ⟨ Iris, iris_is_blue ⟩
+
 end bluedog
 
 /- @@@
@@ -172,16 +201,37 @@ further into this possibility in this class.
 /- @@@
 ## Elimination Rule for ∃
 
-Now suppose you have a proof of a proposition, *∃ (x : T),
-P x*. That is, suppose you have *pf : ∃ (x : T), P x.* How
-can you *use* such a proof?
+Now suppose you have a proof of a proposition, *∃ (x : α),
+P x*. That is, suppose you have *pf : ∃ (x : α), P x.* How
+can you *use* such a proof to derive a proof of some other
+proposition, let's call it *b*. The goal is to understand
+when *∃ x, P x → b*.
 
 Here's the key idea: if you know that *∃ (x : T), P x*,
 then you can deduce two facts: (1) there is some object,
 call it *(w : T),* for which, (2) there is a proof, *pw*,
-that *w* satisfies *P* (a proof of *P w*). The elimination
-rule gives us these objects to work with.
+that *w* satisfies *P* (a proof of *P w*); and then, if
+in addition to having such a witness, we know that if all
+objects of type α satisfy *P* implies *b*, then *b* must
+be true, by application of *∀ elimination* to *w*. The
+elimination rule gives us these objects to work with.
+@@@ -/
 
+#check Exists.elim
+
+/- @@@
+```lean
+Exists.elim.{u}
+  {α : Sort u}                  -- Given any type, α
+  {p : α → Prop}                -- Given any predicate on α
+  {b : Prop}                    -- Given a proposition to prove
+  (h₁ : ∃ x, p x)               -- If there's an x satisfying p
+  (h₂ : ∀ (a : α), p a → b) :   -- If every a satisfies p implies b
+b                               -- then b
+```
+@@@ -/
+
+/- @@@
 Recall that the introduction rule takes a specific value,
 *w*, and proof, *pf : P w,* that that value has property
 *P*. Elimination destructures such a proof. What is gives
