@@ -115,82 +115,7 @@ example : ∃ (d : Dog), Blue d := ⟨ Iris, iris_is_blue ⟩
 end bluedog
 ```
 
-## An Aside on Constructive Logic
-
-The term *constructive* here means that to prove that
-something with a particular property exists, you have
-to actually have such an object (along with a proof).
-Mathematicians generally do *not* require constructive
-proofs. In other words, mathematicians are often happy
-to show that something must exist even if they can't
-construct an actual example.
-
-We call proofs of this kind non-constructive. We saw
-a similar issue arise with proofs of disjunctions. In
-particular, we saw that a *constructive* proof of a
-disjunction, *X ∨ ¬X,* requires either a proof of *X*
-or a proof of *¬X*. Accepting the law of the excluded
-middle as an axiom permits non-constructive reasoning
-by accepting that *X ∨ ¬X* is true without the need
-to construct a proof of either case.
-
-What one gains by accepting non-constructive reasoning
-is the ability to prove more theorems. For example, we
-can prove all four of DeMorgan's laws if we accept the
-law of the excluded middle, but only three of them if
-not.
-
-So what does a non-constructive proof of existence look
-like? Here's a good example. Suppose you have an infinite
-sequence of non-empty sets, *{ s₀, s₁, ...}. Does there
-*exist* a set containing one element from each of the sets?
-
-It might seem obvious that there is such a set; and in
-many cases, such a set can be *constructed*. For example,
-suppose we have an infinite sequence of sets of natural
-numbers (e.g., { {1, 2}, {3, 4, 5}, ... }). The key fact
-here is that every such set has a smallest value. We can
-use this fact to define a *choice function* that, when
-given any such set, returns its smallest value. We can
-then use this choice function to define a set containing
-one element from each of the sets, namely the smallest
-one.
-
-There is no such choice function for sets of real numbers,
-however. Certainly not every such set has a smallest value:
-just consider the set {1, 1/2, 1/4, 1/8, ...}. It does not
-contain a smallest number, because no matter what non-zero
-number you pick (say 1/8) you can always divide it by 2 to
-get an even smaller one. Given such a set there's no choice
-function that can reliably returns a value from each set.
-
-As it turns out, whether you accept that there exists a
-set of elements one from each of an infinity of sets, or
-not, is your decision. If you want to operate assuming that
-there is such a set, then you accept what mathematicians
-call the *axiom of choice*. It's another axiom you can add
-to the constructive logic of Lean without causing any kind
-of contradictions to arise.
-
-The axiom of choice is clearly non-constructive: it gives
-you proofs of the existence of such sets for free. Most
-working mathematicians today freely accept the axiom of
-choice, and so they accept non-constructive reasoning.
-
-Is there a downside to such non-constructive reasoning?
-Constructive mathematicians argue yes, that it leads to
-the ability to prove highly counter-intuitive results.
-One of these is called the *Banach-Tarski* paradox: a
-proof (using the axiom of choice) that there is a way
-cut up and reassemble a sphere that doubles its volume!
-(Wikipedia article here.)[https://en.wikipedia.org/wiki/Banach%E2%80%93Tarski_paradox]
-
-As with excluded middle, you can easily add the axiom
-of choice to your Lean environment to enable classical
-(non-constructive) reasoning in Lean. We will not look
-further into this possibility in this class.
-
-## Elimination Rule for ∃
+## Elimination
 
 Now suppose you have a proof of a proposition, *∃ (x : α),
 P x*. That is, suppose you have *pf : ∃ (x : α), P x.* How
@@ -448,6 +373,77 @@ such that *R p t* (every *p* is related to some *t*).
 In particular, every *p* is related to *w*, the person
 *everyone* loves. So everyone loves someone.
 
-## Homework
+## An Aside on Constructive Logic
 
-Forthcoming.
+The term *constructive* here means that to prove that
+something with a particular property exists, you have
+to actually have such an object (along with a proof).
+Mathematicians generally do *not* require constructive
+proofs. In other words, mathematicians are often happy
+to show that something must exist even if they can't
+construct an actual example.
+
+We call proofs of this kind non-constructive. We saw
+a similar issue arise with proofs of disjunctions. In
+particular, we saw that a *constructive* proof of a
+disjunction, *X ∨ ¬X,* requires either a proof of *X*
+or a proof of *¬X*. Accepting the law of the excluded
+middle as an axiom permits non-constructive reasoning
+by accepting that *X ∨ ¬X* is true without the need
+to construct a proof of either case.
+
+What one gains by accepting non-constructive reasoning
+is the ability to prove more theorems. For example, we
+can prove all four of DeMorgan's laws if we accept the
+law of the excluded middle, but only three of them if
+not.
+
+So what does a non-constructive proof of existence look
+like? Here's a good example. Suppose you have an infinite
+sequence of non-empty sets, *{ s₀, s₁, ...}. Does there
+*exist* a set containing one element from each of the sets?
+
+It might seem obvious that there is such a set; and in
+many cases, such a set can be *constructed*. For example,
+suppose we have an infinite sequence of sets of natural
+numbers (e.g., { {1, 2}, {3, 4, 5}, ... }). The key fact
+here is that every such set has a smallest value. We can
+use this fact to define a *choice function* that, when
+given any such set, returns its smallest value. We can
+then use this choice function to define a set containing
+one element from each of the sets, namely the smallest
+one.
+
+There is no such choice function for sets of real numbers,
+however. Certainly not every such set has a smallest value:
+just consider the set {1, 1/2, 1/4, 1/8, ...}. It does not
+contain a smallest number, because no matter what non-zero
+number you pick (say 1/8) you can always divide it by 2 to
+get an even smaller one. Given such a set there's no choice
+function that can reliably returns a value from each set.
+
+As it turns out, whether you accept that there exists a
+set of elements one from each of an infinity of sets, or
+not, is your decision. If you want to operate assuming that
+there is such a set, then you accept what mathematicians
+call the *axiom of choice*. It's another axiom you can add
+to the constructive logic of Lean without causing any kind
+of contradictions to arise.
+
+The axiom of choice is clearly non-constructive: it gives
+you proofs of the existence of such sets for free. Most
+working mathematicians today freely accept the axiom of
+choice, and so they accept non-constructive reasoning.
+
+Is there a downside to such non-constructive reasoning?
+Constructive mathematicians argue yes, that it leads to
+the ability to prove highly counter-intuitive results.
+One of these is called the *Banach-Tarski* paradox: a
+proof (using the axiom of choice) that there is a way
+cut up and reassemble a sphere that doubles its volume!
+(Wikipedia article here.)[https://en.wikipedia.org/wiki/Banach%E2%80%93Tarski_paradox]
+
+As with excluded middle, you can easily add the axiom
+of choice to your Lean environment to enable classical
+(non-constructive) reasoning in Lean. We will not look
+further into this possibility in this class.
