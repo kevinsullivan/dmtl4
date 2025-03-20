@@ -90,27 +90,54 @@ its definition. Right click on Set and select *go to definition*.
 
 #reduce Set
 -- fun α => α → Prop
--- a predicate taking an argument (a : α) yielding a proposition that might or might not be true
+-- a polymorphic type
+
+-- specializations
+#reduce Set Nat
+#reduce Set Bool
+#reduce Set Prop
+
 
 /- @@@
 In this class we distinguish two uses of the same predicate
 when defining a set in Lean. First, a one-place predicate can
-be understoood as specifying a set: namely of all and only those
-objects that can be proven to satisfy it. Second, Lean then also
-uses such a predicate to *represent* that set, for purposes of
-further reasoning and computation.
-
-The documentation at the site of the definition of *Set* in Lean
-emphasizes that, "A set is a collection of elements of some type α.
-Although Set is defined as α → Prop, this is an implementation
-detail which should not be relied on. Instead, setOf and membership
-of a set (∈) should be used to convert between sets and predicates."
+be understoood to *specify* a set: the set of all and only the
+objects that can be proven to satisfy it.
 @@@ -/
 
+
+/- @@@
+Exercises:
+
+- What predicate would specify the set of all natural numbers?
+- What predicate would specify the empty set of natural numbers?
+- Define a predicate that would specify the set of even numbers.
+@@@ -/
+
+
+/- @@@
+Second, Lean also uses a predicate to *represent* any given set, but
+this fact should be understood as an inessential design decision that
+is *abstracted away* by the Set *API* in Lean.
+@@@ -/
+
+#check Set
+-- def Set (α : Type u) := α → Prop
+
+/- @@@
+Quoting from mathlib: A set is a collection of elements of some
+type `α`. Although `Set` is defined as `α → Prop`, this is an
+implementation detail which should not be relied on. Instead,
+`setOf` and membership of a set (`∈`) should be used to convert
+between sets and predicates.
+@@@ -/
+
+/- @@@
+@@@ -/
 def aNatProp : Nat → Prop := λ n => True
 #check 1 ∈ aNatProp       -- won't work
 
-def s := setOf aNatProp   -- abstract from prop to set
+def s : Set Nat := setOf aNatProp   -- abstract from prop to set
 #check 1 ∈ s              -- gain set language and notations
 #check (s 1)              -- this "works" but is unpreferred
 def t : Nat → Prop := s   -- t defined as s stripped setness

@@ -15,7 +15,13 @@ there is (there exists) *some* even natural number.
 @@@ -/
 
 -- Predicate: defines property of *being even*
-def isEven : Nat → Prop := λ n => (n % 2 = 0)
+def isEven' : Nat → Prop := λ n => (n % 2 = 0)
+
+inductive isEven : Nat → Prop where
+| ev0 : isEven 0
+| ev2 : ∀ (n : Nat), isEven n → isEven (n + 2)
+open isEven
+
 -- λ means the same thing as fun: a function that ...
 
 -- Proposition: there exists an even number
@@ -61,6 +67,22 @@ Exists p
 ```
 @@@ -/
 
+example : ∃ (n : Nat), isEven n :=
+Exists.intro 0 ev0
+
+example : ∃ (n : Nat), isEven n :=
+Exists.intro
+  4
+  (
+    ev2
+      2
+      (
+        ev2
+          0
+          ev0
+      )
+  )
+
 /-
 In type theory, proofs of existence are *dependent pairs*,
 of the form, *⟨a : α, h : p a⟩. Note carefully that the type
@@ -73,7 +95,7 @@ Here's a simple example showing that there exists an even
 number, with *4* as a witness.
 @@@ -/
 
-example : exists (n : Nat), isEven n := Exists.intro 4 rfl
+example : exists (n : Nat), isEven' n := Exists.intro 4 rfl
 
 /- @@@
 The witness is 4 and the proof (computed by rfl) is a
@@ -85,7 +107,7 @@ instead of *4* to see what happens.
 Lean provides ⟨ _, _ ⟩ as a notation for Exists.intro.
 @@@ -/
 
-example : ∃ (n : Nat), isEven n := ⟨ 4, rfl ⟩
+example : ∃ (n : Nat), isEven n := ⟨ 4, sorry ⟩
 
 /- @@@
 We will study the equality relation shortly. For now,
@@ -117,6 +139,9 @@ variable
   (iris_is_blue : Blue Iris)   -- Proof that Iris is blue
 
 -- A proof that there exists a blue dog
+
+example : ∃ (d : Dog), Blue d := Exists.intro Iris iris_is_blue
+
 example : ∃ (d : Dog), Blue d := ⟨ Iris, iris_is_blue ⟩
 
 end bluedog
@@ -200,12 +225,6 @@ def ex1' :
   (∃ (f : Nat), isEven f)
 | ⟨ w, pf_w ⟩  => Exists.intro w pf_w.right
 
-
--- Using better notation
-theorem ex1'' :
-  (∃ (n : Nat), True ∧ isEven n) →
-  (∃ (f : Nat), isEven f)
-| ⟨ w, pf_w ⟩  => Exists.intro w pf_w.right
 
 /- @@@
 ### If There's Someone Everyone Loves then Everyone Loves Someone
