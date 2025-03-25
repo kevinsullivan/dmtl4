@@ -12,29 +12,35 @@ namespace DMT1.Lectures.setsRelationsFunctions.relations
 
 <!-- toc -->
 
-
 Just as a set can be viewed as a collection of
 individual objects of some type, α, specified by a
 membership predicate on α, so we will now view at
-a binary relation on α and β as a collection of
-ordered pairs of objects, ( a : α, b : β ), and
-we will specify such a relation with a two-argument
-predicate on α and β.
+a *binary relation* on α and β as a collection of
+ordered pairs of objects, ( a : α, b : β ). It is
+standard practice to specify y such relation with
+a two-argument predicate on α and β, satisfied by
+any pair of objects, *a* and *b*, that is defined
+to be *in* the relation, and otherwise not.
 @@@ -/
 
 /- @@@
 ## Specification and Representation as Predicates
 
-You'll recall from the section on sets that Lean
-defines the type, (Set α), as the type, α → Prop.
+You'll recall from the section on sets that we not
+only specify sets with membership predicates, but
+that Lean also represents sets as unary predicates.
+It thus defines the type, (Set α), as *α → Prop*.
 Not every predicate is meant to represent a set,
 so Lean provides the (Set α) definition so that
 our code expresses the intended abstraction when
 we mean for such a predicate to represent a set.
 @@@ -/
 
-axiom α : Type
-axiom β : Type
+variable
+  {α : Type}
+  {β : Type}
+
+-- Again, sets are represented as predicates in Lean
 #reduce (types := true) (Set α)     -- α → Prop
 -- The type, Set α, is defined as the type α → Prop
 -- (types := true) tells Lean to reduce types
@@ -42,22 +48,29 @@ axiom β : Type
 /- @@@
 ## Rel α β: The Type of Binary Relations From α to β
 
-Lean provides a similar abstraction for speciying
-binary relations. It's (Rel α β), correspondingly
-defined as α → β → Prop. We will thus specify and
-represent any binary relation, r, of type (Rel α β)
-as a two-argument predicate of type α → β → Prop.
+It is also commplace to specify binary relations as
+binary predicates. Moreover, just as Lean typically
+represents sets as unary predicates, it represents
+binary relations as binary predicates. To this end,
+Lean defines *(Rel α β)* as *α → β → Prop*, as the
+type of binary relation from objects of type α to
+objects of type β.
 @@@ -/
 
 #reduce (types := true) Rel α β -- is α → β → Prop
 
 /-
-## A Tiny Example
-Let's consider a simple example. Suppose we want
-to represent a relation, let's call it tiny, with
-the following pairs: { (0,1,), (1,1), (1,0) }. We
-can start by writing a membership predicate that
-is satisfied by all and only these pairs.
+## An Example
+Let's consider a simple example, of a finite binary
+relation on the natural numbers. In this example we
+will bypass *Rel Nat Nat* and use *Nat → Nat → Prop*
+to make it clear that all we're really dealing with
+are two-argument predicates.
+
+Suppose we want to specify and represent the relation,
+let's call it *tiny*, with the following pairs: { (0,1,),
+(1,1), (1,0) }. We do this by defining the membership
+predicate satisfied by all and only these pairs.
 @@@ -/
 
 def tinyMembershipPred : Nat → Nat → Prop :=
@@ -87,7 +100,7 @@ InfoView panel.
 -- 1 = 0 ∧ 1 = 1 ∨ 1 = 1 ∧ 1 = 1 ∨ 1 = 1 ∧ 1 = 0
 
 /- @@@
-We can now define tiny as a bianry relation on Nat,
+We can now define tiny as a binary relation on Nat,
 giving the membership predicate as its specification.
 @@@ -/
 
@@ -192,7 +205,7 @@ example : ¬tiny 0 0 :=
   @@@ -/
 
 /- @@@
-## Concrete Notations for Binary Relations
+## Rel α β and Concrete Notations for Binary Relations
 
 So far we've applied relation names to arguments using
 prefix notation, e.g., tiny 0 0, with the relation name
@@ -219,7 +232,8 @@ axiom b : β
 /- @@@
 Here are two concrete syntax notations. We give them
 minimal precedences here so that expressions on either
-side group before the relation is applied to them.
+side group before the relation is applied to them. You
+can pronounce them as "is related to"
 @@@ -/
 
 infix:min " ≺ " => r
@@ -234,6 +248,7 @@ the lexicographic order on Strings). we might want to use
 ≺ as an infix symbol. We'd write (precedes a b) as a ≺ b
 and read this as "a precedes b".
 @@@ -/
+
 #check a r b
 #check a ≺ b
 
@@ -242,9 +257,6 @@ In the rest of this file we'll just use prefix notation.
 The remainder of this chapter presents additional concepts
 with worked examples.
 @@@ -/
-
-
-
 
 
 /- @@@
@@ -354,7 +366,8 @@ still the set of all β values; but the domain and range
 are both empty, because the set of pairs of r is empty.
 @@@ -/
 
-/-#### Worked Examples
+/-
+#### Worked Examples
 
 Here a work through various propositions involving an
 empt relation.
@@ -375,7 +388,7 @@ the definition of emptyRel, the membership proposition,
 a proof of False, which is what we need to conclude our
 proof of ¬(emptyRel a b). QED.
 @@@ -/
-example : ¬emptyRel a b := fun (h : emptyRel a b) => h
+example (a : α) (b : β) : ¬emptyRel a b := fun (h : emptyRel a b) => h
 
 /- @@@
 As a minor note, if we handn't already assumed that a
@@ -777,8 +790,6 @@ Exists.intro
 
 -- EXERCISE: Prove 6 is not in the codomain of strlen3
 -- HERE:
-
-
 
 
 /- @@@
