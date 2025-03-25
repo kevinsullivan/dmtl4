@@ -1,7 +1,5 @@
 ```lean
 import Mathlib.Data.Set.Basic
-import Mathlib.Logic.Relation
-
 namespace DMT1.Lectures.setsRelationsFunctions.sets
 ```
 
@@ -296,8 +294,29 @@ rest of this chapter.
 def ev_set : Set Nat := { n : Nat | ev n }
 def small_set : Set Nat := { n | small n }
 
-#reduce small_set 4
+#reduce (types := true) small_set 4
+
+example : 4 ∈ small_set :=
+  -- 4 = 0 ∨ 4 = 1 ∨ 4 = 2 ∨ 4 = 3 ∨ 4 = 4
+Or.inr
+(
+  (Or.inr
+    (
+      Or.inr
+      (
+        Or.inr
+          (
+            rfl
+          )
+      )
+    )
+  )
+)
+
+example : ∃ (n : Nat), n ∈ small_set :=
+Exists.intro 0 (Or.inl rfl)
 ```
+
 
 The take-away is that, no matter one's choice of notation,
 sets are truly represented in Lean by *logical* predicates.
@@ -387,20 +406,22 @@ between operations in set theory, on one hand, and their specifications
 in the language of predicate logic (as implemented in Lean), on the other.
 
 
-| Name          | Notation  | Set Theory Definition     | Logical Specification          |
-|---------------|-----------|---------------------------|--------------------------------|
-| Set           | set α     | axioms of set theory      | (α → Prop)                     |
-| member        | x ∈ a     |                           | (a x)                          |
-| intersection  | s ∩ t     | { a \| a ∈ s ∧ a ∈ t }    | fun a => (s a) ∧ (t a)         |
-| union         | s ∪ t     | { a \| a ∈ s ∨ a ∈ t }    | fun a => (s a) ∨ (t a)         |
-| complement    | sᶜ        | { a \| a ∉ s }            | fun a => ¬(s a)                |
-| difference    | s \ t     | { a \| a ∈ s ∧ a ∉ t }    | fun a => (s a) ∧ ¬(t a) )      |
-| subset        | s ⊆ t     | ∀ a, a ∈ s → a ∈ t  ...   | fun a => (s a) → (t a)         |
-| proper subset | s ⊊ t     | ... ∧ ∃ w, w ∈ t ∧ w ∉ s  | ... ∧ ∃ w, (t w) ∧ ¬(s w)      |
-| product set   | s × t     | { (a,b) | a ∈ s ∧ b ∈ t } | fun (a, b) => (s a) /\ (t b)   |
-| powerset      | 𝒫 s       | { t | t ⊆ s }            | fun t => ∀ ⦃a : ℕ⦄, t a → s a  |
+| Name          | Notation  | Specification               | Logical Specification          |
+|---------------|-----------|-----------------------------|--------------------------------|
+| Set           | set α     | axioms of set theory        | (α → Prop)                     |
+| membership    | x ∈ a     | a satisfies predicate       | (a x)                          |
+| intersection  | s ∩ t     | { a \| a ∈ s ∧ a ∈ t }      | fun a => (s a) ∧ (t a)         |
+| union         | s ∪ t     | { a \| a ∈ s ∨ a ∈ t }      | fun a => (s a) ∨ (t a)         |
+| complement    | sᶜ        | { a \| a ∉ s }              | fun a => ¬(s a)                |
+| difference    | s \ t     | { a \| a ∈ s ∧ a ∉ t }      | fun a => (s a) ∧ ¬(t a) )      |
+| subset        | s ⊆ t     | ∀ a, a ∈ s → a ∈ t          | fun a => (s a) → (t a)         |
+| proper subset | s ⊊ t     | s ⊆ t ∧ ∃ w, w ∈ t ∧ w ∉ s  | ... ∧ ∃ w, (t w) ∧ ¬(s w)      |
+| product set   | s × t     | { (a,b) | a ∈ s ∧ b ∈ t }   | fun (a, b) => (s a) /\ (t b)   |
+| powerset      | 𝒫 s       | { t | t ⊆ s }               | fun t => ∀ ⦃a : ℕ⦄, t a → s a  |
 
 ```lean
+#reduce Set
+#reduce Set.Mem
 #reduce Set.inter
 #reduce Set.union
 #reduce Set.compl
@@ -409,6 +430,12 @@ in the language of predicate logic (as implemented in Lean), on the other.
 #reduce Set.prod
 #reduce Set.powerset
 ```
+
+Exercise: What precisely are the elements of the powerset of the
+product set of two finite sets, S and T?
+
+Exercise: How many elements are in the powerset of the product
+set of two finite sets, S and T, of sizes s and t, respectively?
 
 Let's elaborate on each of these concepts now.
 
@@ -433,7 +460,7 @@ that this predicate is true of all and only the numbers from 0 to
 4 (inclusive).
 
 ```lean
-#reduce (small 1)
+#reduce (types := true) (small 1)
 ```
 
 The result is *1 = 0 ∨ 1 = 1 ∨ 1 = 2 ∨ 1 = 3 ∨ 1 = 4*. This
@@ -475,7 +502,6 @@ or introduction on the right to start.
 
 ```lean
 example : small 1 := (Or.inr (Or.inl rfl))
-
 example : small 3 := Or.inr (Or.inr (Or.inr (Or.inl (Eq.refl 3))))
 ```
 
@@ -771,8 +797,8 @@ relation on sets, s and t, one can therefore write either
 r ⊆ s × t, or r ∈ 𝒫 (s × t.)
 
 ```lean
-#reduce Set.powerset (Set.prod _ _)
--- fun t => t ⊆ prod ?m.3518 ?m.3519 (? placeholders for sets )
+#reduce @Set.powerset (Set.prod _ _)
+-- fun s t => t ⊆ s
 
 end DMT1.Lectures.setsRelationsFunctions.sets
 ```
