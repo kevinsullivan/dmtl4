@@ -59,7 +59,7 @@ objects of type β.
 #reduce (types := true) Rel α β -- is α → β → Prop
 ```
 
-## Example: The Relation { (0, 1), (1, 1), (1, 0) }
+## Example: The Relation \{ (0, 1), (1, 1), (1, 0) \}
 
 Let's consider a simple example, of a finite binary
 relation on the natural numbers. In this example we
@@ -156,11 +156,11 @@ fully mastered.
 
 -- Prove (0, 1) is in tiny
 example : tiny 0 1 :=
-  /- ***
+```
   By the definition of tiny what is to be proved is
   0 = 0 ∧ 1 = 1 ∨ 0 = 1 ∧ 1 = 1 ∨ 0 = 1 ∧ 1 = 0. The
   proof is by *or introduction* on the left with ...
-```
+```lean
   Or.inl
     -- ... a proof of fst = 0 ∧ snd = 1
     (
@@ -171,16 +171,16 @@ example : tiny 0 1 :=
         -- and a proof of 1 = 1 (parens needed)
         (Eq.refl 1)
     )
+```
 
-```lean
 Proving that a pair is not in a relation is done in the
 usual way: by negation. That is, one assumes the pair is
 in the relation and then shows that that cannot actually
 be true, leading one to conclude that the negation of that
 proposition is true. For example, let's show that (0, 0)
 is not in the tiny relation.
-```
 
+```lean
 #reduce (types:=true) tiny 0 0
 -- 0 = 0 ∧ 0 = 1 ∨ 0 = 1 ∧ 0 = 1 ∨ 0 = 1 ∧ 0 = 0
 
@@ -201,32 +201,30 @@ example : ¬tiny 0 0 :=
       | Or.inl h11 => nomatch h11.left
       -- case (0, 0) = (1, 0), i.e., 0 = 1 ∧ 0 = 0? Nope.
       | Or.inr h10 => nomatch h10.left
+```
 
-```lean
   As there can be no proof of (tiny 0 0), i.e., of
   0 = 0 ∧ 0 = 1 ∨ 0 = 1 ∧ 0 = 1 ∨ 0 = 1 ∧ 0 = 0, we
   conclude that (0, 0) is not in the tiny relation:
   ¬tiny 0 0. QED.
-```
 
-```lean
 We now explore a range of particular relations to illustrate
 concepts, specifications, propositions, and proofs involving
 them. To avoid having to declare α and β as types and *r* as
 a binary relation on them, we do it once here using the Lean
 *variable* construct.
-```
 
+```lean
 variable
   (r : Rel α β)
   (a : α)
   (b : β)
 
 #check r a b
+```
 
 
-```lean
-## The Complete Relation from α to β
+## The Complete Binary Relation from α to β
 
 Given sets (in type theory, types) α and β, the *complete*
 relation from α to β relates every value of type α to every
@@ -241,11 +239,11 @@ membership proposition is true for every pair of values,
 so every pair of values is defined to be in the relation.
 Here's a general definition of the total relation on any
 two types, α and β.
-```
-
-def completeRel (α β : Type) : Rel α β := fun _ _ => True
 
 ```lean
+def completeRel (α β : Type) : Rel α β := fun _ _ => True
+```
+
 This relation imposes no constraints on which String-Nat
 pairs are in the relation, so they all are. The predicate
 that defines this relation has to be true for *all* pairs
@@ -262,11 +260,11 @@ what *totalRel String Nat* reduces to. What predicate
 is it, exactly, as expressed formally in Lean. Do not
 proceed if you're not sure, rather go back and figure
 it out.
-```
-
-def completeStrNat : Rel String Nat := completeRel String Nat
 
 ```lean
+def completeStrNat : Rel String Nat := completeRel String Nat
+```
+
 We can now apply this membership predicate to pairs of
 argument values to yield *membership propositions* that
 claim that such pairs are *in* the specified relation.
@@ -274,11 +272,11 @@ Here we claim that the pair, "Hello" and 2, is in this
 relation. You *must* fully understand what proposition
 *completeStrNat "Hello" 2* reduces do. *Go look at the
 definition of completeStrNat if you're sure!*
-```
-
-example : completeStrNat "Hello" 2 := True.intro
 
 ```lean
+example : completeStrNat "Hello" 2 := True.intro
+```
+
 Given this definition we can show that any pair of values is in
 the relation, or related to each other through or by it. As one
 example, let's show that the pair of values, "Hello" and 7, is in
@@ -286,8 +284,8 @@ this relation. Hint. Start by *remembering* the definition of
 completeStrNat, then start natural language proof by saying, "By
 the definition of completeStrNat, what is to be proved is True."
 Then prove that membership proposition.
-```
 
+```lean
 -- Prove ("Hello", 7) is in the total relation on String and Nat
 example : completeStrNat "Hello" 7 :=
   -- By the definition of completeStrNat, all we have to prove True
@@ -297,8 +295,8 @@ example : completeStrNat "Hello" 7 :=
 -- Prove that *every* Nat-Nat pair is in completeStrNat
 example : ∀ (a : String) (b : Nat), completeStrNat a b :=
 fun a b => True.intro
+```
 
-```lean
 To know to "unfold" definitions into their underlying
 definitions is an incredibly important and useful move
 in in proof construction. I'd recommend that if you're
@@ -308,9 +306,7 @@ what actually needs to be proved. Sometimes even Lean
 will get stuck computing proofs automatically until you
 tell it to unfold a definition in the midst of a proof
 construction.
-```
 
-```lean
 ## The Empty Binary Relation From α to β
 
 The empty relation from any type/set α to and type/set β
@@ -322,18 +318,16 @@ that is false for any pair of values. It's a predicate that
 ignores its arguments and yields the membership proposition,
 False. No pair satisfies this membership proposition (makes
 it true), so the specified relation has no pairs at all.
-```
-
-def emptyRel {α β : Type*} : Rel α β := fun _ _ => False
 
 ```lean
+def emptyRel {α β : Type*} : Rel α β := fun _ _ => False
+```
+
 The domain of definition of the empty relation is still
 the set of all values of type α, and the co-domain is
 still the set of all β values; but the domain and range
 are both empty, because the set of pairs of r is empty.
-```
 
-```lean
 Let's now see some example. First we claim and show that no
 pair, (a : α, b : β) can be in an empty relation. We should
 be able to state and prove this proposition formally. Recall
@@ -345,33 +339,33 @@ the definition of emptyRel, the membership proposition,
 (emptyRel a b), is the proposition False. This makes h
 a proof of False, which is what we need to conclude our
 proof of ¬(emptyRel a b). QED.
-```
+```lean
 example (a : α) (b : β) : ¬emptyRel a b :=
 fun h => h
+```
 
-```lean
 As a minor note, if we handn't already assumed that a
 and b are arbitrary objects, we could introduce them as
 such using ∀. You can read this proposition as something
 to the effect, no pair of objects, (a, b), can belong to
 and empty relation on any α and β.
-```
 
-example : ∀ {α β : Type*}, ∀ (a : α), ∀ (b : β), ¬emptyRel a b :=
 ```lean
+example : ∀ {α β : Type*}, ∀ (a : α), ∀ (b : β), ¬emptyRel a b :=
+```
 Proof by ∀ introduction. We assume arbitrary and and b and
 then show that this pair cannot be in an empty relation. The
 rest of the proof is by negation. We assume (h : emptyRel a b)
 and produce a proof of False. By the definition of emptyRel,
 (h : emptyRel x y) *is* a proof of False. Therefore, we can
 conclude that ¬(emptyRel x y).
-```
+```lean
 fun a b =>     -- assume arbitrary a and b (can use _'s here)
   fun h =>     -- assume a proof of (emptyRel a b), call it h
     h          -- It *is* a proof of False, thus ¬emptyRel a b.
+```
 
 
-```lean
 Next we claim and prove the claim that no pair can Be in
 the empty relation from String to Nat, in particular.
 
@@ -380,22 +374,22 @@ The empty relation on String and Nat is just the polymorphic
 types, α = String and β = Nat. EmptyRel does take two Type
 arguments, but they are defined to be implicit: Lean infers
 them from the type of emptyStrNat, namely *Rel String Nat*.
-```
-
-def emptyStrNat : Rel String Nat := emptyRel
 
 ```lean
+def emptyStrNat : Rel String Nat := emptyRel
+```
+
 In the following proof by negation, we assume we have
 a proof, *h* of the proposition that the pair, s and n,
 is in the relation and we need a proof of False. Study
 this example until you see with absolute clarity that
 *h* is assumed to be exactly that. Go back and study the
 definition of emptyStrNat if you're not sure why!
-```
-
-example : ∀ s n, ¬emptyStrNat s n := fun s n h => h
 
 ```lean
+example : ∀ s n, ¬emptyStrNat s n := fun s n h => h
+```
+
 ## Relations Neither Empty or Complete
 The empty and complete relation aren't very informative.
 The interesting ones are proper but non-empty subsets of
@@ -408,11 +402,11 @@ relation if and only if *n is equal to the length of s*.
 In Lean, the *String.length* function takes a string and
 returns its length. We can use it to specify the relation
 we want, as follows.
-```
-
-def strlen : Rel String Nat := fun s n => n = s.length
 
 ```lean
+def strlen : Rel String Nat := fun s n => n = s.length
+```
+
 We want to take a moment at this point to note a critical
 distinction between *relations* in Lean and functions that
 are represented as lambda expressions (ordinary computable
@@ -435,12 +429,12 @@ type as an output for each and every value of the input type.
 
 Finally, consider computability. We could easily define a
 computable function that *computes* to our strlen relation.
-```
-
-def strlenFun : String → Nat := fun s => s.length
-#reduce strlenFun "Hello"   -- computes 5
 
 ```lean
+def strlenFun : String → Nat := fun s => s.length
+#reduce strlenFun "Hello"   -- computes 5
+```
+
 However, our strlen relation is not a computable function,
 but rather a *declarative specification*. When you apply
 it to values of its input types, you get not the output of
@@ -451,33 +445,31 @@ have to confirm yourself), you have a member; otherwise no.
 In a nutshell, if you need to specify a *partial function*
 in Lean, or a multi-valued relation, then you have to do it
 with a declarative specification, not a computable function.
-```
 
-```lean
 Here's yet another example. While we were able to prove
 that ("Hello", 7) is in the complete relation from String to
 Nat, there is no proof that this pair is in strlen, which has
 a much more restrictive membership predicate. Simply put, the
 length of "Hello" (defined in the Lean libraries), is 5, and
 7 is not equal to 5, so this pair can't be a member.
-```
 
+```lean
 example : strlen "Hello" 7 :=
 -- What we need to prove is 7 = "Hello".length, i.e., 7 = 5.
   _     -- We're stuck, as there can be no proof of that.
+```
 
 
-```lean
 We can of course prove that ("Hello", 7) is *not* in the
 strlen relation. The proof is by negation. We'lll assume
 this pair is the relation. That'll lead to the assumption
 that 7 = 5, which is absurd. From that contradiction, we'll
 conclude that the pair is *not* in the strlen relation.
-```
-
-example : ¬strlen "Hello" 7 :=
 
 ```lean
+example : ¬strlen "Hello" 7 :=
+```
+
 The proof is constructed by negation. Assume strlen "Hello" 7;
 show that leads to a contradiction; conclude ¬strlen "Hello" 7.
 You must know this concept, be able to state it clearly, be able
@@ -489,9 +481,9 @@ true and that we have a proof of it (h : strlen "Hello" 7), and
 we will then show that that can't happen (as revealed by the fact
 that we'll have created a contradiction, showing that the initial
 assumption was wrong).
-```
-fun (h : strlen "Hello" 7) =>
 ```lean
+fun (h : strlen "Hello" 7) =>
+```
 Now that we have our assumed proof of (strlen "Hello" 7) we have
 to show that there's a contraction from which we can derive a
 proof of False. The only information we have is the proof, h.
@@ -508,18 +500,18 @@ Another way to say this is that we'll show that we can have a
 proof of false for every possible proof, h, of 7 = 5; but there
 are no, so showing that False is true in all cases is trivial,
 as there is no case that can possibly account for h.
-```
-  nomatch h
-
 ```lean
+  nomatch h
+```
+
 As a final example, we can prove that the pair, ("Hello",5), is
 in strlen. In English, all we'd have to say is that this pair
 satisfies the membership predicate because 5 = "Hello".length
 (assuming we've properly defined "length,." which Lean has. )
-```
 
-example : strlen "Hello" 5 :=
 ```lean
+example : strlen "Hello" 5 :=
+```
 By the definition of strlen, we must prove 5 = "Hello".length.
 By the computation/reduction of "Hello".length this means 5 = 5.
 And that is true by the reflecxivity of equality, as for any
@@ -530,11 +522,11 @@ the value of k from context. And Lean takes care of reducing the
 length function for us. We could write rfl here, but let's use
 (Eq.refl 5) to get a better visual of the idea that what we're
 producing here is a proof of 5 = 5.
-```
-Eq.refl 5
-
-
 ```lean
+Eq.refl 5
+```
+
+
 ## Finite Relations
 
 A finite binary relation is a binary relation having only a
@@ -554,15 +546,15 @@ To specify this relation formally in Lean all we have to do
 is to figure out how to write the membership predicate. In
 this example, we'll do it as a three-clause disjunction, one
 clause for each pair.
-```
 
+```lean
 def strlen3 : Rel String Nat :=
   fun s n =>
     (s = "Hello" ∧ n = 5) ∨
     (s = "Lean" ∧ n = 4) ∨
     (s = "!" ∧ n = 1)
+```
 
-```lean
 We can prove memberships and non-membership of pairs in this
 relation in the usual way: by proving the proposition that is
 the result of applying the membership predicate to any pair of
@@ -570,19 +562,19 @@ values. Here such a proposition will be a disjunction. Again
 you must be able to reduce a relation membership proposition,
 such as *strlen3 "Hello" 5* to its underlying logical form.
 If you're not sure, you can use #reduce (types := true).
-```
-
-#reduce (types := true) strlen3 "Hello" 5
 
 ```lean
+#reduce (types := true) strlen3 "Hello" 5
+```
+
 We see *by the definition* of strlen3, it will suffice to show
 that "Hello" = "Hello" ∧ 5 = 5 ∨ "Hello" = "Lean" ∧ 5 = 4 ∨
 "Hello" = "!" ∧ 5 = 1. Copy of the body of *strlen3* and for
 the formal parameters, substitute in the actual parameters. The
 result is the membership proposition for those parameter values.
 Here's what it looks like to prove this proposition.
-```
 
+```lean
 example : strlen3 "Hello" 5 :=
   -- we prove the result of applying strlen3 to "Hello" and 5:
   -- ("Hello" = "Hello" ∧ 5 = 5) ∨ ("Hello" = "Lean" ∧ 5 = 4) ∨ ("Hello" = "!" ∧ 5 = 1)
@@ -593,8 +585,8 @@ example : strlen3 "Hello" 5 :=
       rfl         -- "Hello" = "Hello"
       rfl         -- 5 = 5
     )
+```
 
-```lean
 We can also prove that ("Hello", 4) is not in the relation.
 The proof is by negation followed by case analysis on the
 3-case disjunction that defines the membership predicate.
@@ -602,8 +594,8 @@ We will assume (strlen3 "Hello" 4) is in the relation and t
 then show that it doesn't satisfy any of the three disjuncts
 and so can't be. From this contradiction we'll conclude that
 ¬(strlen3 "Hello" 4) is true.
-```
 
+```lean
 example : ¬strlen3 "Hello" 4 := fun h =>
 -- proof by case analysis on assumed proof h : (strlen3 "Hello" 4),
 -- which is to say h is a proof of ("Hello" = "Hello" ∧ 4 = 5) ∨ ...
@@ -623,23 +615,21 @@ match h with
       | Or.inr p3 =>
         let f : "Hello" = "!" := p3.left
         nomatch f         -- nope, can't haver a proof of "Hello" = "!"
-```lean
+```
 Having shown there can be no proof of strlen3 "Hello" 4,
 we conclude ¬strlen3 "Hello" 4. QED.
-```
-
--- Lean's smart enough to do all that work for us
-example : ¬strlen "Hello" 4 := fun h => nomatch h
-
 
 ```lean
+-- Lean's smart enough to do all that work for us
+example : ¬strlen "Hello" 4 := fun h => nomatch h
+```
+
+
 ## Fundamental Definitions
 In this section, we define important terms and underlying
 concepts in the theory of relations. To illustrate the ideas,
 we'll refer back to our running examples.
-```
 
-```lean
 Given any relation on sets (types) α and β, we will refer to
 α as the *domain of definition*, and β as the *co-domain* of
 the relation. The domain of definition is the set of possible
@@ -669,12 +659,12 @@ the pair of values, x, y, satisfies the two-place predicate r.
 In Lean, if r is a binary relation (Rel.dom r) is its domain set.
 We can define the domain of definition and the domain of any binary
 relation as follows.
-```
-
-def dom (r : Rel α β) : Set α := { a | ∃ b, r a b }
-def domdef (r : Rel α β) : Type := α
 
 ```lean
+def dom (r : Rel α β) : Set α := { a | ∃ b, r a b }
+def domdef (r : Rel α β) : Type := α
+```
+
 The *domain of definition* of a relation is thus the set of
 possible input values, that can appear as first arguments in
 membership propostions. The *domain* of a relation is the subset
@@ -683,26 +673,26 @@ output values. The codomain is the set of values (type in Lean)
 containing all possible output values. The range of a relation
 is the subset of values in the codomaim for which there really
 are corresonding related input values in the domain.
-```
 
+```lean
 def codom (r : Rel α β) : Type := β
 def ran (r : Rel α β) : Set β := { b | ∃ a, r a b }
 
 #reduce (types := true) Rel.dom r
 -- fun x => ∃ y, r x y
+```
 
-```lean
 Regrettably, Lean defines *codom* as the *range* of a relation.
 As I said in class, these terms are used somewhat inconcistenty
 in the mathematics literature. For this class we'll stick with
 the *concepts* as we've defined them here, with the *range* of a
 relation being the set of all output values for which there is
 a corresponding input.
-```
+```lean
 #reduce (types := true) Rel.codom r
 -- fun y => ∃ x, r x y
+```
 
-```lean
 As a concrete example, the domain of definition of completeStrNat
 is the set of all values of type α represented here by α itself.
 This set is also the domain of this relation, as the relation
@@ -717,8 +707,8 @@ set.
 
 Lean defines these concepts in its standard Libraries. Here
 you can see them in action.
-```
 
+```lean
 #reduce Rel.dom strlen
 -- fun x => ∃ y, strlen x y
 -- the set of x values for which there's some y value in strlen
@@ -729,13 +719,13 @@ you can see them in action.
 -- but ∃ y, emptyStrNat x y reduces to False
 -- this can also be written as { x | ∃ y, False}
 -- no x values satisfy False, so this set is empty
+```
 
-```lean
 We can now prove, for example, that "Hello" ∈ strlen3.dom.
 By the definition of the domain of a relation, we need to
 show (∃ y, strlen3 "Hello" y). As a witness for y, 5 will do.
-```
 
+```lean
 #reduce (types := true) ("Hello" ∈ strlen3.dom )
 
 example : "Hello" ∈ strlen3.dom :=
@@ -752,8 +742,8 @@ example : "Hello" ∈ strlen3.dom :=
 -- Here's the definition of the range of strlen3
 #reduce (types:=true) strlen3.codom
 -- fun y => ∃ x, strlen3 x y
+```
 
-```lean
 With all of that, it should be clear that we can
 express propositions about certain values being in
 or not in the domain or range of a relation, and
@@ -773,8 +763,8 @@ and range (codom), what remains to be proved is"
 
 The initial step is thus to apply the introduction
 rule for exists. And the rest is just basic logic.
-```
 
+```lean
 #reduce (types := true) 5 ∈ strlen3.codom
 
 example : 5 ∈ strlen3.codom :=
@@ -783,29 +773,29 @@ Exists.intro
   (Or.inl                 -- Now a proof that it works
     (And.intro rfl rfl)
   )
+```
 
 
-```lean
 ## The Inverse of a Binary Relation on Types/Sets α and β
 
 The inverse of a relation, r, on α and β, is a relation on
 β and α, comprising all the pair from r but with the first
 and second element values swapped. Sometimes you'll see the
 inverse of a binary relation, r, written as r⁻¹.
-```
 
-#reduce Rel.inv
 ```lean
+#reduce Rel.inv
+```
 The specification is easy. The membership predicate for
 a pair, (b, a), to be in the inverse of a relation r is
 that the pair (a, b) is in r. Think about it and you will
 see that r.inv has to be the same as r but with all pairs
 flipped.
-```
-
-def inv (r : Rel α β) : Rel β α := fun b a => r a b
 
 ```lean
+def inv (r : Rel α β) : Rel β α := fun b a => r a b
+```
+
 Example: What is the inverse of strlen3? In Lean it's writen
 either (Rel.inv strlen3) or just strlen.inv. Remeber, This is
 a predicate being used to represent a relation. The inverse
@@ -815,20 +805,18 @@ and then b of type β, then r.inv takes as arguments some
 is in r. If there's a proof of that, then (b, a) is specified
 to be in r.inv. To so prove that some (b, a) is in r⁻¹, you
 just show that (a, b) ∈ r.
-```
 
-```lean
 Conjecture: (5, "Hello") is in the inverse of strlen3.
 Proof: it suffices to prove ("Hello", 5) is in r. But
 we've already done that once and don need to do it again
 here! Oh, well, ok.
-```
 
+```lean
 #reduce (types := true) strlen3.inv 5 "Hello"
 
 example : strlen3.inv 5 "Hello"
   :=
-```lean
+```
   By the definition of the inverse of a relation,
   the proposition, (strlen3.inv 5 "Hello"), which
   we are to prove, reduces to (strlen3 "Hello" 5).
@@ -836,11 +824,11 @@ example : strlen3.inv 5 "Hello"
   tne reduces to ("Hello" = "Hello" ∧ 5 = 5) ∨ ...
   This proposition is now proved by or introduction
   on the left.
-```
+```lean
   Or.inl ⟨ rfl, rfl⟩
 -- Remember ⟨ _, _ ⟩ here is shorthand for And.intro
+```
 
-```lean
 We can actually now state and prove more general theorems
 showing that the inverse operation has the property that
 appying it twice is equivalent to doing nothing at all.
@@ -853,8 +841,8 @@ other words, (a, b) is in r if and only if (a, b) is in
 the inverse of the inverse of r. We want to know that this
 statement is true for *any* values of a and b (of their
 respective types).
-```
 
+```lean
 theorem inverseInverseIsId:
   ∀ {α β : Type} (rel : Rel α β) (a : α) (b : β), rel a b ↔ rel.inv.inv a b :=
 -- assume a and b are arbitrary values (by ∀ introduction)
@@ -877,8 +865,8 @@ Iff.intro
     -- because r is r.inv.inv
     fun h : rel a b => h
   )
+```
 
-```lean
 ## The Image of a Set Under a Binary Relation
 
 Suppose we have a binary relation, (r : Rel α β),
@@ -893,23 +881,23 @@ as a mathematical specification.
 
 Here you can see the formal definition of the image
 of a set s under a relation r.
-```
-
-#reduce Rel.image
--- fun r s y => ∃ x ∈ s, r x y
 
 ```lean
+#reduce Rel.image
+-- fun r s y => ∃ x ∈ s, r x y
+```
+
 Given a relation, r, a set of input values, s, and a
 y of the output type, y is specified to be in the image
 of r when there is some input value, x, in s, such that
 r relates x to y. In other words, the image of s under r
 is the set of all output values for any and all ainput
 values in s.
-```
 
+```lean
 #reduce Rel.image
 -- fun r s y => ∃ x ∈ s, r x y
-```lean
+```
 Given any relation, r, and any set of input values,
 s, an output value y is (defined to be) in "the image
 of s under r" exactly when y is the output of r for
@@ -918,9 +906,7 @@ operator on a relation acts like it's applying the
 whole relation to a whole set of values and getting
 back all values related to any value in the argument
 set.
-```
 
-```lean
 In this example we consider the image of the two-member
 set, { "Hello", "!"}, under the strlen3 relation. You can
 see intuitively that it must be the set {5, 1}, insofar as
@@ -929,37 +915,35 @@ there are no other values in s. Let's see what we're saying
 formally, as reported by Lean. *Be sure you understand all
 of the outputs of #reduce that we're presenting over in this
 lesson!
-```
 
+```lean
 #reduce Rel.image strlen3 { "Hello", "!"}
 -- Here's an easier way to write the same thing
 #reduce strlen3.image {"Hello", "!"}
 -- fun y => ∃ x ∈ {"Hello", "!"}, strlen3 x y
+```
 
-```lean
 The image, specified by the *single-argument* predicate,
 fun y => ∃ x ∈ {"Hello", "!"}, strlen3 x y, is, again, the
 set of all output (β) values, y, such that, for any given y
 there is some x in s that r relates to y.
-```
 
-```lean
 Given this definition and our understanding, we see that
 it should be possible to show that, say, 1, is in the
 image of { "Hello", "!"} under strlen3, because there is
 a string in the set,  { "Hello", "!"}, namely "!", that
 r relates to 1 (for which (strlen3 "!" 1) is true).
-```
 
-example : 1 ∈ strlen3.image { "Hello", "!"} :=
 ```lean
+example : 1 ∈ strlen3.image { "Hello", "!"} :=
+```
 By the definition of Rel.image we need to prove
 is that there is some string, x, in the set, call
 it s, of strings, that satisfies strlen3 s 1. This
 string, in s, will of course be "!", so that will
 be our witness. The proof is by exits introduction
 with "!" as the witness.
-```
+```lean
 Exists.intro "!"
 (
   -- what remains to be proved is "!" ∈ {"Hello", "!"} ∧ strlen3 "!" 1
@@ -974,8 +958,8 @@ Exists.intro "!"
     -- this is obvious but, sorry, maybe I'll prove it later
     (sorry)
 )
+```
 
-```lean
 We should also be able to show that 4 is not in the image of
 s under strlen3. The proof is by negation. We'll assume that
 4 is in the image, but we have already figured out that the
@@ -983,8 +967,8 @@ only elements in there are 5 and 1 (from "Hello" and "!"). The
 problem will be that assuming 4 is in the set isto assume that
 4 = 5 ∨ 4 = 1. That's a contraction as each case leads to an
 impossibiility. Thus 4 ∉ strlen3.image { "Hello", "!"}. QED,
-```
 
+```lean
 example : 4 ∉ strlen3.image { "Hello", "!"}  :=
 -- assume, h, that 4 is in this set
 fun h =>
@@ -1017,7 +1001,7 @@ fun h =>
             -- by the definition of strlen3 this is a disjuncion that is false
             -- using
             | Or.inl hello =>
-              /-
+```
                 We haven't talked about "tactic mode" in Lean. Without getting
                 into details, we're arging that because "hello" proves w = "Hello",
                 we can replace w in r, which proves strlen3 w 4, to get a proof
@@ -1120,7 +1104,7 @@ of numbers in such an *image* set.
 ```lean
 -- Proof that 1 is in acctsOf.image { "Mary" }
 example : 1 ∈ acctsOf.image { "Mary" } :=
-/-
+```
 By the definition of image, we need to prove
 ∃ x ∈ {"Mary"}, acctsOf x y. At this point, we
 have to find/pick a witness---here an input value
@@ -1132,8 +1116,8 @@ The proof is by exists introduction. We show
 that there is some x in { "Mary" } *and* for
 that x, (x, 1) is in acctsOf. The only possible
 x to choose in this case is "Mary".
-```
 
+```lean
 -- Pick "Mary" as the witness
 (Exists.intro "Mary"
   -- now prove "Mary" ∈ { "Mary" } ∧ acctsOf "Mary" 1
@@ -1151,8 +1135,8 @@ example : 2 ∈ acctsOf.image { "Mary" } := _
 
 -- Exercise: Prove that 3 is NOT one of Mary's bank accounts
 -- HERE:
+```
 
-```lean
 ## Example: The Cartesian Unit Circle as a Relation
 
 The unit circle in the Cartesian plane is the set of points,
@@ -1167,28 +1151,28 @@ import at the top of this file for the Real numbers. In Lean,
 definition. Note that just as we can use ℕ for Nat, so we can
 use ℝ for Real, mirroring the use of these *blackboard font*
 notations by most mathematicians.
-```
-
-def unitCircle : Rel ℝ ℝ := fun x y => x^2 + y^2 = 1
 
 ```lean
+def unitCircle : Rel ℝ ℝ := fun x y => x^2 + y^2 = 1
+```
+
 So now let's state and try to prove the proposition that
 the pair, *(0, 1)* is in this relation (on the unit circle).
 Here's the proposition itself.
-```
-
-def zoUnitCircle : Prop := unitCircle 0 1
 
 ```lean
+def zoUnitCircle : Prop := unitCircle 0 1
+```
+
 We might expect that by the definition of *unitCircle*
 this proposition would reduce to *0² + 1² = 1*, with the
 expression *0² + 1²* then reducing to *1 = 1*, with *rfl*
 as an easy proof.
-```
-
-example : unitCircle 0 (-1) := rfl    -- doesn't work!
 
 ```lean
+example : unitCircle 0 (-1) := rfl    -- doesn't work!
+```
+
 That didn't work! The problem is that the real numbers
 are not computable so Lean will not just reduce *0² + 1²*
 to *1*. One *cannot* compute real numbers, but rather must
@@ -1206,9 +1190,7 @@ and other inputs and try to prove the goal. These programs are
 called *tactics*. To finish off this chapter, we will take the
 opportunity to give a first taste of tactic-based proving, for
 the particular problem we face right here.
-```
 
-```lean
 ## Tactics for Automated Proof Construction in Lean
 
 A tactic is not a proof term, but rather a program that
@@ -1233,13 +1215,13 @@ but also, crucially, the definition of unitCircle.
 The keyword, *by*, kicks Lean into *tactic mode*.
 In general you can intermix the *term* and *tactic*
 modes flexibly in constructing proofs in Lean.
-```
 
+```lean
 example : unitCircle 0 (-1) :=
 by
   simp [unitCircle]
+```
 
-```lean
 Wow, ok! Lean doesn't just support direct programming
 of proof terms by hand, as we've been doing all along,
 but provides a huge library of tactics for helping to
@@ -1248,9 +1230,7 @@ the tactic-built proof that *simp* finds for you into
 English is easy. You can just say, *by the definition
 of unitCircle* (and other basic rules of algebra), the
 proposition is easily proved.
-```
 
-```lean
 For those interested in futher study, Lean has a
 ton of options you can set to have it tell you more
 or less information as it goes. The following option
@@ -1258,17 +1238,17 @@ tells Lean to tell you what facts the simp tactic uses
 in trying to produce a proof for you. Don't worry about
 the details, just be happy you did not have to construct
 that proof by hand!
-```
 
+```lean
 set_option tactic.simp.trace true in
 
 -- hover over simp to see all the definitions it used
 example : unitCircle 0 (-1) :=
   by
     simp [unitCircle]
+```
 
 
-```lean
 Now that we have the tools we need to prove propositions
 about membership in the unitCircle relation, we should be
 all set to prove propositions about membership in the image
@@ -1283,13 +1263,13 @@ the unit circle with *x = 0* or *x = 1*.
 Here's the expression for the image set (of output values)
 for the set of input values, { 0, 1}. Hovering over #reduce
 gives you the predicate that defines the output/image set.
-```
-
-#reduce unitCircle.image { 0, 1 }
--- fun y => ∃ x ∈ {0, 1}, unitCircle x y
-
 
 ```lean
+#reduce unitCircle.image { 0, 1 }
+-- fun y => ∃ x ∈ {0, 1}, unitCircle x y
+```
+
+
 So now we're set: Let's prove that -1 is in the image
 of { 0, 1 } under the unitCircle relation. Here's the
 claim/proposition, followed by the proof. As usual, you
@@ -1298,17 +1278,17 @@ it, to understand the reasoning at each step, what is
 left to prove after each step, and how the whole thing
 really does (firmly in your mind) prove that one of the
 outputs given inputs 0 and 1 is in fact -1.
-```
 
-example : -1 ∈ unitCircle.image { 0, 1 } :=
 ```lean
+example : -1 ∈ unitCircle.image { 0, 1 } :=
+```
 By the definition of image, what we have to show is
 that ∃ x ∈ { 0, 1 } such that (x, -1) is in the image.
 The proof is thus by exists introduction, and we have
 to pick a witness that will make the remaining proof
 go through. The only value that x/input value in that
 set that will work is 0.
-```
+```lean
 Exists.intro
   0   -- witness
       -- proof
@@ -1331,8 +1311,8 @@ Exists.intro
         by simp [unitCircle]
     )
   )
+```
 
-```lean
 ## Conclusion
 
 This lesson has introduced you to the formal definition and
@@ -1350,6 +1330,7 @@ of particular interest include those of being:
 - transitive
 - equivalence
 - well-founded
-```
 
+```lean
 end DMT1.Lectures.setsRelationsFunctions.relations
+```

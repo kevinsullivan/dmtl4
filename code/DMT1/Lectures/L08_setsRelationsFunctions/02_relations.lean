@@ -60,7 +60,7 @@ objects of type β.
 #reduce (types := true) Rel α β -- is α → β → Prop
 
 /- @@@
-## Example: The Relation { (0, 1), (1, 1), (1, 0) }
+## Example: The Relation \{ (0, 1), (1, 1), (1, 0) \}
 
 Let's consider a simple example, of a finite binary
 relation on the natural numbers. In this example we
@@ -159,7 +159,7 @@ fully mastered.
 
 -- Prove (0, 1) is in tiny
 example : tiny 0 1 :=
-  /- ***
+  /- @@@
   By the definition of tiny what is to be proved is
   0 = 0 ∧ 1 = 1 ∨ 0 = 1 ∧ 1 = 1 ∨ 0 = 1 ∧ 1 = 0. The
   proof is by *or introduction* on the left with ...
@@ -210,9 +210,7 @@ example : ¬tiny 0 0 :=
   0 = 0 ∧ 0 = 1 ∨ 0 = 1 ∧ 0 = 1 ∨ 0 = 1 ∧ 0 = 0, we
   conclude that (0, 0) is not in the tiny relation:
   ¬tiny 0 0. QED.
-@@@ -/
 
-/- @@@
 We now explore a range of particular relations to illustrate
 concepts, specifications, propositions, and proofs involving
 them. To avoid having to declare α and β as types and *r* as
@@ -229,7 +227,7 @@ variable
 
 
 /- @@@
-## The Complete Relation from α to β
+## The Complete Binary Relation from α to β
 
 Given sets (in type theory, types) α and β, the *complete*
 relation from α to β relates every value of type α to every
@@ -1020,7 +1018,7 @@ fun h =>
             -- by the definition of strlen3 this is a disjuncion that is false
             -- using
             | Or.inl hello =>
-              /-
+              /- @@@
                 We haven't talked about "tactic mode" in Lean. Without getting
                 into details, we're arging that because "hello" proves w = "Hello",
                 we can replace w in r, which proves strlen3 w 4, to get a proof
@@ -1125,7 +1123,7 @@ of numbers in such an *image* set.
 
 -- Proof that 1 is in acctsOf.image { "Mary" }
 example : 1 ∈ acctsOf.image { "Mary" } :=
-/-
+/- @@@
 By the definition of image, we need to prove
 ∃ x ∈ {"Mary"}, acctsOf x y. At this point, we
 have to find/pick a witness---here an input value
