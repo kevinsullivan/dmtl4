@@ -625,100 +625,166 @@ example : ¬strlen "Hello" 4 := fun h => nomatch h
 ```
 
 
-## Fundamental Definitions
+## Elements of a Binary Relation
 In this section, we define important terms and underlying
 concepts in the theory of relations. To illustrate the ideas,
 we'll refer back to our running examples.
 
-Given any relation on sets (types) α and β, we will refer to
-α as the *domain of definition*, and β as the *co-domain* of
-the relation. The domain of definition is the set of possible
-inputs and the co-domain is the set of all possible outputs.
-For each the relations we've considered as examples so far
-(completeStrNat, strlen, and strlen3) are the sets of *all*
-the values of the types, String and Nat, respectively.
 
-The domain of definition and the codomain of each of the relations
-we've specified as examples are all values of type α = String and
-all values of type β = Nat, respectively.
+### Domain of Definition and Co-Domain
 
-The set of values, (a : α), that r *does* relate to β values,
-i.e., the set of values that do appear in the first position of
-any ordered pair, (a : α, b : β) in r, is called the *domain*
-of r. The domain of r is the set of values on which r is said
-to be *defined*. It's the set of *input* values, (a : α), for
-which r specifies at least one output value, (b : β).
+Given any relation, $r$ on sets of types, *α* and *β*,
+the *domain of definition* of *r* *(r.dom)* is the set,
+given by a type in Lean, from which all possible inputs
+to *r* (left elements pairs) are drawn. The co-domain is
+the set, in Lean the type, of all possible output values
+(right elements of pairs).
 
-More formally, given a relation, r : Rel α β, the domain of r is
-defined to be the set { x : α | ∃ y : β, r x y }. Another way to
-say this is that the domain of r is the set of α values specified
-by the predicate, fun x => ∃ y, r x y. In other words, x : α is
-in  the domain of r if any only if there's some y : β such that
-the pair of values, x, y, satisfies the two-place predicate r.
+We will speak in type theoretical terms, and thus have
+specified the domain of definition and co-domain sets as
+types. This is nice as Lean can now typecheck values to
+see if they're in these sets.
 
-In Lean, if r is a binary relation (Rel.dom r) is its domain set.
-We can define the domain of definition and the domain of any binary
-relation as follows.
+Now we can specify any binary relation from α (input side)
+to β (output side) values, as a *predicate, p, on *α* and
+*β*, thus being of type *(p : α → β → Prop)*. Lean, as we
+have seen, provides the polymorphic type, *Rel α β* as an
+abstraction from *α → β → Prop*, used particularly when a
+predicate is representing a binary relation, in particular.
+
+With that representation, we can now see how we can return
+the *domain of definition* of *r*, as the sets of all values
+(the *universals* sets) of types, α, and β, respectively.
+
+```lean
+def domDef (r : Rel α β) : Set α := Set.univ
+def codom (r : Rel α β) : Set β := Set.univ
+```
+
+Let's see some applications.
+
+```lean
+-- The domain of definition of strlen3 is a set of strings
+-- The codomain of strlen3 is a set atural numbers
+
+#check (domDef strlen3)
+#check (codom strlen3)
+
+-- Its domain of definition is the set of all strings
+-- Its codomain is the set of all natural numbers
+
+#reduce (domDef strlen3)
+#reduce (codom strlen3)
+```
+
+
+
+### Domain and Range of a Binary Relation on α and β
+
+We now define what it means for a set to be, respectively,
+the *domain* or the *range* of *r*. The *domain* of *r* is
+the set of all *(a : α)* values for which *r* there is some
+corresponding β value, *b*, such that the pair *(a, b)* is
+in the relation *r*. Similarly, the *range* of *r* is the
+set of all output values, *(b : β)* for which there is some
+input value, *(a : α),* where *r* relates *a* and *b*.
 
 ```lean
 def dom (r : Rel α β) : Set α := { a | ∃ b, r a b }
-def domdef (r : Rel α β) : Type := α
-```
-
-The *domain of definition* of a relation is thus the set of
-possible input values, that can appear as first arguments in
-membership propostions. The *domain* of a relation is the subset
-of its domain of definition for which there are corresponding
-output values. The codomain is the set of values (type in Lean)
-containing all possible output values. The range of a relation
-is the subset of values in the codomaim for which there really
-are corresonding related input values in the domain.
-
-```lean
-def codom (r : Rel α β) : Type := β
 def ran (r : Rel α β) : Set β := { b | ∃ a, r a b }
 
-#reduce (types := true) Rel.dom r
--- fun x => ∃ y, r x y
+-- Let's look at some applications
+
+
+-- set types
+#check dom strlen3    -- a set of strings
+#check ran strlen3    -- a set of natural numbers
+
+-- set values
+#reduce dom strlen3   -- fun a => ∃ b, strlen3 a b
+#reduce ran strlen3   -- fun b => ∃ a, strlen3 a b
 ```
 
-Regrettably, Lean defines *codom* as the *range* of a relation.
-As I said in class, these terms are used somewhat inconcistenty
-in the mathematics literature. For this class we'll stick with
-the *concepts* as we've defined them here, with the *range* of a
-relation being the set of all output values for which there is
-a corresponding input.
+
+-- The domain of definition and the codomain of each of the relations
+-- we've specified as examples are all values of type α = String and
+-- all values of type β = Nat, respectively.
+
+-- The set of values, (a : α), that r *does* relate to β values,
+-- i.e., the set of values that do appear in the first position of
+-- any ordered pair, (a : α, b : β) in r, is called the *domain*
+-- of r. The domain of r is the set of values on which r is said
+-- to be *defined*. It's the set of *input* values, (a : α), for
+-- which r specifies at least one output value, (b : β).
+
+-- More formally, given a relation, r : Rel α β, the domain of r is
+-- defined to be the set { x : α | ∃ y : β, r x y }. Another way to
+-- say this is that the domain of r is the set of α values specified
+-- by the predicate, fun x => ∃ y, r x y. In other words, x : α is
+-- in  the domain of r if any only if there's some y : β such that
+-- the pair of values, x, y, satisfies the two-place predicate r.
+
+-- In Lean, if r is a binary relation (Rel.dom r) is its domain set.
+-- We can define the domain of definition and the domain of any binary
+-- relation as follows.
+
 ```lean
+-- def dom (r : Rel α β) : Set α := { a | ∃ b, r a b }
+-- def domDef (r : Rel α β) : Type := α
+```
+
+-- The *domain of definition* of a relation is thus the set of
+-- possible input values, that can appear as first arguments in
+-- membership propostions. The *domain* of a relation is the subset
+-- of its domain of definition for which there are corresponding
+-- output values. The codomain is the set of values (type in Lean)
+-- containing all possible output values. The range of a relation
+-- is the subset of values in the codomaim for which there really
+-- are corresonding related input values in the domain.
+
+```lean
+-- def codom (r : Rel α β) : Type := β
+-- def ran (r : Rel α β) : Set β := { b | ∃ a, r a b }
+```
+
+### Lean's Definitions
+
+We didn's have to define these operations ourselves, as Lean
+provides them to us from its libraries. In particular, *Rel.dom*
+reduces to the domain of any relation, and Rel.codom *sadly*
+reduces to its range as we've defined these terms here.
+
+```lean
+#reduce (types := true) Rel.dom r
+-- fun x => ∃ y, r x y
+
 #reduce (types := true) Rel.codom r
 -- fun y => ∃ x, r x y
 ```
 
-As a concrete example, the domain of definition of completeStrNat
-is the set of all values of type α represented here by α itself.
-This set is also the domain of this relation, as the relation
-associates *every* value of this type with a corresponding output
-value.
+-- Regrettably, Lean defines *codom* to be what we have called
+-- the *range* of a relation.
+-- As I said in class, these terms are used somewhat inconcistenty
+-- in the mathematics literature. For this class we'll stick with
+-- the *concepts* as we've defined them here, with the *range* of a
+-- relation being the set of all output values for which there is
+-- a corresponding input.
 
-The domain of definition of *strlen3* is similarly *String*,
-but its *domain* is a proper subset, { "Hello", "Lean", "!"}.
-The domain of definition of an *empty* relation is the set of
-all values of the input type, but the domain is ∅, the empty
-set.
 
-Lean defines these concepts in its standard Libraries. Here
-you can see them in action.
+### More Examples
+
+We'll start by looking at the domains of a few of the relations
+we've already introduced.
 
 ```lean
 #reduce Rel.dom strlen
 -- fun x => ∃ y, strlen x y
--- the set of x values for which there's some y value in strlen
+-- think of this as the set  { x | ∃ y, strlen x y}
 
 #reduce Rel.dom emptyStrNat
 -- fun x => ∃ y, emptyStrNat x y
--- equivalent to { x | ∃ y, emptyStrNat x y }
--- but ∃ y, emptyStrNat x y reduces to False
--- this can also be written as { x | ∃ y, False}
--- no x values satisfy False, so this set is empty
+-- think of this as { x | ∃ y, emptyStrNat x y }
+-- equivalently { x | ∃ y, False }
 ```
 
 We can now prove, for example, that "Hello" ∈ strlen3.dom.
@@ -1137,7 +1203,7 @@ example : 2 ∈ acctsOf.image { "Mary" } := _
 -- HERE:
 ```
 
-## Example: The Cartesian Unit Circle as a Relation
+## Example: The Unit Circle in the Cartesian Plane
 
 The unit circle in the Cartesian plane is the set of points,
 represented by ordered pairs of real numbers, *(x, y)*, that
@@ -1191,7 +1257,7 @@ called *tactics*. To finish off this chapter, we will take the
 opportunity to give a first taste of tactic-based proving, for
 the particular problem we face right here.
 
-## Tactics for Automated Proof Construction in Lean
+## Tactics: Automating Steps in Proof Construction
 
 A tactic is not a proof term, but rather a program (written
 in Lean) that automates an attempt to construct an actual proof
@@ -1331,6 +1397,93 @@ Exists.intro
     )
   )
 ```
+
+As a final example, let's see how one might construct such a
+proof in tactic mode.
+
+```lean
+#reduce (types := true) -1 ∈ unitCircle.image { 0, 1 }
+
+example : -1 ∈ unitCircle.image { 0, 1 } :=
+by                  -- enter tactic mode
+```
+  We need to show there's an x in { 0, 1 } such that
+  (x, -1) is on the unit circle. Clearly x = 0 will do.
+  So we use the *apply* tactic to apply the introduction
+  rule for exists with 0 as a witness, leaving the proof
+  argument to be provided separately. We use an _ to make
+  it clear that we're leaving this proof term to be given
+  later. Hovering over the _ (or checking the Info View)
+  confirms that all that remains to be provided is this
+  proof, namely a proof of *0 ∈ {0, 1} ∧ unitCircle 0 (-1)*.
+```lean
+  apply Exists.intro 0 _
+```
+
+  The proof that remains to be provided is a proof of the
+  conjunction, *0 ∈ {0, 1} ∧ unitCircle 0 (-1)*. To prove
+  it we apply the introduction rule for ∧, leaving the two
+  proof arguments to be provided separately. Note that the
+  proof context now has two goals pending, one for each of
+  the conjuncts.
+```lean
+  apply And.intro _ _
+```
+  We can use curly braces and indenting to make tactic-based
+  proofs easier to read. Here we prove each conjunct in its
+  own { ... } construct.
+
+```lean
+  {
+```
+    The membership predicate here is a disjunction, so we
+    apply the rule for Or introduction, here on the left,
+    with only a simple equality to prove thereafter.
+```lean
+    apply Or.inl _
+    apply rfl
+  }
+  {
+    -- The proof of this conjunct is as explained above.
+    simp [unitCircle]
+  }
+```
+
+Lean provides tactics to automate the application of the
+right rules. Here's the same proof again.
+```lean
+  example : -1 ∈ unitCircle.image { 0, 1 } :=
+  by
+    use 0         -- give witness for proving ∃
+    constructor   -- applies only constructor for goal
+    {
+      left          -- applies Or.inl
+      rfl           -- applies rfl
+    }
+    simp [unitCircle]
+```
+
+Finally, tactics can be composed into larger tactics.
+Here we sequentially compose the tactics from the proof
+just given into one big tactic, using ; to compose them.
+
+As you can see, tactics make it easier to give compact
+proof construction instructions. The results however are
+not always very easy to understand. You have to know what
+a lot of tactics do *under the hood*. What you can do to
+gain insight is to step through such a tactic-based proof
+construction and watch how each steps transforms your
+context. Give it a try for yourself, with the Info View
+open, put your cursor before each tactic in sequence and
+see how the proof state changes until the last remaining
+details are given.
+
+
+```lean
+example : -1 ∈ unitCircle.image { 0, 1 } :=
+ by use 0; constructor; left; rfl; simp [unitCircle]
+```
+
 
 ## Conclusion
 
