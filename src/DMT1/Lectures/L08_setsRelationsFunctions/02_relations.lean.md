@@ -1193,34 +1193,52 @@ the particular problem we face right here.
 
 ## Tactics for Automated Proof Construction in Lean
 
-A tactic is not a proof term, but rather a program that
-someone wrote in Lean that automates an attempt to construct
-an actual proof term. One of the most widely used tactics in
-Lean is called *simp*. It tries to apply a set of definitions
-to simplify a goal so that you don't have to do it yourself.
-In lucky cases, it will simplify a goal to an equality that
-can finally be proven by Eq.refl or rfl, which the tactic is
-happy to apply for you.
+A tactic is not a proof term, but rather a program (written
+in Lean) that automates an attempt to construct an actual proof
+term.
 
-Here then is a demonstration that there is a formal
-proof that *(0, -1)* is on the unit circle. You must
-understand that *simp* (and tactics more generally)
-automatically construct proof terms. You don't see
-the actual *proof term* here, but you can see that
-the Lean prover has accepted it, so you can rest easy
-knowing that the proposition that *(0, -1)* is on the
-unit circle is valud. Here we tell *simp* to use not
-only the set of general definitions it knows about
-but also, crucially, the definition of unitCircle.
-The keyword, *by*, kicks Lean into *tactic mode*.
-In general you can intermix the *term* and *tactic*
-modes flexibly in constructing proofs in Lean.
+One of the most widely used tactics in Lean is called *simp*.
+It tries to apply a set of definitions, e.g., of exactly how
+some function is defined, to simplify a goal so that you don't
+have to do by yourself what could be a considerable amount of
+reasoning. In successful cases, it will simplify a goal to an
+equality that can finally be proven by Eq.refl or rfl, which
+the tactic is happy to apply for you. As an example, here is
+how we can use the *simp* tactic to obtain a proof term that
+shows that *(0, -1) = 1* (in the real numbers) and is thus on
+the unit circle.
 
 ```lean
-example : unitCircle 0 (-1) :=
+def zeroMinusOneOnUnitCircle : unitCircle 0 (-1) :=
 by
   simp [unitCircle]
 ```
+
+The keyword, *by*, places Lean in *tactic mode*. It
+is in this mode that you can run tactics. In general
+you can mix *term* and *tactic* modes in constructing
+proofs in Lean. We will see more of tactics later on.
+
+Here we run *simp*, informing it of the definition
+of the definition of *unitCircle*. This tactic will
+then combine this definition with other dedinitions
+in its database, to try to prove the goal. Here, the
+tactic succeeds in producing a proof term that Lean
+then checks and accepts.
+
+Tactics do not always succeed. In that case you will
+get an error message and your proof state (sequent) will
+be unchanged. Moreover, even if a mistake was made in the
+implementation of a tactic, Lean still checks the proof
+terms it produces, just as if you had produced them by hand.
+Tactics are thus not of the correctness-critical part of
+Lean, and even if buggy tactics succeed in producing bad
+proof terms, Lean will still check, and not accept, them.
+
+You don't ordinarily see the *proof terms*  that tactics
+construct. You can nevertheless now have confidence that
+*(0, -1)* is on the unit circle in the Cartesian plan, as
+Lean has checked and accepted the generated proof term.
 
 Wow, ok! Lean doesn't just support direct programming
 of proof terms by hand, as we've been doing all along,
@@ -1228,16 +1246,17 @@ but provides a huge library of tactics for helping to
 prove all kinds of propositions. The translation of
 the tactic-built proof that *simp* finds for you into
 English is easy. You can just say, *by the definition
-of unitCircle* (and other basic rules of algebra), the
+of unitCircle* and other rules of real arithmetic, the
 proposition is easily proved.
 
 For those interested in futher study, Lean has a
 ton of options you can set to have it tell you more
 or less information as it goes. The following option
 tells Lean to tell you what facts the simp tactic uses
-in trying to produce a proof for you. Don't worry about
-the details, just be happy you did not have to construct
-that proof by hand!
+in trying to produce a proof for you. Hover over *simp*
+(now with a blue underline in VSCode) to see what facts
+*simp* used. Don't worry about details, just be happy
+you did not have to construct that proof by hand!
 
 ```lean
 set_option tactic.simp.trace true in
