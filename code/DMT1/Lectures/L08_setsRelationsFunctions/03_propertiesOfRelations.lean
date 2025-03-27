@@ -17,60 +17,90 @@ The definitions/specifications speak for themselves.
 namespace DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
 
 /- @@@
-The property of not relating any pair of values
+
+## Properties of Binary Relations in General
+@@@-/
+
+/- @@@
+The property of a relation not relating any pair of values.
+We call such a relation *empty.*
 @@@ -/
 def isEmpty {α β : Type} : Rel α β → Prop :=
   fun (r : Rel α β) => ¬∃ (x : α) (y : β), r x y
 
 /- @@@
-The property of relating every every pair of values
+The property of a relation relating every pair of values.
+We call such a relation *complete*. NOTE: We've corrected
+the previous chapter, which used the term *total* for such
+a relation. Use *complete* as we will define *total* to be
+a different property.
 @@@ -/
 def isComplete {α β : Type} : Rel α β → Prop :=
   fun r => ∀ x y, r x y
 
+
+-- Example, the complete relation on natural numbers
 def natCompleteRel : Rel Nat Nat := fun a b => True
 
+-- A proposition and a proof that it is complete
 example : isComplete natCompleteRel :=
--- by the definiteion of isComplete what needs to be proved is
--- ∀ (a b : Nat), natCompleteRel a b
+/- @@@
+By the definition of isComplete we need to prove that
+every pair is in this relation. In other words, we need
+to prove, *∀ (a b : Nat), natCompleteRel a b*. This is
+a universally quantified proposition, so we apply the
+rule for ∀, which is to assume arbitrary values of the
+arguments, *a,, b,* and then show *natCompleteRel a b*.
+@@@ -/
 fun a b =>
--- prove natCompleteRel a b
--- by the definition of natCompleteRel
--- what is to be proved is ...
---
-True.intro
+  True.intro
 
 /- @@@
-The property of relating every input to some output
+A relation is said to be *total* if it relates every
+value in its domain of definition to some output value.
+In other words, a relation is total if its *domain* is
+its entire *domain of definition*.
 @@@ -/
 def isTotal  {α β : Type} : Rel α β → Prop :=
   fun r => ∀ (x : α), ∃ (y : β), r x y
 
+
 /- @@@
-The property of relating some input to every output
+A relation is called *surjective* if it relates some
+input to *every* output in its codomain. That is, for
+every output, there is some input that is related to it.
 @@@ -/
 def isSurjectiveRel {α β : Type} : Rel α β → Prop :=
   fun r => ∀ (y : β), ∃ (x : α), r x y
 
+
 /- @@@
-The property of relating no input to more than one output
+A binary relation is said to be *single-valued* if no
+input is related to more than one *output*. This is the
+property that crucially distinguishes binary relations
+that are also mathematical *functions* from those that
+are just relations but not functions. The way we express
+this property is slightly indirect. It says that to be
+a function means that there cannot be two outputs for
+a single input unless those outputs are actually the same,
+in which case there's just one.
 @@@ -/
 def isSingleValued {α β : Type} : Rel α β → Prop :=
   fun r => ∀ x y z, r x y → r x z → y = z
 
 /- @@@
-The property of relating no more than one input to any
-output. Sometimes also called one-to-one, as distinct
-from many-to-one, which injectivity prohibits.
+A relation is said to be *injective* if there is no
+more than one input that is related to any given output.
+Such a relation is also called *one-to-one*, as distinct
+from *many-to-one*, which injectivity prohibits.
 @@@ -/
 def isInjectiveRel  {α β : Type} : Rel α β → Prop :=
   fun r => ∀ x y z, r x z → r y z → x = y
 
 /- @@@
-The propery of a relation being surject means that there
-is at least one input, a, for each possible output, b,
-with (a, b) being in the relation.
+## Properties of Functions in Particular
 @@@ -/
+
 
 /- @@@
 The property of being a function, i.e., single-valued
@@ -110,6 +140,11 @@ existence of a bijective relationship shows that the
 domain and range sets are the same size.
 @@@ -/
 
+
+/- @@@
+## More Properties of Relations in General
+@@@ -/
+
 -- The property of a relation being a many-to-one function
 def isManyToOne {α β : Type} : Rel α β → Prop :=
   fun r => ¬isInjective r
@@ -124,6 +159,10 @@ def isOneToMany {α β : Type} : Rel α β → Prop :=
 def isManyToMany {α β : Type} : Rel α β → Prop :=
   fun r => ¬isFunctional r ∧ ¬isInjectiveRel r
 
+
+/- @@@
+Properties of Binary Relations on a Single Set/Type
+@@@ -/
 
 -- The property of relating every input to itself
 def isReflexive {α β : Type} : Rel α α → Prop :=
@@ -178,6 +217,7 @@ def isLinearOrder {α  β : Type} := @isTotalOrder α β
 
 def isWellFounded  {α  β : Type} : Rel α α → Prop :=
   fun r => ∀ (s : Set α), s ≠ ∅ → ∃ m, (m ∈ s ∧ ¬∃ n ∈ s, r n m)
+
 -- See [TPIL4](https://leanprover.github.io/theorem_proving_in_lean4/induction_and_recursion.html#well-founded-recursion-and-induction).
 
 def predRel : Rel Nat Nat := fun a b => b = a.succ
@@ -194,7 +234,7 @@ example : @isWellFounded Nat Nat predRel :=
 
 
 /- @@@
-### Equality is an equivalence relation.
+## Example: Equality is an equivalence relation.
 
 
 To show that that equality on a type, α, (@Eq α), is

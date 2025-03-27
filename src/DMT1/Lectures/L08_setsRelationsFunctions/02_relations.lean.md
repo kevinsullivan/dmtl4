@@ -237,7 +237,7 @@ two arguments, ignores them, and reduces to the membership
 proposition, True. As there's always a proof of True, the
 membership proposition is true for every pair of values,
 so every pair of values is defined to be in the relation.
-Here's a general definition of the total relation on any
+Here's a general definition of the complete relation on any
 two types, α and β.
 
 ```lean
@@ -254,9 +254,9 @@ set theoretic notation we could define fullStringNat as
 { (s,n ) | True }. In the type theory of Lean, specify the
 relation using by defining its membership predicate.
 
-As an example, we define completeStrNat as the total
+As an example, we define completeStrNat as the complete
 relation from String to Nat values. Be sure you see
-what *totalRel String Nat* reduces to. What predicate
+what *completeRel String Nat* reduces to. What predicate
 is it, exactly, as expressed formally in Lean. Do not
 proceed if you're not sure, rather go back and figure
 it out.
@@ -286,7 +286,7 @@ the definition of completeStrNat, what is to be proved is True."
 Then prove that membership proposition.
 
 ```lean
--- Prove ("Hello", 7) is in the total relation on String and Nat
+-- Prove ("Hello", 7) is in the complete relation on String and Nat
 example : completeStrNat "Hello" 7 :=
   -- By the definition of completeStrNat, all we have to prove True
   -- The proof is by True introduction
@@ -411,19 +411,19 @@ We want to take a moment at this point to note a critical
 distinction between *relations* in Lean and functions that
 are represented as lambda expressions (ordinary computable
 functions in Lean). Functions in Lean and related systems
-are (1) computable, and (2) total, which is to say for *any*
+are (1) computable, and (2) complete, which is to say for *any*
 value of the declared input type a function must return some
 value of the output type.
 
-By contrast, relations in Lean need not be total. We have
+By contrast, relations in Lean need not be compelte. We have
 already seen an example in  (with a defined output for every
 input); and they can be multi-valued, with several outputs for
 any given input.
 
-Concerning totality, a quick look back at the empty relation
+Concerning completeness, a quick look back at the empty relation
 makes the point: the domain of definition is every value, but
 the relation has no pairs: it does not define an output for
-any of them. As far as being multi-valued, consider the total
+any of them. As far as being multi-valued, consider the complete
 relation defined about. It defines *every* value of the output
 type as an output for each and every value of the input type.
 
@@ -1203,6 +1203,59 @@ example : 2 ∈ acctsOf.image { "Mary" } := _
 -- HERE:
 ```
 
+
+## A Most Fundamental Relation: Equality
+
+The Equality Relation in Lean, called *Eq* is defined as an
+inductive type whose values are proofs of equalities between
+terms *up to reduction*. The *=* symbol is an infix notation
+for *Eq*, so instead of writing *Eq a b* we can write *a = b*.
+
+Such an equality proposition has a proof if and only if both
+sides *reduce* to the same term. For example, *1 + 1 = 2* has
+a proof because *1 + 1* reduces to *2*, leaving only *2 = 2*
+to be proved. The single proof constructor for *Eq*, called
+*Eq.refl,* takes any value of any type, (a : α) and constructs
+a proof of *a = a*. Applying it to *2* thus yields a proof of
+*2 = 2*, and that's what we wanted to confirm.
+
+```lean
+example : 1 + 1 = 2 := rfl
+```
+
+Here's the definition of the equality type in Lean.
+
+```lean
+#check Eq     -- right click and go to definition
+```
+
+```lean
+inductive Eq : α → α → Prop where
+  | refl (a : α) : Eq a a
+```
+
+The first line establishes that *Eq* takes two arguments,
+*a* and *b*, and yields the proposition, *Eq a b,* which
+with infix notation is usually written *a = b*. The second
+line provides the sole means of proving an equality. It
+takes *1* argument, *a*, and return a proof that *a = a*.
+
+```lean
+example : 1 + 1 = 2 := Eq.refl 2
+```
+
+So what about rfl? Here's how it's defined.
+
+```lean
+ rfl {α : Sort u} {a : α} : Eq a a := Eq.refl a
+```
+
+It's special power is that it infers both *α* and
+*a* and returns a proof of *a = a* by reducing to
+*Eq.refl a*. It works so long as Lean can infer both
+values. If not, then use *Eq.refl a*.
+
+
 ## Example: The Unit Circle in the Cartesian Plane
 
 The unit circle in the Cartesian plane is the set of points,
@@ -1240,14 +1293,15 @@ example : unitCircle 0 (-1) := rfl    -- doesn't work!
 ```
 
 That didn't work! The problem is that the real numbers
-are not computable so Lean will not just reduce *0² + 1²*
-to *1*. One *cannot* compute real numbers, but rather must
-reason about them based on the axioms used to define them.
+*are not computable* (!) so Lean cannot reduce *0² + 1²*
+to *1* computationally. Instead, opne must must *reason*
+logically reals based on the axioms used to define them
+and theorems already proved from those axioms. One must
+*deduce* that *0² + 1²*.
 
-In this particular case, one must *deduce* that *0² + 1²*.
-One can do this reasoning entirely on one's own, but it is
-tedious and requires an understanding of complex definitions
-and previously proved theorems about real numbers.
+You can do such reasoning entirely on your own, but it is
+tedious and requires an understanding of definitions and
+previously proved theorems about real numbers.
 
 The good news is that Lean provides a vast library of programs
 that *automate* aspects of proof construction. These programs,
@@ -1259,20 +1313,24 @@ the particular problem we face right here.
 
 ## Tactics: Automating Steps in Proof Construction
 
-A tactic is not a proof term, but rather a program (written
-in Lean) that automates an attempt to construct an actual proof
-term.
+A tactic is not a proof term, but rather a program, that
+someone wrote, in Lean, that *attempt* to construct a proof
+term for the current goal. These terms usually have remaining
+*holes* to be filled in, which become the new *goals* to be
+proved.
+
+### The simp Automates Reasoning to Simplify Expressions
 
 One of the most widely used tactics in Lean is called *simp*.
-It tries to apply a set of definitions, e.g., of exactly how
-some function is defined, to simplify a goal so that you don't
-have to do by yourself what could be a considerable amount of
-reasoning. In successful cases, it will simplify a goal to an
-equality that can finally be proven by Eq.refl or rfl, which
-the tactic is happy to apply for you. As an example, here is
-how we can use the *simp* tactic to obtain a proof term that
-shows that *(0, -1) = 1* (in the real numbers) and is thus on
-the unit circle.
+It has a default database of already accepted definitions, e.g.,
+of functions, theorems, etc., and tries to find a way to apply
+them to simplify a goal so that you don't have to do by hand,
+
+In the best cases, it will simplify a goal to an equality that
+can finally be proven by Eq.refl or rfl, which the tactic will
+apply for you. As an example, here is how we can use the *simp*
+tactic to obtain a proof term that shows that *(0, -1) = 1* in
+the real numbers, and is thus on the unit circle.
 
 ```lean
 def zeroMinusOneOnUnitCircle : unitCircle 0 (-1) :=
@@ -1306,14 +1364,12 @@ construct. You can nevertheless now have confidence that
 *(0, -1)* is on the unit circle in the Cartesian plan, as
 Lean has checked and accepted the generated proof term.
 
-Wow, ok! Lean doesn't just support direct programming
-of proof terms by hand, as we've been doing all along,
-but provides a huge library of tactics for helping to
-prove all kinds of propositions. The translation of
-the tactic-built proof that *simp* finds for you into
-English is easy. You can just say, *by the definition
-of unitCircle* and other rules of real arithmetic, the
-proposition is easily proved.
+The translation into English of the tactic-built proof that
+*simp* finds for you into English is easy. You can just say,
+*by the definition of unitCircle* and other rules of real
+arithmetic, the proposition evidently valid. QED.
+
+### You Can See What Reasoning Principles It Used
 
 For those interested in futher study, Lean has a
 ton of options you can set to have it tell you more
@@ -1333,6 +1389,8 @@ example : unitCircle 0 (-1) :=
     simp [unitCircle]
 ```
 
+
+### Proving Propositions About the Real Unit Circle
 
 Now that we have the tools we need to prove propositions
 about membership in the unitCircle relation, we should be
@@ -1397,6 +1455,8 @@ Exists.intro
     )
   )
 ```
+
+### A Few More Useful Tactics
 
 As a final example, let's see how one might construct such a
 proof in tactic mode.
@@ -1485,7 +1545,7 @@ example : -1 ∈ unitCircle.image { 0, 1 } :=
 ```
 
 
-## Conclusion
+## What's Next?
 
 This lesson has introduced you to the formal definition and
 principles for reasoning about binary relations. In the next
