@@ -1,0 +1,138 @@
+import Mathlib.Data.Rel
+import Mathlib.Data.Set.Basic
+import Mathlib.Logic.Relation
+import Mathlib.Data.Real.Basic
+
+namespace DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
+
+/- @@@
+# Well Founded Orders and Termination
+
+UNDER CONSTRUCTION
+
+<!-- toc -->
+
+## For a Value to be *Accessible* Under an Endorelation
+@@@ -/
+
+#check Acc
+-- #check Acc r x
+
+/- @@@
+To understand what it means for an endorelation to be well
+founded, we need the notion of what it means for an element,
+*(x : α)* to be *accessible* under a given relation, *r*.
+
+Think of *r* as being some kind of *one smaller than* relation.
+We will write *y is one smaller than x (under r)* as *r y x*.
+One could call such a relation, *precedes*, and use an infix
+notation, *y ≺ x*, to mean *y precedes x by one step under r*.
+
+Now the question is whether the process of going from *x*,
+through *r*, to *y*, and then from *y* to an even smaller *z*
+can be repeated forever. If so, then *x* is *not* accessible.
+On the other hand, you are guaranteed eventually to hit some
+*smallest* element, from which you can *descend* no further,
+the *x* is said to be *accessible* (from that smallest value).
+
+This notion will be crucial in establishing that it is okay,
+(a) to use recursion down through the relation *r* as it will
+terminate, or (b) that one is not inadvertently specifying an
+infinite structure, as values of inductive types in Lean are
+always finite by definition.
+
+Here are two examples. First,  consider the predecessor relation
+on the natural numbers. Every natural number, *a*, is accessible
+under it, as you can only move from *a* down to its predecessor,
+and from there further down, a finite number of times before you
+reach zero and can go no further down. In other words, there is
+*no infinite descending chain* from *x*. But on the other hand,
+no number is accessible in the *integers*, because from any value
+you can keep subtracting one forever, always with a new result.
+
+Given any endorelation *r* on *α*, the property of a value,
+*(x : a)*, being accessible is defined formally as follows.
+
+```lean
+inductive Acc {α : Sort u} (r : α → α → Prop) : α → Prop where
+  | intro (x : α) (h : (y : α) → r y x → Acc r y) : Acc r x
+```
+Given the proposition that *x* is accessible under *r*, written
+formally as *Acc r x*, it is valid, and a proof is obtained by
+applying the *Acc.intro* (proof) constructor:
+
+```lean
+intro (x : α) (h : (y : α) → r y x → Acc r y) : Acc r x
+```
+
+What it says,reading from right to left, is that to prove
+*Acc r x* it will suffice to apply *Acc.intro* to *x* and
+to a proof, *h*, of the proposition that if any value, *y*,
+that is one step smaller than *x* is accessible, then *x* is
+too.  That makes sense because if such a *y* is accessible,
+there can be no infinite descending chain from any such *y*,
+and so any chain down from *x* must be finite, as well, being
+just one *step* longer than a chain down from *y*. In sum, if
+every value that is one step smaller than *x* is accessible,
+then so is *x*.
+@@@ -/
+
+open Nat
+
+-- 1. Define the "one-less-than" relation
+def pred_rel (m n : ℕ) : Prop :=
+  m = n + 1
+
+-- 2. Prove accessibility for every n under pred_rel
+def acc_pred_rel : (n : ℕ) → Acc pred_rel n
+| 0 =>
+  Acc.intro (fun (y : ℕ) (h : pred_rel y 0) =>
+    -- pred_rel y 0 means y = 0 + 1 = 1, but 1 ≠ y in general
+    -- we can use y = 1 and say "nomatch"
+    nomatch h)
+| (n + 1) =>
+  let ih : Acc pred_rel n := acc_pred_rel n
+  Acc.intro (fun (y : ℕ) (h : pred_rel y (n + 1)) =>
+    -- h : y = n + 2, so we rewrite y to n + 2 and apply ih
+    -- because pred_rel (n + 2) (n + 1), and we're going down to n
+    match h.symm with
+    | Eq.refl => ih)
+
+
+def isWellFoundedOrder  {α  _ : Type} : Rel α α → Prop :=
+  fun r => ∀ (s : Set α), s ≠ ∅ → ∃ m, (m ∈ s ∧ ¬∃ n ∈ s, r n m)
+
+
+
+
+
+
+/- @@@
+### The Predecessor Relation is Well Founded
+@@@ -/
+
+inductive PredRel : ℕ → ℕ → Prop
+| step : ∀ {n : ℕ}, PredRel n (n + 1)
+
+theorem predRel_wf : WellFounded PredRel :=
+  WellFounded.intro (fun a =>
+    Acc.intro a (fun y h =>
+      match h with
+      | step =>
+        -- h : PredRel a y, and step : PredRel n (n + 1)
+        -- So a = n, y = n + 1
+        -- Then we recurse on n = a
+        byexact Acc.intro a (fun z h' => nomatch h')))
+
+
+#reduce (types := true) @isWellFoundedOrder Nat Nat predRel
+-- ∀ (s : Set ℕ), s ≠ ∅ → ∃ m, m ∈ s ∧ ¬(∃ n ∈ s, predRel n m)
+example : @isWellFoundedOrder Nat Nat predRel :=
+  fun s =>
+    fun nonempty =>
+      -- ∃ m ∈ s, ¬∃ n ∈ s, predRel n m
+      _
+
+
+
+-- See [TPIL4](https://leanprover.github.io/theorem_proving_in_lean4/induction_and_recursion.html#well-founded-recursion-and-induction).

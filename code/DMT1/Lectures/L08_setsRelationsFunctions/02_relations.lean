@@ -1358,7 +1358,7 @@ tactic to obtain a proof term that shows that *(0, -1) = 1* in
 the real numbers, and is thus on the unit circle.
 @@@ -/
 
-def zeroMinusOneOnUnitCircle : unitCircle 0 (-1) :=
+theorem zeroMinusOneOnUnitCircle : unitCircle 0 (-1) :=
 by
   simp [unitCircle]
 

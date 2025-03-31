@@ -1,0 +1,608 @@
+import Mathlib.Data.Rel
+import Mathlib.Data.Set.Basic
+import Mathlib.Logic.Relation
+import Mathlib.Data.Real.Basic
+
+namespace DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
+
+/- @@@
+# Properties of Binary Relations
+
+<!-- toc -->
+
+There are many important properties of relations. In this
+section we'll formally define some of the most important.
+@@@ -/
+
+/- @@@
+## Some General Properties of Binary Relations
+@@@-/
+
+/- @@@
+### Being an Empty Relation
+
+We start with the simple property of a relation being *empty*.
+That is, no value pairs satisfy its membership predicate. We
+would typically write the definition of such a property of a
+relation as follows:
+@@@ -/
+
+def isEmpty'' {α β : Type u} : Rel α β → Prop :=
+  fun r => ¬∃ (x : α) (y : β), r x y
+
+/- @@@
+Here *α* and *β* are arbitrary types. We formalize the property
+as a predicate on binary relations from *α* to *β*, having the
+type, *Rel α β → Prop*. The definition is thus in the form of a
+function from a binary relation, *r*, to a specific proposition
+about it: that no values, *x* and *y*, satisfy its membership
+predicate.
+
+In this chapter, we will specify many properties of relations in
+this style. To avoid having to introduce *α*, *β*, and *r* in each
+case, we can declare them once using Lean's *variable* construct.
+Lean will thereafter introduce them automatically into definitions
+in which these identifiers are used. We will also define *e* as a
+binary relation from a single type, *α*, to itself. A relation of
+this kind is called *homogeneous*, or an *endorelation*. We will
+use the identifier *e* for any endorelation.
+@@@ -/
+
+variable
+  {α β : Type u}  -- arbitrary types as implicit parameters
+  (r : Rel α β)   -- arbitrary binary relation from α to β
+  (e : Rel α α)  -- arbitrary homogeneous/endo relation on α
+
+/- @@@
+With these variable definitions, we can now specific the same
+property with a lot less syntactic boilerplate. First, we can
+omit declarations for *α*, *β*, and *r*.
+@@@ -/
+
+def isEmpty' :=
+  ¬∃ (x : α) (y : β), r x y
+
+/- @@@
+Second, Lean can infer the specified value is a proposition,
+so we can omit the *: Prop* type declaration as well, leaving
+us with pretty much what one would say in English: a relation
+is empty if there isn't any pair, (x, y), in the relation.
+@@@ -/
+
+def isEmpty := ¬∃ (x : α) (y : β), r x y
+
+/- @@@
+We will avail ourselves of the use of this shorthand for the
+rest of this file. Just remember that the mere appearance of
+the identifiers, *α, β, r,* or *e* in such a definition causes
+Lean to insert type declarations for them, producing the same
+desugared term as in the first version of *isEmpty* above.
+@@@ -/
+
+
+/- @@@
+### Being a Complete Relation
+
+The property of a relation relating every pair of values.
+We call such a relation *complete*. NOTE: We've corrected
+the previous chapter, which used the term *total* for such
+a relation. Use *complete* as we will define *total* to be
+a different property.
+@@@ -/
+def isComplete := ∀ x y, r x y
+
+-- Example, the complete relation on natural numbers
+def natCompleteRel : Rel Nat Nat := fun _ _ => True
+
+-- A proposition and a proof that it is complete
+example : isComplete natCompleteRel :=
+/- @@@
+By the definition of isComplete we need to prove that
+every pair is in this relation. In other words, we need
+to prove, *∀ (a b : Nat), natCompleteRel a b*. This is
+a universally quantified proposition, so we apply the
+rule for ∀, which is to assume arbitrary values of the
+arguments, *a,, b,* and then show *natCompleteRel a b*.
+@@@ -/
+fun _ _ => True.intro
+
+
+/- @@@
+### Being a Total Relation
+A relation is said to be *total* if it relates every
+value in its domain of definition to some output value.
+In other words, a relation is total if its *domain* is
+its entire *domain of definition*.
+@@@ -/
+def isTotalRel := ∀ (x : α), ∃ (y : β), r x y
+
+
+/- @@@
+### Being a Single-Valued Relation
+
+A binary relation is said to be *single-valued* if no
+input is related to more than one *output*. This is the
+property that crucially distinguishes binary relations
+in general from ones that are mathematical *functions.*
+Simply put, a function cannot have more than one output
+for any given input.
+
+The way we express this property formally is slightly
+indirect. It says that to be a function means that *if*
+there areoutputs for a single input then they must be the
+same output after all.
+@@@ -/
+def isSingleValuedRel := ∀ x y z, r x y → r x z → y = z
+
+
+
+/- @@@
+### Being a Surjective Relation
+
+A relation is called *surjective* if it relates some
+input to *every* output in its codomain. That is, for
+every output, there is some input that *maps* to it.
+We note that this property is often defined as being
+applicable only to functions. We define *isSurjective*
+below accordingly.
+@@@ -/
+def isSurjectiveRel :Prop := ∀ (y : β), ∃ (x : α), r x y
+
+
+/- @@@
+### Being an Injective Relation
+
+A relation is said to be *injective* if there is no
+more than one input that is related to any given output.
+Such a relation is also called *one-to-one*, as distinct
+from *many-to-one*, which injectivity prohibits.
+@@@ -/
+def isInjectiveRel :=
+  ∀ x y z, r x z → r y z → x = y
+
+
+/- @@@
+### Being a Many-To-One Relation
+A many-to-one relation is one that is not injective.
+In other words, it's not the case that every input
+maps to at most one output value.
+@@@ -/
+
+def isManyToOneRel := ¬isInjectiveRel r
+
+/- @@@
+### Being a One-To-Many Relation
+
+A relation is said to be one to many if it allows
+one input to map to multiple outputs while still
+requiring that multiple inputs don't map to the same
+output.
+@@@ -/
+
+def isOneToMany :Prop :=
+  ¬isSingleValuedRel r ∧
+  isInjectiveRel r
+
+/- @@@
+### Being a Many-To-Many Relation
+A relation is said to be many to many if it is neither
+functional (so some input maps to multiple outputs) not
+injective (so multiple inputs map to some single output).
+@@@ -/
+
+def isManyToMany :=
+  ¬isSingleValuedRel r ∧
+  ¬isInjectiveRel r
+
+
+
+/- @@@
+## Properties of Functions
+@@@ -/
+
+
+/- @@@
+### Being a Function
+We define an alias, *isFunction*, for the property
+of being single-valued.
+@@@ -/
+def isFunction : Rel α β → Prop :=
+  isSingleValuedRel
+
+
+/- @@@
+### Being a Total Function
+
+A total function is a function that is total as a
+relation, i.e., it maps every input to some output.
+@@@ -/
+
+def isTotalFun := isFunction r ∧ isTotalRel r
+
+
+/- @@@
+### Being an Injective Function
+
+The term, injective, is usually applied only to
+functions. This and the following few definitions
+apply only to functions and thus all include as a
+condition that *r* be function as well as, in this
+case, never mapping one input to multiple outputs.
+In other words, to be an injective function is to
+be a function and to be injective as a relation.
+@@@ -/
+
+def isInjectiveFun :  Prop :=
+  isFunction r ∧
+  isInjectiveRel r
+
+/- @@@
+*One to one* is another widely used name for being
+injective, in contradistinction to being many-to-one.
+@@@-/
+
+def isOneToOneFun : Rel α β → Prop :=
+  isInjectiveFun
+
+
+/- @@@
+### Being a Surjective Function
+
+Tbe be a surjective function is to be a function
+(single-valued) and to be surjective as a relation.
+@@@ -/
+
+def isSurjectiveFun :=
+  isFunction r ∧
+  isSurjectiveRel r
+
+
+/- @@@
+"Onto" is another name often used to mean surjective.
+The idea is that the function maps its domain "onto
+the entire codomain." A relation that maps its domain
+to only part of the codomain can be said to map "into"
+the codomain, but this use of the term is not standard.
+@@@ -/
+
+def isOntoFun : Rel α β → Prop :=
+  isSurjectiveFun
+
+
+/- @@@
+### Being a Bijective Function
+
+A *total* function is that is injective and surjective
+is said to be *bijective*. Being bijective in this sense
+means that (a) every input relates to exactly one output
+(total), (b) every input maps to a different output (inj),
+and (c) every output is mapped to by some input (surj).
+
+From having a bijection between two sets one can conclude
+that they must be of the same size, as in this case there
+is a perfect matching of elements in one with elements of
+the other.
+@@@ -/
+
+def isBijectiveFun :=
+  isTotalFun      r ∧
+  isInjectiveFun  r ∧
+  isSurjectiveFun r
+/- @@@
+When a relation is a function and is both injective
+and surjective then the relation defines a pairing of
+the elements of the two sets. Among other things, the
+existence of a bijective relationship shows that the
+domain and range sets are the same size.
+@@@ -/
+
+/- @@@
+## Properties of Endorelations
+
+A binary relation, *e*, with the same set/type as both
+its domain of definition and its co-domain is said to be
+a *homogrneous* relation, and also an *endorelation*. We
+are using the identifier, *e*, to refer to an arbitrary
+endorelation. We now define certain important properties
+of endorelations, in particular.
+@@@ -/
+
+
+/- @@@
+### Being Reflexive
+@@@ -/
+
+-- The property of relating every input to itself
+def isReflexive  := ∀ (a : α), e a a
+
+
+/- @@@
+### Being Symmetric
+@@@ -/
+
+-- The property, if (a, b) ∈ r then (b, a) ∈ r
+def isSymmetric := ∀ (a b : α), e a b → e b a
+
+
+/- @@@
+### Being Transitive
+@@@ -/
+
+
+def isTransitive := ∀ (a b c : α), e a b → e b c → e a c
+
+
+/- @@@
+### Being an Equivalence Relation
+@@@ -/
+
+-- The property of partitioning inputs into equivalence classes
+def isEquivalence :=
+  (isReflexive e) ∧
+  (isSymmetric e) ∧
+  (isTransitive e)
+
+
+/- @@@
+### Being Asymmetric
+@@@ -/
+
+-- The property, if (a, b) ∈ r then (b, a) ∉ r
+def isAsymmetric :=
+  ∀ (a b : α), e a b → ¬e b a
+
+
+/- @@@
+### Being Antisymmetric
+@@@ -/
+
+-- The property, if (a, b) ∈ r and (b, a) ∈ r then a = b
+def isAntisymmetric:=
+  ∀ (a b : α), e a b → e b a → a = b
+
+
+/- @@@
+### Being Strongly Connected
+
+A relation in which every pair of values is related
+in at least one direction is said to be strongly connected.
+@@@ -/
+
+def isStronglyConnected := ∀ (a b : α), e a b ∨ e b a
+
+
+/- @@@
+## Ordering Relations
+
+Orderings are a crucial class of relations.
+@@@ -/
+
+/- @@@
+### Being a Partial Order
+@@@ -/
+
+def isPartialOrder :=
+    isReflexive     e ∧
+    isAntisymmetric e ∧
+    isTransitive    e
+
+/- @@@
+### Being a Total Order
+@@@ -/
+
+def isTotalOrder :=
+    isPartialOrder      e ∧
+    isStronglyConnected e
+
+def isLinearOrder : Rel α α → Prop := isTotalOrder
+
+/- @@@
+## Closure Operations on Endorelations
+@@@ -/
+
+
+/- @@@
+### Reflexive Closure
+
+Recall that for an endorelation, *e*, to be reflexive, *e*
+must relate every value in its domain of definition to itself.
+
+The reflexive closure of such a relation *e* is the smallest
+relation that contains *e* (relates all of the pairs related
+by *e*) and that also relates every value in the entire domain
+of definition to itself.
+
+We will give two definitions of this operation. The first is as
+an inductive definition, and the second as a function that takes
+any endorelation and returns the relation that is its reflexive
+closure.
+
+Here's the inductive definition, called *ReflClosure*. To use
+it, you apply it to any endorelation, called *r* here, and you
+get back a relation with two constructors for proving that any
+given pair is in this relation. The first constructor assures
+that every pair in *e* qualifies as a member. The second one
+assures that for any *a*, *e a a* holds. That is, every pair of
+a value with itself is in the reflexive closure.
+@@@ -/
+
+inductive ReflClosure {α : Type u} (r : α → α → Prop) : α → α → Prop
+| base  {a b : α} : r a b → ReflClosure r a b
+| refl  (a : α)   : ReflClosure r a a
+
+
+/- @@@
+We can also define a reflexive closure function that, when
+applied to any endorelation returns the relation (represented
+as a membership predicate) that is its reflexive closure.
+@@@ -/
+
+def reflexiveClosure' : Rel α α → Rel α α :=
+  fun (e : Rel α α) (a b : α) => e a b ∨ a = b
+
+def reflexiveClosure := fun (a b : α) => e a b ∨ a = b
+
+/- @@@
+### Symmetric Closure
+
+Similarly, the *symmetric closure* of an endorelation, *e*,
+is the smallest relation that contains *e* and has the fewest
+additional pairs needed to make it symmetric. Note that if *e*
+is empty, so is its symmetric closure, whereas the reflexive
+closure of an empty relation having a domain of definition
+that is not empty is never empty.
+@@@ -/
+
+inductive SymmetricClosure {α : Type u} (r : α → α → Prop) : α → α → Prop
+| base  {a b : α} : r a b → SymmetricClosure r a b
+| flip  {a b : α} : r b a → SymmetricClosure r a b
+
+def symmetricClosure {α : Type u} (r : α → α → Prop) : α → α → Prop :=
+  fun a b => r a b ∨ r b a
+
+/- @@@
+### Transitive Closure
+@@@ -/
+
+inductive TransitiveClosure {α : Type u} (r : α → α → Prop) : α → α → Prop
+| base  {a b : α} : r a b → TransitiveClosure r a b
+| step  {a b c : α} : TransitiveClosure r a b → TransitiveClosure r b c → TransitiveClosure r a c
+
+/- @@@
+A functional form of this definition, taking a relation and
+returning its transitive closure, is more complicated, and not
+worth the time it'd take to introduce it here.
+@@@ -/
+
+/- @@@
+### Reflexive Transitive Closure
+
+It's often useful to deal with the reflexive and transitive closure
+of an endorelation, *e*. This requires only the addition of a *refl*
+constructor to the definition of transitive closure.
+@@@ -/
+
+inductive ReflexiveTransitiveClosure {α : Type u} (r : α → α → Prop) : α → α → Prop
+| base  {a b : α} : r a b → ReflexiveTransitiveClosure r a b
+| refl  (a : α) : ReflexiveTransitiveClosure r a a
+| step  {a b c : α} :
+    ReflexiveTransitiveClosure r a b →
+    ReflexiveTransitiveClosure r b c →
+    ReflexiveTransitiveClosure r a c
+
+/- @@@
+As an interesting aside, first-order predicate logic is not
+expressive enough to be able to express the claim that even a
+specific relation is transitive, not to mention formalizing the
+property of being transitive generalized over all relations.
+@@@ -/
+
+
+/- @@@
+## Examples: Proving Properties of Relations
+@@@ -/
+
+
+/- @@@
+### Equality is an Equivalence Relation.
+
+To show that that equality on a type, α, (@Eq α), is
+an equivalence relation, we have to show that it's
+reflexive, symmetric, and transitive. We'll give the
+proof in a bottom up style, first proving each of the
+conjuncts, then composing them into a proof of the
+overall conjecture.
+@@@ -/
+
+-- equality is reflective
+theorem eqIsRefl {α : Type}: isReflexive (@Eq α) :=
+  -- prove that for any a, a = a
+  fun _ => rfl
+
+-- equality is symmetric
+theorem eqIsSymm {α : Type}: @isSymmetric α (@Eq α) :=
+  -- prove that for any a, b, if a = b ∈ r then b = a
+  -- use proof of a = b to rewrite a to b in b = a
+  -- yielding b = b, which Lean then proves using rfl
+  fun (a b : α) (hab : a = b) => by rw [hab]
+
+
+-- equality is transitive
+theorem eqIsTrans {α : Type}: @isTransitive α (@Eq α) :=
+  -- similar to last proof
+  fun (a b c : α) (hab : a = b) (hbc : b = c) => by rw [hab, hbc]
+
+
+-- equality is an equivalence relation
+theorem eqIsEquiv {α β: Type}: @isEquivalence α (@Eq α) :=
+  -- just need to prove that Eq is refl,, symm, and trans
+  ⟨ eqIsRefl, ⟨ eqIsSymm, eqIsTrans ⟩ ⟩ -- And.intros
+
+
+
+/- @@@
+### The ⊆ Relation is a Partial Order
+@@@ -/
+
+def subSetRel {α : Type} : Rel (Set α) (Set α) :=
+  fun (s t : Set α) => s ⊆ t
+
+#reduce @subSetRel
+-- fun {α} s t => ∀ ⦃a : α⦄, a ∈ s → t a
+
+
+example {α : Type}: (@isPartialOrder (Set α) (@subSetRel α))  :=
+  And.intro
+    -- @isReflexive α β r
+    -- by the definition of isReflexive, show ∀ a, r a a
+    (fun s =>               -- for any set
+      fun a =>              -- for any a ∈ s
+        fun ains => ains    -- a ∈ s
+    )
+    (
+      And.intro
+        -- @isAntisymmetric α β r
+        -- ∀ (a b : α), r a b → r b a → a = b
+        (
+          fun (s1 s2 : Set α)
+              (hab : subSetRel s1 s2)
+              (hba : subSetRel s2 s1) =>
+            (
+              Set.ext   -- axiom: reduces s1 = s2 to bi-implication
+              fun _ =>
+                Iff.intro
+                  (fun h => hab h)
+                  (fun h => hba h)
+            )
+        )
+        -- @isTransitive α β r
+        -- ∀ (a b c : α), r a b → r b c → r a c
+        (
+          (
+            fun _ _ _ hst htv =>
+            (
+              fun _ =>  -- for any member of a
+                fun has =>
+                  let hat := hst has
+                  htv hat
+            )
+          )
+        )
+    )
+
+/- @@@
+### The Inverse of an Injective Function is a Function
+@@@ -/
+
+#check Rel.inv
+example : isInjectiveFun r → isFunction (r.inv) :=
+  fun hinjr =>   -- assume r is injective
+  -- show inverse is a function
+  -- assume r output, r.inv input, elements c b a
+  fun c b a =>
+  -- we need to show that r.inv is single valued
+  -- assume r.inv associatss c with both b and a
+      fun rinvcb rinvca =>
+        hinjr.right b a c rinvcb rinvca
+
+end DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations

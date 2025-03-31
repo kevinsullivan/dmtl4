@@ -1,5 +1,5 @@
 ```lean
-import DMT1.Lectures.L08_setsRelationsFunctions.«03_propertiesOfRelations»
+import DMT1.Lectures.L08_setsRelationsFunctions.«04_propertiesOfRelations»
 
 namespace DMT1.Lectures.setsRelationsFunctions.homeworksSetsRelations
 
