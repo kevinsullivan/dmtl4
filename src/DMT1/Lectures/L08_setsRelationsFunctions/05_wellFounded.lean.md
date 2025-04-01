@@ -4,10 +4,10 @@ import Mathlib.Data.Set.Basic
 import Mathlib.Logic.Relation
 import Mathlib.Data.Real.Basic
 
-namespace DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
+namespace DMT1.Lectures.setsRelationsFunctions.wellFounded
 ```
 
-# Well Founded Relations and Termination
+# Well Founded Relations
 
 *UNDER CONSTRUCTION -- BROKEN -- NOTHING TO SEE HERE*
 
@@ -30,7 +30,7 @@ One could call such a relation, *precedes*, and use an infix
 notation, *y ≺ x*, to mean *y precedes x by one step under r*.
 
 Now the question is whether the process of going from *x*,
-through *r*, to *y*, and then from *y* to an even smaller *z*
+through *r*, to *y*, `and then from *y* to an even smaller *z*
 can be repeated forever. If so, then *x* is *not* accessible.
 On the other hand, you are guaranteed eventually to hit some
 *smallest* element, from which you can *descend* no further,
@@ -134,4 +134,6 @@ example : @isWellFoundedOrder Nat Nat predRel :=
 
 
 -- See [TPIL4](https://leanprover.github.io/theorem_proving_in_lean4/induction_and_recursion.html#well-founded-recursion-and-induction).
+
+end DMT1.Lectures.setsRelationsFunctions.wellFounded
 ```
