@@ -310,10 +310,13 @@ of endorelations, in particular.
 
 /- @@@
 ### Being Reflexive
+
+A relation is reflexive if it relates *every*
+value in the domain of definition to itself.
 @@@ -/
 
--- The property of relating every input to itself
-def isReflexive  := ∀ (a : α), e a a
+
+def isReflexiveRel  := ∀ (a : α), e a a
 
 
 /- @@@
@@ -321,16 +324,40 @@ def isReflexive  := ∀ (a : α), e a a
 @@@ -/
 
 -- The property, if (a, b) ∈ r then (b, a) ∈ r
-def isSymmetric := ∀ (a b : α), e a b → e b a
+def isSymmetricRel := ∀ (a b : α), e a b → e b a
+
+/- @@@
+Note that being symmetric do not imply that a relation
+is total. There needs to be a pair, *(b, a)* in the
+relation only if there's a pair *(a, b)*. Question:
+Which of the following relations is symmetric?
+
+- The empty relation
+- { (1, 0), (1, 0), (2, 1) }
+- { (1, 2), (1, 0), (1, 0), (2, 1) }
+
+Give informal natural languages proofs in each case.
+@@@ -/
 
 
 /- @@@
 ### Being Transitive
 @@@ -/
 
+def isTransitiveRel := ∀ (a b c : α), e a b → e b c → e a c
 
-def isTransitive := ∀ (a b c : α), e a b → e b c → e a c
+/- @@@
+Note that transitivity doesn't require totality either. Which
+of the following relations are transitive?
 
+- The empty relation
+- The complete relation
+- { (0, 1) }
+- { (0, 1), (1, 2) }
+- { (0, 1), (1, 2), (0, 2) }
+- { (0, 1), (1, 2), (0, 2), (2, 0) }
+
+@@@ -/
 
 /- @@@
 ### Being an Equivalence Relation
@@ -338,9 +365,9 @@ def isTransitive := ∀ (a b c : α), e a b → e b c → e a c
 
 -- The property of partitioning inputs into equivalence classes
 def isEquivalence :=
-  (isReflexive e) ∧
-  (isSymmetric e) ∧
-  (isTransitive e)
+  (isReflexiveRel e) ∧
+  (isSymmetricRel e) ∧
+  (isTransitiveRel e)
 
 
 /- @@@
@@ -348,8 +375,12 @@ def isEquivalence :=
 @@@ -/
 
 -- The property, if (a, b) ∈ r then (b, a) ∉ r
-def isAsymmetric :=
+def isAsymmetricRel :=
   ∀ (a b : α), e a b → ¬e b a
+
+/- @@@
+What a commonly used arithmetic relation that's asymmetric?
+@@@ -/
 
 
 /- @@@
@@ -357,8 +388,12 @@ def isAsymmetric :=
 @@@ -/
 
 -- The property, if (a, b) ∈ r and (b, a) ∈ r then a = b
-def isAntisymmetric:=
+def isAntisymmetricRel :=
   ∀ (a b : α), e a b → e b a → a = b
+
+/- @@@
+What a commonly used arithmetic relation that's antisymmetric?
+@@@ -/
 
 
 /- @@@
@@ -368,7 +403,7 @@ A relation in which every pair of values is related
 in at least one direction is said to be strongly connected.
 @@@ -/
 
-def isStronglyConnected := ∀ (a b : α), e a b ∨ e b a
+def isStronglyConnectedRel := ∀ (a b : α), e a b ∨ e b a
 
 
 /- @@@
@@ -382,9 +417,9 @@ Orderings are a crucial class of relations.
 @@@ -/
 
 def isPartialOrder :=
-    isReflexive     e ∧
-    isAntisymmetric e ∧
-    isTransitive    e
+    isReflexiveRel     e ∧
+    isAntisymmetricRel e ∧
+    isTransitiveRel    e
 
 /- @@@
 ### Being a Total Order
@@ -392,14 +427,34 @@ def isPartialOrder :=
 
 def isTotalOrder :=
     isPartialOrder      e ∧
-    isStronglyConnected e
+    isStronglyConnectedRel e
 
 def isLinearOrder : Rel α α → Prop := isTotalOrder
+
+
+/- @@@
+### Being a Preorder
+
+A preorder is a relation that is Reflexive and Transitive.
+
+Exercise: Write the formal definition and come up with a nice
+example of a preorder.
+@@@ -/
+
+/- @@@
+More to come.
+
+### Strict Partial Order
+
+### Strict Total Order
+
+### Well Order
+@@@ -/
+
 
 /- @@@
 ## Closure Operations on Endorelations
 @@@ -/
-
 
 /- @@@
 ### Reflexive Closure
@@ -460,6 +515,7 @@ inductive SymmetricClosure {α : Type u} (r : α → α → Prop) : α → α �
 def symmetricClosure {α : Type u} (r : α → α → Prop) : α → α → Prop :=
   fun a b => r a b ∨ r b a
 
+
 /- @@@
 ### Transitive Closure
 @@@ -/
@@ -473,6 +529,7 @@ A functional form of this definition, taking a relation and
 returning its transitive closure, is more complicated, and not
 worth the time it'd take to introduce it here.
 @@@ -/
+
 
 /- @@@
 ### Reflexive Transitive Closure
@@ -502,6 +559,14 @@ property of being transitive generalized over all relations.
 ## Examples: Proving Properties of Relations
 @@@ -/
 
+/- @@@
+### A Reflexive Endorelation is Necessarily Total
+@@@ -/
+
+example : isReflexiveRel e → isTotalRel e :=
+by
+  _
+
 
 /- @@@
 ### Equality is an Equivalence Relation.
@@ -515,29 +580,28 @@ overall conjecture.
 @@@ -/
 
 -- equality is reflective
-theorem eqIsRefl {α : Type}: isReflexive (@Eq α) :=
-  -- prove that for any a, a = a
+theorem eqIsRefl {α : Type}: isReflexiveRel (@Eq α) :=
   fun _ => rfl
 
 -- equality is symmetric
-theorem eqIsSymm {α : Type}: @isSymmetric α (@Eq α) :=
+theorem eqIsSymm : @isSymmetricRel α (@Eq α) :=
   -- prove that for any a, b, if a = b ∈ r then b = a
   -- use proof of a = b to rewrite a to b in b = a
   -- yielding b = b, which Lean then proves using rfl
-  fun (a b : α) (hab : a = b) => by rw [hab]
+  fun (a b : α) (hab : a = b) =>
+    by rw [hab]
 
 
 -- equality is transitive
-theorem eqIsTrans {α : Type}: @isTransitive α (@Eq α) :=
+theorem eqIsTrans : @isTransitiveRel α (@Eq α) :=
   -- similar to last proof
-  fun (a b c : α) (hab : a = b) (hbc : b = c) => by rw [hab, hbc]
-
+  fun (a b c : α) (hab : a = b) (hbc : b = c) =>
+    by rw [hab, hbc]
 
 -- equality is an equivalence relation
 theorem eqIsEquiv {α β: Type}: @isEquivalence α (@Eq α) :=
   -- just need to prove that Eq is refl,, symm, and trans
   ⟨ eqIsRefl, ⟨ eqIsSymm, eqIsTrans ⟩ ⟩ -- And.intros
-
 
 
 /- @@@

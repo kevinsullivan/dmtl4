@@ -9,7 +9,7 @@ namespace DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
 
 # Well Founded Orders and Termination
 
-UNDER CONSTRUCTION
+*UNDER CONSTRUCTION*
 
 <!-- toc -->
 
