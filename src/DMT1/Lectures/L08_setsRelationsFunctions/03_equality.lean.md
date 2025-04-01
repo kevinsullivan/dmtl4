@@ -123,8 +123,8 @@ example
   Happy b :=
   by
     rw [heq]
-    exact ha
-    -- assumption (looks for a proof in your context)
+    -- exact ha
+    assumption -- (looks for a proof in your context)
 
 example
   (Person : Type)           -- Suppose there are people,
@@ -135,6 +135,17 @@ example
   Happy b :=
   by
     rw [←heq]
+    exact ha
+
+example
+  (Person : Type)           -- Suppose there are people,
+  (Happy : Person → Prop)   -- who can be Happy, and
+  (a b : Person)            -- that a and b are people
+  (heq : a = b)             -- and moreover a = b
+  (ha : Happy a) :          -- and finally that a is Happy
+  Happy b :=
+  by
+    rw [heq] at ha
     exact ha
 ```
 
@@ -173,6 +184,8 @@ Eq.refl :
     (a : α),
   a = a
 ```
+
+
 
 #### Symmetric
 
@@ -213,8 +226,8 @@ to prove that equality as defined is a transitive relation.
 ```lean
 theorem eqTrans {α : Type} (a b c : α) : a = b → b = c → a = c :=
 by
-  intro hab hbc   -- assume a = b and b = c
-  rw [hab, hbc]   -- proof: rewrite twice then (auto) Eq.intro
+  intro hab hbc
+  rw [hab, hbc]
 ```
 
 Lean provides a proof of the transitivity of equality.

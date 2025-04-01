@@ -7,9 +7,9 @@ import Mathlib.Data.Real.Basic
 namespace DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
 ```
 
-# Well Founded Orders and Termination
+# Well Founded Relations and Termination
 
-*UNDER CONSTRUCTION*
+*UNDER CONSTRUCTION -- BROKEN -- NOTHING TO SEE HERE*
 
 <!-- toc -->
 
@@ -100,12 +100,9 @@ def acc_pred_rel : (n : ℕ) → Acc pred_rel n
     | Eq.refl => ih)
 
 
-def isWellFoundedOrder  {α  _ : Type} : Rel α α → Prop :=
+def isWellOrder  {α  _ : Type} : Rel α α → Prop :=
   fun r => ∀ (s : Set α), s ≠ ∅ → ∃ m, (m ∈ s ∧ ¬∃ n ∈ s, r n m)
 ```
-
-
-
 
 
 

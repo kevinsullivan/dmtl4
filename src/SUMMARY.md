@@ -56,7 +56,7 @@
   - [Relations as n-ary Predicates](./DMT1/Lectures/L08_setsRelationsFunctions/02_relations.lean.md)
   - [(Polymorphic) Equality](./DMT1/Lectures/L08_setsRelationsFunctions/03_equality.lean.md)
   - [Properties of Relations](./DMT1/Lectures/L08_setsRelationsFunctions/04_propertiesOfRelations.lean.md)
-  - [Examples](./DMT1/Lectures/L08_setsRelationsFunctions/05_examples.lean.md)
+  - [Well Founded Relations](./DMT1/Lectures/L08_setsRelationsFunctions/05_wellFounded.lean.md)
 
 - [Induction](./proofByInduction.md)
   - [Axioms](./inductionAxioms.md)
@@ -78,4 +78,3 @@
 
 [Set Up for This Course](./build.md)
 [Learning Resources](./resources.md)
-

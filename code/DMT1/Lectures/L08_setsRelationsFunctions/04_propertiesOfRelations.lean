@@ -19,7 +19,7 @@ section we'll formally define some of the most important.
 @@@-/
 
 /- @@@
-### Being an Empty Relation
+### Empty Relation
 
 We start with the simple property of a relation being *empty*.
 That is, no value pairs satisfy its membership predicate. We
@@ -81,7 +81,7 @@ desugared term as in the first version of *isEmpty* above.
 
 
 /- @@@
-### Being a Complete Relation
+### Complete Relation
 
 The property of a relation relating every pair of values.
 We call such a relation *complete*. NOTE: We've corrected
@@ -108,7 +108,7 @@ fun _ _ => True.intro
 
 
 /- @@@
-### Being a Total Relation
+### Total Relation
 A relation is said to be *total* if it relates every
 value in its domain of definition to some output value.
 In other words, a relation is total if its *domain* is
@@ -118,7 +118,7 @@ def isTotalRel := ∀ (x : α), ∃ (y : β), r x y
 
 
 /- @@@
-### Being a Single-Valued Relation
+### Single-Valued Relation
 
 A binary relation is said to be *single-valued* if no
 input is related to more than one *output*. This is the
@@ -137,7 +137,7 @@ def isSingleValuedRel := ∀ x y z, r x y → r x z → y = z
 
 
 /- @@@
-### Being a Surjective Relation
+### Surjective Relation
 
 A relation is called *surjective* if it relates some
 input to *every* output in its codomain. That is, for
@@ -150,7 +150,7 @@ def isSurjectiveRel :Prop := ∀ (y : β), ∃ (x : α), r x y
 
 
 /- @@@
-### Being an Injective Relation
+### Injective Relation
 
 A relation is said to be *injective* if there is no
 more than one input that is related to any given output.
@@ -162,7 +162,7 @@ def isInjectiveRel :=
 
 
 /- @@@
-### Being a Many-To-One Relation
+### Many-To-One Relation
 A many-to-one relation is one that is not injective.
 In other words, it's not the case that every input
 maps to at most one output value.
@@ -171,7 +171,7 @@ maps to at most one output value.
 def isManyToOneRel := ¬isInjectiveRel r
 
 /- @@@
-### Being a One-To-Many Relation
+### One-To-Many Relation
 
 A relation is said to be one to many if it allows
 one input to map to multiple outputs while still
@@ -184,7 +184,7 @@ def isOneToMany :Prop :=
   isInjectiveRel r
 
 /- @@@
-### Being a Many-To-Many Relation
+### Many-To-Many Relation
 A relation is said to be many to many if it is neither
 functional (so some input maps to multiple outputs) not
 injective (so multiple inputs map to some single output).
@@ -202,7 +202,7 @@ def isManyToMany :=
 
 
 /- @@@
-### Being a Function
+### Function
 We define an alias, *isFunction*, for the property
 of being single-valued.
 @@@ -/
@@ -211,7 +211,7 @@ def isFunction : Rel α β → Prop :=
 
 
 /- @@@
-### Being a Total Function
+### Total Function
 
 A total function is a function that is total as a
 relation, i.e., it maps every input to some output.
@@ -221,7 +221,7 @@ def isTotalFun := isFunction r ∧ isTotalRel r
 
 
 /- @@@
-### Being an Injective Function
+### Injective Function
 
 The term, injective, is usually applied only to
 functions. This and the following few definitions
@@ -246,7 +246,7 @@ def isOneToOneFun : Rel α β → Prop :=
 
 
 /- @@@
-### Being a Surjective Function
+### Surjective Function
 
 Tbe be a surjective function is to be a function
 (single-valued) and to be surjective as a relation.
@@ -270,7 +270,7 @@ def isOntoFun : Rel α β → Prop :=
 
 
 /- @@@
-### Being a Bijective Function
+### Bijective Function
 
 A *total* function is that is injective and surjective
 is said to be *bijective*. Being bijective in this sense
@@ -360,7 +360,7 @@ of the following relations are transitive?
 @@@ -/
 
 /- @@@
-### Being an Equivalence Relation
+### Equivalence Relation
 @@@ -/
 
 -- The property of partitioning inputs into equivalence classes
@@ -413,7 +413,7 @@ Orderings are a crucial class of relations.
 @@@ -/
 
 /- @@@
-### Being a Partial Order
+### Partial Order
 @@@ -/
 
 def isPartialOrder :=
@@ -422,7 +422,12 @@ def isPartialOrder :=
     isTransitiveRel    e
 
 /- @@@
-### Being a Total Order
+### Strict Partial Order
+@@@ -/
+
+
+/- @@@
+### Total Order
 @@@ -/
 
 def isTotalOrder :=
@@ -433,7 +438,12 @@ def isLinearOrder : Rel α α → Prop := isTotalOrder
 
 
 /- @@@
-### Being a Preorder
+### Strict Total Order
+@@@ -/
+
+
+/- @@@
+### Preorder
 
 A preorder is a relation that is Reflexive and Transitive.
 
@@ -442,13 +452,9 @@ example of a preorder.
 @@@ -/
 
 /- @@@
-More to come.
-
-### Strict Partial Order
-
-### Strict Total Order
-
 ### Well Order
+
+<future>
 @@@ -/
 
 
@@ -556,7 +562,44 @@ property of being transitive generalized over all relations.
 
 
 /- @@@
-## Examples: Proving Properties of Relations
+## Proving Properties of Relations
+@@@ -/
+
+/- @@@
+To prove that some relation, r, has some property P,
+assert and and show that there is a proof of (P r).
+
+As an example, let's assert and prove that equality
+on the natural numbers is *total*. In other words,
+we claim that there's a proof of the *proposition*,
+*isTotal (@Eq Nat)*. Recall that the @ disables the
+inference of implement arguments, here allowing the
+type, Nat, to be given explicitly.
+
+One of the first steps in getting to a proof of such
+a proposition is to reduce the name of the property,
+such as *isTotalRel*, to its definition, and in Lean
+to its representation, as a logical predicate.
+
+In an English language proof, you might say, "By
+the definition of *isTotalRel*, it will suffice for
+us to to show that *∀ x, ∃ y, r x y*." You then go
+on to prove that more transparent form of the basic
+proposition at hand.
+
+In Lean it's the same. You can *unfold* (expand)
+the definition of a term, such as *isTotalRel*, in
+a larger expression using the *unfold* tactic.
+@@@ -/
+
+example : isTotalRel (@Eq Nat) :=
+  by
+    unfold isTotalRel
+    _     -- Exercise!
+
+
+/- @@@
+## Exercises
 @@@ -/
 
 /- @@@
@@ -565,7 +608,12 @@ property of being transitive generalized over all relations.
 
 example : isReflexiveRel e → isTotalRel e :=
 by
-  _
+  intro h
+  unfold isReflexiveRel at h
+  unfold isTotalRel
+  intro a
+  use a
+  exact (h a)
 
 
 /- @@@
