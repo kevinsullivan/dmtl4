@@ -766,6 +766,35 @@ fun n =>
 Part A, given *n*, define a relation, conguence mod n.
 @@@ -/
 
-def congrModN ...
+-- DONE IN CLASS
+
+
+-- Show that subset is a partial order
+
+/-
+def isPartialOrder :=
+    isReflexiveRel     e ∧
+    isAntisymmetricRel e ∧
+    isTransitiveRel    e
+-/
+
+theorem subsetPO (α : Type): isPartialOrder (@subSetRel α) :=
+by
+  unfold isPartialOrder
+  apply And.intro
+    (
+      by
+        unfold isReflexiveRel
+        intro s
+        unfold subSetRel
+        intro t
+        intro h
+        assumption
+    )
+    (
+      And.intro _ _
+    )
+
+
 
 end DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
