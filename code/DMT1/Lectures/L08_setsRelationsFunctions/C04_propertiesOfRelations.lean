@@ -48,6 +48,8 @@ this kind is called *homogeneous*, or an *endorelation*. We will
 use the identifier *e* for any endorelation.
 @@@ -/
 
+section properties
+
 variable
   {α β : Type u}  -- arbitrary types as implicit parameters
   (r : Rel α β)   -- arbitrary binary relation from α to β
@@ -561,6 +563,13 @@ property of being transitive generalized over all relations.
 @@@ -/
 
 
+
+/- @@@
+Thus ends our section on properties of relations.
+@@@ -/
+end properties
+
+
 /- @@@
 ## Proving Properties of Relations
 @@@ -/
@@ -595,7 +604,7 @@ a larger expression using the *unfold* tactic.
 example : isTotalRel (@Eq Nat) :=
   by
     unfold isTotalRel
-    _     -- Exercise!
+    sorry     -- Exercise!
 
 
 /- @@@
@@ -716,5 +725,42 @@ example : isInjectiveFun r → isFunction (r.inv) :=
   -- assume r.inv associatss c with both b and a
       fun rinvcb rinvca =>
         hinjr.right b a c rinvcb rinvca
+
+
+
+/- @@@
+State and prove the proposition that congruence mod n is
+an equivalence relation.
+@@@ -/
+
+def congModN (n : Nat) : Rel Nat Nat := fun a b => a%n = b%n
+
+example : ∀ (n : Nat), isEquivalence (congModN n) :=
+fun n =>
+  And.intro
+  (
+    fun a =>
+      rfl
+  )
+  (
+    And.intro
+    (
+      fun a b h =>
+        by
+          simp [congModN] at h
+          simp [congModN]
+          rw [h]
+    )
+    (
+      fun a b c hab hbc =>
+      _
+    )
+  )
+
+/- @@@
+Part A, given *n*, define a relation, conguence mod n.
+@@@ -/
+
+def congrModN ...
 
 end DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations

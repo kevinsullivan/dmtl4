@@ -31,3 +31,5 @@ import DMT1.Lectures.L04_natArithmetic.domain
 import DMT1.Lectures.L05_theoryExtensions.syntax
 import DMT1.Lectures.L05_theoryExtensions.semantics
 import DMT1.Lectures.L05_theoryExtensions.domain
+
+import DMT1.Lectures.L08_setsRelationsFunctions.C04_propertiesOfRelations
