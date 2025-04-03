@@ -753,7 +753,12 @@ fun n =>
     )
     (
       fun a b c hab hbc =>
-      _
+        by
+          simp [congModN] at hab
+          simp [congModN] at hbc
+          simp [congModN]
+          rw [hab]
+          assumption
     )
   )
 
