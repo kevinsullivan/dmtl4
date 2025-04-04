@@ -1,18 +1,19 @@
+```lean
 import Mathlib.Data.Rel
 import Mathlib.Data.Set.Basic
 import Mathlib.Logic.Relation
 import Mathlib.Data.Real.Basic
 
 import DMT1.Lectures.L08_setsRelationsFunctions.C04_propertiesOfRelations
+```
 
-/- @@@
 We've now imported the properties of relation defined in
 propertiesOfRelations.
-@@@ -/
 
+```lean
 namespace DMT1.Lectures.setsRelationsFunctions.wellFounded
+```
 
-/- @@@
 # Well Founded Relations
 
 <!-- toc -->
@@ -26,8 +27,8 @@ to be *accessible* under *r*.
 For now, let's view *r* as some kind of *smaller than*
 relation. It's just a name. We can give it the concrete
 notation to reflect this view.
-@@@ -/
 
+```lean
 open DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
 
 section wellFounded
@@ -37,7 +38,7 @@ variable
   (e : Rel α α)
 
 #reduce @Acc
-/- @@@
+```
 ```lean
 Acc.{u}
   {α : Sort u}
@@ -49,12 +50,12 @@ Prop
 We will say that a value, *x*, is accessible under an
 endorelation, *r*, written as *Acc e a*, whenever every
 value *y* that *precedes* *x* under *r* is accessible.
-@@@ -/
 
+```lean
 inductive Acc {α : Sort u} (r : α → α → Prop) : α → Prop where
   | intro (x : α) (h : (y : α) → r y x → Acc r y) : Acc r x
+```
 
-/- @@@
 ### Accessibility under the Nat Precedes Relation
 
 Previously we defined the predecessor relation on
@@ -63,16 +64,16 @@ that takes any *Nat* and returns it's predecessor
 (the number one less), except when the argument is
 *0*, in which case, to be total, the function simply
 returns *0* again.
-@@@ -/
 
 
+```lean
 -- A computable, thus in type theory, total, function
 def pred : Nat → Nat
 | 0 => 0
 | (n' + 1) => n'
+```
 
 
-/- @@@
 ### The Prec Relation (Immediately Precedes on Nats)
 Now, with declaratively specified relations, we're
 no longer constrained to define only total functions.
@@ -92,13 +93,13 @@ in this first instance, under the *Prec* relation.
 
 We formally define the predecessor relation, called
 *Prec* ("precedes"), as follows.
-@@@ -/
 
+```lean
 inductive Prec : Nat → Nat → Prop
 | step : ∀ { m n }, m + 1 = n → Prec m n
+```
 
 
-/- @@@
 
 #### Prec 0 1
 
@@ -110,23 +111,21 @@ this pair as stating *0 precedes 1* in the *Prec* relation.
 
 As a quick example, let's prove that the pair, *(0, 1),*
 is in this relation.
-@@@ -/
 
+```lean
 example : Prec 0 1 := Prec.step rfl
+```
 
-/- @@@
 EXERCISE: Prove that (1, 2) is in Prec.
 EXERCISE: Prove (0, 2) is not.
-@@@ -/
 
 
 
-/- @@@
 #### Prec m 1 => m = 0
 
 If a natural number *m* precedes 1, it's 0.
-@@@ -/
 
+```lean
 example : ∀ m, Prec m 1 → m = 0 :=
 by
   intro m h
@@ -138,10 +137,10 @@ by
   rename_i n a  -- annoy: make hiddens visible again
   nomatch a
   -- QED
+```
 
 
 
-/- @@@
 ### Zero is Accessible Under Prec
 
 Zero is accessible under the precedes relation,'
@@ -152,8 +151,8 @@ can apply it as *zeroAcc* laterin this development.
 
 EXERCISE: Grok this proof then express it in English.
 HERE:
-@@@ -/
 
+```lean
 theorem zeroAcc : Acc Prec 0 :=
 Acc.intro
   0
@@ -163,9 +162,9 @@ Acc.intro
         nomatch h
       )
   )
+```
 
 
-/- @@@
 ### One is Accessible Under Prec
 
 One is accessible, because it can be reached through
@@ -176,8 +175,8 @@ as is has no predecessors, so does has the property for
 all of them.
 
 EXERCISE: Complete the proof then express it all in English.
-@@@ -/
 
+```lean
 example : Acc Prec 1 :=
 Acc.intro
   1
@@ -187,8 +186,8 @@ Acc.intro
         _
       )
   )
+```
 
-/- @@@
 ### Accessibility of a Value *a* Under Relation *r*
 
 Given a relation, *r*, a value *(a : α)* is defined,
@@ -217,19 +216,19 @@ terms, by iterative application of a relation, r, it
 can be helpful to see the relation expressed in infix
 notation using a symbol reminscent of *less than*. We
 can use this symbol, *≺* and pronounce is as *precedes*.
-@@@ -/
 
 
+```lean
 infix:50 "≺" => Prec
 
 example : 0 ≺ 0 := Prec.step rfl  -- partiality!
 example : 0 ≺ 1 := Prec.step rfl  -- expect yes
 example : 2 ≺ 3 := Prec.step rfl  -- expect yes
 example : 2 ≺ 4 := Prec.step rfl  -- expect no!!
+```
 
 
 
-/- @@@
 ### Every Natural Number is Accessible Under *Prec*
 
 For a number, *a*, to be accessible under *Prec* thus
@@ -242,23 +241,21 @@ have properly represented the predecesor function (now
 as a specified relation) as a partial function. We are
 relying on there being exactly no cases of predecessors
 to consider for the base case of zero.
-@@@ -/
 
 
 
-/- @@@
 ## The Property of Relation Being Well Founded
 
 EXERCISE: State and prove as a theorem that every
 natural number is accessible under the Prec relation.
-@@@ -/
 
 
 
 
+```lean
 end wellFounded
+```
 
-/- @@@
 ## Further Information
 
 See [TPIL4](https://leanprover.github.io/theorem_proving_in_lean4/induction_and_recursion.html#well-founded-recursion-and-induction).

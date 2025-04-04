@@ -8,8 +8,8 @@ lean_lib «DMT1» where
   -- Add library configuration options here
 
 -- Add Mathlib dependency with a known working version
-require mathlib from git
-  "https://github.com/leanprover-community/mathlib4" @ "v4.6.0"
+  require mathlib from git
+  "https://github.com/leanprover-community/mathlib4.git" @ "master"
 
 @[default_target]
 lean_exe «dmt1» where
