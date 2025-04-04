@@ -37,6 +37,7 @@ variable
   (e : Rel α α)
 
 #reduce @Acc
+
 /- @@@
 ```lean
 Acc.{u}
@@ -262,5 +263,6 @@ end wellFounded
 ## Further Information
 
 See [TPIL4](https://leanprover.github.io/theorem_proving_in_lean4/induction_and_recursion.html#well-founded-recursion-and-induction).
--/
+
+@@@ -/
 end DMT1.Lectures.setsRelationsFunctions.wellFounded

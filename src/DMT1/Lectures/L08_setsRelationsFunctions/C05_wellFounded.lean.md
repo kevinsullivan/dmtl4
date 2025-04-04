@@ -39,6 +39,7 @@ variable
 
 #reduce @Acc
 ```
+
 ```lean
 Acc.{u}
   {α : Sort u}
@@ -259,5 +260,7 @@ end wellFounded
 ## Further Information
 
 See [TPIL4](https://leanprover.github.io/theorem_proving_in_lean4/induction_and_recursion.html#well-founded-recursion-and-induction).
--/
+
+```lean
 end DMT1.Lectures.setsRelationsFunctions.wellFounded
+```
