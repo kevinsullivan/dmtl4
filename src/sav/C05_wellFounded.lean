@@ -185,7 +185,7 @@ Acc.intro
   (
     fun y h =>
       (
-        sorry
+        _
       )
   )
 
@@ -223,12 +223,10 @@ can use this symbol, *≺* and pronounce is as *precedes*.
 
 infix:50 "≺" => Prec
 
--- uncomment to see error
--- example : 0 ≺ 0 := Prec.step rfl  -- partiality!
+example : 0 ≺ 0 := Prec.step rfl  -- partiality!
 example : 0 ≺ 1 := Prec.step rfl  -- expect yes
 example : 2 ≺ 3 := Prec.step rfl  -- expect yes
--- uncomment to see error
--- example : 2 ≺ 4 := Prec.step rfl  -- expect no!!
+example : 2 ≺ 4 := Prec.step rfl  -- expect no!!
 
 
 

@@ -32,4 +32,8 @@ import DMT1.Lectures.L05_theoryExtensions.syntax
 import DMT1.Lectures.L05_theoryExtensions.semantics
 import DMT1.Lectures.L05_theoryExtensions.domain
 
+import DMT1.Lectures.L08_setsRelationsFunctions.C01_sets
+import DMT1.Lectures.L08_setsRelationsFunctions.C02_relations
+import DMT1.Lectures.L08_setsRelationsFunctions.C03_equality
 import DMT1.Lectures.L08_setsRelationsFunctions.C04_propertiesOfRelations
+import DMT1.Lectures.L08_setsRelationsFunctions.C05_wellFounded

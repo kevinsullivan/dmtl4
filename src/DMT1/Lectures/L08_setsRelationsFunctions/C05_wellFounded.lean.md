@@ -184,7 +184,7 @@ Acc.intro
   (
     fun y h =>
       (
-        _
+        sorry
       )
   )
 ```
@@ -222,10 +222,12 @@ can use this symbol, *≺* and pronounce is as *precedes*.
 ```lean
 infix:50 "≺" => Prec
 
-example : 0 ≺ 0 := Prec.step rfl  -- partiality!
+-- uncomment to see error
+-- example : 0 ≺ 0 := Prec.step rfl  -- partiality!
 example : 0 ≺ 1 := Prec.step rfl  -- expect yes
 example : 2 ≺ 3 := Prec.step rfl  -- expect yes
-example : 2 ≺ 4 := Prec.step rfl  -- expect no!!
+-- uncomment to see error
+-- example : 2 ≺ 4 := Prec.step rfl  -- expect no!!
 ```
 
 
@@ -260,6 +262,7 @@ end wellFounded
 ## Further Information
 
 See [TPIL4](https://leanprover.github.io/theorem_proving_in_lean4/induction_and_recursion.html#well-founded-recursion-and-induction).
+
 
 ```lean
 end DMT1.Lectures.setsRelationsFunctions.wellFounded

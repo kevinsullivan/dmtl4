@@ -126,14 +126,15 @@ implementation detail which should not be relied on. Instead,
 `setOf` and membership of a set (`∈`) should be used to convert
 between sets and predicates.
 
+Example: Can't directly treat Prop as Set
 ```lean
 def aNatProp : Nat → Prop := λ n => True
-#check 1 ∈ aNatProp       -- won't work
+-- #check 1 ∈ aNatProp       -- won't work
 
-def s : Set Nat := setOf aNatProp   -- abstract from prop to set
+def s : Set Nat := setOf aNatProp   -- can coerce prop to set
 #check 1 ∈ s              -- gain set language and notations
 #check (s 1)              -- this "works" but is unpreferred
-def t : Nat → Prop := s   -- t defined as s stripped setness
+def t : Nat → Prop := s   -- can treat set as prop
 ```
 
 Good to know Lean details.
@@ -202,8 +203,8 @@ def noNat : Set Nat := ∅                    -- set theory notation!
 def allNat' : Set Nat := { n : Nat | True}
 def allNat : Set Nat := Set.univ            -- Univeral set (of all Nats)
 
---
-example : 3 ∈ noNat := (_ : False)          -- unprovable, stuck
+-- Uncomment the next line to see the error
+-- example : 3 ∈ noNat := (_ : False)      -- unprovable, stuck
 example : 3 ∉ noNat := fun h => nomatch h   -- proof by negation
 ```
 
@@ -717,7 +718,8 @@ satisfied by a given value.
 example : 3 ∈ even_or_small_set := Or.inr sorry
 example : 6 ∈ even_or_small_set := sorry
 example : 7 ∉ ev_set ∪ small_set := sorry
-example : 7 ∈ ev_set := _   -- stuck
+-- uncomment the following line to see error
+-- example : 7 ∈ ev_set := _   -- stuck
 example : 7 ∉ ev_set := λ h => sorry
 ```
 

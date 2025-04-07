@@ -23,7 +23,8 @@ We would ordinarily write it as *a = b*. Lean does provide
 *=* as an infix operator for *Eq*.
 
 ```lean
-#check Eq 1 "foo"   -- equality undefined on different types
+-- uncomment to see error
+-- #check Eq 1 "foo"   -- equality undefined on different types
 #check Eq 1 2       -- the proposition, 1 = 2
 #check 1 = 2        -- the same proposition infix = notation
 #check "hi" = "hi"  -- an equality proposition that is true

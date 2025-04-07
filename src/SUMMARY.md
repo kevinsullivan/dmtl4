@@ -52,11 +52,11 @@
   - [Dependent Type Theory](./DMT1/Lectures/L07_predicateLogic/06_dependentTypes.lean.md)
   
 - [Sets and Relations](./setTheory)
-  - [Sets as Unary Predicates](./DMT1/Lectures/L08_setsRelationsFunctions/01_sets.lean.md)
-  - [Relations as n-ary Predicates](./DMT1/Lectures/L08_setsRelationsFunctions/02_relations.lean.md)
-  - [(Polymorphic) Equality](./DMT1/Lectures/L08_setsRelationsFunctions/03_equality.lean.md)
-  - [Properties of Relations](./DMT1/Lectures/L08_setsRelationsFunctions/04_propertiesOfRelations.lean.md)
-  - [Well Founded Relations](./DMT1/Lectures/L08_setsRelationsFunctions/05_wellFounded.lean.md)
+  - [Sets](./DMT1/Lectures/L08_setsRelationsFunctions/C01_sets.lean.md)
+  - [Relations](./DMT1/Lectures/L08_setsRelationsFunctions/C02_relations.lean.md)
+  - [Equality](./DMT1/Lectures/L08_setsRelationsFunctions/C03_equality.lean.md)
+  - [Properties](./DMT1/Lectures/L08_setsRelationsFunctions/C04_propertiesOfRelations.lean.md)
+  - [Well Founded Relations](./DMT1/Lectures/L08_setsRelationsFunctions/C05_wellFounded.lean.md)
 
 - [Induction](./proofByInduction.md)
   - [Axioms](./inductionAxioms.md)

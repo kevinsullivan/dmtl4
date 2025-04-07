@@ -1,0 +1,444 @@
+echo "Converting code/DMT1/MyWork/foo.lean into src/DMT1/MyWork/foo.lean.md"
+Converting code/DMT1/MyWork/foo.lean into src/DMT1/MyWork/foo.lean.md
+scripts/convert.hs code/DMT1/MyWork/foo.lean src/DMT1/MyWork/foo.lean.md
+Formatted content written to src/DMT1/MyWork/foo.lean.md
+echo "Converting code/DMT1/MyWork/qwen.lean into src/DMT1/MyWork/qwen.lean.md"
+Converting code/DMT1/MyWork/qwen.lean into src/DMT1/MyWork/qwen.lean.md
+scripts/convert.hs code/DMT1/MyWork/qwen.lean src/DMT1/MyWork/qwen.lean.md
+Formatted content written to src/DMT1/MyWork/qwen.lean.md
+echo "Converting code/DMT1/MyWork/hw4/semantics.lean into src/DMT1/MyWork/hw4/semantics.lean.md"
+Converting code/DMT1/MyWork/hw4/semantics.lean into src/DMT1/MyWork/hw4/semantics.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw4/semantics.lean src/DMT1/MyWork/hw4/semantics.lean.md
+Formatted content written to src/DMT1/MyWork/hw4/semantics.lean.md
+echo "Converting code/DMT1/MyWork/hw4/syntax.lean into src/DMT1/MyWork/hw4/syntax.lean.md"
+Converting code/DMT1/MyWork/hw4/syntax.lean into src/DMT1/MyWork/hw4/syntax.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw4/syntax.lean src/DMT1/MyWork/hw4/syntax.lean.md
+Formatted content written to src/DMT1/MyWork/hw4/syntax.lean.md
+echo "Converting code/DMT1/MyWork/hw4/domain.lean into src/DMT1/MyWork/hw4/domain.lean.md"
+Converting code/DMT1/MyWork/hw4/domain.lean into src/DMT1/MyWork/hw4/domain.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw4/domain.lean src/DMT1/MyWork/hw4/domain.lean.md
+Formatted content written to src/DMT1/MyWork/hw4/domain.lean.md
+echo "Converting code/DMT1/MyWork/hw4/demo.lean into src/DMT1/MyWork/hw4/demo.lean.md"
+Converting code/DMT1/MyWork/hw4/demo.lean into src/DMT1/MyWork/hw4/demo.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw4/demo.lean src/DMT1/MyWork/hw4/demo.lean.md
+Formatted content written to src/DMT1/MyWork/hw4/demo.lean.md
+echo "Converting code/DMT1/MyWork/hw4/induction.lean into src/DMT1/MyWork/hw4/induction.lean.md"
+Converting code/DMT1/MyWork/hw4/induction.lean into src/DMT1/MyWork/hw4/induction.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw4/induction.lean src/DMT1/MyWork/hw4/induction.lean.md
+Formatted content written to src/DMT1/MyWork/hw4/induction.lean.md
+echo "Converting code/DMT1/MyWork/hw3/semantics.lean into src/DMT1/MyWork/hw3/semantics.lean.md"
+Converting code/DMT1/MyWork/hw3/semantics.lean into src/DMT1/MyWork/hw3/semantics.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw3/semantics.lean src/DMT1/MyWork/hw3/semantics.lean.md
+Formatted content written to src/DMT1/MyWork/hw3/semantics.lean.md
+echo "Converting code/DMT1/MyWork/hw3/utilities.lean into src/DMT1/MyWork/hw3/utilities.lean.md"
+Converting code/DMT1/MyWork/hw3/utilities.lean into src/DMT1/MyWork/hw3/utilities.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw3/utilities.lean src/DMT1/MyWork/hw3/utilities.lean.md
+Formatted content written to src/DMT1/MyWork/hw3/utilities.lean.md
+echo "Converting code/DMT1/MyWork/hw3/syntax.lean into src/DMT1/MyWork/hw3/syntax.lean.md"
+Converting code/DMT1/MyWork/hw3/syntax.lean into src/DMT1/MyWork/hw3/syntax.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw3/syntax.lean src/DMT1/MyWork/hw3/syntax.lean.md
+Formatted content written to src/DMT1/MyWork/hw3/syntax.lean.md
+echo "Converting code/DMT1/MyWork/hw3/domain.lean into src/DMT1/MyWork/hw3/domain.lean.md"
+Converting code/DMT1/MyWork/hw3/domain.lean into src/DMT1/MyWork/hw3/domain.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw3/domain.lean src/DMT1/MyWork/hw3/domain.lean.md
+Formatted content written to src/DMT1/MyWork/hw3/domain.lean.md
+echo "Converting code/DMT1/MyWork/hw3/axioms.lean into src/DMT1/MyWork/hw3/axioms.lean.md"
+Converting code/DMT1/MyWork/hw3/axioms.lean into src/DMT1/MyWork/hw3/axioms.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw3/axioms.lean src/DMT1/MyWork/hw3/axioms.lean.md
+Formatted content written to src/DMT1/MyWork/hw3/axioms.lean.md
+echo "Converting code/DMT1/MyWork/hw3/test.lean into src/DMT1/MyWork/hw3/test.lean.md"
+Converting code/DMT1/MyWork/hw3/test.lean into src/DMT1/MyWork/hw3/test.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw3/test.lean src/DMT1/MyWork/hw3/test.lean.md
+Formatted content written to src/DMT1/MyWork/hw3/test.lean.md
+echo "Converting code/DMT1/MyWork/hw3/interpretation.lean into src/DMT1/MyWork/hw3/interpretation.lean.md"
+Converting code/DMT1/MyWork/hw3/interpretation.lean into src/DMT1/MyWork/hw3/interpretation.lean.md
+scripts/convert.hs code/DMT1/MyWork/hw3/interpretation.lean src/DMT1/MyWork/hw3/interpretation.lean.md
+Formatted content written to src/DMT1/MyWork/hw3/interpretation.lean.md
+echo "Converting code/DMT1/MyWork/predlogpt.lean into src/DMT1/MyWork/predlogpt.lean.md"
+Converting code/DMT1/MyWork/predlogpt.lean into src/DMT1/MyWork/predlogpt.lean.md
+scripts/convert.hs code/DMT1/MyWork/predlogpt.lean src/DMT1/MyWork/predlogpt.lean.md
+Formatted content written to src/DMT1/MyWork/predlogpt.lean.md
+echo "Converting code/DMT1/MyWork/exists_cuts.lean into src/DMT1/MyWork/exists_cuts.lean.md"
+Converting code/DMT1/MyWork/exists_cuts.lean into src/DMT1/MyWork/exists_cuts.lean.md
+scripts/convert.hs code/DMT1/MyWork/exists_cuts.lean src/DMT1/MyWork/exists_cuts.lean.md
+Formatted content written to src/DMT1/MyWork/exists_cuts.lean.md
+echo "Converting code/DMT1/MyWork/L07_sets_relations_functions/01_sets.lean into src/DMT1/MyWork/L07_sets_relations_functions/01_sets.lean.md"
+Converting code/DMT1/MyWork/L07_sets_relations_functions/01_sets.lean into src/DMT1/MyWork/L07_sets_relations_functions/01_sets.lean.md
+scripts/convert.hs code/DMT1/MyWork/L07_sets_relations_functions/01_sets.lean src/DMT1/MyWork/L07_sets_relations_functions/01_sets.lean.md
+Formatted content written to src/DMT1/MyWork/L07_sets_relations_functions/01_sets.lean.md
+echo "Converting code/DMT1/MyWork/L07_sets_relations_functions/02_relations.lean into src/DMT1/MyWork/L07_sets_relations_functions/02_relations.lean.md"
+Converting code/DMT1/MyWork/L07_sets_relations_functions/02_relations.lean into src/DMT1/MyWork/L07_sets_relations_functions/02_relations.lean.md
+scripts/convert.hs code/DMT1/MyWork/L07_sets_relations_functions/02_relations.lean src/DMT1/MyWork/L07_sets_relations_functions/02_relations.lean.md
+Formatted content written to src/DMT1/MyWork/L07_sets_relations_functions/02_relations.lean.md
+echo "Converting code/DMT1/MyWork/L07_sets_relations_functions/08_homework_sets_relations.lean into src/DMT1/MyWork/L07_sets_relations_functions/08_homework_sets_relations.lean.md"
+Converting code/DMT1/MyWork/L07_sets_relations_functions/08_homework_sets_relations.lean into src/DMT1/MyWork/L07_sets_relations_functions/08_homework_sets_relations.lean.md
+scripts/convert.hs code/DMT1/MyWork/L07_sets_relations_functions/08_homework_sets_relations.lean src/DMT1/MyWork/L07_sets_relations_functions/08_homework_sets_relations.lean.md
+Formatted content written to src/DMT1/MyWork/L07_sets_relations_functions/08_homework_sets_relations.lean.md
+echo "Converting code/DMT1/MyWork/L07_sets_relations_functions/ignore_relations.lean into src/DMT1/MyWork/L07_sets_relations_functions/ignore_relations.lean.md"
+Converting code/DMT1/MyWork/L07_sets_relations_functions/ignore_relations.lean into src/DMT1/MyWork/L07_sets_relations_functions/ignore_relations.lean.md
+scripts/convert.hs code/DMT1/MyWork/L07_sets_relations_functions/ignore_relations.lean src/DMT1/MyWork/L07_sets_relations_functions/ignore_relations.lean.md
+Formatted content written to src/DMT1/MyWork/L07_sets_relations_functions/ignore_relations.lean.md
+echo "Converting code/DMT1/MyWork/L07_sets_relations_functions/03_properties_of_relations.lean into src/DMT1/MyWork/L07_sets_relations_functions/03_properties_of_relations.lean.md"
+Converting code/DMT1/MyWork/L07_sets_relations_functions/03_properties_of_relations.lean into src/DMT1/MyWork/L07_sets_relations_functions/03_properties_of_relations.lean.md
+scripts/convert.hs code/DMT1/MyWork/L07_sets_relations_functions/03_properties_of_relations.lean src/DMT1/MyWork/L07_sets_relations_functions/03_properties_of_relations.lean.md
+Formatted content written to src/DMT1/MyWork/L07_sets_relations_functions/03_properties_of_relations.lean.md
+echo "Converting code/DMT1/MyWork/embedPropInLean.lean into src/DMT1/MyWork/embedPropInLean.lean.md"
+Converting code/DMT1/MyWork/embedPropInLean.lean into src/DMT1/MyWork/embedPropInLean.lean.md
+scripts/convert.hs code/DMT1/MyWork/embedPropInLean.lean src/DMT1/MyWork/embedPropInLean.lean.md
+Formatted content written to src/DMT1/MyWork/embedPropInLean.lean.md
+echo "Converting code/DMT1/MyWork/L06_predicate_logic/04_quantifiers_all.lean into src/DMT1/MyWork/L06_predicate_logic/04_quantifiers_all.lean.md"
+Converting code/DMT1/MyWork/L06_predicate_logic/04_quantifiers_all.lean into src/DMT1/MyWork/L06_predicate_logic/04_quantifiers_all.lean.md
+scripts/convert.hs code/DMT1/MyWork/L06_predicate_logic/04_quantifiers_all.lean src/DMT1/MyWork/L06_predicate_logic/04_quantifiers_all.lean.md
+Formatted content written to src/DMT1/MyWork/L06_predicate_logic/04_quantifiers_all.lean.md
+echo "Converting code/DMT1/MyWork/L06_predicate_logic/04_quantifiers_exists.lean into src/DMT1/MyWork/L06_predicate_logic/04_quantifiers_exists.lean.md"
+Converting code/DMT1/MyWork/L06_predicate_logic/04_quantifiers_exists.lean into src/DMT1/MyWork/L06_predicate_logic/04_quantifiers_exists.lean.md
+scripts/convert.hs code/DMT1/MyWork/L06_predicate_logic/04_quantifiers_exists.lean src/DMT1/MyWork/L06_predicate_logic/04_quantifiers_exists.lean.md
+Formatted content written to src/DMT1/MyWork/L06_predicate_logic/04_quantifiers_exists.lean.md
+echo "Converting code/DMT1/MyWork/L06_predicate_logic/02_predicates.lean into src/DMT1/MyWork/L06_predicate_logic/02_predicates.lean.md"
+Converting code/DMT1/MyWork/L06_predicate_logic/02_predicates.lean into src/DMT1/MyWork/L06_predicate_logic/02_predicates.lean.md
+scripts/convert.hs code/DMT1/MyWork/L06_predicate_logic/02_predicates.lean src/DMT1/MyWork/L06_predicate_logic/02_predicates.lean.md
+Formatted content written to src/DMT1/MyWork/L06_predicate_logic/02_predicates.lean.md
+echo "Converting code/DMT1/MyWork/L06_predicate_logic/04_quantifiers.lean into src/DMT1/MyWork/L06_predicate_logic/04_quantifiers.lean.md"
+Converting code/DMT1/MyWork/L06_predicate_logic/04_quantifiers.lean into src/DMT1/MyWork/L06_predicate_logic/04_quantifiers.lean.md
+scripts/convert.hs code/DMT1/MyWork/L06_predicate_logic/04_quantifiers.lean src/DMT1/MyWork/L06_predicate_logic/04_quantifiers.lean.md
+Formatted content written to src/DMT1/MyWork/L06_predicate_logic/04_quantifiers.lean.md
+echo "Converting code/DMT1/MyWork/L06_predicate_logic/axioms.lean into src/DMT1/MyWork/L06_predicate_logic/axioms.lean.md"
+Converting code/DMT1/MyWork/L06_predicate_logic/axioms.lean into src/DMT1/MyWork/L06_predicate_logic/axioms.lean.md
+scripts/convert.hs code/DMT1/MyWork/L06_predicate_logic/axioms.lean src/DMT1/MyWork/L06_predicate_logic/axioms.lean.md
+Formatted content written to src/DMT1/MyWork/L06_predicate_logic/axioms.lean.md
+echo "Converting code/DMT1/MyWork/L06_predicate_logic/01_props_as_types.lean into src/DMT1/MyWork/L06_predicate_logic/01_props_as_types.lean.md"
+Converting code/DMT1/MyWork/L06_predicate_logic/01_props_as_types.lean into src/DMT1/MyWork/L06_predicate_logic/01_props_as_types.lean.md
+scripts/convert.hs code/DMT1/MyWork/L06_predicate_logic/01_props_as_types.lean src/DMT1/MyWork/L06_predicate_logic/01_props_as_types.lean.md
+Formatted content written to src/DMT1/MyWork/L06_predicate_logic/01_props_as_types.lean.md
+echo "Converting code/DMT1/MyWork/L06_predicate_logic/03_connectives.lean into src/DMT1/MyWork/L06_predicate_logic/03_connectives.lean.md"
+Converting code/DMT1/MyWork/L06_predicate_logic/03_connectives.lean into src/DMT1/MyWork/L06_predicate_logic/03_connectives.lean.md
+scripts/convert.hs code/DMT1/MyWork/L06_predicate_logic/03_connectives.lean src/DMT1/MyWork/L06_predicate_logic/03_connectives.lean.md
+Formatted content written to src/DMT1/MyWork/L06_predicate_logic/03_connectives.lean.md
+echo "Converting code/DMT1/MyWork/00_introduction.lean into src/DMT1/MyWork/00_introduction.lean.md"
+Converting code/DMT1/MyWork/00_introduction.lean into src/DMT1/MyWork/00_introduction.lean.md
+scripts/convert.hs code/DMT1/MyWork/00_introduction.lean src/DMT1/MyWork/00_introduction.lean.md
+Formatted content written to src/DMT1/MyWork/00_introduction.lean.md
+echo "Converting code/DMT1/MyWork/06_examples.lean into src/DMT1/MyWork/06_examples.lean.md"
+Converting code/DMT1/MyWork/06_examples.lean into src/DMT1/MyWork/06_examples.lean.md
+scripts/convert.hs code/DMT1/MyWork/06_examples.lean src/DMT1/MyWork/06_examples.lean.md
+Formatted content written to src/DMT1/MyWork/06_examples.lean.md
+echo "Converting code/DMT1/MyWork/events.lean into src/DMT1/MyWork/events.lean.md"
+Converting code/DMT1/MyWork/events.lean into src/DMT1/MyWork/events.lean.md
+scripts/convert.hs code/DMT1/MyWork/events.lean src/DMT1/MyWork/events.lean.md
+Formatted content written to src/DMT1/MyWork/events.lean.md
+echo "Converting code/DMT1/MyWork/case_analysis.lean into src/DMT1/MyWork/case_analysis.lean.md"
+Converting code/DMT1/MyWork/case_analysis.lean into src/DMT1/MyWork/case_analysis.lean.md
+scripts/convert.hs code/DMT1/MyWork/case_analysis.lean src/DMT1/MyWork/case_analysis.lean.md
+Formatted content written to src/DMT1/MyWork/case_analysis.lean.md
+echo "Converting code/DMT1/MyWork/classes.lean into src/DMT1/MyWork/classes.lean.md"
+Converting code/DMT1/MyWork/classes.lean into src/DMT1/MyWork/classes.lean.md
+scripts/convert.hs code/DMT1/MyWork/classes.lean src/DMT1/MyWork/classes.lean.md
+Formatted content written to src/DMT1/MyWork/classes.lean.md
+echo "Converting code/DMT1/MyWork/01_props_as_types.lean into src/DMT1/MyWork/01_props_as_types.lean.md"
+Converting code/DMT1/MyWork/01_props_as_types.lean into src/DMT1/MyWork/01_props_as_types.lean.md
+scripts/convert.hs code/DMT1/MyWork/01_props_as_types.lean src/DMT1/MyWork/01_props_as_types.lean.md
+Formatted content written to src/DMT1/MyWork/01_props_as_types.lean.md
+echo "Converting code/DMT1/MyWork/generalizeOverEmptyTrue.lean into src/DMT1/MyWork/generalizeOverEmptyTrue.lean.md"
+Converting code/DMT1/MyWork/generalizeOverEmptyTrue.lean into src/DMT1/MyWork/generalizeOverEmptyTrue.lean.md
+scripts/convert.hs code/DMT1/MyWork/generalizeOverEmptyTrue.lean src/DMT1/MyWork/generalizeOverEmptyTrue.lean.md
+Formatted content written to src/DMT1/MyWork/generalizeOverEmptyTrue.lean.md
+echo "Converting code/DMT1/MyWork/ignore_relations.lean into src/DMT1/MyWork/ignore_relations.lean.md"
+Converting code/DMT1/MyWork/ignore_relations.lean into src/DMT1/MyWork/ignore_relations.lean.md
+scripts/convert.hs code/DMT1/MyWork/ignore_relations.lean src/DMT1/MyWork/ignore_relations.lean.md
+Formatted content written to src/DMT1/MyWork/ignore_relations.lean.md
+echo "Converting code/DMT1/MyWork/predLogicIntro.lean into src/DMT1/MyWork/predLogicIntro.lean.md"
+Converting code/DMT1/MyWork/predLogicIntro.lean into src/DMT1/MyWork/predLogicIntro.lean.md
+scripts/convert.hs code/DMT1/MyWork/predLogicIntro.lean src/DMT1/MyWork/predLogicIntro.lean.md
+Formatted content written to src/DMT1/MyWork/predLogicIntro.lean.md
+echo "Converting code/DMT1/hw/hw3/semantics.lean into src/DMT1/hw/hw3/semantics.lean.md"
+Converting code/DMT1/hw/hw3/semantics.lean into src/DMT1/hw/hw3/semantics.lean.md
+scripts/convert.hs code/DMT1/hw/hw3/semantics.lean src/DMT1/hw/hw3/semantics.lean.md
+Formatted content written to src/DMT1/hw/hw3/semantics.lean.md
+echo "Converting code/DMT1/hw/hw3/utilities.lean into src/DMT1/hw/hw3/utilities.lean.md"
+Converting code/DMT1/hw/hw3/utilities.lean into src/DMT1/hw/hw3/utilities.lean.md
+scripts/convert.hs code/DMT1/hw/hw3/utilities.lean src/DMT1/hw/hw3/utilities.lean.md
+Formatted content written to src/DMT1/hw/hw3/utilities.lean.md
+echo "Converting code/DMT1/hw/hw3/syntax.lean into src/DMT1/hw/hw3/syntax.lean.md"
+Converting code/DMT1/hw/hw3/syntax.lean into src/DMT1/hw/hw3/syntax.lean.md
+scripts/convert.hs code/DMT1/hw/hw3/syntax.lean src/DMT1/hw/hw3/syntax.lean.md
+Formatted content written to src/DMT1/hw/hw3/syntax.lean.md
+echo "Converting code/DMT1/hw/hw3/domain.lean into src/DMT1/hw/hw3/domain.lean.md"
+Converting code/DMT1/hw/hw3/domain.lean into src/DMT1/hw/hw3/domain.lean.md
+scripts/convert.hs code/DMT1/hw/hw3/domain.lean src/DMT1/hw/hw3/domain.lean.md
+Formatted content written to src/DMT1/hw/hw3/domain.lean.md
+echo "Converting code/DMT1/hw/hw3/axioms.lean into src/DMT1/hw/hw3/axioms.lean.md"
+Converting code/DMT1/hw/hw3/axioms.lean into src/DMT1/hw/hw3/axioms.lean.md
+scripts/convert.hs code/DMT1/hw/hw3/axioms.lean src/DMT1/hw/hw3/axioms.lean.md
+Formatted content written to src/DMT1/hw/hw3/axioms.lean.md
+echo "Converting code/DMT1/hw/hw3/test.lean into src/DMT1/hw/hw3/test.lean.md"
+Converting code/DMT1/hw/hw3/test.lean into src/DMT1/hw/hw3/test.lean.md
+scripts/convert.hs code/DMT1/hw/hw3/test.lean src/DMT1/hw/hw3/test.lean.md
+Formatted content written to src/DMT1/hw/hw3/test.lean.md
+echo "Converting code/DMT1/hw/hw3/interpretation.lean into src/DMT1/hw/hw3/interpretation.lean.md"
+Converting code/DMT1/hw/hw3/interpretation.lean into src/DMT1/hw/hw3/interpretation.lean.md
+scripts/convert.hs code/DMT1/hw/hw3/interpretation.lean src/DMT1/hw/hw3/interpretation.lean.md
+Formatted content written to src/DMT1/hw/hw3/interpretation.lean.md
+echo "Converting code/DMT1/hw/hw6/hw6.lean into src/DMT1/hw/hw6/hw6.lean.md"
+Converting code/DMT1/hw/hw6/hw6.lean into src/DMT1/hw/hw6/hw6.lean.md
+scripts/convert.hs code/DMT1/hw/hw6/hw6.lean src/DMT1/hw/hw6/hw6.lean.md
+Formatted content written to src/DMT1/hw/hw6/hw6.lean.md
+echo "Converting code/DMT1/hw/hw8/hw8.lean into src/DMT1/hw/hw8/hw8.lean.md"
+Converting code/DMT1/hw/hw8/hw8.lean into src/DMT1/hw/hw8/hw8.lean.md
+scripts/convert.hs code/DMT1/hw/hw8/hw8.lean src/DMT1/hw/hw8/hw8.lean.md
+Formatted content written to src/DMT1/hw/hw8/hw8.lean.md
+echo "Converting code/DMT1/hw/hw8/hw8_key.lean into src/DMT1/hw/hw8/hw8_key.lean.md"
+Converting code/DMT1/hw/hw8/hw8_key.lean into src/DMT1/hw/hw8/hw8_key.lean.md
+scripts/convert.hs code/DMT1/hw/hw8/hw8_key.lean src/DMT1/hw/hw8/hw8_key.lean.md
+Formatted content written to src/DMT1/hw/hw8/hw8_key.lean.md
+echo "Converting code/DMT1/hw/hw7/hw7.lean into src/DMT1/hw/hw7/hw7.lean.md"
+Converting code/DMT1/hw/hw7/hw7.lean into src/DMT1/hw/hw7/hw7.lean.md
+scripts/convert.hs code/DMT1/hw/hw7/hw7.lean src/DMT1/hw/hw7/hw7.lean.md
+Formatted content written to src/DMT1/hw/hw7/hw7.lean.md
+echo "Converting code/DMT1/hw/hw10/hw10.lean into src/DMT1/hw/hw10/hw10.lean.md"
+Converting code/DMT1/hw/hw10/hw10.lean into src/DMT1/hw/hw10/hw10.lean.md
+scripts/convert.hs code/DMT1/hw/hw10/hw10.lean src/DMT1/hw/hw10/hw10.lean.md
+Formatted content written to src/DMT1/hw/hw10/hw10.lean.md
+echo "Converting code/DMT1/Library/natArithmetic/semantics.lean into src/DMT1/Library/natArithmetic/semantics.lean.md"
+Converting code/DMT1/Library/natArithmetic/semantics.lean into src/DMT1/Library/natArithmetic/semantics.lean.md
+scripts/convert.hs code/DMT1/Library/natArithmetic/semantics.lean src/DMT1/Library/natArithmetic/semantics.lean.md
+Formatted content written to src/DMT1/Library/natArithmetic/semantics.lean.md
+echo "Converting code/DMT1/Library/natArithmetic/syntax.lean into src/DMT1/Library/natArithmetic/syntax.lean.md"
+Converting code/DMT1/Library/natArithmetic/syntax.lean into src/DMT1/Library/natArithmetic/syntax.lean.md
+scripts/convert.hs code/DMT1/Library/natArithmetic/syntax.lean src/DMT1/Library/natArithmetic/syntax.lean.md
+Formatted content written to src/DMT1/Library/natArithmetic/syntax.lean.md
+echo "Converting code/DMT1/Library/natArithmetic/domain.lean into src/DMT1/Library/natArithmetic/domain.lean.md"
+Converting code/DMT1/Library/natArithmetic/domain.lean into src/DMT1/Library/natArithmetic/domain.lean.md
+scripts/convert.hs code/DMT1/Library/natArithmetic/domain.lean src/DMT1/Library/natArithmetic/domain.lean.md
+Formatted content written to src/DMT1/Library/natArithmetic/domain.lean.md
+echo "Converting code/DMT1/Library/propLogic/semantics.lean into src/DMT1/Library/propLogic/semantics.lean.md"
+Converting code/DMT1/Library/propLogic/semantics.lean into src/DMT1/Library/propLogic/semantics.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/semantics.lean src/DMT1/Library/propLogic/semantics.lean.md
+Formatted content written to src/DMT1/Library/propLogic/semantics.lean.md
+echo "Converting code/DMT1/Library/propLogic/utilities.lean into src/DMT1/Library/propLogic/utilities.lean.md"
+Converting code/DMT1/Library/propLogic/utilities.lean into src/DMT1/Library/propLogic/utilities.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/utilities.lean src/DMT1/Library/propLogic/utilities.lean.md
+Formatted content written to src/DMT1/Library/propLogic/utilities.lean.md
+echo "Converting code/DMT1/Library/propLogic/model_theory/truth_table.lean into src/DMT1/Library/propLogic/model_theory/truth_table.lean.md"
+Converting code/DMT1/Library/propLogic/model_theory/truth_table.lean into src/DMT1/Library/propLogic/model_theory/truth_table.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/model_theory/truth_table.lean src/DMT1/Library/propLogic/model_theory/truth_table.lean.md
+Formatted content written to src/DMT1/Library/propLogic/model_theory/truth_table.lean.md
+echo "Converting code/DMT1/Library/propLogic/model_theory/models.lean into src/DMT1/Library/propLogic/model_theory/models.lean.md"
+Converting code/DMT1/Library/propLogic/model_theory/models.lean into src/DMT1/Library/propLogic/model_theory/models.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/model_theory/models.lean src/DMT1/Library/propLogic/model_theory/models.lean.md
+Formatted content written to src/DMT1/Library/propLogic/model_theory/models.lean.md
+echo "Converting code/DMT1/Library/propLogic/model_theory/properties.lean into src/DMT1/Library/propLogic/model_theory/properties.lean.md"
+Converting code/DMT1/Library/propLogic/model_theory/properties.lean into src/DMT1/Library/propLogic/model_theory/properties.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/model_theory/properties.lean src/DMT1/Library/propLogic/model_theory/properties.lean.md
+Formatted content written to src/DMT1/Library/propLogic/model_theory/properties.lean.md
+echo "Converting code/DMT1/Library/propLogic/model_theory/counterexamples.lean into src/DMT1/Library/propLogic/model_theory/counterexamples.lean.md"
+Converting code/DMT1/Library/propLogic/model_theory/counterexamples.lean into src/DMT1/Library/propLogic/model_theory/counterexamples.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/model_theory/counterexamples.lean src/DMT1/Library/propLogic/model_theory/counterexamples.lean.md
+Formatted content written to src/DMT1/Library/propLogic/model_theory/counterexamples.lean.md
+echo "Converting code/DMT1/Library/propLogic/syntax.lean into src/DMT1/Library/propLogic/syntax.lean.md"
+Converting code/DMT1/Library/propLogic/syntax.lean into src/DMT1/Library/propLogic/syntax.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/syntax.lean src/DMT1/Library/propLogic/syntax.lean.md
+Formatted content written to src/DMT1/Library/propLogic/syntax.lean.md
+echo "Converting code/DMT1/Library/propLogic/domain.lean into src/DMT1/Library/propLogic/domain.lean.md"
+Converting code/DMT1/Library/propLogic/domain.lean into src/DMT1/Library/propLogic/domain.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/domain.lean src/DMT1/Library/propLogic/domain.lean.md
+Formatted content written to src/DMT1/Library/propLogic/domain.lean.md
+echo "Converting code/DMT1/Library/propLogic/axioms.lean into src/DMT1/Library/propLogic/axioms.lean.md"
+Converting code/DMT1/Library/propLogic/axioms.lean into src/DMT1/Library/propLogic/axioms.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/axioms.lean src/DMT1/Library/propLogic/axioms.lean.md
+Formatted content written to src/DMT1/Library/propLogic/axioms.lean.md
+echo "Converting code/DMT1/Library/propLogic/identities.lean into src/DMT1/Library/propLogic/identities.lean.md"
+Converting code/DMT1/Library/propLogic/identities.lean into src/DMT1/Library/propLogic/identities.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/identities.lean src/DMT1/Library/propLogic/identities.lean.md
+Formatted content written to src/DMT1/Library/propLogic/identities.lean.md
+echo "Converting code/DMT1/Library/propLogic/interpretation.lean into src/DMT1/Library/propLogic/interpretation.lean.md"
+Converting code/DMT1/Library/propLogic/interpretation.lean into src/DMT1/Library/propLogic/interpretation.lean.md
+scripts/convert.hs code/DMT1/Library/propLogic/interpretation.lean src/DMT1/Library/propLogic/interpretation.lean.md
+Formatted content written to src/DMT1/Library/propLogic/interpretation.lean.md
+echo "Converting code/DMT1/Library/propLogicWithArith/semantics.lean into src/DMT1/Library/propLogicWithArith/semantics.lean.md"
+Converting code/DMT1/Library/propLogicWithArith/semantics.lean into src/DMT1/Library/propLogicWithArith/semantics.lean.md
+scripts/convert.hs code/DMT1/Library/propLogicWithArith/semantics.lean src/DMT1/Library/propLogicWithArith/semantics.lean.md
+Formatted content written to src/DMT1/Library/propLogicWithArith/semantics.lean.md
+echo "Converting code/DMT1/Library/propLogicWithArith/syntax.lean into src/DMT1/Library/propLogicWithArith/syntax.lean.md"
+Converting code/DMT1/Library/propLogicWithArith/syntax.lean into src/DMT1/Library/propLogicWithArith/syntax.lean.md
+scripts/convert.hs code/DMT1/Library/propLogicWithArith/syntax.lean src/DMT1/Library/propLogicWithArith/syntax.lean.md
+Formatted content written to src/DMT1/Library/propLogicWithArith/syntax.lean.md
+echo "Converting code/DMT1/Library/propLogicWithArith/domain.lean into src/DMT1/Library/propLogicWithArith/domain.lean.md"
+Converting code/DMT1/Library/propLogicWithArith/domain.lean into src/DMT1/Library/propLogicWithArith/domain.lean.md
+scripts/convert.hs code/DMT1/Library/propLogicWithArith/domain.lean src/DMT1/Library/propLogicWithArith/domain.lean.md
+Formatted content written to src/DMT1/Library/propLogicWithArith/domain.lean.md
+echo "Converting code/DMT1/Library/setTheory/01_sets.lean into src/DMT1/Library/setTheory/01_sets.lean.md"
+Converting code/DMT1/Library/setTheory/01_sets.lean into src/DMT1/Library/setTheory/01_sets.lean.md
+scripts/convert.hs code/DMT1/Library/setTheory/01_sets.lean src/DMT1/Library/setTheory/01_sets.lean.md
+Formatted content written to src/DMT1/Library/setTheory/01_sets.lean.md
+echo "Converting code/DMT1/Library/setTheory/02_relations.lean into src/DMT1/Library/setTheory/02_relations.lean.md"
+Converting code/DMT1/Library/setTheory/02_relations.lean into src/DMT1/Library/setTheory/02_relations.lean.md
+scripts/convert.hs code/DMT1/Library/setTheory/02_relations.lean src/DMT1/Library/setTheory/02_relations.lean.md
+Formatted content written to src/DMT1/Library/setTheory/02_relations.lean.md
+echo "Converting code/DMT1/Library/setTheory/03_properties_of_relations.lean into src/DMT1/Library/setTheory/03_properties_of_relations.lean.md"
+Converting code/DMT1/Library/setTheory/03_properties_of_relations.lean into src/DMT1/Library/setTheory/03_properties_of_relations.lean.md
+scripts/convert.hs code/DMT1/Library/setTheory/03_properties_of_relations.lean src/DMT1/Library/setTheory/03_properties_of_relations.lean.md
+Formatted content written to src/DMT1/Library/setTheory/03_properties_of_relations.lean.md
+echo "Converting code/DMT1/Lectures/L02_propLogic/formal/semantics.lean into src/DMT1/Lectures/L02_propLogic/formal/semantics.lean.md"
+Converting code/DMT1/Lectures/L02_propLogic/formal/semantics.lean into src/DMT1/Lectures/L02_propLogic/formal/semantics.lean.md
+scripts/convert.hs code/DMT1/Lectures/L02_propLogic/formal/semantics.lean src/DMT1/Lectures/L02_propLogic/formal/semantics.lean.md
+Formatted content written to src/DMT1/Lectures/L02_propLogic/formal/semantics.lean.md
+echo "Converting code/DMT1/Lectures/L02_propLogic/formal/utilities.lean into src/DMT1/Lectures/L02_propLogic/formal/utilities.lean.md"
+Converting code/DMT1/Lectures/L02_propLogic/formal/utilities.lean into src/DMT1/Lectures/L02_propLogic/formal/utilities.lean.md
+scripts/convert.hs code/DMT1/Lectures/L02_propLogic/formal/utilities.lean src/DMT1/Lectures/L02_propLogic/formal/utilities.lean.md
+Formatted content written to src/DMT1/Lectures/L02_propLogic/formal/utilities.lean.md
+echo "Converting code/DMT1/Lectures/L02_propLogic/formal/syntax.lean into src/DMT1/Lectures/L02_propLogic/formal/syntax.lean.md"
+Converting code/DMT1/Lectures/L02_propLogic/formal/syntax.lean into src/DMT1/Lectures/L02_propLogic/formal/syntax.lean.md
+scripts/convert.hs code/DMT1/Lectures/L02_propLogic/formal/syntax.lean src/DMT1/Lectures/L02_propLogic/formal/syntax.lean.md
+Formatted content written to src/DMT1/Lectures/L02_propLogic/formal/syntax.lean.md
+echo "Converting code/DMT1/Lectures/L02_propLogic/formal/domain.lean into src/DMT1/Lectures/L02_propLogic/formal/domain.lean.md"
+Converting code/DMT1/Lectures/L02_propLogic/formal/domain.lean into src/DMT1/Lectures/L02_propLogic/formal/domain.lean.md
+scripts/convert.hs code/DMT1/Lectures/L02_propLogic/formal/domain.lean src/DMT1/Lectures/L02_propLogic/formal/domain.lean.md
+Formatted content written to src/DMT1/Lectures/L02_propLogic/formal/domain.lean.md
+echo "Converting code/DMT1/Lectures/L02_propLogic/formal/axioms.lean into src/DMT1/Lectures/L02_propLogic/formal/axioms.lean.md"
+Converting code/DMT1/Lectures/L02_propLogic/formal/axioms.lean into src/DMT1/Lectures/L02_propLogic/formal/axioms.lean.md
+scripts/convert.hs code/DMT1/Lectures/L02_propLogic/formal/axioms.lean src/DMT1/Lectures/L02_propLogic/formal/axioms.lean.md
+Formatted content written to src/DMT1/Lectures/L02_propLogic/formal/axioms.lean.md
+echo "Converting code/DMT1/Lectures/L02_propLogic/formal/identities.lean into src/DMT1/Lectures/L02_propLogic/formal/identities.lean.md"
+Converting code/DMT1/Lectures/L02_propLogic/formal/identities.lean into src/DMT1/Lectures/L02_propLogic/formal/identities.lean.md
+scripts/convert.hs code/DMT1/Lectures/L02_propLogic/formal/identities.lean src/DMT1/Lectures/L02_propLogic/formal/identities.lean.md
+Formatted content written to src/DMT1/Lectures/L02_propLogic/formal/identities.lean.md
+echo "Converting code/DMT1/Lectures/L02_propLogic/formal/Main.lean into src/DMT1/Lectures/L02_propLogic/formal/Main.lean.md"
+Converting code/DMT1/Lectures/L02_propLogic/formal/Main.lean into src/DMT1/Lectures/L02_propLogic/formal/Main.lean.md
+scripts/convert.hs code/DMT1/Lectures/L02_propLogic/formal/Main.lean src/DMT1/Lectures/L02_propLogic/formal/Main.lean.md
+Formatted content written to src/DMT1/Lectures/L02_propLogic/formal/Main.lean.md
+echo "Converting code/DMT1/Lectures/L02_propLogic/formal/interpretation.lean into src/DMT1/Lectures/L02_propLogic/formal/interpretation.lean.md"
+Converting code/DMT1/Lectures/L02_propLogic/formal/interpretation.lean into src/DMT1/Lectures/L02_propLogic/formal/interpretation.lean.md
+scripts/convert.hs code/DMT1/Lectures/L02_propLogic/formal/interpretation.lean src/DMT1/Lectures/L02_propLogic/formal/interpretation.lean.md
+Formatted content written to src/DMT1/Lectures/L02_propLogic/formal/interpretation.lean.md
+echo "Converting code/DMT1/Lectures/L06_induction/induction.lean into src/DMT1/Lectures/L06_induction/induction.lean.md"
+Converting code/DMT1/Lectures/L06_induction/induction.lean into src/DMT1/Lectures/L06_induction/induction.lean.md
+scripts/convert.hs code/DMT1/Lectures/L06_induction/induction.lean src/DMT1/Lectures/L06_induction/induction.lean.md
+Formatted content written to src/DMT1/Lectures/L06_induction/induction.lean.md
+echo "Converting code/DMT1/Lectures/L08_setsRelationsFunctions/C01_sets.lean into src/DMT1/Lectures/L08_setsRelationsFunctions/C01_sets.lean.md"
+Converting code/DMT1/Lectures/L08_setsRelationsFunctions/C01_sets.lean into src/DMT1/Lectures/L08_setsRelationsFunctions/C01_sets.lean.md
+scripts/convert.hs code/DMT1/Lectures/L08_setsRelationsFunctions/C01_sets.lean src/DMT1/Lectures/L08_setsRelationsFunctions/C01_sets.lean.md
+Formatted content written to src/DMT1/Lectures/L08_setsRelationsFunctions/C01_sets.lean.md
+echo "Converting code/DMT1/Lectures/L04_natArithmetic/semantics.lean into src/DMT1/Lectures/L04_natArithmetic/semantics.lean.md"
+Converting code/DMT1/Lectures/L04_natArithmetic/semantics.lean into src/DMT1/Lectures/L04_natArithmetic/semantics.lean.md
+scripts/convert.hs code/DMT1/Lectures/L04_natArithmetic/semantics.lean src/DMT1/Lectures/L04_natArithmetic/semantics.lean.md
+Formatted content written to src/DMT1/Lectures/L04_natArithmetic/semantics.lean.md
+echo "Converting code/DMT1/Lectures/L04_natArithmetic/syntax.lean into src/DMT1/Lectures/L04_natArithmetic/syntax.lean.md"
+Converting code/DMT1/Lectures/L04_natArithmetic/syntax.lean into src/DMT1/Lectures/L04_natArithmetic/syntax.lean.md
+scripts/convert.hs code/DMT1/Lectures/L04_natArithmetic/syntax.lean src/DMT1/Lectures/L04_natArithmetic/syntax.lean.md
+Formatted content written to src/DMT1/Lectures/L04_natArithmetic/syntax.lean.md
+echo "Converting code/DMT1/Lectures/L04_natArithmetic/domain.lean into src/DMT1/Lectures/L04_natArithmetic/domain.lean.md"
+Converting code/DMT1/Lectures/L04_natArithmetic/domain.lean into src/DMT1/Lectures/L04_natArithmetic/domain.lean.md
+scripts/convert.hs code/DMT1/Lectures/L04_natArithmetic/domain.lean src/DMT1/Lectures/L04_natArithmetic/domain.lean.md
+Formatted content written to src/DMT1/Lectures/L04_natArithmetic/domain.lean.md
+echo "Converting code/DMT1/Lectures/L04_natArithmetic/examples.lean into src/DMT1/Lectures/L04_natArithmetic/examples.lean.md"
+Converting code/DMT1/Lectures/L04_natArithmetic/examples.lean into src/DMT1/Lectures/L04_natArithmetic/examples.lean.md
+scripts/convert.hs code/DMT1/Lectures/L04_natArithmetic/examples.lean src/DMT1/Lectures/L04_natArithmetic/examples.lean.md
+Formatted content written to src/DMT1/Lectures/L04_natArithmetic/examples.lean.md
+echo "Converting code/DMT1/Lectures/L04_natArithmetic/induction.lean into src/DMT1/Lectures/L04_natArithmetic/induction.lean.md"
+Converting code/DMT1/Lectures/L04_natArithmetic/induction.lean into src/DMT1/Lectures/L04_natArithmetic/induction.lean.md
+scripts/convert.hs code/DMT1/Lectures/L04_natArithmetic/induction.lean src/DMT1/Lectures/L04_natArithmetic/induction.lean.md
+Formatted content written to src/DMT1/Lectures/L04_natArithmetic/induction.lean.md
+echo "Converting code/DMT1/Lectures/L03_modelTheory/validity.lean into src/DMT1/Lectures/L03_modelTheory/validity.lean.md"
+Converting code/DMT1/Lectures/L03_modelTheory/validity.lean into src/DMT1/Lectures/L03_modelTheory/validity.lean.md
+scripts/convert.hs code/DMT1/Lectures/L03_modelTheory/validity.lean src/DMT1/Lectures/L03_modelTheory/validity.lean.md
+Formatted content written to src/DMT1/Lectures/L03_modelTheory/validity.lean.md
+echo "Converting code/DMT1/Lectures/L03_modelTheory/truthTable.lean into src/DMT1/Lectures/L03_modelTheory/truthTable.lean.md"
+Converting code/DMT1/Lectures/L03_modelTheory/truthTable.lean into src/DMT1/Lectures/L03_modelTheory/truthTable.lean.md
+scripts/convert.hs code/DMT1/Lectures/L03_modelTheory/truthTable.lean src/DMT1/Lectures/L03_modelTheory/truthTable.lean.md
+Formatted content written to src/DMT1/Lectures/L03_modelTheory/truthTable.lean.md
+echo "Converting code/DMT1/Lectures/L03_modelTheory/models.lean into src/DMT1/Lectures/L03_modelTheory/models.lean.md"
+Converting code/DMT1/Lectures/L03_modelTheory/models.lean into src/DMT1/Lectures/L03_modelTheory/models.lean.md
+scripts/convert.hs code/DMT1/Lectures/L03_modelTheory/models.lean src/DMT1/Lectures/L03_modelTheory/models.lean.md
+Formatted content written to src/DMT1/Lectures/L03_modelTheory/models.lean.md
+echo "Converting code/DMT1/Lectures/L03_modelTheory/properties.lean into src/DMT1/Lectures/L03_modelTheory/properties.lean.md"
+Converting code/DMT1/Lectures/L03_modelTheory/properties.lean into src/DMT1/Lectures/L03_modelTheory/properties.lean.md
+scripts/convert.hs code/DMT1/Lectures/L03_modelTheory/properties.lean src/DMT1/Lectures/L03_modelTheory/properties.lean.md
+Formatted content written to src/DMT1/Lectures/L03_modelTheory/properties.lean.md
+echo "Converting code/DMT1/Lectures/L03_modelTheory/counterexamples.lean into src/DMT1/Lectures/L03_modelTheory/counterexamples.lean.md"
+Converting code/DMT1/Lectures/L03_modelTheory/counterexamples.lean into src/DMT1/Lectures/L03_modelTheory/counterexamples.lean.md
+scripts/convert.hs code/DMT1/Lectures/L03_modelTheory/counterexamples.lean src/DMT1/Lectures/L03_modelTheory/counterexamples.lean.md
+Formatted content written to src/DMT1/Lectures/L03_modelTheory/counterexamples.lean.md
+echo "Converting code/DMT1/Lectures/L05_theoryExtensions/semantics.lean into src/DMT1/Lectures/L05_theoryExtensions/semantics.lean.md"
+Converting code/DMT1/Lectures/L05_theoryExtensions/semantics.lean into src/DMT1/Lectures/L05_theoryExtensions/semantics.lean.md
+scripts/convert.hs code/DMT1/Lectures/L05_theoryExtensions/semantics.lean src/DMT1/Lectures/L05_theoryExtensions/semantics.lean.md
+Formatted content written to src/DMT1/Lectures/L05_theoryExtensions/semantics.lean.md
+echo "Converting code/DMT1/Lectures/L05_theoryExtensions/utilities.lean into src/DMT1/Lectures/L05_theoryExtensions/utilities.lean.md"
+Converting code/DMT1/Lectures/L05_theoryExtensions/utilities.lean into src/DMT1/Lectures/L05_theoryExtensions/utilities.lean.md
+scripts/convert.hs code/DMT1/Lectures/L05_theoryExtensions/utilities.lean src/DMT1/Lectures/L05_theoryExtensions/utilities.lean.md
+Formatted content written to src/DMT1/Lectures/L05_theoryExtensions/utilities.lean.md
+echo "Converting code/DMT1/Lectures/L05_theoryExtensions/syntax.lean into src/DMT1/Lectures/L05_theoryExtensions/syntax.lean.md"
+Converting code/DMT1/Lectures/L05_theoryExtensions/syntax.lean into src/DMT1/Lectures/L05_theoryExtensions/syntax.lean.md
+scripts/convert.hs code/DMT1/Lectures/L05_theoryExtensions/syntax.lean src/DMT1/Lectures/L05_theoryExtensions/syntax.lean.md
+Formatted content written to src/DMT1/Lectures/L05_theoryExtensions/syntax.lean.md
+echo "Converting code/DMT1/Lectures/L05_theoryExtensions/domain.lean into src/DMT1/Lectures/L05_theoryExtensions/domain.lean.md"
+Converting code/DMT1/Lectures/L05_theoryExtensions/domain.lean into src/DMT1/Lectures/L05_theoryExtensions/domain.lean.md
+scripts/convert.hs code/DMT1/Lectures/L05_theoryExtensions/domain.lean src/DMT1/Lectures/L05_theoryExtensions/domain.lean.md
+Formatted content written to src/DMT1/Lectures/L05_theoryExtensions/domain.lean.md
+echo "Converting code/DMT1/Lectures/L05_theoryExtensions/examples.lean into src/DMT1/Lectures/L05_theoryExtensions/examples.lean.md"
+Converting code/DMT1/Lectures/L05_theoryExtensions/examples.lean into src/DMT1/Lectures/L05_theoryExtensions/examples.lean.md
+scripts/convert.hs code/DMT1/Lectures/L05_theoryExtensions/examples.lean src/DMT1/Lectures/L05_theoryExtensions/examples.lean.md
+Formatted content written to src/DMT1/Lectures/L05_theoryExtensions/examples.lean.md
+echo "Converting code/DMT1/Lectures/L05_theoryExtensions/Main.lean into src/DMT1/Lectures/L05_theoryExtensions/Main.lean.md"
+Converting code/DMT1/Lectures/L05_theoryExtensions/Main.lean into src/DMT1/Lectures/L05_theoryExtensions/Main.lean.md
+scripts/convert.hs code/DMT1/Lectures/L05_theoryExtensions/Main.lean src/DMT1/Lectures/L05_theoryExtensions/Main.lean.md
+Formatted content written to src/DMT1/Lectures/L05_theoryExtensions/Main.lean.md
+echo "Converting code/DMT1/Lectures/L09_induction/01_induction.lean into src/DMT1/Lectures/L09_induction/01_induction.lean.md"
+Converting code/DMT1/Lectures/L09_induction/01_induction.lean into src/DMT1/Lectures/L09_induction/01_induction.lean.md
+scripts/convert.hs code/DMT1/Lectures/L09_induction/01_induction.lean src/DMT1/Lectures/L09_induction/01_induction.lean.md
+Formatted content written to src/DMT1/Lectures/L09_induction/01_induction.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/firstVsHigher.lean into src/DMT1/Lectures/L07_predicateLogic/firstVsHigher.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/firstVsHigher.lean into src/DMT1/Lectures/L07_predicateLogic/firstVsHigher.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/firstVsHigher.lean src/DMT1/Lectures/L07_predicateLogic/firstVsHigher.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/firstVsHigher.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/05_quantifiers_all.lean into src/DMT1/Lectures/L07_predicateLogic/05_quantifiers_all.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/05_quantifiers_all.lean into src/DMT1/Lectures/L07_predicateLogic/05_quantifiers_all.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/05_quantifiers_all.lean src/DMT1/Lectures/L07_predicateLogic/05_quantifiers_all.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/05_quantifiers_all.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean into src/DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean into src/DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean src/DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/01_propsAsCompTypes.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/01_propsAsLogicalTypes.lean into src/DMT1/Lectures/L07_predicateLogic/01_propsAsLogicalTypes.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/01_propsAsLogicalTypes.lean into src/DMT1/Lectures/L07_predicateLogic/01_propsAsLogicalTypes.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/01_propsAsLogicalTypes.lean src/DMT1/Lectures/L07_predicateLogic/01_propsAsLogicalTypes.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/01_propsAsLogicalTypes.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/04_predicates.lean into src/DMT1/Lectures/L07_predicateLogic/04_predicates.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/04_predicates.lean into src/DMT1/Lectures/L07_predicateLogic/04_predicates.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/04_predicates.lean src/DMT1/Lectures/L07_predicateLogic/04_predicates.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/04_predicates.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/05_quantifiers_exists.lean into src/DMT1/Lectures/L07_predicateLogic/05_quantifiers_exists.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/05_quantifiers_exists.lean into src/DMT1/Lectures/L07_predicateLogic/05_quantifiers_exists.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/05_quantifiers_exists.lean src/DMT1/Lectures/L07_predicateLogic/05_quantifiers_exists.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/05_quantifiers_exists.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/00_introduction.lean into src/DMT1/Lectures/L07_predicateLogic/00_introduction.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/00_introduction.lean into src/DMT1/Lectures/L07_predicateLogic/00_introduction.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/00_introduction.lean src/DMT1/Lectures/L07_predicateLogic/00_introduction.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/00_introduction.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/axioms.lean into src/DMT1/Lectures/L07_predicateLogic/axioms.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/axioms.lean into src/DMT1/Lectures/L07_predicateLogic/axioms.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/axioms.lean src/DMT1/Lectures/L07_predicateLogic/axioms.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/axioms.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/99_inferenceRules.lean into src/DMT1/Lectures/L07_predicateLogic/99_inferenceRules.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/99_inferenceRules.lean into src/DMT1/Lectures/L07_predicateLogic/99_inferenceRules.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/99_inferenceRules.lean src/DMT1/Lectures/L07_predicateLogic/99_inferenceRules.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/99_inferenceRules.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/06_dependentTypes.lean into src/DMT1/Lectures/L07_predicateLogic/06_dependentTypes.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/06_dependentTypes.lean into src/DMT1/Lectures/L07_predicateLogic/06_dependentTypes.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/06_dependentTypes.lean src/DMT1/Lectures/L07_predicateLogic/06_dependentTypes.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/06_dependentTypes.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/05_quantifiers.lean into src/DMT1/Lectures/L07_predicateLogic/05_quantifiers.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/05_quantifiers.lean into src/DMT1/Lectures/L07_predicateLogic/05_quantifiers.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/05_quantifiers.lean src/DMT1/Lectures/L07_predicateLogic/05_quantifiers.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/05_quantifiers.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/99_introByExample.lean into src/DMT1/Lectures/L07_predicateLogic/99_introByExample.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/99_introByExample.lean into src/DMT1/Lectures/L07_predicateLogic/99_introByExample.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/99_introByExample.lean src/DMT1/Lectures/L07_predicateLogic/99_introByExample.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/99_introByExample.lean.md
+echo "Converting code/DMT1/Lectures/L07_predicateLogic/03_classicalReasoning.lean into src/DMT1/Lectures/L07_predicateLogic/03_classicalReasoning.lean.md"
+Converting code/DMT1/Lectures/L07_predicateLogic/03_classicalReasoning.lean into src/DMT1/Lectures/L07_predicateLogic/03_classicalReasoning.lean.md
+scripts/convert.hs code/DMT1/Lectures/L07_predicateLogic/03_classicalReasoning.lean src/DMT1/Lectures/L07_predicateLogic/03_classicalReasoning.lean.md
+Formatted content written to src/DMT1/Lectures/L07_predicateLogic/03_classicalReasoning.lean.md
+echo "Converting code/DMT1/quizzes/quiz1.lean into src/DMT1/quizzes/quiz1.lean.md"
+Converting code/DMT1/quizzes/quiz1.lean into src/DMT1/quizzes/quiz1.lean.md
+scripts/convert.hs code/DMT1/quizzes/quiz1.lean src/DMT1/quizzes/quiz1.lean.md
+Formatted content written to src/DMT1/quizzes/quiz1.lean.md

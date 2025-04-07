@@ -453,10 +453,12 @@ a much more restrictive membership predicate. Simply put, the
 length of "Hello" (defined in the Lean libraries), is 5, and
 7 is not equal to 5, so this pair can't be a member.
 
+
 ```lean
-example : strlen "Hello" 7 :=
+-- uncomment this example to see error
+-- example : strlen "Hello" 7 :=
 -- What we need to prove is 7 = "Hello".length, i.e., 7 = 5.
-  _     -- We're stuck, as there can be no proof of that.
+--  _     -- We're stuck, as there can be no proof of that.
 ```
 
 
@@ -1197,7 +1199,7 @@ x to choose in this case is "Mary".
 )
 
 -- Exercise: Prove that 2 is also in the image of { "Mary"}
-example : 2 ∈ acctsOf.image { "Mary" } := _
+example : 2 ∈ acctsOf.image { "Mary" } := sorry
 
 -- Exercise: Prove that 3 is NOT one of Mary's bank accounts
 -- HERE:
@@ -1289,7 +1291,8 @@ expression *0² + 1²* then reducing to *1 = 1*, with *rfl*
 as an easy proof.
 
 ```lean
-example : unitCircle 0 (-1) := rfl    -- doesn't work!
+-- Uncomment to see the actual error
+-- example : unitCircle 0 (-1) := rfl    -- doesn't work!
 ```
 
 That didn't work! The problem is that the real numbers

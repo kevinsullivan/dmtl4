@@ -1,4 +1,3 @@
-```lean
 To understand what it means for an endorelation to be well
 founded, we need the notion of what it means for an element,
 *(x : α)* to be *accessible* under a given relation, *r*.
@@ -55,7 +54,7 @@ and so any chain down from *x* must be finite, as well, being
 just one *step* longer than a chain down from *y*. In sum, if
 every value that is one step smaller than *x* is accessible,
 then so is *x*.
-```
+@@@ -/
 
 open Nat
 
@@ -84,9 +83,9 @@ def isWellOrder  {α  _ : Type} : Rel α α → Prop :=
 
 
 
-```lean
+/- @@@
 ### The Predecessor Relation is Well Founded
-```
+@@@ -/
 
 inductive PredRel : ℕ → ℕ → Prop
 | step : ∀ {n : ℕ}, PredRel n (n + 1)
@@ -110,6 +109,9 @@ example : @isWellFoundedOrder Nat Nat predRel :=
       -- ∃ m ∈ s, ¬∃ n ∈ s, predRel n m
       _
 
-```lean
+/- @@@
 End of technical section
-```
+@@@ -/
+
+
+/- @@@ @@@@@@@@@@@ @@@@@@@@@@@@@ @@@@@@@@@@ @@@ -/

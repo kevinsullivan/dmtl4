@@ -722,6 +722,8 @@ they are just elements in the equivalence class for
 0. So here we go: congruence mod 3 is an equivalence
 relation.
 
+### Congruence Mod 3 is an Equivalence Relation
+
 ```lean
 example : isEquivalence (congModN 3) :=
 by
@@ -735,6 +737,7 @@ by
 ```lean
   constructor   -- applies first ∧ constructor
 ```
+
   On ∧.left we need a prove that (congModN 3) is reflexive
   And on the right, that it's symmetrical and transitive
 
@@ -756,9 +759,13 @@ by
   rw [h]
 
   -- transitive
-  -- HOMEWORK PROBLEM HERE
+
+-- EXERCISE: fill this hole.
   sorry
 ```
+
+
+### Congruence Mod n is an Equivalence Relation
 
 Now we state and prove that for any n, conguence mod n is
 an equivalence relation.
@@ -792,37 +799,9 @@ fun n =>
   )
 ```
 
-
-State and prove the proposition that, informally,
-subset is a partial order. In more detail, for any
-set element type, α, the subset relation on sets of
-α values has the property of being a partial order.
+### The Subset Relation is a Partial Order
 
 ```lean
-/-
-```lean
-def subSetRel {α : Type} : Rel (Set α) (Set α) :=
-  fun (s t : Set α) =>
-    s ⊆ t
-```
-
-```lean
-And recall
-def isPartialOrder :=
-    isReflexiveRel     e ∧
-    isAntisymmetricRel e ∧
-    isTransitiveRel    e
-```
-
-HOMEWORK: Finish the proof. Replace the sorries.
-
-You cannot understand what any of this means without
-bbeing able to use the info browser to see how each
-tactic affects your proof state, and being able to make
-sense of each step. Use your info browser to step through
-the tactics! The finish the missing proofs
--/
-
 theorem subsetPO (α : Type): isPartialOrder (@subSetRel α) :=
 by
   unfold isPartialOrder
@@ -837,12 +816,20 @@ by
         assumption
     )
     (
+      -- EXERCISE: Fill these holes.
       And.intro
         sorry
         sorry
     )
+```
+
+### Well Founded Relations
 
 
 
+
+
+
+```lean
 end DMT1.Lectures.setsRelationsFunctions.propertiesOfRelations
 ```
