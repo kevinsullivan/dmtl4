@@ -56,15 +56,7 @@
   - [Relations](./DMT1/Lectures/L08_setsRelationsFunctions/C02_relations.lean.md)
   - [Equality](./DMT1/Lectures/L08_setsRelationsFunctions/C03_equality.lean.md)
   - [Properties](./DMT1/Lectures/L08_setsRelationsFunctions/C04_propertiesOfRelations.lean.md)
-  - [Well Founded Relations](./DMT1/Lectures/L08_setsRelationsFunctions/C05_wellFounded.lean.md)
-
-- [Induction](./proofByInduction.md)
-  - [Axioms](./inductionAxioms.md)
-  - [Proofs](./DMT1/Lectures/L09_induction/01_sets.lean.md)
-  - [Structural Recursion](./structuralRecursion.md)
-  - [Generative Recursion](./generativeRecursion.md)
-  - [Well-Founded Relations and Termination](./wellFoundedRelations.md)
-
+  
 - [Assignments](){-}
 
   - [Lean and VSCode](./Assignments/a1.md)
