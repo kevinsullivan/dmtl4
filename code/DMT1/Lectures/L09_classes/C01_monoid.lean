@@ -6,8 +6,7 @@ import Mathlib.Algebra.Group.Defs
 
 /- @@@
 ## Operator Overloading
-@@@
--/
+@@@ -/
 #check Add
 
 /- @@@
@@ -149,7 +148,7 @@ also need to have AddZeroClass for Rot. This
 class will add the structure that overloads
 a *zero* value and requires it to behave as
 both a left and right identity (zero) for +.
--/
+@@@ -/
 
 #check AddZeroClass
 
@@ -192,7 +191,7 @@ instance : AddZeroClass Rot :=
 }
 
 /- @@@
-### Additive Monoid (with Scalar Multiplication)
+## Additive Monoid (with Scalar Multiplication)
 We're almost prepared to add the structure of
 a monoid on Rot. For that, we'll need to implement
 a *natural number scalar multiplication operator*
@@ -270,10 +269,15 @@ class SubNegMonoid (G : Type u) extends AddMonoid G, Neg G, Sub G where
   protected zsmul_neg' (n : ℕ) (a : G) : zsmul (Int.negSucc n) a = -zsmul n.succ a := by
     intros; rfl
   ```
-  -/
+  @@@ -/
 
   -- EXERCISE: Instantiate SubNegMonoid, thus also Neg and Sub
   -- EXERCISE: Instantiate Group
+
+  /- @@@
+  Note: You'll have to study the Int (ℤ) type and learn how
+  to program with it.
+  @@@ -/
 
   /- @@@
   ## Constraints on Type Arguments

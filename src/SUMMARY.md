@@ -51,11 +51,14 @@
     - [Exists](./DMT1/Lectures/L07_predicateLogic/05_quantifiers_exists.lean.md)
   - [Dependent Type Theory](./DMT1/Lectures/L07_predicateLogic/06_dependentTypes.lean.md)
   
-- [Sets and Relations](./setTheory)
-  - [Sets](./DMT1/Lectures/L08_setsRelationsFunctions/C01_sets.lean.md)
-  - [Relations](./DMT1/Lectures/L08_setsRelationsFunctions/C02_relations.lean.md)
-  - [Equality](./DMT1/Lectures/L08_setsRelationsFunctions/C03_equality.lean.md)
-  - [Properties](./DMT1/Lectures/L08_setsRelationsFunctions/C04_propertiesOfRelations.lean.md)
+  - [Sets and Relations](./setTheory)
+    - [Sets](./DMT1/Lectures/L08_setsRelationsFunctions/C01_sets.lean.md)
+    - [Relations](./DMT1/Lectures/L08_setsRelationsFunctions/C02_relations.lean.md)
+    - [Equality](./DMT1/Lectures/L08_setsRelationsFunctions/C03_equality.lean.md)
+    - [Properties](./DMT1/Lectures/L08_setsRelationsFunctions/C04_propertiesOfRelations.lean.md)
+  
+  - [Mathematical Structures](./mathStructures)
+    - [Group](./DMT1/Lectures/L09_classes/C01_monoid.lean.md)
   
 - [Assignments](){-}
 
