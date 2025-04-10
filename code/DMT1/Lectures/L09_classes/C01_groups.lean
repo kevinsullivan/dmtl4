@@ -23,6 +23,11 @@ These objects are tied together by additional constraints:
 
 @@@ -/
 
+#check Zero
+#check AddZeroClass
+#check AddSemigroup
+#check AddMonoid
+
 /-
 ## Operator Overloading
 @@@ -/
@@ -355,6 +360,7 @@ def aRot := r120                  -- rotations
 def zeroRot := r0                 -- zero element
 def aRotInv := -r120              -- inverse
 def aRotPlus := r120 + r240       -- addition
+def aRotMinus := r120 - r240
 def aRotInvTimesNat := 2 • r120   -- scalar mul by ℕ
 def aRotInvTimeInt := -2 • r120   -- scalar mul by ℤ
 
