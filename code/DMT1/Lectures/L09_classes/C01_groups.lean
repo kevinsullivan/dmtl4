@@ -1,10 +1,29 @@
 import Mathlib.Algebra.Group.Defs
 
 /- @@@
-# Mathematical Structures as Typeclasses
+# Groups
+
+<!-- toc -->
+
+In abstract algebra, a group is a *mathenmatical structure*
+with several elements:
+
+ @@@
+
+- a set of objects, sometimes called the *carrier set*
+- a binary operation on elements of this set
+- an element designated as the *zero* or *identity* element
+- an inverse operation on elements of the set
+
+These objects are tied together by additional constraints:
+
+- the binary operation must be associative
+- the zero element be a left and right zero for addition
+- the addition of any element and its inverse must be zero
+
 @@@ -/
 
-/- @@@
+/-
 ## Operator Overloading
 @@@ -/
 #check Add
@@ -269,19 +288,85 @@ class SubNegMonoid (G : Type u) extends AddMonoid G, Neg G, Sub G where
   protected zsmul_neg' (n : ℕ) (a : G) : zsmul (Int.negSucc n) a = -zsmul n.succ a := by
     intros; rfl
   ```
-  @@@ -/
+@@@ -/
 
-  -- EXERCISE: Instantiate SubNegMonoid, thus also Neg and Sub
-  -- EXERCISE: Instantiate Group
+-- EXERCISE: Instantiate SubNegMonoid, thus also Neg and Sub
 
-  /- @@@
-  Note: You'll have to study the Int (ℤ) type and learn how
-  to program with it.
-  @@@ -/
+/- @@@
+```lean
+class Neg (α : Type u) where
+  neg : α → α
+```
+@@@ -/
 
-  /- @@@
-  ## Constraints on Type Arguments
-  @@@ -/
+def negRot : Rot → Rot
+| 0 => 0
+| r120 => r240
+| r240 => r120
+
+instance : Neg Rot :=
+{
+  neg := negRot
+}
+
+/- @@@
+```lean
+class Sub (α : Type u) where
+  sub : α → α → α
+```
+@@@ -/
+
+instance : Sub Rot :=
+{
+  sub := λ a b => a + -b
+}
+
+
+instance : SubNegMonoid Rot :=
+{
+  zsmul := zsmulRec
+}
+
+  -- EXERCISE: Instantiate AddGroup
+
+theorem rotNegAddCancel :  ∀ r : Rot, -r + r = 0 :=
+by
+  intro r
+  cases r
+  rfl
+  rfl
+  rfl
+
+instance : AddGroup Rot :=
+{
+  neg_add_cancel := rotNegAddCancel
+}
+
+/-@@@
+## A Group of Rotations
+
+We have succeeded in establishing that the rotational
+symmetries of an equilateral triangle for an additive
+group. Th
+@@@-/
+
+
+def aRot := r120                  -- rotations
+def zeroRot := r0                 -- zero element
+def aRotInv := -r120              -- inverse
+def aRotPlus := r120 + r240       -- addition
+def aRotInvTimesNat := 2 • r120   -- scalar mul by ℕ
+def aRotInvTimeInt := -2 • r120   -- scalar mul by ℤ
+
+/- @@@
+Question: Can we define scalar multiplication by reals
+or rationals?
+@@@ -/
+
+
+/- @@@
+## Typeclasses Enable Constraints on Type Arguments
+@@@ -/
 
 
 -- uncomment to see error
@@ -296,10 +381,13 @@ By requiring that there be a typeclass instance
 for α in *myAdd* we've constrained the function to
 take and accept only those type for which this is
 the case. We could read this definition as saying,
-"Let myAdd by a function polymorphic in any type for
-which + is defined, such that myAdd a b = a + b." At
-this point, we can apply *myAdd* to objects of any
-such type.
+"Let myAdd by a function polymorphic *in any type for
+which + is defined*, such that myAdd a b = a + b."
+
+What we have thus defined is a polymorphic function,
+but one that applies only to values of type for which
+some additional information is defined, here, how to
+add elements of a given type.
 @@@ -/
 
 #eval myAdd 1 2                   -- Nat
