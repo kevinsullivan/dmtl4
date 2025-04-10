@@ -10,8 +10,11 @@ Mathematicians of think of the elements of a group as
 constituting *actions* that can be applied to *objects*
 of some other type.
 
-For example, we can now consider rotations as actions.
-When applied to an object, a rotation will *rotate* it.
+For example, we can now consider rotations as actions
+on some kind of object, such as a vaccum robot: on that
+can rotate to change its direction of travel. Such a
+rotation *acts* on an object by *rotating* it by some
+defined amount.
 
 To make the idea concrete, suppose we have a kind of
 floor vacuuming robot. It's very silly looking, as it
@@ -30,6 +33,10 @@ acted upon by a rotation.
 
 Let's define our triangular robot type.
 @@@ -/
+
+namespace DMT1.Lecture.classes.groupActions
+
+open DMT1.Lecture.classes.groups
 
 inductive Tri where
 | o0
@@ -72,7 +79,6 @@ class AddAction (G : Type*) (P : Type*) [AddMonoid G] extends VAdd G P where
 We can see that the *AddAction* typeclass is parameterized by two
 types: *G* and *P*. *G* will be our group of actions (here required
 only to be a monoid). *P* will be the type of objects acted upon.
-
 To instantiate the class, we will need three elements:
 
 - an instance of the *VAdd* class, defining (overloading) +ᵥ
@@ -80,14 +86,16 @@ To instantiate the class, we will need three elements:
 - show that applying a sum of actions is the same as one at a time
 @@@ -/
 
+open Rot
+
 def vaddRotTri : Rot → Tri → Tri
 | 0, t => t
-| .r120, o0 => o120
-| .r120, o120 => o240
-| .r120, o240 => o0
-| .r240, o0 => o240
-| .r240, o120 => o0
-| .r240, o240 => o120
+| Rot.r120, o0 => o120
+| Rot.r120, o120 => o240
+| Rot.r120, o240 => o0
+| Rot.r240, o0 => o240
+| Rot.r240, o120 => o0
+| Rot.r240, o240 => o120
 
 theorem vaddZero: ∀ p : Tri, vaddRotTri (0 : Rot) p = p :=
 by
@@ -95,7 +103,7 @@ by
   cases t
   repeat rfl
 
-theorem vaddSum:  ∀ (g₁ g₂ : Rot) (p : Tri), vaddRotTri (g₁ + g₂) p = vaddRotTri g₁ (vaddRotTri g₂ p) :=
+theorem vAddSum:  ∀ (g₁ g₂ : Rot) (p : Tri), vaddRotTri (g₁ + g₂) p = vaddRotTri g₁ (vaddRotTri g₂ p) :=
 by
   intro g₁ g₂ p
   cases g₁
@@ -103,3 +111,47 @@ by
   cases p
   rfl
   repeat sorry
+
+#check VAdd
+
+/-
+class VAdd (G : Type u) (P : Type v) where
+  /-- `a +ᵥ b` computes the sum of `a` and `b`. The meaning of this notation is type-dependent,
+  but it is intended to be used for left actions. -/
+  vadd : G → P → P
+-/
+
+instance : VAdd Rot Tri :=
+{
+  vadd := vaddRotTri
+}
+
+/- @@@
+```lean
+class AddAction (G : Type*) (P : Type*) [AddMonoid G] extends VAdd G P where
+  /-- Zero is a neutral element for `+ᵥ` -/
+  protected zero_vadd : ∀ p : P, (0 : G) +ᵥ p = p
+  /-- Associativity of `+` and `+ᵥ` -/
+  add_vadd : ∀ (g₁ g₂ : G) (p : P), (g₁ + g₂) +ᵥ p = g₁ +ᵥ g₂ +ᵥ p
+```
+@@@ -/
+
+instance : AddAction Rot Tri :=
+{
+  zero_vadd := vaddZero
+  add_vadd := vAddSum
+}
+
+#eval Rot.r120 +ᵥ Tri.o0                -- o120
+#eval Rot.r120 +ᵥ (Rot.r120 +ᵥ Tri.o0)  -- o240
+#eval (Rot.r120 + Rot.r120) +ᵥ Tri.o0   -- 0240
+
+/- @@@
+Group actions must have this property that you can
+add them up in the group (+) then *apply* them once
+(+ᵥ) rather than applying each one in turn using +ᵥ.
+That's a great way to optimize batter power usage in
+a floor-vacuuming robot.
+@@@ -/
+
+end DMT1.Lecture.classes.groupActions

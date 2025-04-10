@@ -23,6 +23,8 @@ These objects are tied together by additional constraints:
 
 @@@ -/
 
+namespace DMT1.Lecture.classes.groups
+
 #check Zero
 #check AddZeroClass
 #check AddSemigroup
@@ -421,3 +423,6 @@ instance : Add String :=
   add := String.append
 }
 #eval myAdd "Hello, " "Lean"
+
+
+ end DMT1.Lecture.classes.groups

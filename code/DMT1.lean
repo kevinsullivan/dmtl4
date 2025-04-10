@@ -36,4 +36,5 @@ import DMT1.Lectures.L08_setsRelationsFunctions.C01_sets
 import DMT1.Lectures.L08_setsRelationsFunctions.C02_relations
 import DMT1.Lectures.L08_setsRelationsFunctions.C03_equality
 import DMT1.Lectures.L08_setsRelationsFunctions.C04_propertiesOfRelations
-import DMT1.Lectures.L08_setsRelationsFunctions.C05_wellFounded
+
+import DMT1.Lectures.L09_classes.C02_groupActions
