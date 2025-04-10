@@ -58,7 +58,9 @@
   - [Properties](./DMT1/Lectures/L08_setsRelationsFunctions/C04_propertiesOfRelations.lean.md)
 
 - [Mathematical Structures](./mathStructures)
-  - [Group](./DMT1/Lectures/L09_classes/C01_monoid.lean.md)
+  - [Groups](./DMT1/Lectures/L09_classes/C01_groups.lean.md)
+  - [Actions](./DMT1/Lectures/L09_classes/C02_groupActions.lean.md)
+  - [Torsors](./DMT1/Lectures/L09_classes/C03_torsors.lean.md)
 
 - [Assignments](){-}
 
