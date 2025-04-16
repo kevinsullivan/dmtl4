@@ -1,9 +1,9 @@
 import Mathlib.Algebra.Group.Defs
 
 /- @@@
-# Groups
-
 <!-- toc -->
+
+# Groups
 
 In abstract algebra, a group is a *mathenmatical structure*
 with several elements:
@@ -31,7 +31,7 @@ namespace DMT1.Lecture.classes.groups
 #check AddMonoid
 
 /-
-## Operator Overloading
+## Overloading Operations With Typeclasses
 @@@ -/
 #check Add
 
@@ -44,7 +44,7 @@ class Add (α : Type u) where
 @@@ -/
 
 /- @@@
-## Example: Rotational Symmetries of Equilateral Triangle
+## Example: Rotational Symmetries of a Triangle
 
 Think of these as the three orientations of
 an equilateral triangle that sits on top of
@@ -97,7 +97,7 @@ for *Add.add* in general.
 
 
 /- @@@
-## (Additive) Monoid
+## Additive Monoids
 @@@ -/
 
 #check AddMonoid
@@ -114,7 +114,7 @@ class AddMonoid (M : Type u) extends AddSemigroup M, AddZeroClass M where
 #check AddSemigroup
 
 /- @@@
-## Additive Semigroup
+## Additive Semigroups
 ```
 class AddSemigroup (G : Type u) extends Add G where
   protected add_assoc : ∀ a b c : G, a + b + c = a + (b + c)
@@ -166,8 +166,6 @@ instance : AddSemigroup Rot :=
 }
 
 /- @@@
-## AddZero
-
 Next, on our path to augmenting the Rot type
 with the structure of an additive monoid, we
 also need to have AddZeroClass for Rot. This
@@ -217,7 +215,6 @@ instance : AddZeroClass Rot :=
 }
 
 /- @@@
-## Additive Monoid (with Scalar Multiplication)
 We're almost prepared to add the structure of
 a monoid on Rot. For that, we'll need to implement
 a *natural number scalar multiplication operator*
@@ -258,7 +255,7 @@ scalar multiplication (•) operations.
 
 
 /- @@@
-## Group
+## Additive Groups
 @@@ -/
 
 #check AddGroup
@@ -350,7 +347,7 @@ instance : AddGroup Rot :=
 }
 
 /-@@@
-## A Group of Rotations
+## Example: A Rotation Group
 
 We have succeeded in establishing that the rotational
 symmetries of an equilateral triangle for an additive
@@ -373,9 +370,8 @@ or rationals?
 
 
 /- @@@
-## Typeclasses Enable Constraints on Type Arguments
+## Constraints on Type Arguments
 @@@ -/
-
 
 -- uncomment to see error
 -- def myAdd {α : Type u} : α → α → α

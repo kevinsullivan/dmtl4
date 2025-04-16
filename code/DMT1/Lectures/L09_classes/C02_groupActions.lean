@@ -4,6 +4,10 @@ import Mathlib.Algebra.Group.Action.Defs
 import DMT1.Lectures.L09_classes.C01_groups
 
 /- @@@
+
+<!-- toc -->
+
+<!-- toc -->
 # Group Actions
 
 Mathematicians of think of the elements of a group as

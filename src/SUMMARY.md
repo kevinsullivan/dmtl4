@@ -57,10 +57,12 @@
   - [Equality](./DMT1/Lectures/L08_setsRelationsFunctions/C03_equality.lean.md)
   - [Properties](./DMT1/Lectures/L08_setsRelationsFunctions/C04_propertiesOfRelations.lean.md)
 
-- [Mathematical Structures](./mathStructures)
+- [Abstract Algebra](./mathStructures)
   - [Groups](./DMT1/Lectures/L09_classes/C01_groups.lean.md)
   - [Actions](./DMT1/Lectures/L09_classes/C02_groupActions.lean.md)
-  - [Torsors](./DMT1/Lectures/L09_classes/C03_torsors.lean.md)
+  - [Torsors over Groups](./DMT1/Lectures/L09_classes/C03_torsors.lean.md)
+  - [Modules and Vector Spaces](./DMT1/Lectures/L09_classes/C04_vectorSpaces.lean.md)
+  - [Affine Spaces](./DMT1/Lectures/L09_classes/C05_affineSpaces.lean.md)
 
 - [Assignments](){-}
 

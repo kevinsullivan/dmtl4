@@ -2,7 +2,13 @@ import DMT1.Lectures.L09_classes.C02_groupActions
 import Mathlib.Algebra.AddTorsor.Defs
 
 /- @@@
-# Torsors
+<!-- toc -->
+
+# Torsors Over Groups
+
+NB: This chapter is currently formatted as a
+homework assignment, with many blanks left to
+fill in.
 @@@ -/
 
 namespace DMT1.Lecture.classes.torsors
@@ -119,5 +125,8 @@ sorry
 -- HERE
 
 -- EXERCISE: Write test cases for all operations
+
+#check AddGroup
+#check AddMonoid
 
 end DMT1.Lecture.classes.torsors
