@@ -43,7 +43,7 @@ current 1-D representation.
 @@@ -/
 
 /- @@@
-## Finite Nat Index Sets: Fin n
+## Finite Index Sets: Fin n
 
 In mathematics, tuple is a common name for an ordered sequence of values.
 A tuple with *n* values is said to be an *n-tuple*. If the values in the
@@ -64,8 +64,6 @@ to α values.
 Now the question is how to represent such a finite set of α values so that
 its values can serve as arguments to that order-imposing indexing function.
 
-## Data Type
-
 Lean provides the *Fin n* type for this purpose. It's values are all of the
 natural numbers from 0 to n-1. If you try to assign a larger natural number
 to an identifier of this type, the value will be reduced mod n to a value
@@ -79,7 +77,7 @@ in the designated range of index values.
 #eval (4 : Fin 3)
 
 /- @@@
-## n-Tuple as Fin n → α
+## Tuples: Fin n → α
 
 We can represent an *α n-tuple* as a function, *t*, taking
 an index, i, of type *Fin n*, and returning *t i*.
@@ -116,7 +114,7 @@ def getFinVal {n : Nat} : Fin n → Nat
 
 
 /- @@@
-## Overloaded Operators and Structures
+### Overloads
 @@@ -/
 
 -- For Lean to pretty print tuples, e.g., as #eval outputs
@@ -217,7 +215,7 @@ and other results, that come with the respective typeclasses.
 
 
 /- @@@
-## A *Tuple α n* Type
+## Tuples: Tuple α n
 
 We'll wrap tuples represented by values of (Fin n → α) in  a
 new *Tuple* type, parametric in *α* and *n*. With this type
@@ -228,7 +226,7 @@ Note! Having defined decidable equality and other typeclass
 instances for *Fin n → α*, Lean can now automaticallysynthesize
 the corresponding typeclasses instances for our Tuple type!
 
-### Tuple Data Type
+### Data Type
 @@@ -/
 
 structure Tuple (α : Type u) (n : ℕ) where
@@ -237,7 +235,7 @@ deriving Repr, DecidableEq, BEq     -- Look here!
 
 
 /- @@@
-### Overloaded Operations
+### Overloads
 @@@ -/
 
 -- A coercion to extract the (Fin n → α) representation
@@ -288,12 +286,12 @@ def v3 := v2 + 2 • v2
 
 
 /- @@@
-## Representing α n-Vectors as Tuples
+## Vectors: Vc α n
 
 We will now represent n-dimensional α *vectors* as
 n-tuples of α values, represented as *Tuple* values.
 
-### Vc Data Type
+### Data Type
 @@@ -/
 
 structure Vc (α : Type u) (n: Nat) where
@@ -302,7 +300,7 @@ deriving Repr, DecidableEq, BEq
 
 
 /- @@@
-### Overloaded Operations
+### Overloads
 @@@ -/
 
 -- A coercion to extract the (Fin n → α) representation
@@ -347,13 +345,15 @@ def b3ℚVc := a3ℚVc + (1/2:ℚ) • a3ℚVc
 #eval a3ℚVc = b3ℚVc   -- = is from DecidableEq
 #eval a3ℚVc + b3ℚVc + b3ℚVc
 
+
+
 /- @@@
-### Representing Points as Tuples
+## Points: Pt α n
 
 We will now represent n-dimensional α *points* * as
 n-tuples of α values in the same way.
 
-### Pt Data Type
+### Data Type
 @@@ -/
 
 structure Pt (α : Type u) (n: Nat) where
@@ -361,7 +361,7 @@ structure Pt (α : Type u) (n: Nat) where
 deriving Repr, DecidableEq, BEq
 
 /- @@@
-### Overloaded Operations
+### Overloads
 
 We're *not* going to lift operation such as addition
 from Tuple to Pt because such operations won't make
@@ -375,8 +375,9 @@ instance : Coe (Pt α n) (Tuple α n) where
   coe := Pt.tuple
 
 
+
 /- @@@
-## α Affine n-Space
+## α Affine n-Spaces
 
 TODO (EXERCISE): Build an affine space structure on Vc and Pt.
 @@@ -/
@@ -386,7 +387,7 @@ TODO (EXERCISE): Build an affine space structure on Vc and Pt.
 
 
 /- @@@
-## Starter Example
+### Starter Example
 
 To give you a good start on the overall task, here's
 a completed construction showing that our Vc vectors
@@ -464,6 +465,8 @@ Yay. Vc forms an additive monoid.
 @@@ -/
 
 /- @@@
+### Your Job
+
 TODO: Continue with the main task. A precondition for forming
 an additive torsor is to show that Vc forms an additive group.
 You might want to start with that!
