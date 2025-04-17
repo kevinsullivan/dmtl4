@@ -1,6 +1,6 @@
 import Mathlib.Data.Rat.Defs
 import Mathlib.Algebra.Module.Basic
-import Mathlib.LinearAlgebra.AffineSpace.Defs
+--import Mathlib.LinearAlgebra.AffineSpace.Defs
 import Mathlib.Tactic.Ring.Basic
 
 /- @@@
