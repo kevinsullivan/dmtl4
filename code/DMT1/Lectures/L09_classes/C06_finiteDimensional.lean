@@ -238,12 +238,12 @@ deriving Repr, DecidableEq, BEq     -- Look here!
 ### Overloads
 @@@ -/
 
--- A coercion to extract the (Fin n → α) representation
--- instance : Coe (Tuple α n) (Fin n → α) where
---  coe t := t.toFun
+/- @@@
+We define an automatically applied coercion of any Tuple
+to its underlying (Fin n → α) function value.
+@@@ -/
 
-instance : CoeFun (Tuple α n) (fun _ => Fin n → α) where
-  coe t := t.toFun
+instance : CoeFun (Tuple α n) (fun _ => Fin n → α) := ⟨Tuple.toFun⟩
 
 -- -- Element-wise heterogeneous addition
 -- instance [HAdd α α α] : HAdd (Tuple α n) (Tuple α n) (Tuple α n) :=
