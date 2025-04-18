@@ -11,6 +11,7 @@ src = "src"
 "1.1.0" = { releaseNotes = "Chapters on Propositional Logic and Model Theory", release_date = "2025-01-15" }
 "1.1.1" = { releaseNotes = "Fixes import paths in hw3", release_date = "2025-01-23" }
 "0.2.0" = { releaseNotes = "Pretty good up to quantifiers. Note discontinuity in version # scheme.", release_date = "2025-02-04" }
+"0.3.0" = { releaseNotes = "Good draft through multi-dimensional affine spaces.", release_date = "2025-04-18" }
 
 [build]
 build-dir = "book"
