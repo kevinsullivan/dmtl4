@@ -131,8 +131,6 @@ variable
   {α : Type u}
   {n : Nat}
 
-instance [Mul α] : HSMul α α α := ⟨(· * ·)⟩
-instance [Mul α] : SMul α α := ⟨(· * ·)⟩
 ---------------
 /- @@@
 ## Tuple α n
@@ -174,11 +172,11 @@ instance [Repr α] : Repr (Fin n → α) where
 -- How to promote operation
 instance [Add α] : Add (Tuple α n) where
   --add t1 t2 := ⟨ t1.toFin + t2.toFin ⟩
-  add t1 t2 := ⟨fun i => t1 i + t2 i⟩
+  add t1 t2 := ⟨ t1 + t2 ⟩
 
 instance [Neg α] : Neg (Tuple α n) where
-  -- neg t := ⟨ -t.toFin ⟩
-  neg t := ⟨ fun i => -(t i) ⟩
+   neg t := ⟨ -t.toFin ⟩
+  --neg t := ⟨ fun i => -(t i) ⟩
 
 instance [Add α] [Sub α] : Sub (Tuple α n) where
  sub t v := ⟨ fun i => t i - v i ⟩
@@ -189,8 +187,8 @@ instance [Zero α]: Zero (Tuple α n) :=
 }
 
 instance [SMul α α] : SMul α (Tuple α n) :=
---  { smul a t := ⟨ a • t.toFin ⟩ }
-    { smul a t := ⟨fun i => a • t i⟩ }
+  { smul a t := ⟨ a • t.toFin ⟩ }
+--    { smul a t := ⟨fun i => a • t i⟩ }
 
 
 
@@ -198,19 +196,6 @@ instance [SMul α α] : SMul α (Tuple α n) :=
 -- QUESTION
 --instance [SMul α (Fin n → α)] : SMul α (Tuple α n) where
 --  smul a v := ⟨ a • v.toFin ⟩   -- have to be explicit
-
-instance [AddMonoid α] : AddMonoid (Tuple α n) :=
-{
-  add := Add.add
-  zero := Zero.zero
-  add_assoc := by     -- So you can see the steps
-    intros
-    ext i
-    apply add_assoc
-  nsmul := nsmulRec
-  zero_add := by intros; ext; apply zero_add
-  add_zero := by intros; ext; apply add_zero
-}
 
 instance [AddCommSemigroup α]: AddCommSemigroup (Tuple α n) :=
 {
@@ -220,7 +205,6 @@ instance [AddCommSemigroup α]: AddCommSemigroup (Tuple α n) :=
     apply add_comm
   add_assoc := by intros; ext; apply add_assoc
 }
-
 
 instance [AddCommMonoid α] : AddCommMonoid (Tuple α n) :=
 {
@@ -236,44 +220,11 @@ instance [AddCommMonoid α] : AddCommMonoid (Tuple α n) :=
   zero_add := by intros; ext; apply zero_add
   add_zero := by intros; ext; apply add_zero
   add_comm := by intros; ext; apply add_comm
-  }
-
-
-instance [AddCommGroup α] : AddCommGroup (Tuple α n) :=
-{
-  add := Add.add
-  zero := Zero.zero
-  neg := Neg.neg
-  sub := Sub.sub
-  nsmul := nsmulRec
-  zsmul := zsmulRec
-
-  add_assoc :=  by intros; ext; apply add_assoc
-  zero_add := by intros; ext; apply zero_add
-  add_zero := by intros; ext; apply add_zero
-  add_comm := by intros; ext; apply add_comm
-
-  neg_add_cancel := by intros; ext; apply neg_add_cancel
-}
-
--- QUESTION
-
-instance [Monoid α] : MulAction α (Tuple α n) :=
-{
-  one_smul := by
-    intros
-    ext
-    simp [HSMul.hSMul, SMul.smul]
-
-  mul_smul := by
-    intros
-    ext
-    apply mul_assoc
 }
 
 instance [Semiring α] : Module α (Tuple α n) :=
 {
-  smul := fun a x => ⟨fun i => a * x i⟩,
+  --smul := fun a x => ⟨fun i => a * x i⟩,
   smul_add := by intros a x y; ext i; apply mul_add,
   add_smul := by intros a b x; ext i; apply add_mul,
   mul_smul := by intros a b x; ext i; apply mul_assoc,
