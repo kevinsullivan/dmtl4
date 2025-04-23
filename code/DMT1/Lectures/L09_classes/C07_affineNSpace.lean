@@ -808,18 +808,72 @@ instance [AddMonoid α]: AddAction (Vc α n) (Pt α n) :=
 theorem Pt.add_vadd_def [Add α] (v1 v2 : Vc α n) (p : Pt α n) :
   (v1 + v2) +ᵥ p = ⟨ v1.1 + v2.1 + p.1 ⟩ := rfl
 
+
+/- @@@
+-- What I got wrong.
+```lean
 @[simp]
 theorem Pt.vsub_vadd'_def
   [Add α]
   [Sub α]
   (p1 p2 : Pt α n) :
-  (p1 -ᵥ p2) +ᵥ p1 = ⟨ (p1.1 - p2.1) + p1.1 ⟩ :=
+   -- match on this
+  (p1 -ᵥ p2) +ᵥ p1 =
+  -- transofrm to this
+  ⟨ (p1.1 - p2.1) + p1.1 ⟩ :=
   by
     ext i
     simp only [Pt.vadd_def]
     simp only [Pt.vsub_def]
+```
+@@@ -/
+
+/- @@@
+Itt's still wrong.
+
+-- The right code
+-- The weird proof was never right
+```lean
+@[simp]
+theorem Pt.vsub_vadd'_def
+  [Add α]
+  [Sub α]
+  (p1 p2 : Pt α n) :
+   -- match on this
+  (p1 -ᵥ p2) +ᵥ p2 =
+  -- transofrm to this
+  ⟨ (p1.1 - p2.1) + p1.1 ⟩ :=
+  by
+    simp only [Pt.vadd_def]
+    simp only [Pt.vsub_def]
+    _
+```
+@@@ -/
+
+/- @@@
+There now. Behold. Correct is simpler
+@@@ -/
+@[simp]
+theorem Pt.vsub_vadd'_def
+  [Add α]
+  [Sub α]
+  (p1 p2 : Pt α n) :
+   -- match on this
+  (p1 -ᵥ p2) +ᵥ p2 =
+  -- transofrm to this
+  ⟨ (p1.1 - p2.1) + p2.1 ⟩ :=
+  by
+    simp only [Pt.vadd_def]
+    simp only [Pt.vsub_def]
 
 
+/-
+    simp only [Pt.vadd_def]
+-/
+
+    -- ext i
+    -- simp only [Pt.vadd_def]
+    -- simp only [Pt.vsub_def]
 
 
 -- AddTorsor (G : outParam Type*) (P : Type*) [AddGroup G] extends AddAction G P, VSub G P
@@ -837,10 +891,50 @@ AddTorsor (Vc α n) (Pt α n) :=
   zero_vadd := AddAction.zero_vadd
   add_vadd := AddAction.add_vadd
   vsub:= VSub.vsub
-
   vsub_vadd':= by
+    --  ∀ (p₁ p₂ : Pt α n), (p₁ -ᵥ p₂) +ᵥ p₂ = p₁
     intros p1 p2
-    simp [Pt.vsub_vadd_def]
+    _
+
+
+/- @@@
+``lean
+@[simp]
+theorem Pt.vsub_vadd'_def [Add α] [Sub α]
+  (p1 p2 : Pt α n) :
+  (p1 -ᵥ p2) +ᵥ p1 =
+  ⟨ (p1.1 - p2.1) + p1.1 ⟩ :=
+  by
+    ext i
+    simp only [Pt.vadd_def]
+    simp only [Pt.vsub_def]
+```
+
+
+-- Goal: (p1 -ᵥ p2) +ᵥ p2 = p1
+-- vsub_vadd'_def : (p1 -ᵥ p2) +ᵥ p1 = ⟨ (p1.1 - p2.1) + p1.1 ⟩
+```
+
+It's my definition of vsub_vadd'_def that's wrong. It
+should prove (p1 -ᵥ p2) +ᵥ p2 ... Test: Let's go fix it.
+@@@ -/
+
+  vsub_vadd'_def, is  (p1 -ᵥ p2) +ᵥ p1 =
+  -- transofrm to this
+  ⟨ (p1.1 - p2.1) + p1.1 ⟩
+
+    simp [Pt.vsub_vadd'_def]
+    _
+/-
+  Pt.vsub_vadd'_def.{u}
+      {n : ℕ}
+      {α : Type u}
+      [Add α]
+      [Sub α]
+      (p1 p2 : Pt α n) :
+    (p1 -ᵥ p2) +ᵥ p1 =
+    { toRep := p1.toRep - p2.toRep + p1.toRep }
+  -/
 
   vadd_vsub':=
     _
