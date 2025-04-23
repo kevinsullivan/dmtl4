@@ -7,25 +7,67 @@ import Mathlib.LinearAlgebra.AffineSpace.Defs
 import Mathlib.Algebra.Module.Pi
 
 
+
 /- @@@
 # α Affine n-Space
+
+We'll assume *n* is a natural number representing the
+dimension of the space we want to construct.
 @@@ -/
 
-/- @@@
-## Carrier Type and Dimension
-
-Throughout the rest of this file, let α represent any type and
-*n* any natural number dimension of a space.
-@@@ -/
 variable
-  {α : Type u}
   {n : Nat}
-
-
+  {α : Type u}
 
 /- @@@
-## Scalars: α
+## Scalars
+
+Throughout the rest of this file, let α represent any type that
+we intend to use as scalars, and let  *n* represent the dimension
+of any tuple or vector or affine space we wish to construct.
+
+Lean already knows a lot of the structures on such types as the
+rational, ℚ. For example, Lean's libraries already enable it to
+synthesize an *AddGroup* structure on ℚ. That means we already
+have definitions of not only the standard arithmetic operations
+(such as *add*, with notation *+*) on ℚ, but we also have *proofs*
+of, e.g., all of the group axioms for ℚ (add is associative, etc).
 @@@ -/
+
+-- #synth (AddGroup ℚ)
+-- #synth (HAdd ℚ ℚ ℚ)
+
+
+
+---------------------------------------------------
+
+/- @@@
+## Fin n → α
+
+Lean also has predefined algebraic structures on *Fin n → α*.
+Here for example we confirm that Lean can synthesize an additive
+group structure on (Fin n → α). That means first we can add, negate,
+subtract, and scalar multiply (by Nat or Int) these things. Second,
+we can have proofs of all the (here) *group axioms* for (Fin n → α).
+@@@ -/
+
+-- #synth (AddGroup (Fin (_ : Nat) → ℚ))
+
+/- @@@
+There's more going on here than meets the eye. To synthesize a
+group structure on *Fin n → α* depends on there being a group
+structure on *α* itself. As an example, that (Fin n → α) tuple
+encodings forms a group means the must be addition on (Fin n → α).
+Lean defines that by *pointwise* addition using the addition that
+is defined for the scalar type, α, requiring of course that there
+also be an addition operation for individual α values. Of course
+that is the case when α = ℚ, as we've already seen.
+@@@ -/
+
+-- #synth (AddCommSemigroup (Fin (_ : Nat) → ℚ))
+-- #synth (AddCommMonoid (Fin (_ : Nat) → ℚ))
+-- #synth (HAdd ℚ ℚ ℚ)     --yes
+-- #synth (HAdd (Fin (_ : Nat) → ℚ) (Fin (_ : Nat) → ℚ) (Fin (_ : Nat) → ℚ)) --no
 
 /- @@@
 ## α n-tuples
@@ -39,9 +81,23 @@ instance [Repr α] : Repr (Fin n → α) where
   reprPrec t _ := repr (List.ofFn t)
 
 
+/- @@@
+We're going to want to have a definition of zero for
+Fin n → α. It's not pre-defined in Lean's libraries.
+@@@ -/
+
+-- No need to define any of this for (Fin n → ℚ)
+-- #synth (Zero (Fin n → ℚ))
+-- #synth (Add (Fin n → ℚ))
+-- #synth (HAdd (Fin n → ℚ) (Fin n → ℚ) (Fin n → ℚ))
+
+-- We *do* need a definition theorem for (0 : Fin n → α)
+theorem Zero.zero_def [Zero α] :
+    (0 : Fin n → α) = fun _ => 0 := rfl
+
+
 ------------------------------------------------------------
--- Tuples
-------------------------------------------------------------
+
 
 /- @@@
 ## Tuples: Tuple α n
@@ -61,6 +117,7 @@ structure Tuple (α : Type u) (n : Nat) where
   toRep : Fin n →  α
 deriving Repr
 
+
 /- @@@
 ### Values
 @@@ -/
@@ -73,6 +130,9 @@ instance [Repr α] : Repr (Tuple α n) where
 #### Zero
 @@@ -/
 
+-- instance [Zero (Fin n → α)] : Zero (Tuple α n) where
+--   zero := ⟨ 0 ⟩
+
 instance [Zero α] : Zero (Tuple α n) where
   zero := ⟨ 0 ⟩
 
@@ -81,47 +141,86 @@ When you introduce notation like +, -, •, or +ᵥ, you’re really using synta
 typeclass-based operations like HAdd, HSub, SMul, VAdd, VSub, etc. To support these notations
 well, and make them usable in proofs, you should pair them with definition theorems that make
 the meaning of the operation transparent to the simplifier, the rewriter, and the human reader.
-Zero, like some other classes, is its own notation class. Here is a nice way to write def thms.
+Zero, like some other classes, is its own notation class.
 @@@ -/
 
--- theorem Vc.vadd_pt_def [Add α] (v : Vc α n) (p : Pt α n) : v +ᵥ p = ⟨v.1 + p.1⟩ := rfl
-
-
+theorem Tuple.zero_def [Zero α] : (0 : Tuple α n) = ⟨ (0 : Fin n → α) ⟩ := rfl
 
 /- @@@
 ### Operations
 @@@ -/
 
+
 /- @@@
 #### Add
+
+Here we Tuples in terms of addition of their underlying
+(Fin n → α) representations, which Lean knows how to do
+provided it has a way to add individual α values. That is
+providing by passing in an instance of the [Add α] class.
+
 @@@ -/
 
-
--- Define componentwise addition
 instance [Add α] : Add (Tuple α n) where
   add t1 t2 := ⟨ t1.1 + t2.1 ⟩   -- Fin n → α add on right
 
--- Support for `+` notation using HAdd
+/- @@@
+This is important. The *Add* class defines the arithmetic.
+One should *also* instantial any separate *notation-defining*
+class. The `+` notation is actually defined by the *HAdd*
+
+Support for `+` notation using HAdd class. They key idea to
+observe here is that we want the hAdd operation (addition
+using `+`) to use precisely the same definition of Tuple
+addition defined in the *Add* class. The pattern to use is
+first to define the arithmetic class, and then to define
+the notation class, ensuring that it's notational operator
+is simply *delegating* to the actual arithmetic definition.
+Follow this pattern thoughout, and going forward.
+@@@ -/
 instance [Add α] : HAdd (Tuple α n) (Tuple α n) (Tuple α n) where
   hAdd := Add.add
 
--- Definition theorem for simplification and rewriting
--- @[simp]
-theorem tuple_add_def [Add α] (t1 t2 : Tuple α n) :
+/- @@@
+Finally, write a corresponding *definition theorem* to provide
+a known basis for rewriting and simplifying expressions using
+the concrete notation. If you want the *simp* tactic to know
+about and use this rewriting rule, annotate the definition with
+*@[simp]*. We prefer to disable most such automations here so
+as to see exactly what's going on at all times.
+
+@@@ -/
+
+theorem Tuple.add_def [Add α] (t1 t2 : Tuple α n) :
   t1 + t2 = ⟨ t1.1 + t2.1 ⟩ := rfl
+
+/- @@@
+HAdd is synthesized, but not its definition theorem. Marking
+it as a simp axioms mean it'll be used as part of simp.
+@@@ -/
+@[simp]
+theorem Tuple.hAdd_def [Add α] (x y : Tuple α n) :
+  HAdd.hAdd x y = ⟨ x.1 + y.1 ⟩ := rfl
 
 
 /- @@@
 #### Neg
 
-PT: There is no separate HNeg like there is for binary HAdd, HSub,
-etc., because unary negation is always homogeneously typed.
+Now another small complication. Not every arithmetic-defining
+class, such as *Add*, has a separate notation class. There is
+no separate notation defining class (which would presumably be
+called *HNeg*) like there is for binary HAdd. Rather, the *-*
+notation is provided by *Neg* itself. Separate notation classes
+are used when there are both homogeneous versions of operations
+(such as + : α → α → α) and heterogeneous (e.g., + : α → β → γ).
+Unary negation, being unary, is always homogeneously typed, so
+no separate notation class is needed or provided.
 @@@ -/
 
 instance [Neg α] : Neg (Tuple α n) where
    neg t := ⟨ -t.1 ⟩
 
-theorem tuple_neg_def [Neg α] (t : Tuple α n) :
+theorem Tuple.neg_def [Neg α] (t : Tuple α n) :
   -t = ⟨ -t.1 ⟩ := rfl
 
 
@@ -132,8 +231,13 @@ theorem tuple_neg_def [Neg α] (t : Tuple α n) :
 instance [Sub α] : Sub (Tuple α n) where
   sub t1 t2 := ⟨t1.1 - t2.1⟩
 
+instance [Sub α] : HSub (Tuple α n) (Tuple α n) (Tuple α n) :=
+{
+  hSub := Sub.sub
+}
+
 -- @[simp]
-theorem tuple_sub_def [Sub α] (t1 t2 : Tuple α n) :
+theorem Tuple.sub_def [Sub α] (t1 t2 : Tuple α n) :
   t1 - t2 = ⟨t1.1 - t2.1⟩ := rfl
 
 /- @@@
@@ -145,9 +249,30 @@ SMul is its own notation class.
 instance [SMul α α] : SMul α (Tuple α n) where
   smul a t := ⟨ a • t.1 ⟩
 
+/- @@@
+Yet more complexity: Lean will automatically infer an HSMul
+(notation-providing) instance from this SMul instance via a
+SMul.toHSMul instance know to Lean. So there's no need, and
+it would be undesirable to define HSMul. By contrast, Lean
+does not automatically derive an *HAdd* instances from *Add*,
+so we defined *HAdd* explicitly. We've thus commented out the
+notation class definition that we might otherwise write here.
+@@@ -/
+-- instance [SMul α α] : HSMul α (Tuple α n) (Tuple α n) :=
+-- {
+--   hSMul := SMul.smul
+-- }
+
+/- @@@
+We do still want to give ourselves a well known operation for
+reducing a • t on tuples to the level of Fin n → α operations,
+which we do with this *definition theorem*.
+@@@ -/
 -- @[simp]
-theorem tuple_smul_def [SMul α α] (a : α) (t : Tuple α n) :
+theorem Tuple.smul_def [SMul α α] (a : α) (t : Tuple α n) :
   a • t = ⟨ a • t.1 ⟩ := rfl
+
+
 
 
 /- @@@
@@ -155,7 +280,7 @@ theorem tuple_smul_def [SMul α α] (a : α) (t : Tuple α n) :
 @@@ -/
 
 /- @@@
-#### AddCommSemigroup
+#### AddCommSemigroup (Tuple α n)
 @@@ -/
 
 instance [AddCommSemigroup α] : AddCommSemigroup (Tuple α n) :=
@@ -163,7 +288,27 @@ instance [AddCommSemigroup α] : AddCommSemigroup (Tuple α n) :=
 /- @@@
 Here's a key example of lifing *proofs* from the
 level of concrete representation to the level of
-*Tuple* objects. We strip the *Tuple* abstraction
+*Tuple* objects.
+
+In particular, we'll prove that our tuples form an
+additive, commutative semigroup, which is to say that
+we'll construct proofs of the axioms for our *Tuples*
+from corresopnding proofs for *Fin n → α*.
+
+Those proofs, in turn, will come from an instance
+of *AddCommSemigroup *(Fin n → α)* that Lean will
+synthesize for us given that the necessary operations
+are already available on scalar (α) values. For that,
+we tell Lean to provide a *[AddCommSemigroup α]* class
+instance, which it can also synthesize on its own.
+
+
+The proofs of commutative and associativity of addition
+on *Tuple* values are then constructed using the proofs
+of the corresponding properties for (Fin n → α) concrete
+representation objects.
+
+strip the *Tuple* abstraction
 using the extensionality axiom for *Tuple* then
 apply the corresponding theorem from the level of
 the concrete representation. The *ext* tactic is
@@ -172,42 +317,72 @@ to the *Tuple* type definition. Use *ext* instead
 of *apply congrArg Tuple.mk*. Now you know what it
 actually does.
 @@@ -/
-  add_comm := by     -- So you can see the steps
-    intros
-    ext
+  add_comm := by
+    intro a b
+    simp [Tuple.add_def]
     apply add_comm
 
-  -- We can write such tactic scripts as one-liners
-  add_assoc := by intros; ext; apply add_assoc
-}
-
 /- @@@
-#### AddCommMonoid
+Here we see the use of our definition axiom. If
+we replace *simp [Tuple.add_def]* with *ext* then
+the extensionality principle will be applied, but
+it will erase abstractions all the way to scalars,
+not just one level to *Fin n → α*. Consistent with
+our wanting a strictly layered architecture here,
+we will prefer to strip abstractions just one level
+and to use the proofs and values available there.
+
+EXERCISE: Give it a try and in each case study the
+goal after applying either variant. Hover over the
+elements of the goal to see that in one case you've
+got a proof to construct involving (Fin n → α) and
+in the other case, involving scalars. There's an
+*add_comm* proof available in either case, but one
+applies to *Fin n → α* values while the other is on
+bare *α* values. It's important to know exactly how
+things are simplifying!
 @@@ -/
 
-instance [AddCommMonoid α] : AddCommMonoid (Tuple α n) :=
-{
-  add := Add.add
-  zero := Zero.zero
-  nsmul := nsmulRec
-  add_assoc := by intros; ext; apply add_assoc
-  zero_add := by intros; ext; apply zero_add
-  add_zero := by intros; ext; apply add_zero
-  add_comm := by intros; ext; apply add_comm
+  -- We can write such tactic scripts as one-liners
+  add_assoc := by
+    intros
+    simp [Tuple.add_def]
+    apply add_assoc
 }
 
 /- @@@
-#### Module over α
+#### AddCommMonoid (Tuple α n)
+@@@ -/
+
+instance [AddCommMonoid α]: AddCommMonoid (Tuple α n) :=
+{
+  nsmul := nsmulRec
+
+  zero_add := by
+    intros
+    simp [Tuple.add_def, Tuple.zero_def]
+
+  add_zero := by
+    intros
+    simp [Tuple.add_def, Tuple.zero_def]
+}
+
+-- CLASS 4/22 ENDED HERE
+
+/- @@@
+#### Module α (Tuple α n)
 @@@ -/
 
 instance [Semiring α] : Module α (Tuple α n) :=
 {
-  smul_add := by intros a x y; ext i; apply mul_add,
-  add_smul := by intros a b x; ext i; apply add_mul,
-  mul_smul := by intros a b x; ext i; apply mul_assoc,
-  one_smul := by intros x; ext i; apply one_mul,
-  zero_smul := by intros x; ext i; apply zero_mul,
-  smul_zero := by intros a; ext i; apply mul_zero
+  smul_add := by
+    intros
+    simp [Tuple.smul_def]
+  add_smul := by intros; simp [Tuple.smul_def, Tuple.add_def]; apply add_mul,
+  mul_smul := by intros; simp [Tuple.smul_def, Tuple.add_def]; apply mul_assoc,
+  one_smul := by intros; simp [Tuple.smul_def]
+  zero_smul := by intros; simp [Tuple.zero_def, Tuple.smul_def]
+  smul_zero := by intros a; simp [Tuple.zero_def, Tuple.smul_def]
 }
 
 
@@ -288,8 +463,8 @@ instance [Zero α]: Zero (Vc α n) where
   zero := ⟨ 0 ⟩
 
 -- @[simp]
-theorem vec_zero_def [Zero α] :
-  (0 : Vc α n) = ⟨ 0 ⟩ := rfl
+theorem Vc.zero_def [Zero α] :
+  (0 : Vc α n) = ⟨ ( 0 : Tuple α n) ⟩ := rfl
 
 /- @@@
 ### Operations
@@ -304,17 +479,24 @@ instance [Add α] : Add (Vc α n) where
   add t1 t2 := ⟨ t1.1 + t2.1 ⟩
 
 
--- Support for `+` notation using HAdd
-instance [Add α] : HAdd (Vc α n) (Vc α n) (Vc α n) where
-  hAdd := Add.add
-
-
--- Definition theorem for simplification and rewriting
--- @[simp]
-theorem vc_add_def [Add α] (t1 t2 : Vc α n) :
+-- SIMP ENABLED HERE
+@[simp]
+theorem Vc.add_def [Add α] (t1 t2 : Vc α n) :
   t1 + t2 = ⟨ t1.1 + t2.1 ⟩ := rfl
 
+/- @@@
+#### HAdd
+@@@-/
 
+-- Support for Vc `+` notation using HAdd
+instance [Add α]  : HAdd (Vc α n) (Vc α n) (Vc α n) :=
+{
+  hAdd := Add.add
+}
+
+@[simp]
+theorem Vc.hAdd_def [Add α] (v w : Vc α n) :
+  HAdd.hAdd v w = ⟨ v.1 + w.1 ⟩ := rfl
 
 /- @@@
 #### Neg
@@ -327,7 +509,7 @@ theorem vc_add_def [Add α] (t1 t2 : Vc α n) :
 instance [Neg α] : Neg (Vc α n) where
    neg t := ⟨ -t.1 ⟩
 
-theorem vc_neg_def [Neg α] (t : Tuple α n) :
+theorem Vc.neg_def [Neg α] (t : Tuple α n) :
   -t = ⟨ -t.1 ⟩ := rfl
 
 
@@ -340,13 +522,8 @@ instance [Sub α] : Sub (Vc α n) where
   sub t1 t2 := ⟨t1.1 - t2.1⟩
 
 -- @[simp]
-theorem vc_sub_def [Sub α] (t1 t2 : Vc α n) :
+theorem Vc.sub_def [Sub α] (t1 t2 : Vc α n) :
   t1 - t2 = ⟨t1.1 - t2.1⟩ := rfl
-
-
-/- @@@
-#### SMul
-@@@-/
 
 
 /- @@@
@@ -359,12 +536,8 @@ instance [SMul α α] : SMul α (Vc α n) where
   smul a t := ⟨ a • t.1 ⟩
 
 -- @[simp]
-theorem vc_smul_def [SMul α α] (a : α) (t : Vc α n) :
+theorem Vc.smul_def [SMul α α] (a : α) (t : Vc α n) :
   a • t = ⟨ a • t.1 ⟩ := rfl
-
-
-instance [SMul α α] : SMul α (Vc α n) where
-  smul a t := ⟨ a • (t.1 : Tuple α n) ⟩
 
 
 /- @@@
@@ -395,7 +568,7 @@ instance [AddSemigroup α] : AddSemigroup (Vc α n) :=
   add := Add.add
   add_assoc := by
     intros a b c
-    simp [vc_add_def]
+    simp [Vc.add_def]
     apply add_assoc
 }
 
@@ -542,265 +715,137 @@ There are no distinguished point values.
 
 /- @@@
 #### VSub
+
+We're not going to define
 @@@ -/
 
-instance [Sub α] [VSub α α] : VSub (Vc α n) (Pt α n) :=
+instance [Sub α] : VSub (Tuple α n) (Tuple α n) :=
 {
   vsub p2 p1 := ⟨ p2.1 - p1.1 ⟩
 }
 
--- @[simp]
-theorem pt_vsub_def [Sub α] [VSub α α] (t1 t2 : Vc α n) :
-  t1 - t2 = ⟨t1.1 - t2.1⟩ := rfl
+theorem Tuple.vsub_def [Sub α] (p2 p1 : Tuple α n) :
+  p2 -ᵥ p1 = ⟨ p2.1 - p1.1 ⟩ := rfl
 
+instance [Sub α] : VSub (Vc α n) (Pt α n) :=
+{
+  vsub p2 p1 := ⟨ p2.1 - p1.1 ⟩
+}
+
+theorem Pt.vsub_def [Sub α] (p2 p1 : Pt α n) :
+  p2 -ᵥ p1 = ⟨ p2.1 - p1.1 ⟩ := rfl
+
+-- instance [Sub α] [VSub α α] : VSub (Tuple α n) (Tuple α n) :=
+-- {
+--   vsub p2 p1 := ⟨ p2.1 - p1.1 ⟩
+-- }
+
+instance [Sub α] : HSub (Tuple α n) (Tuple α n) (Tuple α n) where
+  hSub p q := p - q
 
 /- @@@
 #### VAdd
 @@@ -/
 
+-- +ᵥ notation
+instance [Add α] : VAdd (Tuple α n) (Tuple α n) :=
+{
+  vadd := Add.add
+}
+
+-- SIMP ENABLED
+@[simp]
+theorem Tuple.vadd_def [Add α] (v : Tuple α n) (p : Tuple α n) :
+  v + p = ⟨ v.1 + p.1 ⟩ := rfl
+
+
+-- theorem Tuple.vadd_def [Add α] (t v : Tuple α n) : t + v = ⟨ t.1 + v.1 ⟩ := rfl
+
+-- defines +ᵥ
 instance [Add α] : VAdd (Vc α n) (Pt α n) where
   vadd v p := ⟨ v.1 + p.1 ⟩
 
+-- SIMP ENABLED
+@[simp]
+theorem Pt.vadd_def [Add α] (v : Vc α n) (p : Pt α n) :
+  v +ᵥ p = ⟨ v.1 + p.1 ⟩ := rfl
 
--- @[simp]
-theorem pt_vadd_def [Add α] (v : Vc α n) (p : Pt α n) :
-  v +ᵥ p = ⟨v.1 + p.1⟩ := rfl
-
-
-/- @@@
-HAdd stuff?
-@@@ -/
-#synth HAdd ℚ ℚ ℚ
-
-instance [Add α] : HAdd (Fin n → α) (Fin n → α) (Fin n → α) :=
-{
-  hAdd t v := v + t
-}
-
-instance [Add α] : HAdd (Tuple α n) (Tuple α n) (Tuple α n) :=
-{
-  hAdd t1 t2 := ⟨ t1.1 + t2.1 ⟩
-}
-
-instance [Add α] : HAdd (Vc α n) (Pt α n) (Pt α n) :=
-{
-  hAdd v p := ⟨ v.1 + p.1 ⟩
-}
-
--- [VAdd α α] [HAdd α α α]
-instance [Group α] [VAdd α α] [HAdd (Vc α n) (Pt α n) (Pt α n)] [Nonempty (Pt α n)] [AddGroup (Vc α n)]  :
-  AddTorsor (Vc α n) (Pt α n) :=
-{
-
-  vadd v p := ⟨v.1 + p.1⟩
-
-  zero_vadd := by
-    intros p
-    apply zero_vadd
-    _
-
-  add_vadd := by
-    _
-
-  vsub:= by
-    _
-
-  vsub_vadd':= by
-    _
-
-  vadd_vsub':= by
-    _
-}
 
 /- @@@
 ## α Affine n-Spaces
 @@@ -/
 
-
-
-
-/- @@@
-Appendix: Operations and Structures Available on Scalars
-@@@ -/
-
-/- @@@
-### Operations
-@@@ -/
-
-#synth (Add K)
-#synth (Neg K)
-#synth (Sub K)
-#synth (Inv K)
-#synth (Div K)
-
-/- @@@
-#### K Additive Structures on K
-@@@ -/
-
-#synth (AddMonoid K)
-#synth (AddGroup K)
-#synth (AddCommGroup K)
-#synth (Semigroup K)
-#synth (Module K K)
-#synth (Field K)
-
-
-/- @@@
-#### K Affine Structure on K
-@@@ -/
-#synth (AddTorsor K K)
-
-
-/- @@@
-#### K Multiplicative Structure on K
-@@@ -/
-
-#synth (Monoid K)
-#synth (CommMonoid K)
-#synth (Semiring K)
-#synth (CommSemiring K)
-#synth (Ring K)
-#synth (CommRing K)
-
--- #synth (Group K)     -- nope
--- #synth (CommGroup K) -- nope
-
-
-
-
-
-/- @@@
-### Starter Example
-
-To give you a good start on the overall task, here's
-a completed construction showing that our Vc vectors
-form an additive monoid. We already have a definition
-of *+*. We'll need a proof that *+* is associative, so
-let's see that first.
-@@@ -/
-
-theorem vcAddAssoc {α : Type u} {n : Nat} [Ring α]:
-  ∀ (v1 v2 v3 : Vc α n), v1 + v2 + v3 = v1 + (v2 + v3) := by
-  -- Assume three vectors
-  intro v1 v2 v3
-  -- strip Vc and Tuple abstraction
-  apply congrArg Vc.mk
-  apply congrArg Tuple.mk
-  /- @@@
-  NB: We now must show equality of  underlying Fin n → α
-  *functions*. For this we're going to need an axiom that
-  is new to us: the axiom of *functional extensionality*.
-  What it says is if two functions produce the same outputs
-  for all inputs then they are equal (even if expressed in
-  very different ways). Look carefully at the goal before
-  and after running *funext*.
-  @@@ -/
-  apply funext
-  -- Now prove values are equal for arbitrary index values
-  intro i
-  -- This step is not necessary but gives better clarity
-  simp [HAdd.hAdd]
-  -- Finally appeal to associativity of α addition
-  apply add_assoc
-  /- @@@
-  Go read the add_assoc theorem and puzzle through how
-  its application here finishes the proof.
-  @@@ -/
-
-/- @@@
-With that, we're two steps (*add* and *add_assoc*) closer
-to showing that our n-Dimensional vectors form a Monoid (as
-long as α itself has the necessary properties (e.g., that the
-α + is associative). We ensure that by adding the precondition
-that α be a Ring. That will ensure that α has all of the usual
-arithmetic operations and proofs of properties.
-@@@ -/
-
-instance (α : Type u) (n : Nat) [Ring α]: AddMonoid (Vc α n) :=
+instance [AddMonoid α]: AddAction (Vc α n) (Pt α n) :=
 {
-  -- add is already available from the Add Vc instance.
+  --  (p : Pt α n), 0 +ᵥ p = p
+  zero_vadd := by
+    intro
+    -- to study in part by stepping through
+    --
+    simp only [Pt.vadd_def]
+    simp [Tuple.add_def]
+    /- @@@
+    Without the only, Lean will go on to simp the tuples, too.
+    @@@ -/
+    simp [Vc.zero_def]
+    simp [Tuple.zero_def]
 
-  add_assoc := vcAddAssoc   -- The proof we just constructed
-
-  zero := 0                 -- The Vc zero vector
-
-  zero_add := by            -- ∀ (a : Vc α n), 0 + a = a
-    intro a
-    apply congrArg Vc.mk
-    apply congrArg Tuple.mk
-    funext                  -- The tactic version
-    simp [Add.add]
-    rfl
-
-  add_zero :=  by             -- ∀ (a : Vc α n), a + 0 = a
-    intro a
-    apply congrArg Vc.mk
-    apply congrArg Tuple.mk
-    funext
-    simp [Add.add]
-    rfl
-
-  nsmul := nsmulRec
-}
-
-/- @@@
-Yay. Vc forms an additive monoid.
-@@@ -/
-
-/- @@@
-### Your Job
-
-TODO: Continue with the main task. A precondition for forming
-an additive torsor is to show that Vc forms an additive group.
-You might want to start with that!
-@@@ -/
-
-instance {α : Type u} {n : Nat} [Ring α]: AddGroup (Vc α n) :=
-{
-}
-
-instance {α : Type u} {n : Nat} [Ring α]: AddTorsor (Vc α n) (Pt α n) :=
-{
+  -- ∀ (g₁ g₂ : Vc α n) (p : Pt α n), (g₁ + g₂) +ᵥ p = g₁ +ᵥ g₂ +ᵥ p
+  -- GOOD EXERCISE
+  add_vadd :=  by
+    intros
+    simp only [Pt.vadd_def]
+    simp [Tuple.add_def]
+    apply add_assoc
 }
 
 
-/- @@@
-## Alternative Rep: Finsupp: ℕ →₀ K
 
-### Data Type
-In Lean, (ℕ →₀ K) is notation for Finsupp ℕ K,
-the type of functions from ℕ to K that are defined
-on only a finite number of ℕ inputs. That set is
-called the *support* of such a function. The name
-of type thus makes sense: It's the type of functions
-with finite support. The index set, here ℕ, can be
-any type, not just *Fin n*.
+#synth (AddMonoid (Vc ℚ n))
 
-### Structures
+-- WIP
+@[simp]
+theorem Pt.add_vadd_def [Add α] (v1 v2 : Vc α n) (p : Pt α n) :
+  (v1 + v2) +ᵥ p = ⟨ v1.1 + v2.1 + p.1 ⟩ := rfl
 
-Lean pre-defines a range of important structures
-on Finsupp types.
-@@@ -/
+@[simp]
+theorem Pt.vsub_vadd'_def
+  [Add α]
+  [Sub α]
+  (p1 p2 : Pt α n) :
+  (p1 -ᵥ p2) +ᵥ p1 = ⟨ (p1.1 - p2.1) + p1.1 ⟩ :=
+  by
+    ext i
+    simp only [Pt.vadd_def]
+    simp only [Pt.vsub_def]
 
-#synth (AddCommGroup (ℕ →₀ K))
-#synth (Semiring K)
-#synth (Module K (Fin _ → K)) -- Yes with Fin n → K
--- #synth (Module K (ℕ →₀ K))) -- No with ℕ →₀ K
 
-/- @@@
-### Fin n → K vs ℕ →₀ K
 
-Proofs where tuples are represented as *(ℕ →₀ K)* functions
-can be more tedious than with *(Fin n → K)* representations.
-Definining computation is also harder with (ℕ →₀ K).
 
-A benefit is that Lean defines what it means to be a *basis* for
-a space of tuples of type *(ℕ →₀ K)*. We will have to define our
-own notion of basis for spaces using *Fin n → K* tuples. If one
-is working with sparse vectors even in infinite dimensional
-spaces,  ℕ →₀ K, as long as no functions have more than finite
-support.
-@@@ -/
+-- AddTorsor (G : outParam Type*) (P : Type*) [AddGroup G] extends AddAction G P, VSub G P
+-- Is there already one out there that Lean will synth?
+instance
+
+[Nonempty (Pt α n)]
+[AddGroup (Vc α n)]
+[AddAction (Vc α n) (Pt α n)]
+[VSub (Vc α n) (Pt α n)]
+:
+AddTorsor (Vc α n) (Pt α n) :=
+{
+
+  zero_vadd := AddAction.zero_vadd
+  add_vadd := AddAction.add_vadd
+  vsub:= VSub.vsub
+
+  vsub_vadd':= by
+    intros p1 p2
+    simp [Pt.vsub_vadd_def]
+
+  vadd_vsub':=
+    _
+}
+
 
 /- @@@
 Ack. Thank you: Rob_23oba.
