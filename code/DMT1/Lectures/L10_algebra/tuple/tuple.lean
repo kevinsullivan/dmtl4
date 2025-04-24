@@ -6,11 +6,11 @@ import Mathlib.Algebra.Module.Basic
 import Mathlib.LinearAlgebra.AffineSpace.Defs
 import Mathlib.Algebra.Module.Pi
 
-import DMT1.Lectures.L10_algebra.Scalar.scalar
+import DMT1.Lectures.L10_algebra.scalar.scalar
 
 open DMT1.Algebra.Scalar
 
-namespace DMT1.Algebra.Tuple
+namespace DMT1.Algebra.Tuples
 
 universe u
 variable
@@ -107,7 +107,6 @@ Heterogeneous addition. This type class provides the +ᵥ notation.
 instance [Add α] : VAdd (Tuple α n) (Tuple α n) where
   vadd t v := ⟨ t.1 + v.1 ⟩
 
--- @[simp]
 theorem Tuple.vadd_def [Add α] (v : Tuple α n) (p : Tuple α n) :
   v + p = ⟨ v.1 + p.1 ⟩ := rfl
 
@@ -168,6 +167,7 @@ This class provides the -ᵥ notation for tuples?
 We'll keep it here for now. The operation makes sense of course.
 @@@ -/
 
+-- TODO? Use Sb.sub?
 instance [Sub α] : VSub (Tuple α n) (Tuple α n) :=
 { vsub p2 p1 := ⟨ p2.1 - p1.1 ⟩ }
 
@@ -219,10 +219,18 @@ theorem Tuple.smul_def [SMul α α] (a : α) (t : Tuple α n) :
 
 For zero_add and add_zero
 @@@ -/
+
+#check AddMonoid
+
 instance [AddMonoid α] : AddMonoid (Tuple α n) :=
 {
   nsmul := nsmulRec
-  zero_add := by intros; ext; apply zero_add
+  zero_add :=
+    by
+      intros
+      ext i
+      apply zero_add
+
   add_zero := by intros; ext; apply add_zero
   add_assoc := by intros; ext; apply add_assoc
 }
@@ -242,7 +250,7 @@ instance [AddMonoid α] [Neg α] [Sub α] : SubNegMonoid (Tuple α n) :=
   sub_eq_add_neg :=
     by
       intros a b
-      simp [Tuple.sub_def]
+      simp only [Tuple.sub_def]
       simp [Tuple.neg_def]
       simp [Tuple.vadd_def]
   }
@@ -389,4 +397,4 @@ def t1 : Tuple ℚ 3 := ⟨ f1 ⟩
 #eval (3 : ℚ) • (t1 + (1/2 :ℚ) • t1 )   --HSMul (notation)
 
 
-end  DMT1.Algebra.Tuple
+end  DMT1.Algebra.Tuples

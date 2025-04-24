@@ -4,13 +4,13 @@ import Mathlib.Algebra.Group.Defs
 import Mathlib.Algebra.Module.Basic
 import Mathlib.LinearAlgebra.AffineSpace.Defs
 import Mathlib.Algebra.Module.Pi
-import DMT1.Lectures.L10_algebra.Tuple.tuple
-import DMT1.Lectures.L10_algebra.Vector.vector
+import DMT1.Lectures.L10_algebra.tuple.tuple
+import DMT1.Lectures.L10_algebra.vector.vector
 
 namespace DMT1.Algebra.Point
 
 open DMT1.Algebra.Vector
-open DMT1.Algebra.Tuple
+open DMT1.Algebra.Tuples
 
 universe u
 variable

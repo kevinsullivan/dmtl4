@@ -4,11 +4,11 @@ import Mathlib.Algebra.Group.Defs
 import Mathlib.Algebra.Module.Basic
 import Mathlib.LinearAlgebra.AffineSpace.Defs
 import Mathlib.Algebra.Module.Pi
-import DMT1.Lectures.L10_algebra.Tuple.tuple
-
-open DMT1.Algebra.Tuple
+import DMT1.Lectures.L10_algebra.tuple.tuple
 
 namespace DMT1.Algebra.Vector
+
+open DMT1.Algebra.Tuples
 
 universe u
 variable
@@ -42,6 +42,7 @@ deriving Repr
 instance [Zero α]: Zero (Vc α n) where
   zero := ⟨ 0 ⟩
 
+-- TODO
 -- @[simp]
 theorem Vc.zero_def [Zero α] :
   (0 : Vc α n) = ⟨ ( 0 : Tuple α n) ⟩ := rfl

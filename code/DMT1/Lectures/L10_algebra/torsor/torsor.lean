@@ -1,4 +1,3 @@
-import Init.Data.Repr
 import Mathlib.Data.Rat.Defs
 import Mathlib.Algebra.Group.Defs
 import Mathlib.Algebra.Module.Basic
@@ -12,6 +11,7 @@ namespace DMT1.Lecture.Torsor
 
 open DMT1.Algebra.Vector
 open DMT1.Algebra.Point
+open DMT1.Algebra.Tuples
 
 universe u
 variable
@@ -32,14 +32,21 @@ class AddTorsor
   vadd_vsub' : ∀ (g : G) (p : P), (g +ᵥ p) -ᵥ p = g
   -/
 
-#check instAddGroupVc
-#check instAddActionVcPt
-#check instVSubVcPtOfSub
 
+/- @@@
+To see, without other effects, whether Lean will produce an
+instance of a given typeclass in the current environment.
+@@@ -/
 #synth AddAction (Vc ℚ 3) (Pt ℚ 3)
 #synth AddGroup (Vc ℚ 3)
 #synth VSub (Vc ℚ 3) (Pt ℚ 3)
 
+
+/- @@@
+We want to instantiate the torsor typeclass for Vc and Pt.
+So we study its constructor type, as determined by #check.
+Here it is.
+@@@ -/
 #check AddTorsor.mk
 /-
 AddTorsor.mk.{u_1, u_2}
@@ -54,13 +61,11 @@ AddTorsor.mk.{u_1, u_2}
   AddTorsor G P
 -/
 
-
 instance
   [AddGroup α]
   [Nonempty (Pt α n)]
   :
-
-  AddTorsor (Vc α n) (Pt α n) :=
+AddTorsor (Vc α n) (Pt α n) :=
 {
   vsub_vadd':= by
     --  ∀ (p₁ p₂ : Pt α n), (p₁ -ᵥ p₂) +ᵥ p₂ = p₁
