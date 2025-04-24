@@ -70,17 +70,12 @@ AddTorsor (Vc α n) (Pt α n) :=
   vsub_vadd':= by
     --  ∀ (p₁ p₂ : Pt α n), (p₁ -ᵥ p₂) +ᵥ p₂ = p₁
     intros p1 p2
-    simp only [Pt.vsub_vadd_def]
     apply congrArg Pt.mk
-    _
+    apply congrArg Tuple.mk
+    simp [sub_eq_add_neg]
 
+  -- vadd_vsub' : ∀ (g : Vc α n) (p : Pt α n), (g +ᵥ p) -ᵥ p = g
   vadd_vsub':= by
     intro v p
-    simp [Pt.vsub_def]
     _
 }
-
-
-/- @@@
-Ack. Thank you: Rob_23oba.
-@@@ -/

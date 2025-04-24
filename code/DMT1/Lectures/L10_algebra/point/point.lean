@@ -107,14 +107,12 @@ theorem Pt.hVAdd_def [Add α] (v : Vc α n) (p : Pt α n) :
 
 -- set_option pp.rawOnError true
 
-@[simp]
+-- @[simp]
 theorem Pt.vsub_vadd_def
   [Add α]
   [Sub α]
   (p1 p2 : Pt α n) :
-  (p1 -ᵥ p2) +ᵥ p2 = ⟨ (p1.1 - p2.1) + p2.1 ⟩ := by
-  simp only [hVAdd_def]
-  simp only [Pt.vsub_def]
+  (p1 -ᵥ p2) +ᵥ p2 = ⟨ (p1 -ᵥ p2).1 + p2.1 ⟩ := rfl
 
 /- @@@
 Key was to add def theorem for the
