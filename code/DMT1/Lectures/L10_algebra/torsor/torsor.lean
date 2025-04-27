@@ -7,7 +7,7 @@ import Mathlib.Tactic.Group
 
 import DMT1.Lectures.L10_algebra.point.point
 
-namespace DMT1.Lecture.Torsor
+namespace DMT1.Algebra.Torsor
 
 open DMT1.Algebra.Vector
 open DMT1.Algebra.Point
@@ -77,5 +77,7 @@ AddTorsor (Vc α n) (Pt α n) :=
   -- vadd_vsub' : ∀ (g : Vc α n) (p : Pt α n), (g +ᵥ p) -ᵥ p = g
   vadd_vsub':= by
     intro v p
-    _
+    sorry
 }
+
+end DMT1.Algebra.Torsor

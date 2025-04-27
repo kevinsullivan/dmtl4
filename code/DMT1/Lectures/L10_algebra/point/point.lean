@@ -121,7 +121,7 @@ notation class HVadd *notation* class.
 
 -- ∀ (p₁ p₂ : Pt α n), (p₁ -ᵥ p₂) +ᵥ p₂ = p₁
 /- @@@
-### AddActon (Vc α n) (Pt α n)
+#### AddActon (Vc α n) (Pt α n)
 @@@ -/
 
 /-
@@ -162,8 +162,9 @@ instance [AddMonoid α]: AddAction (Vc α n) (Pt α n) :=
     apply add_assoc
 }
 
+-- NEEDED SAME CHANGE AS Pt.vsub.vadd_def
 theorem Pt.add_vadd_def [Add α] (v1 v2 : Vc α n) (p : Pt α n) :
-  (v1 + v2) +ᵥ p = ⟨(v1.1 + v2.1) + p.1 ⟩ := rfl
+  (v1 + v2) +ᵥ p = ⟨ (v1 + v2).1 +  p.1 ⟩ := rfl
 
 
 /- @@@

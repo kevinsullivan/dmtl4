@@ -76,7 +76,7 @@ instance [Add α]  : HAdd (Vc α n) (Vc α n) (Vc α n) :=
 
 @[simp]
 theorem Vc.hAdd_def [Add α] (v w : Vc α n) :
-  HAdd.hAdd v w = ⟨ v.1 + w.1 ⟩ := rfl
+  v + w = ⟨ v.1 + w.1 ⟩ := rfl
 
 /- @@@
 #### VAdd
