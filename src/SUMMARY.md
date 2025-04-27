@@ -65,6 +65,14 @@
   - [Affine Spaces](./DMT1/Lectures/L09_classes/C05_affineSpaces.lean.md)
   - [n-Dimensional Spaces](./DMT1/Lectures/L09_classes/C06_finiteDimensional.lean.md)
 
+- [Affine Spaces]()
+  - [Scalar](./DMT1/Lectures/L10_algebra/finfun/finfun.lean.md)
+  - [Indexed Finite Set](./DMT1/Lectures/L10_algebra/scalar/scalar.lean.md)
+  - [Tuple](./DMT1/Lectures/L10_algebra/tuple/tuple.lean.md)
+  - [Vector](./DMT1/Lectures/L10_algebra/vector/vector.lean.md)
+  - [Point](./DMT1/Lectures/L10_algebra/point/point.lean.md)
+  - [AffineSpace](./DMT1/Lectures/L10_algebra/torsor/torsor.lean.md)
+
 - [Assignments](){-}
 
   - [Lean and VSCode](./Assignments/a1.md)
