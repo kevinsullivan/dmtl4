@@ -1,10 +1,3 @@
-import Init.Data.Repr
-import Mathlib.Data.Rat.Defs
-import Mathlib.Algebra.Group.Defs
-import Mathlib.Algebra.Module.Basic
-import Mathlib.LinearAlgebra.AffineSpace.Defs
-import Mathlib.Algebra.Module.Pi
-import DMT1.Lectures.L10_algebra.tuple.tuple
 import DMT1.Lectures.L10_algebra.vector.vector
 
 namespace DMT1.Algebra.Point
@@ -17,60 +10,43 @@ variable
   {n : Nat}
   {α : Type u}
 
-------------------------------------------- POINTS
 /- @@@
-## Pt α n
+# Points: Pt α n
 
 We will now represent n-dimensional α *points* * as
 n-tuples of α values in the same way.
 
-### Data Type
+## Representation
 @@@ -/
 
 @[ext]
 structure Pt (α : Type u) (n: Nat) where
-  (toRep: Tuple α n)
-deriving Repr   -- , DecidableEq --, BEq
-
-/- @@@
-### Values
-
-There are no distinguished point values.
-@@@ -/
+  (toRep: Fin n → α)
+deriving Repr     --, DecidableEq --, BEq
 
 
 
 /- @@@
-### Operations
-@@@ -/
-
-/- @@@
-### Add
-
-There is no addition operation on points. Leaving out
-the definition of one means that it's not even syntactic
-to write p1 + p2. (We're careful not to enable coercions
-to reps except with care), which would permit expressions
-like this but the results would only be tuples. If there
-is a check for that type distinction, great, but good
-luck finding that in eeryday practice.
-@@@ -/
-
-/- @@@
-### Sub
-
-In place of Sub, we ask that ones use the heterogeneous -ᵥ
-VSub) subtraction operator.
-@@@ -/
-
-/- @@@
-#### Nonempty
+## Values: Zero (Vc α n)
+There are no distinguished point values. However
+we do need proof that there's *some point*. For that
+we'll require, somewhat arbitrarily, that there be a
+Zero scalar, and we'll build an arbitrary point with
+all zero internal parameters.
 @@@ -/
 
 instance [Zero α] : Nonempty (Pt α n) := ⟨ ⟨ 0 ⟩ ⟩
 
+
+
 /- @@@
-#### VSub
+## Operations
+@@@ -/
+
+
+
+/- @@@
+### VSub (Vc α n) (Pt α n)
 
 This is the -ᵥ notation providing typeclass.
 @@@ -/
@@ -78,23 +54,22 @@ This is the -ᵥ notation providing typeclass.
 instance [Sub α] : VSub (Vc α n) (Pt α n) :=
 { vsub p1 p2 := ⟨ p1.1 - p2.1 ⟩ }
 
--- Need notation class
 
 @[simp]
 theorem Pt.vsub_def [Sub α] (p1 p2 : Pt α n) :
   p1 -ᵥ p2 = ⟨ p1.1 - p2.1 ⟩ := rfl
 
+theorem Pt.vsub_toRep [Sub α] (p1 p2 : Pt α n) (i : Fin n) :
+  (p1 -ᵥ p2).toRep i = p1.toRep i - p2.toRep i := rfl
+
+
+
 /- @@@
-#### VAdd (Vc α n) (Pt α n)
+### VAdd (Vc α n) (Pt α n)
 @@@ -/
 -- defines +ᵥ
 instance [Add α] : VAdd (Vc α n) (Pt α n) where
   vadd v p := ⟨ v.1 + p.1 ⟩
-
--- SIMP ENABLED
-@[simp]
-theorem Pt.vadd_def [Add α] (v : Vc α n) (p : Pt α n) :
-  v +ᵥ p = ⟨ v.1 + p.1 ⟩ := rfl
 
 -- Insight need notation eliminating rule for VAdd from HVAdd
 @[simp]
@@ -113,11 +88,6 @@ theorem Pt.vsub_vadd_def
   [Sub α]
   (p1 p2 : Pt α n) :
   (p1 -ᵥ p2) +ᵥ p2 = ⟨ (p1 -ᵥ p2).1 + p2.1 ⟩ := rfl
-
-/- @@@
-Key was to add def theorem for the
-notation class HVadd *notation* class.
--/
 
 -- ∀ (p₁ p₂ : Pt α n), (p₁ -ᵥ p₂) +ᵥ p₂ = p₁
 /- @@@
@@ -148,21 +118,26 @@ instance [AddMonoid α]: AddAction (Vc α n) (Pt α n) :=
     intro
     -- to study in part by stepping through
     --
-    simp only [Pt.vadd_def]
-    simp [Tuple.add_def]
+    simp only [Pt.hVAdd_def]
+    -- TODO: Release note: a simplification here, losing two lines
+    --simp [Tuple.add_def]
     simp [Vc.zero_def]
-    simp [Tuple.zero_def]
+   -- simp [Tuple.zero_def]
 
   -- ∀ (g₁ g₂ : Vc α n) (p : Pt α n), (g₁ + g₂) +ᵥ p = g₁ +ᵥ g₂ +ᵥ p
   -- GOOD EXERCISE
+  -- TODO: Release note: simplification here, too
   add_vadd :=  by
     intros
-    simp only [Pt.vadd_def]
-    simp [Tuple.add_def]
+    ext
     apply add_assoc
 }
 
--- NEEDED SAME CHANGE AS Pt.vsub.vadd_def
+
+/- @@@
+### Add then VAdd
+@@@ -/
+
 theorem Pt.add_vadd_def [Add α] (v1 v2 : Vc α n) (p : Pt α n) :
   (v1 + v2) +ᵥ p = ⟨ (v1 + v2).1 +  p.1 ⟩ := rfl
 
@@ -180,7 +155,7 @@ theorem Pt.vsub_vadd'_def
 -- match on left pattern
 -- rewrite as this pattern
 by  -- and this shows it's ok
-  simp only [Pt.vadd_def]
+  simp only [Pt.hVAdd_def]
   simp only [Pt.vsub_def]
 
 end DMT1.Algebra.Point

@@ -10,8 +10,6 @@ import Mathlib.Data.Matrix.Defs
 import Mathlib.Data.Matrix.Basic
 import Mathlib.LinearAlgebra.Determinant
 import Mathlib.Algebra.Module.LinearMap.Defs
-
-
 import DMT1.Lectures.L10_algebra.torsor.torsor
 
 namespace DMT1.Lecture.Bases
@@ -70,7 +68,11 @@ def equivVcTuple [AddCommGroup α] [Semiring α] [Module α α] : Vc α n ≃ₗ
   map_add' := by intros v₁ v₂; cases v₁; cases v₂; rfl
 
   -- map_smul' : ∀ (m : α) (x : Vc α n), (m • x).toRep = (RingHom.id α) m • x.toRep
-  map_smul' := by intros a v; cases v; rfl
+  map_smul' := by
+    intros a v
+    cases v
+    simp [Vc.smul_def]
+    sorry -- not def-eq, likely instsance conflict issue, later
 
 
 -- definition theorems
@@ -86,22 +88,29 @@ theorem vcTuple.equiv_symm_apply
 ## Vectors
 @@@ -/
 
+
+-- TODO: Release note. Simplification.
 -- Vectors, with constructor parameters (1, 0), (0, 1), and (0, 2)
-def vc0 : Vc ℚ 2 := ⟨ ⟨ fun i => match i with | 0 => 1 | 1 => 0 ⟩ ⟩
-def vc1 : Vc ℚ 2 := ⟨ ⟨ fun i => match i with | 0 => 0 | 1 => 1 ⟩ ⟩
-def vc1': Vc ℚ 2 := ⟨ ⟨ fun i => match i with | 0 => 0 | 1 => 2 ⟩ ⟩
+-- def vc0 : Vc ℚ 2 := ⟨ ⟨ fun i => match i with | 0 => 1 | 1 => 0 ⟩ ⟩
+-- def vc1 : Vc ℚ 2 := ⟨ ⟨ fun i => match i with | 0 => 0 | 1 => 1 ⟩ ⟩
+-- def vc1': Vc ℚ 2 := ⟨ ⟨ fun i => match i with | 0 => 0 | 1 => 2 ⟩ ⟩
+
+def vc0 : Vc ℚ 2 := ⟨ fun i => match i with | 0 => 1 | 1 => 0 ⟩
+def vc1 : Vc ℚ 2 := ⟨ fun i => match i with | 0 => 0 | 1 => 1 ⟩
+def vc1': Vc ℚ 2 := ⟨ fun i => match i with | 0 => 0 | 1 => 2 ⟩
+-- Nicer
 
 
 /- @@@
 ## MATRIX VcTuple c r
 @@@ -/
 
-def twoVc := fun (i : Fin 2) => match i with | 0 => vc0 | 1 => vc1
+def twoVc := fun (i : Fin 2) => match i with | 0 => vc0 | 1 => vc1'
 
 #eval twoVc 0
 
 
-def aMatrix : Matrix (Fin 2) (Fin 2) ℚ := fun i j => ((twoVc i).toRep.toRep) j
+def aMatrix : Matrix (Fin 2) (Fin 2) ℚ := fun i j => ((twoVc i).toRep) j
 
 -- Mathlib types
 #check LinearEquiv
@@ -133,24 +142,61 @@ A LinearMap satisfies:
 A simple version of a linear map from a module M₁ to a module M₂ rep. wrt stdBasis
 @@@ -/
 
-structure LinearFinMap (α : Type u) (n m : ℕ) [Semiring α] where
-  toFun : (Fin n → α) → (Fin m → α)
-  map_add' : ∀ (x y : Fin n → α), toFun (x + y) = toFun x + toFun y
-  map_smul' : ∀ (a : α) (x : Fin n → α), toFun (a • x) = a • (toFun x)
+structure LinearFinMap (α : Type u) (n m : ℕ) (dom codom : Type v)
+  [Semiring α]
+  [AddCommMonoid dom]
+  [AddCommMonoid codom]
+  [Module α dom]
+  [Module α codom]
+  where
+  toFun : dom → codom
+  map_add' : ∀ (x y : dom), toFun (x + y) = toFun x + toFun y
+  map_smul' : ∀ (a : α) (x : dom), toFun (a • x) = a • toFun x
 
-def swapMap [Semiring α] : LinearFinMap α 2 2 where
-toFun := fun v =>
-  fun
-  | 0 => v 1
-  | 1 => v 0
-map_add' := by
-  intros x y
-  funext i
-  fin_cases i <;> simp [Pi.add_apply]
-map_smul' := by
-  intros a x
-  funext i
-  fin_cases i <;> simp [Pi.smul_apply]
+#check LinearFinMap ℚ 2 2 (Fin 2 → ℚ) (Fin 2 → ℚ)
+#check LinearFinMap ℚ 2 2 (Tuple ℚ 2) (Fin 2 → ℚ)
+#check LinearFinMap ℚ 2 2 (Vc ℚ 2) (Tuple ℚ 2)
+#check LinearFinMap ℚ 2 2 (Vc ℚ 2) (Tuple ℚ 2)
+
+#check (Tuple ℚ 2)
+
+def swapMap [Semiring ℚ] [Module ℚ (Vc ℚ 2)] : LinearFinMap ℚ 2 2 (Vc ℚ 2) (Vc ℚ 2) :=
+{
+  toFun := fun v =>
+    ⟨ fun
+      | 0 => v.toRep 1
+      | 1 => v.toRep 0 ⟩
+
+  map_add' := by
+    intros x y
+    simp [Vc.add_def]
+    simp [HAdd.hAdd]
+    simp [Add.add]
+    funext i
+    fin_cases i
+    rfl
+    rfl
+
+  map_smul' := by
+    intros a x
+    simp [Vc.smul_def]
+    simp [SMul.smul]
+    simp [MulAction.mul_smul]
+    funext i
+    fin_cases i
+    rfl
+    rfl
+
+
+    -- apply congrArg Vc.mk
+    -- simp [Vc.smul_toRep]
+
+    -- funext i
+    -- fin_cases i
+    -- simp [Pi.smul_apply]
+    -- simp [Pi.smul_apply]
+}
+
 
 structure LinearFinMap' (α : Type u) (n m : ℕ) [Semiring α] where
   toFun : Tuple α n → Tuple α m
@@ -160,7 +206,39 @@ structure LinearFinMap' (α : Type u) (n m : ℕ) [Semiring α] where
 
   -- mathlib: def Matrix (m n : Type*) (α : Type*) := m → n → α
   -- LinearFinMap: Finite-dimensional linear maps
-structure LinearFinMap'' (α : Type u) (n m : ℕ) [Semiring α] where
+structure LinearFinMap'' (α : Type u) (n m : ℕ)  (dom codom : Type u)
+  [Semiring α]
+  [AddCommMonoid dom]
+  [AddCommMonoid codom]
+  [Module α dom]
+  [Module α codom]
+  [Semiring α]
+  where
+  toMatrix : Matrix (Fin m) (Fin n) α
+  toFun : Tuple α n → Tuple α m := fun v => ⟨toMatrix.mulVec v.toRep⟩
+  map_add' : ∀ (x y : Tuple α n), toFun (x + y) = toFun x + toFun y :=
+    by
+      intros x y
+      apply Tuple.ext
+      intro i
+      simp [toFun, mulVec, dotProduct]
+      rw [Finset.sum_add_distrib]
+      apply Finset.sum_congr rfl
+      intro j _
+      simp [mul_add]
+
+  map_smul' : ∀ (a : α) (x : Tuple α n), toFun (a • x) = a • (toFun x) :=
+    by
+      intros a x
+      apply Tuple.ext
+      intro i
+      simp [toFun, mulVec, dotProduct]
+      rw [Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro j _
+      simp [mul_assoc]
+
+structure LinearFinMap''' (α : Type u) (n m : ℕ) (dom codom : Type u)[Semiring α] where
   toMatrix : Matrix (Fin m) (Fin n) α
   toFun : Tuple α n → Tuple α m :=
     fun v => ⟨toMatrix.mulVec v.toRep⟩
@@ -217,9 +295,9 @@ def LinearFinMap.ofMatrix [CommSemiring α] (M : Matrix (Fin n) (Fin n) α) : (L
     rw [← Finset.mul_sum]
     rfl
 
-
 #check aMatrix
-#check LinearFinMap.ofMatrix aMatrix
+def aLinMap := LinearFinMap.ofMatrix aMatrix
+#eval aLinMap.toFun ⟨ fun i => match i with | 0 => 2 | 1 => 3 ⟩
 
 
 structure LinEquiv (α : Type u) (n : Nat) (M₁ M₂ : Type u)
@@ -227,80 +305,59 @@ structure LinEquiv (α : Type u) (n : Nat) (M₁ M₂ : Type u)
 (toCoords : LinMap α n n)
 (fromCoords : LinMap α n n)
 
-/- @@@
-```lean
-vc0 = [1, 0]
-vc1 = [0, 1]
-@@@ -/
-def aLinMap : LinMap ℚ 2 2 :=
-{ rep := fun (c : Fin 2) => match c with | 0 => vc0 | 1 => vc1' }
+-- /-!
+-- ## Fin n → α and Vector α n Conversions
+-- This file defines:
 
--- A VcTuple
+-- - `Vector.toFun` : converts `Vector α n → Fin n → α`
+-- - `funToVector` : converts `Fin n → α → Vector α n`
+-- - optional: coercion from `Vector α n` to `Fin n → α`
+-- - simple examples
+-- -/
 
-def foo :  Fin 2 → Vc ℚ 2 := fun i => match i with | 0 => vc0 | 1 => vc1
+-- namespace FinVec
 
+-- -- Convert Vector α n → Fin n → α
+-- def Vc.toFun {α : Type u} {n : ℕ} (v : Vector α n) : Fin n → α :=
+--   fun i => v.get i
 
-def aVcTuple : VcTuple ℚ 2 2  := ⟨ foo ⟩
+-- -- Optional: CoeFun instance for automatic coercion
+-- instance {α : Type u} {n : ℕ} : CoeFun (Vector α n) (fun _ => Fin n → α) where
+--   coe := Vc.toFun
 
-/- @@@
-VcTuble
-@@@ -/
+-- -- Convert Fin n → α → Vector α n
+-- def funToVector {α : Type u} {n : ℕ} (f : Fin n → α) : Vc α n :=
+--   ⟨List.ofFn f, List.length_ofFn f⟩
 
-/-!
-## Fin n → α and Vector α n Conversions
+-- -- Examples
 
-This file defines:
+-- -- Example 1: Vector to function
+-- def v1 : Vc ℕ 3 := ![10, 20, 30]
 
-- `Vector.toFun` : converts `Vector α n → Fin n → α`
-- `funToVector` : converts `Fin n → α → Vector α n`
-- optional: coercion from `Vector α n` to `Fin n → α`
-- simple examples
--/
+-- #eval v1 0  -- 10
+-- #eval v1 1  -- 20
+-- #eval v1 2  -- 30
 
-namespace FinVec
+-- -- Example 2: Function to Vector
+-- def f1 : Fin 3 → ℕ := fun
+--   | 0 => 7
+--   | 1 => 8
+--   | 2 => 9
 
--- Convert Vector α n → Fin n → α
-def Vc.toFun {α : Type u} {n : ℕ} (v : Vector α n) : Fin n → α :=
-  fun i => v.get i
+-- def v2 : Vector ℕ 3 := funToVector f1
 
--- Optional: CoeFun instance for automatic coercion
-instance {α : Type u} {n : ℕ} : CoeFun (Vector α n) (fun _ => Fin n → α) where
-  coe := Vc.toFun
-
--- Convert Fin n → α → Vector α n
-def funToVector {α : Type u} {n : ℕ} (f : Fin n → α) : Vc α n :=
-  ⟨List.ofFn f, List.length_ofFn f⟩
-
--- Examples
-
--- Example 1: Vector to function
-def v1 : Vc ℕ 3 := ![10, 20, 30]
-
-#eval v1 0  -- 10
-#eval v1 1  -- 20
-#eval v1 2  -- 30
-
--- Example 2: Function to Vector
-def f1 : Fin 3 → ℕ := fun
-  | 0 => 7
-  | 1 => 8
-  | 2 => 9
-
-def v2 : Vector ℕ 3 := funToVector f1
-
-#eval v2.toList  -- [7, 8, 9]
+-- #eval v2.toList  -- [7, 8, 9]
 
 -- Example 3: Round trip
-example (v : Vector ℚ 4) : funToVector (Vector.toFun v) = v := by
-  cases v
-  simp [Vector.toFun, funToVector, List.ofFn, List.get]
-  apply congrArg
-  apply List.ext
-  intro i
-  simp
-  rfl
-
-end FinVec
+-- example (v : Vector ℚ 4) : funToVector (Vector.toFun v) = v := by
+--   cases v
+--   simp [Vector.toFun, funToVector, List.ofFn, List.get]
+--   apply congrArg
+--   apply List.ext
+--   intro i
+--   simp
+--   rfl
+-- end FinVec
 
 
 
@@ -316,12 +373,6 @@ rep :
 You get a pair of functions, Vc to Tuple ("coordinates"), and Tuple ("coordinates") to Vc,
 satisfying specific linearity constraints.
 @@@ -/
-
-
-structure
-
-
-
 
 
 
@@ -348,9 +399,6 @@ https://leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Module/Line
   tc := equivVcTuple.toFun vc0
   equivVcTuple.invFun (equivVcTuple.toFun ⟨ tc ⟩ )
 
--- #check Matrix + Basis = LinearMap
-
-
 --------
 
 /-
@@ -359,11 +407,6 @@ https://leanprover-community.github.io/theories/linear_algebra.html
 ```
 -/
 
-
-def Fin.stdBasis [AddCommGroup α] [Semiring α] [Module α α] : MyBasis (α : Type u) (n : Nat) :=
-{
-  rep := _
-}
 
 def fullRank (v : Fin n → Vc ℚ n) : Bool :=
   let m : Matrix (Fin n) (Fin n) ℚ := fun i j => (v j).toRep.toRep i

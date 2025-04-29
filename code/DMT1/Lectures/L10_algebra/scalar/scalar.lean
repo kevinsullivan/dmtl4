@@ -1,9 +1,5 @@
-import Init.Data.Repr
 import Mathlib.Data.Rat.Defs
-import Mathlib.Algebra.Group.Defs
 import Mathlib.Algebra.Module.Basic
-import Mathlib.LinearAlgebra.AffineSpace.Defs
-import Mathlib.Algebra.Module.Pi
 
 universe u
 variable
@@ -14,19 +10,26 @@ namespace DMT1.Algebra.Scalar
 
 /- @@@
 # Scalars
-
-Our intent is to support α affine n-spaces for dependable
-computation. We will typecheck away errors made possible by
-endemic widening of types by programmers for their earliest
-years.
-
-Because our intended abstraction, α affine n-spaces, which
-involving α linear n-spaces (modules) as well, we require any
-scalar type to come with the necessary structures defined and
-with Lean able to synthesize instances as needed. Here we list
-the structures that we build upon, using ℚ as a concrete scalar
-value type
-
 @@@ -/
+
+/- @@@
+### SMul α α
+
+For this entire system we'll assume scalar
+multiplication of a scalar by another scalar
+is just ordinary multiplication.
+@@@ -/
+
+#synth (SMul ℚ ℚ)
+#synth (SMul ℚ (Fin _ → ℚ))
+
+instance [Mul α] : SMul α α := { smul := Mul.mul }
+
+theorem Vc.smul_α_def [Mul α] (a b : α) :
+  a • b =  a * b := rfl
+
+theorem Vc.smul_α_toRep [Mul α] (a b : α) :
+  a • b =  a * b := rfl
+
 
 end DMT1.Algebra.Scalar

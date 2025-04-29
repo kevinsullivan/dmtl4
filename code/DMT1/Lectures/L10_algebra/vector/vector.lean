@@ -1,14 +1,7 @@
-import Init.Data.Repr
 import Mathlib.Data.Rat.Defs
-import Mathlib.Algebra.Group.Defs
-import Mathlib.Algebra.Module.Basic
-import Mathlib.LinearAlgebra.AffineSpace.Defs
-import Mathlib.Algebra.Module.Pi
 import DMT1.Lectures.L10_algebra.tuple.tuple
 
 namespace DMT1.Algebra.Vector
-
-open DMT1.Algebra.Tuples
 
 universe u
 variable
@@ -17,8 +10,9 @@ variable
 
 ----------------------------------------------------
 /- @@@
-# Vector: Vc α n
+# Vectors: Vc α n
 
+TODO: Update this explanation for loss of Tuple type
 We now define our abstract vector type, *Vc α n*, in
 the same way, but now using *Tuple α n* as a concrete
 representation. We lift the operations and structures
@@ -27,46 +21,53 @@ for *Tuple* from he underlying scalar *K* type.
 @@@ -/
 
 /- @@@
-### Data
+## Representation as Fin n → α
 @@@ -/
 
 @[ext]
 structure Vc (α : Type u) (n : Nat) : Type u where
-  (toRep : Tuple α n)
-deriving Repr
+  (toRep : Fin n → α)
+-- deriving Repr
+
 
 /- @@@
-### Values
+### Special Values: Zero (Vc α n)
 @@@ -/
 
 instance [Zero α]: Zero (Vc α n) where
   zero := ⟨ 0 ⟩
 
--- TODO
--- @[simp]
+
+@[simp]
 theorem Vc.zero_def [Zero α] :
-  (0 : Vc α n) = ⟨ ( 0 : Tuple α n) ⟩ := rfl
+  (0 : Vc α n) = ⟨ ( 0 : Fin n → α) ⟩ := rfl
 
 
 /- @@@
-### Operations
+## Operations
 @@@ -/
 
 
+
 /- @@@
-#### Add
+### Add (Vc α n)
 @@@-/
 
 instance [Add α] : Add (Vc α n) where
   add t1 t2 := ⟨ t1.1 + t2.1 ⟩
 
-
 -- SIMP ENABLED HERE
 theorem Vc.add_def [Add α] (t1 t2 : Vc α n) :
   t1 + t2 = ⟨ t1.1 + t2.1 ⟩ := rfl
 
+theorem Vc.add_toRep [Add α] {n : ℕ} (x y : Vc α n) (i : Fin n) :
+  (x + y).1 i = x.1 i + y.1 i := rfl
+
+
+
+
 /- @@@
-#### HAdd
+### HAdd (Vc α n) (Vc α n) (Vc α n)
 @@@-/
 
 -- Support for Vc `+` notation using HAdd
@@ -78,27 +79,13 @@ instance [Add α]  : HAdd (Vc α n) (Vc α n) (Vc α n) :=
 theorem Vc.hAdd_def [Add α] (v w : Vc α n) :
   v + w = ⟨ v.1 + w.1 ⟩ := rfl
 
-/- @@@
-#### VAdd
-@@@ -/
+theorem Vc.hAdd_toRep [Add α] {n : ℕ} (x y : Vc α n) (i : Fin n) :
+  (x + y).1 i = x.1 i + y.1 i := rfl
+
+
 
 /- @@@
-#### VAdd (Vc α n) (Vc α n)
-
-Question need for this, and design appropriateness.
-
--- defines +ᵥ on *vectors* (seems not quite right)
-instance [Add α] : VAdd (Vc α n) (Vc α n) where
-  vadd v p := ⟨ v.1 + p.1 ⟩
-
--- SIMP ENABLED
--- @[simp]
-theorem Vc.vadd_def [Add α] (v : Vc α n) (p : Vc α n) :
-  v +ᵥ p = ⟨ v.1 + p.1 ⟩ := rfl
-@@@ -/
-
-/- @@@
-#### Neg
+### Neg (Vc α n)
 
 No separate notation class.
 @@@ -/
@@ -106,12 +93,17 @@ No separate notation class.
 instance [Neg α] : Neg (Vc α n) where
    neg t := ⟨ -t.1 ⟩
 
-theorem Vc.neg_def [Neg α] (t : Tuple α n) :
-  -t = ⟨ -t.1 ⟩ := rfl
+-- TODO: Release note
+theorem Vc.neg_def [Neg α] (t : Vc α n) :
+  -t = ⟨ fun i => -(t.1 i) ⟩ := rfl
+
+theorem Vc.neg_toRep [Neg α] {n : ℕ} (x : Vc α n) (i : Fin n) :
+  -x.1 i = -(x.1 i) := rfl
+
 
 
 /- @@@
-#### Sub
+### Sub (Vc α n)
 @@@ -/
 
 instance [Sub α] : Sub (Vc α n) where
@@ -121,9 +113,13 @@ instance [Sub α] : Sub (Vc α n) where
 theorem Vc.sub_def [Sub α] (t1 t2 : Vc α n) :
   t1 - t2 = ⟨t1.1 - t2.1⟩ := rfl
 
+theorem Vc.sub_toRep [Sub α] {n : ℕ} (x y : Vc α n) (i : Fin n) :
+  (x - y).1 i = x.1 i - y.1 i := rfl
+
+
 
 /- @@@
-#### HSub
+### HSub (Vc α n) (Vc α n) (Vc α n)
 
 This is the heterogeneous subtraction (-) otation-defining class
 @@@ -/
@@ -134,19 +130,37 @@ instance [Sub α] : HSub (Vc α n) (Vc α n) (Vc α n) where
 theorem Vc.hSub_def [Sub α] (v w : Vc α n) :
   HSub.hSub v w = ⟨ v.1 - w.1 ⟩ := rfl
 
+@[simp]
+theorem Vc.hSub_toRep [Sub α] (v w : Vc α n) (i : Fin n) :
+  (v - w).1 i = v.1 i - w.1 i := rfl
+
 
 /- @@@
-#### SMul
-
-SMul is its own notation class.
+### SMul α (Vc α n)
 @@@ -/
 
 instance [SMul α α] : SMul α (Vc α n) where
   smul a t := ⟨ a • t.1 ⟩
 
--- @[simp]
-theorem Vc.smul_def [SMul α α] (a : α) (t : Vc α n) :
-  a • t = ⟨ a • t.1 ⟩ := rfl
+theorem Vc.smul_Vc_def [SMul α α] (a : α) (v : Vc α n) :
+  a • v = ⟨ a • v.toRep ⟩ := rfl
+
+theorem Vc.smul_Vc_toRep [SMul α α] (a : α) (v : Vc α n) (i : Fin n) :
+  (a • v).toRep i = a • (v.toRep i) :=
+rfl
+
+
+/- @@@
+### HSMul α vc vc
+@@@ -/
+instance [SMul α α] : HSMul α (Vc α n) (Vc α n) where
+  hSMul := SMul.smul
+
+theorem Vc.hSMul_def [SMul α α] (a : α) (v : Vc α n) :
+  a • v = ⟨ fun i => a • (v.1 i) ⟩ := rfl
+
+theorem Vc.hsmul_toRep [SMul α α] (a : α) (v : Vc α n) (i : Fin n) :
+  (a • v).toRep i = a • (v.toRep i) := rfl
 
 
 /- @@@
@@ -154,7 +168,7 @@ theorem Vc.smul_def [SMul α α] (a : α) (t : Vc α n) :
 @@@ -/
 
 /- @@@
-#### AddCommSemigroup
+#### AddCommSemigroup  (Vc α n)
 @@@ -/
 
 instance [AddCommSemigroup α]: AddCommSemigroup (Vc α n) :=
@@ -168,6 +182,8 @@ instance [AddCommSemigroup α]: AddCommSemigroup (Vc α n) :=
 
 
 /- @@@
+### AddSemigroup  (Vc α n)
+
 Had a bug here: included [Add α] as well as [Semigroup α]
 thereby getting two equivalent but different definitions
 of +. Try adding [Add α] to see how the problem manifests.
@@ -182,7 +198,7 @@ instance [AddSemigroup α] : AddSemigroup (Vc α n) :=
 }
 
 /- @@@
-#### AddCommMonoid
+#### AddCommMonoid (Vc α n)
 @@@ -/
 
 instance [AddCommMonoid α] : AddCommMonoid (Vc α n) :=
@@ -209,21 +225,10 @@ instance [Semiring α] : Module α (Vc α n) :=
   smul_zero := by intros a; ext i; apply mul_zero
 }
 
-#synth (AddZeroClass ℚ)
 
-instance [AddZeroClass α] : AddZeroClass (Vc α n) :=
-{
-  zero_add := by
-    intros x
-    ext i
-    apply zero_add
-
-
-  add_zero := by
-    intros x;
-    ext i;
-    apply add_zero
-}
+/- @@@
+#### AddMonoid (Vc α n)
+@@@ -/
 
 instance [AddMonoid α] : AddMonoid (Vc α n) :=
 {
@@ -241,60 +246,12 @@ instance [AddMonoid α] : AddMonoid (Vc α n) :=
 }
 
 /- @@@
-Same problem here. Had both [Add α] and [AddSemigroup α],
-the latter of which extends [Add α].
+#### SubNegMonoid
 @@@ -/
---#synth (SubNegMonoid ℚ)
-
-/-
-instance [SubNegMonoid α] : SubNegMonoid (Vc α n) :=
-{
-  zero_add := by
-    intro a;
-    ext
-    apply zero_add
-
-  add_zero := by
-    intro a;
-    ext
-    apply add_zero
-
-  sub_eq_add_neg := by
-    intro a b
-    ext
-    apply sub_eq_add_neg
-
-  nsmul := nsmulRec
-  zsmul := zsmulRec
-_
--/
-
 instance [SubNegMonoid α] : SubNegMonoid (Vc α n) :=
 {
   zsmul := zsmulRec
   sub_eq_add_neg := by intros a b; ext i; apply sub_eq_add_neg
-}
-
-instance [SubNegMonoid α] : SubNegMonoid (Vc α n) :=
-{
-  zero_add := by
-    intro a;
-    ext
-    apply zero_add
-
-  add_zero := by
-    intro a;
-    ext
-    apply add_zero
-
-  sub_eq_add_neg := by
-    intro a b
-    ext
-    apply sub_eq_add_neg
-
-  nsmul := nsmulRec
-  zsmul := zsmulRec
-
 }
 
 instance [AddGroup α] : AddGroup (Vc α n) :=
@@ -304,7 +261,6 @@ instance [AddGroup α] : AddGroup (Vc α n) :=
     ext
     apply neg_add_cancel
 }
-
 
 -- Yay
 -- Now that we can have Vc as the type of p2 -ᵥ p1
