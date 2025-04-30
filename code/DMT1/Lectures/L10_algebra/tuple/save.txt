@@ -1,0 +1,391 @@
+-- ------------------------TUPLE------------------------------------
+-- /- @@@
+-- # Tuples: Tuple α n
+
+-- Tuple represented as (Fin n → α).
+
+-- ## Definition and Pretty Printing
+-- @@@ -/
+
+-- instance [Repr α] : Repr (Fin n → α) where
+--   reprPrec t _ := repr (List.ofFn t)
+
+-- @[ext]
+-- structure Tuple (α : Type u) (n : Nat) where
+--   toRep : Fin n →  α
+-- deriving Repr
+
+-- -- Pretty printing of values (ignore details)
+-- instance [Repr α] : Repr (Tuple α n) where
+--   reprPrec t _ := repr (List.ofFn t.1)
+
+-- /- @@@
+-- ## Special Values
+
+-- ### Zero
+-- @@@ -/
+
+-- instance [Zero α] : Zero (Tuple α n) where
+--   zero := ⟨ 0 ⟩
+
+-- theorem Tuple.zero_def [Zero α] : (0 : Tuple α n) = ⟨ (0 : Fin n → α) ⟩ := rfl
+
+
+-- /- @@@
+-- When you introduce notation like +, -, •, or +ᵥ, you’re really using syntactic sugar for
+-- typeclass-based operations like HAdd, HSub, SMul, VAdd, VSub, etc. To support these notations
+-- well, and make them usable in proofs, you should pair them with definition theorems that make
+-- the meaning of the operation transparent to the simplifier, the rewriter, and the human reader.
+-- Zero, like some other classes, is its own notation class.
+-- @@@ -/
+
+-- ------------------------OPERATIONS------------------------------------
+
+-- /- @@@
+-- ## Operations
+
+-- For each:
+
+-- - arithmetic definition
+-- - definition unfolding lemmas
+-- - notation unfolding lemmas
+-- @@@ -/
+
+
+-- /- @@@
+-- ### Add n
+-- @@@ -/
+
+-- -- arithmetic
+-- instance [Add α] : Add (Tuple α n) where
+--   add t1 t2 := ⟨ t1.1 + t2.1 ⟩   -- Fin n → α add on right
+
+-- -- definition unfolding
+-- theorem Tuple.add_def [Add α] (t1 t2 : Tuple α n) :
+--   t1 + t2 = ⟨ t1.1 + t2.1 ⟩ := rfl
+
+-- -- TODO: release note (first used (needed?) in LinearFinMap swap example)
+-- theorem Tuple.add_toRep {α : Type*} [Add α] {n : ℕ} (x y : Tuple α n) (i : Fin n) :
+--   (x + y).toRep i = x.toRep i + y.toRep i :=
+-- rfl
+
+-- /- @@@
+-- ### HAdd
+
+-- Heterogeneous addition.
+-- @@@ -/
+
+-- -- notation unfolding
+-- instance [Add α] : HAdd (Tuple α n) (Tuple α n) (Tuple α n) where
+--   hAdd := Add.add
+
+
+-- theorem Tuple.hAdd_def [Add α] (x y : Tuple α n) :
+--   HAdd.hAdd x y = ⟨ x.1 + y.1 ⟩ := rfl
+
+
+-- /- @@@
+-- ### VAdd
+
+-- Heterogeneous addition. This type class provides the +ᵥ notation.
+-- @@@ -/
+
+-- instance [Add α] : VAdd (Tuple α n) (Tuple α n) where
+--   vadd t v := ⟨ t.1 + v.1 ⟩
+
+-- theorem Tuple.vadd_def [Add α] (v : Tuple α n) (p : Tuple α n) :
+--   v + p = ⟨ v.1 + p.1 ⟩ := rfl
+
+
+-- /- @@@
+-- #### Neg
+
+-- Now another small complication. Not every arithmetic-defining
+-- class, such as *Add*, has a separate notation class. There is
+-- no separate notation defining class (which would presumably be
+-- called *HNeg*) like there is for binary HAdd. Rather, the *-*
+-- notation is provided by *Neg* itself. Separate notation classes
+-- are used when there are both homogeneous versions of operations
+-- (such as + : α → α → α) and heterogeneous (e.g., + : α → β → γ).
+-- Unary negation, being unary, is always homogeneously typed, so
+-- no separate notation class is needed or provided.
+-- @@@ -/
+
+-- -- Definition (representation) reducer
+-- instance [Neg α] : Neg (Tuple α n) where
+--    neg t := ⟨ -t.1 ⟩
+
+-- -- Notation reducer
+-- theorem Tuple.neg_def [Neg α] (t : Tuple α n) :
+--   -t = ⟨ -(t.1) ⟩ := rfl
+
+
+-- /- @@@
+-- #### Sub
+-- @@@ -/
+
+-- instance [ Neg α] [Add α]: Sub (Tuple α n) where
+--   sub t1 t2 := ⟨t1.1 + (-t2.1)⟩
+
+-- -- @[simp]
+-- theorem Tuple.sub_def [Neg α] [Add α] (t1 t2 : Tuple α n) :
+--   t1 - t2 = ⟨t1.1 + (-t2.1)⟩ := rfl
+
+
+-- -------------
+-- /- @@@
+-- #### HSub (Tuple α n) (Tuple α n) (Tuple α n)
+
+-- Provides heterogeneous `-` notation
+-- @@@ -/
+
+-- instance [Sub α] : HSub (Tuple α n) (Tuple α n) (Tuple α n) where
+--   hSub t1 t2 := ⟨ t1.1 - t2.1 ⟩
+
+-- @[simp]
+-- theorem Tuple.hSub_def [Sub α] (t1 t2 : Tuple α n) :
+--   t1 - t2 = ⟨ t1.1 - t2.1 ⟩ := rfl
+
+-- /- @@@
+-- #### VSub (Tuple α n) (Tuple α n)
+
+-- This class provides the -ᵥ notation for tuples?
+-- We'll keep it here for now. The operation makes sense of course.
+-- @@@ -/
+
+-- -- TODO? Use Sb.sub?
+-- instance [Sub α] : VSub (Tuple α n) (Tuple α n) :=
+-- { vsub p2 p1 := ⟨ p2.1 - p1.1 ⟩ }
+
+-- theorem Tuple.vsub_def [Sub α] (p2 p1 : Tuple α n) :
+--   p2 -ᵥ p1 = ⟨ p2.1 - p1.1 ⟩ := rfl
+
+
+-- /- @@@
+-- #### SMul
+
+-- SMul is its own notation class.
+-- @@@ -/
+
+-- instance [SMul α α] : SMul α (Tuple α n) where
+--   smul a t := ⟨ a • t.1 ⟩
+
+-- /- @@@
+-- Yet more complexity: Lean will automatically infer an HSMul
+-- (notation-providing) instance from this SMul instance via a
+-- SMul.toHSMul instance know to Lean. So there's no need, and
+-- it would be undesirable to define HSMul. By contrast, Lean
+-- does not automatically derive an *HAdd* instances from *Add*,
+-- so we defined *HAdd* explicitly. We've thus commented out the
+-- notation class definition that we might otherwise write here.
+-- @@@ -/
+-- -- instance [SMul α α] : HSMul α (Tuple α n) (Tuple α n) :=
+-- -- {
+-- --   hSMul := SMul.smul
+-- -- }
+
+-- /- @@@
+-- We do still want to give ourselves a well known operation for
+-- reducing a • t on tuples to the level of Fin n → α operations,
+-- which we do with this *definition theorem*.
+-- @@@ -/
+
+-- theorem Tuple.smul_def [SMul α α] (a : α) (t : Tuple α n) :
+--   a • t = ⟨ a • t.1 ⟩ := rfl
+
+--   -- TODO: release note (first used (needed?) in LinearFinMap swap example)
+-- theorem Tuple.smul_toRep [SMul α α] {n : ℕ} (a : α) (t : Tuple α n) (i : Fin n) :
+--   (a • t).toRep i = a • t.toRep i := rfl
+
+
+-- -----------------
+
+
+-- /- @@@
+-- ### Structures
+-- @@@ -/
+
+-- /- @@@
+-- #### Additive Monoid
+
+-- For zero_add and add_zero
+-- @@@ -/
+
+-- #check AddMonoid
+
+-- instance [AddMonoid α] : AddMonoid (Tuple α n) :=
+-- {
+--   nsmul := nsmulRec
+--   zero_add :=
+--     by
+--       intros
+--       ext i
+--       apply zero_add
+
+--   add_zero := by intros; ext; apply add_zero
+--   add_assoc := by intros; ext; apply add_assoc
+-- }
+
+-- /- @@@
+-- ### SubNegMonoid
+-- @@@ -/
+-- -- AddMonoid G, Neg G, Sub G
+-- -- class SubNegMonoid (G : Type u) extends AddMonoid G, Neg G, Sub G
+-- instance [AddMonoid α] [Neg α] [Sub α] : SubNegMonoid (Tuple α n) :=
+-- {
+--   -- add_assoc := sorry
+--   zero_add := zero_add
+--   add_zero := add_zero
+--   nsmul := nsmulRec
+--   zsmul := zsmulRec
+--   sub_eq_add_neg :=
+--     by
+--       intros a b
+--       simp only [Tuple.sub_def]
+--       simp [Tuple.neg_def]
+--       simp [Tuple.vadd_def]
+--   }
+
+
+
+-- -- couldn't synthesize sub_eq_add_neg of AddGroup
+-- instance [AddGroup α] : AddGroup (Tuple α n) :=
+-- {
+--   neg_add_cancel := by
+--     intro a
+--     simp [Tuple.add_def] -- there is no separate "-" notation class
+--     simp [Tuple.neg_def]
+--     rfl
+--   zsmul := zsmulRec
+-- }
+
+
+-- /- @@@
+-- #### AddCommSemigroup (Tuple α n)
+-- @@@ -/
+
+-- instance [AddCommSemigroup α] : AddCommSemigroup (Tuple α n) :=
+-- {
+-- /- @@@
+-- Here's a key example of lifing *proofs* from the
+-- level of concrete representation to the level of
+-- *Tuple* objects.
+
+-- In particular, we'll prove that our tuples form an
+-- additive, commutative semigroup, which is to say that
+-- we'll construct proofs of the axioms for our *Tuples*
+-- from corresopnding proofs for *Fin n → α*.
+
+-- Those proofs, in turn, will come from an instance
+-- of *AddCommSemigroup *(Fin n → α)* that Lean will
+-- synthesize for us given that the necessary operations
+-- are already available on scalar (α) values. For that,
+-- we tell Lean to provide a *[AddCommSemigroup α]* class
+-- instance, which it can also synthesize on its own.
+
+
+-- The proofs of commutative and associativity of addition
+-- on *Tuple* values are then constructed using the proofs
+-- of the corresponding properties for (Fin n → α) concrete
+-- representation objects.
+
+-- strip the *Tuple* abstraction
+-- using the extensionality axiom for *Tuple* then
+-- apply the corresponding theorem from the level of
+-- the concrete representation. The *ext* tactic is
+-- enabled by the *@[ext]* annotation we've attached
+-- to the *Tuple* type definition. Use *ext* instead
+-- of *apply congrArg Tuple.mk*. Now you know what it
+-- actually does.
+-- @@@ -/
+--   add_comm := by
+--     intro a b
+--     simp [Tuple.add_def]
+--     apply add_comm
+
+-- /- @@@
+-- Here we see the use of our definition axiom. If
+-- we replace *simp [Tuple.add_def]* with *ext* then
+-- the extensionality principle will be applied, but
+-- it will erase abstractions all the way to scalars,
+-- not just one level to *Fin n → α*. Consistent with
+-- our wanting a strictly layered architecture here,
+-- we will prefer to strip abstractions just one level
+-- and to use the proofs and values available there.
+
+-- EXERCISE: Give it a try and in each case study the
+-- goal after applying either variant. Hover over the
+-- elements of the goal to see that in one case you've
+-- got a proof to construct involving (Fin n → α) and
+-- in the other case, involving scalars. There's an
+-- *add_comm* proof available in either case, but one
+-- applies to *Fin n → α* values while the other is on
+-- bare *α* values. It's important to know exactly how
+-- things are simplifying!
+-- @@@ -/
+
+--   -- We can write such tactic scripts as one-liners
+--   add_assoc := by
+--     intros
+--     simp [Tuple.add_def]
+--     apply add_assoc
+-- }
+
+-- /- @@@
+-- #### AddCommMonoid (Tuple α n)
+-- @@@ -/
+
+-- instance [AddCommMonoid α]: AddCommMonoid (Tuple α n) :=
+-- {
+--   nsmul := nsmulRec
+
+--   zero_add := by
+--     intros
+--     simp [Tuple.add_def, Tuple.zero_def]
+
+--   add_zero := by
+--     intros
+--     simp [Tuple.add_def, Tuple.zero_def]
+-- }
+
+-- -- CLASS 4/22 ENDED HERE
+
+-- /- @@@
+-- #### Module α (Tuple α n)
+-- @@@ -/
+
+-- instance [Semiring α] : Module α (Tuple α n) :=
+-- {
+--   smul_add := by
+--     intros
+--     simp [Tuple.smul_def]
+--     simp [Tuple.vadd_def]
+--   add_smul := by intros; simp [Tuple.smul_def, Tuple.add_def]; apply add_mul,
+--   mul_smul := by intros; simp [Tuple.smul_def, Tuple.add_def]; apply mul_assoc,
+--   one_smul := by intros; simp [Tuple.smul_def]
+--   zero_smul := by intros; simp [Tuple.zero_def, Tuple.smul_def]
+--   smul_zero := by intros a; simp [Tuple.zero_def, Tuple.smul_def]
+-- }
+
+
+-- -- Added this to make the following tests work
+-- instance [AddSemigroup α]: AddSemigroup (Tuple α n) :=
+-- {
+--   add_assoc := by
+--     intros
+--     ext
+--     apply add_assoc
+-- }
+
+
+-- /- @@@
+-- ### Test
+-- @@@ -/
+
+-- def f1 : Fin 3 → ℚ := fun i => match i with |0 => 1/2 |1 => 1/4 |2=> 1/6
+-- def t1 : Tuple ℚ 3 := ⟨ f1 ⟩
+-- #eval 3 • (t1 + (1/2 :ℚ) • t1 )         -- nsmul (nat smul)
+-- #eval (3 : ℚ) • (t1 + (1/2 :ℚ) • t1 )   --HSMul (notation)
+
+
+-- end  DMT1.Algebra.Tuples

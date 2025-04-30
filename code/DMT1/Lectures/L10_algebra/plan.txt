@@ -1,0 +1,13 @@
+Add +
+
+HAdd +
+
+Sub -
+
+HSub - 
+
+Neg -
+
+SMul 
+
+HSSub, VAdd, VSub

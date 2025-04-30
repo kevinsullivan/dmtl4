@@ -8,3 +8,26 @@
 - ring tactic, group tactic, abel tactic for abelian groups
 - having multiple actions of the same group on the same type requires some contortions, such as defining type synonyms, each of which carries different type class instances.
 @@@ -/
+
+
+/-
+/- @@@
+### VAdd
+@@@ -/
+
+/- @@@
+### VAdd (Vc α n) (Vc α n)
+
+Question need for this, and design appropriateness.
+
+-- defines +ᵥ on *vectors* (seems not quite right)
+instance [Add α] : VAdd (Vc α n) (Vc α n) where
+  vadd v p := ⟨ v.1 + p.1 ⟩
+
+-- SIMP ENABLED
+-- @[simp]
+theorem Vc.vadd_def [Add α] (v : Vc α n) (p : Vc α n) :
+  v +ᵥ p = ⟨ v.1 + p.1 ⟩ := rfl
+@@@ -/
+
+-/
