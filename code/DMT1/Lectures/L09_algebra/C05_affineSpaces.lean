@@ -1,4 +1,6 @@
-import DMT1.Lectures.L09_classes.C04_vectorSpaces
+import DMT1.Lectures.L09_algebra.C04_vectorSpaces
+import Mathlib.LinearAlgebra.AffineSpace.Defs
+import Mathlib.LinearAlgebra.Basis.Defs
 
 /- @@@
 <!-- toc -->
@@ -127,13 +129,13 @@ theorem add_vaddVcPt : ∀ (g₁ g₂ : Vc) (p : Pt), (g₁ + g₂) +ᵥ p = g�
 by
     intro g1 g2 h
     apply congrArg Pt.mk
-    /- @@@
-    Here we apply a generalized theorem from Lean's libraries to
-    finish the proof. The theorem is universally quantified and so
-    can be treated as a function, applied to particular, to yield
-    a proof about them. This is just ∀ elimination, also known as
-    universal *specialization*.
-    @@@ -/
+/- @@@
+Here we apply a generalized theorem from Lean's libraries to
+finish the proof. The theorem is universally quantified and so
+can be treated as a function, applied to particular, to yield
+a proof about them. This is just ∀ elimination, also known as
+universal *specialization*.
+@@@ -/
     apply Rat.add_assoc
 
 -- [EXERCISE: Finish the following proofs.]
@@ -304,3 +306,5 @@ require proof construction, then the change will not be
 allowed, even if it's a perfectly mathematically valid
 rewriting of the goal.
 @@@ -/
+
+--

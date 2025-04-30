@@ -1,4 +1,4 @@
-import DMT1.Lectures.L09_classes.C02_groupActions
+import DMT1.Lectures.L09_algebra.C02_groupActions
 import Mathlib.Algebra.AddTorsor.Defs
 
 /- @@@

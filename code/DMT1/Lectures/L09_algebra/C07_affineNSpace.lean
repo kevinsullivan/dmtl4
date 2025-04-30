@@ -1,6 +1,5 @@
 import Init.Data.Repr
 import Mathlib.Data.Rat.Defs
-
 import Mathlib.Algebra.Group.Defs
 import Mathlib.Algebra.Module.Basic
 import Mathlib.LinearAlgebra.AffineSpace.Defs
@@ -198,7 +197,8 @@ theorem Tuple.add_def [Add α] (t1 t2 : Tuple α n) :
 HAdd is synthesized, but not its definition theorem. Marking
 it as a simp axioms mean it'll be used as part of simp.
 @@@ -/
-@[simp]
+
+-- @[simp]
 theorem Tuple.hAdd_def [Add α] (x y : Tuple α n) :
   HAdd.hAdd x y = ⟨ x.1 + y.1 ⟩ := rfl
 
@@ -378,6 +378,7 @@ instance [Semiring α] : Module α (Tuple α n) :=
   smul_add := by
     intros
     simp [Tuple.smul_def]
+    simp [Tuple.add_def]
   add_smul := by intros; simp [Tuple.smul_def, Tuple.add_def]; apply add_mul,
   mul_smul := by intros; simp [Tuple.smul_def, Tuple.add_def]; apply mul_assoc,
   one_smul := by intros; simp [Tuple.smul_def]
@@ -480,7 +481,7 @@ instance [Add α] : Add (Vc α n) where
 
 
 -- SIMP ENABLED HERE
-@[simp]
+-- @[simp]
 theorem Vc.add_def [Add α] (t1 t2 : Vc α n) :
   t1 + t2 = ⟨ t1.1 + t2.1 ⟩ := rfl
 
@@ -494,7 +495,7 @@ instance [Add α]  : HAdd (Vc α n) (Vc α n) (Vc α n) :=
   hAdd := Add.add
 }
 
-@[simp]
+-- @[simp]
 theorem Vc.hAdd_def [Add α] (v w : Vc α n) :
   HAdd.hAdd v w = ⟨ v.1 + w.1 ⟩ := rfl
 
@@ -754,7 +755,7 @@ instance [Add α] : VAdd (Tuple α n) (Tuple α n) :=
 }
 
 -- SIMP ENABLED
-@[simp]
+-- @[simp]
 theorem Tuple.vadd_def [Add α] (v : Tuple α n) (p : Tuple α n) :
   v + p = ⟨ v.1 + p.1 ⟩ := rfl
 
@@ -766,7 +767,7 @@ instance [Add α] : VAdd (Vc α n) (Pt α n) where
   vadd v p := ⟨ v.1 + p.1 ⟩
 
 -- SIMP ENABLED
-@[simp]
+-- @[simp]
 theorem Pt.vadd_def [Add α] (v : Vc α n) (p : Pt α n) :
   v +ᵥ p = ⟨ v.1 + p.1 ⟩ := rfl
 
@@ -804,56 +805,11 @@ instance [AddMonoid α]: AddAction (Vc α n) (Pt α n) :=
 #synth (AddMonoid (Vc ℚ n))
 
 -- WIP
-@[simp]
+-- @[simp]
 theorem Pt.add_vadd_def [Add α] (v1 v2 : Vc α n) (p : Pt α n) :
   (v1 + v2) +ᵥ p = ⟨ v1.1 + v2.1 + p.1 ⟩ := rfl
 
 
-/- @@@
--- What I got wrong.
-```lean
-@[simp]
-theorem Pt.vsub_vadd'_def
-  [Add α]
-  [Sub α]
-  (p1 p2 : Pt α n) :
-   -- match on this
-  (p1 -ᵥ p2) +ᵥ p1 =
-  -- transofrm to this
-  ⟨ (p1.1 - p2.1) + p1.1 ⟩ :=
-  by
-    ext i
-    simp only [Pt.vadd_def]
-    simp only [Pt.vsub_def]
-```
-@@@ -/
-
-/- @@@
-Itt's still wrong.
-
--- The right code
--- The weird proof was never right
-```lean
-@[simp]
-theorem Pt.vsub_vadd'_def
-  [Add α]
-  [Sub α]
-  (p1 p2 : Pt α n) :
-   -- match on this
-  (p1 -ᵥ p2) +ᵥ p2 =
-  -- transofrm to this
-  ⟨ (p1.1 - p2.1) + p1.1 ⟩ :=
-  by
-    simp only [Pt.vadd_def]
-    simp only [Pt.vsub_def]
-    _
-```
-@@@ -/
-
-/- @@@
-There now. Behold. Correct is simpler
-@@@ -/
-@[simp]
 theorem Pt.vsub_vadd'_def
   [Add α]
   [Sub α]
@@ -865,15 +821,6 @@ theorem Pt.vsub_vadd'_def
   by
     simp only [Pt.vadd_def]
     simp only [Pt.vsub_def]
-
-
-/-
-    simp only [Pt.vadd_def]
--/
-
-    -- ext i
-    -- simp only [Pt.vadd_def]
-    -- simp only [Pt.vsub_def]
 
 
 -- AddTorsor (G : outParam Type*) (P : Type*) [AddGroup G] extends AddAction G P, VSub G P
@@ -894,50 +841,10 @@ AddTorsor (Vc α n) (Pt α n) :=
   vsub_vadd':= by
     --  ∀ (p₁ p₂ : Pt α n), (p₁ -ᵥ p₂) +ᵥ p₂ = p₁
     intros p1 p2
-    _
-
-
-/- @@@
-``lean
-@[simp]
-theorem Pt.vsub_vadd'_def [Add α] [Sub α]
-  (p1 p2 : Pt α n) :
-  (p1 -ᵥ p2) +ᵥ p1 =
-  ⟨ (p1.1 - p2.1) + p1.1 ⟩ :=
-  by
-    ext i
-    simp only [Pt.vadd_def]
-    simp only [Pt.vsub_def]
-```
-
-
--- Goal: (p1 -ᵥ p2) +ᵥ p2 = p1
--- vsub_vadd'_def : (p1 -ᵥ p2) +ᵥ p1 = ⟨ (p1.1 - p2.1) + p1.1 ⟩
-```
-
-It's my definition of vsub_vadd'_def that's wrong. It
-should prove (p1 -ᵥ p2) +ᵥ p2 ... Test: Let's go fix it.
-@@@ -/
-
-  vsub_vadd'_def, is  (p1 -ᵥ p2) +ᵥ p1 =
-  -- transofrm to this
-  ⟨ (p1.1 - p2.1) + p1.1 ⟩
-
-    simp [Pt.vsub_vadd'_def]
-    _
-/-
-  Pt.vsub_vadd'_def.{u}
-      {n : ℕ}
-      {α : Type u}
-      [Add α]
-      [Sub α]
-      (p1 p2 : Pt α n) :
-    (p1 -ᵥ p2) +ᵥ p1 =
-    { toRep := p1.toRep - p2.toRep + p1.toRep }
-  -/
+    sorry
 
   vadd_vsub':=
-    _
+    sorry
 }
 
 

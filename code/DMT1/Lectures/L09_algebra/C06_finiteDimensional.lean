@@ -403,15 +403,15 @@ theorem vcAddAssoc {α : Type u} {n : Nat} [Ring α]:
   -- strip Vc and Tuple abstraction
   apply congrArg Vc.mk
   apply congrArg Tuple.mk
-  /- @@@
-  NB: We now must show equality of  underlying Fin n → α
-  *functions*. For this we're going to need an axiom that
-  is new to us: the axiom of *functional extensionality*.
-  What it says is if two functions produce the same outputs
-  for all inputs then they are equal (even if expressed in
-  very different ways). Look carefully at the goal before
-  and after running *funext*.
-  @@@ -/
+/- @@@
+NB: We now must show equality of  underlying Fin n → α
+*functions*. For this we're going to need an axiom that
+is new to us: the axiom of *functional extensionality*.
+What it says is if two functions produce the same outputs
+for all inputs then they are equal (even if expressed in
+very different ways). Look carefully at the goal before
+and after running *funext*.
+@@@ -/
   apply funext
   -- Now prove values are equal for arbitrary index values
   intro i
@@ -419,10 +419,10 @@ theorem vcAddAssoc {α : Type u} {n : Nat} [Ring α]:
   simp [HAdd.hAdd]
   -- Finally appeal to associativity of α addition
   apply add_assoc
-  /- @@@
-  Go read the add_assoc theorem and puzzle through how
-  its application here finishes the proof.
-  @@@ -/
+/- @@@
+Go read the add_assoc theorem and puzzle through how
+its application here finishes the proof.
+@@@ -/
 
 /- @@@
 With that, we're two steps (*add* and *add_assoc*) closer
@@ -472,10 +472,10 @@ an additive torsor is to show that Vc forms an additive group.
 You might want to start with that!
 @@@ -/
 
-instance {α : Type u} {n : Nat} [Ring α]: AddGroup (Vc α n) :=
-{
-}
+-- instance {α : Type u} {n : Nat} [Ring α]: AddGroup (Vc α n) :=
+-- {
+-- }
 
-instance {α : Type u} {n : Nat} [Ring α]: AddTorsor (Vc α n) (Pt α n) :=
-{
-}
+-- instance {α : Type u} {n : Nat} [Ring α]: AddTorsor (Vc α n) (Pt α n) :=
+-- {
+-- }
