@@ -12,6 +12,11 @@ import Mathlib.LinearAlgebra.Determinant
 import Mathlib.Algebra.Module.LinearMap.Defs
 import DMT1.Lectures.L10_algebra.torsor.torsor
 
+
+/- @@@
+PLEASE IGNORE THIS FILE. UNDER CONSTRUCTION.
+@@@ -/
+
 namespace DMT1.Lecture.Bases
 
 open DMT1.Algebra.Vector
