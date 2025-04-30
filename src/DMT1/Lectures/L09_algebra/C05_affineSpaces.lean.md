@@ -1,5 +1,7 @@
 ```lean
-import DMT1.Lectures.L09_classes.C04_vectorSpaces
+import DMT1.Lectures.L09_algebra.C04_vectorSpaces
+import Mathlib.LinearAlgebra.AffineSpace.Defs
+import Mathlib.LinearAlgebra.Basis.Defs
 ```
 
 <!-- toc -->
@@ -127,11 +129,11 @@ by
     intro g1 g2 h
     apply congrArg Pt.mk
 ```
-    Here we apply a generalized theorem from Lean's libraries to
-    finish the proof. The theorem is universally quantified and so
-    can be treated as a function, applied to particular, to yield
-    a proof about them. This is just ∀ elimination, also known as
-    universal *specialization*.
+Here we apply a generalized theorem from Lean's libraries to
+finish the proof. The theorem is universally quantified and so
+can be treated as a function, applied to particular, to yield
+a proof about them. This is just ∀ elimination, also known as
+universal *specialization*.
 ```lean
     apply Rat.add_assoc
 
@@ -300,3 +302,7 @@ If if cannot confirm that, e.g., because doing so would
 require proof construction, then the change will not be
 allowed, even if it's a perfectly mathematically valid
 rewriting of the goal.
+
+```lean
+--
+```

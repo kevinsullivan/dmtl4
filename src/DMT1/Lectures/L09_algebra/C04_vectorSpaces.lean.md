@@ -286,6 +286,7 @@ is needed is to show that these rationals are equal.
 ```lean
     apply congrArg Vc.mk
 ```
+
 Note that the *+* in the expression, *a + b* within
 parentheses in the goal is *Vc* addition, but the *+*
 between the *.val* expressions is *rational* addition.
@@ -311,11 +312,11 @@ the proof.
     rfl
 ```
 
-  At this point, you really will have to go back
-  to just before this typeclass instance definition
-  and define typeclass instances for *Zero Vc* and
-  for *Add Vc*. When you come back here, the error
-  should be resolved.
+At this point, you really will have to go back
+to just before this typeclass instance definition
+and define typeclass instances for *Zero Vc* and
+for *Add Vc*. When you come back here, the error
+should be resolved.
 ```lean
   nsmul := nsmulRec
 
