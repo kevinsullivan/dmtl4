@@ -38,3 +38,10 @@ import DMT1.Lectures.L08_setsRelationsFunctions.C03_equality
 import DMT1.Lectures.L08_setsRelationsFunctions.C04_propertiesOfRelations
 
 import DMT1.Lectures.L09_classes.C02_groupActions
+
+import DMT1.Lectures.L10_algebra.scalar.scalar
+import DMT1.Lectures.L10_algebra.finfun.finfun
+import DMT1.Lectures.L10_algebra.tuple.tuple
+import DMT1.Lectures.L10_algebra.vector.vector
+import DMT1.Lectures.L10_algebra.point.point
+import DMT1.Lectures.L10_algebra.torsor.torsor

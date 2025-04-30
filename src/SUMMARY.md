@@ -58,20 +58,20 @@
   - [Properties](./DMT1/Lectures/L08_setsRelationsFunctions/C04_propertiesOfRelations.lean.md)
 
 - [Abstract Algebra](./mathStructures)
-  - [Groups](./DMT1/Lectures/L09_classes/C01_groups.lean.md)
-  - [Actions](./DMT1/Lectures/L09_classes/C02_groupActions.lean.md)
-  - [Torsors over Groups](./DMT1/Lectures/L09_classes/C03_torsors.lean.md)
-  - [Modules and Vector Spaces](./DMT1/Lectures/L09_classes/C04_vectorSpaces.lean.md)
-  - [Affine Spaces](./DMT1/Lectures/L09_classes/C05_affineSpaces.lean.md)
-  - [n-Dimensional Spaces](./DMT1/Lectures/L09_classes/C06_finiteDimensional.lean.md)
+  - [Groups](./DMT1/Lectures/L09_algebra/C01_groups.lean.md)
+  - [Actions](./DMT1/Lectures/L09_algebra/C02_groupActions.lean.md)
+  - [Torsors over Groups](./DMT1/Lectures/L09_algebra/C03_torsors.lean.md)
+  - [Modules and Vector Spaces](./DMT1/Lectures/L09_algebra/C04_vectorSpaces.lean.md)
+  - [Affine Spaces](./DMT1/Lectures/L09_algebra/C05_affineSpaces.lean.md)
+  - [n-Dimensional Spaces](./DMT1/Lectures/L09_algebra/C06_finiteDimensional.lean.md)
 
-- [Affine Spaces]()
-  - [Scalar](./DMT1/Lectures/L10_algebra/finfun/finfun.lean.md)
-  - [Indexed Finite Set](./DMT1/Lectures/L10_algebra/scalar/scalar.lean.md)
+- [Library]()
+  - [Scalar](./DMT1/Lectures/L10_algebra/scalar/scalar.lean.md)
   - [Tuple](./DMT1/Lectures/L10_algebra/tuple/tuple.lean.md)
   - [Vector](./DMT1/Lectures/L10_algebra/vector/vector.lean.md)
   - [Point](./DMT1/Lectures/L10_algebra/point/point.lean.md)
-  - [AffineSpace](./DMT1/Lectures/L10_algebra/torsor/torsor.lean.md)
+  - [Torsor](./DMT1/Lectures/L10_algebra/torsor/torsor.lean.md)
+  - [Affine](./DMT1/Lectures/L10_algebra/affine/affine.lean.md)
 
 - [Assignments](){-}
 
