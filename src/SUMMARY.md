@@ -65,7 +65,7 @@
   - [Affine Spaces](./DMT1/Lectures/L09_algebra/C05_affineSpaces.lean.md)
   - [n-Dimensional Spaces](./DMT1/Lectures/L09_algebra/C06_finiteDimensional.lean.md)
 
-- [Library]()
+- [Library](./mathStructures)
   - [Scalar](./DMT1/Lectures/L10_algebra/scalar/scalar.lean.md)
   - [Tuple](./DMT1/Lectures/L10_algebra/tuple/tuple.lean.md)
   - [Vector](./DMT1/Lectures/L10_algebra/vector/vector.lean.md)
@@ -73,7 +73,7 @@
   - [Torsor](./DMT1/Lectures/L10_algebra/torsor/torsor.lean.md)
   - [Affine](./DMT1/Lectures/L10_algebra/affine/affine.lean.md)
   
-- [Type Heterogeneity]()
+- [Type Heterogeneity](./hetero)
   - [Six Methods](./DMT1/Lectures/L11_TypeHeterogeneity/C01_hetero.lean.md)
 
 - [Assignments](){-}
