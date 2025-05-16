@@ -72,9 +72,11 @@
   - [Point](./DMT1/Lectures/L10_algebra/point/point.lean.md)
   - [Torsor](./DMT1/Lectures/L10_algebra/torsor/torsor.lean.md)
   - [Affine](./DMT1/Lectures/L10_algebra/affine/affine.lean.md)
+  
+- [Type Heterogeneity]()
+  - [Six Methods](./DMT1/Lectures/L11_TypeHeterogeneity/C01_hetero.lean.md)
 
 - [Assignments](){-}
-
   - [Lean and VSCode](./Assignments/a1.md)
   - [Syntax of Propositional Logic](./Assignments/a2.md)
   - [Semantics of Propositional Logic](./Assignments/a3.md)
