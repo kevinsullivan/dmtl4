@@ -9,59 +9,91 @@ import Mathlib.Algebra.Group.Defs
 Advanced mathematics is to a considerable extent about
 generalizing from numbers and operations on them to a
 diversity of abstract objects and analogous operations
-on them.
+on them, obeying laws that make it all valid and useful.
 
 As an example, we could imagine a set of objects, let's
-called them the *rotations of a clock hand.* A rotation is
-an action involving a clock hand moving from one position
-to another on the clock dial (e.g., from 3PM to 5PM, which
-we could say is a rotation by two hours).
+call them the *rotations of a clock hand.* A rotation is
+an action that moves a clock hand from one position on the
+dial to another. A clockwise rotation by two hours, for
+example, would move a hand at 3PM to the 5PM position. A
+duration of two hours acts on a hand pointing tio 3PM to
+the 5PM position.
 
 There's a zero rotation, which is no rotation at all. Any
 two rotations can be added. Addition is associative (just
 think about it). Every rotation has an inverse, which is
 rotation by the same amount in the opposite direction. And
 under these definitions, any rotation added to its inverse
-puts the hand of the clock where it started, so the sum
-of any rotation and its inverse is the zero rotation.
+puts the hand of the clock where it started, which is just
+what the zero rotation does; so the sum of any rotation and
+its inverse rotation is zero: no overall rotation at all.
+
+The pattern here, of a set of objects with an associative
+binary operator (addition in our domain), a zero element,
+and (additive) inverses arises in innumerable domains even
+though they might differ great in what the actual objects
+are. The generalization arises in a form that is expressly
+specialized to fit each particular type of object at hand.
+This generalization is that of a *group*.
 
 Any set of objects with these properties satisfies the
 rules required to form what is called a *group*. A group
-is any *mathematical structure* having several elements:
+is any *mathematical structure* having several elements,
+connected and governed by certain rules.
 
 - a set of objects, sometimes called the *carrier set*
 - an associative *binary operation*, such as addition
 - an element designated as the *zero* or *identity* element
-- an inverse operation on elements of the set
+- a total inverse operation on elements of the set
+- where the binary operation must be associative
+- adding zero on the left or right is an identity opreation
+- the sum of any element and its inverse is always the zero
 
-These objects are tied together by additional rules:
+The notion of a group is a general structure that we can
+impose on many different kinds of objects. The 120 degree
+rotations of a clock hand are the elements of a group as
+long as we define zero, addition, and inverse in ways that
+sastisfy the laws.
 
-- the binary operation must be associative
-- adding zero on the left or right has no effect
-- the sum of any element and its inverse must be zero
+The rational numbers forms an additive  group. The set of
+invertible matrices forms a multiplicative group. The general
+notion of a group gives us a common formal language in which
+to read, reason, and write about any such structure.
 
-What we have, then, in the notion of a group is a very
-general structure that we can impose on many different
-kinds of objects. Rotations of a clock hand can serve as
-group elements. The rationals form a group. The set of
-invertible matrices forms a group. The notion of a group
-gives us as way to study any such structure in common
-terms.
+Moreover, in everyday algebra we have not only groups. but
+a large and amazing zoo of abstract mathematical structures,
+each having special values (e.g., zeros and ones), operations
+(e.g., add and vadd), axioms and relations amongst elements,
+notations, major theorems, and now automations.
 
-Moreover, in everyday algebra we have not only groups.
-which have but one operation (typically an addition or
-multiplication operator), but a whole zoo of abstract
-mathematical structures, each having special values
-(such as the zero group element), operations (such as
-addition), and axioms, which ensure that everything
-works as required (addition is associative, etc).
+As an example of automations, consider Lean's support for
+proving propositional (proof-requiring) equalities involving
+*rings.* A ring is short of a *field* only by multiplicative
+inverses. Polynomials have addition and additive inverses, as
+well as multiplication, but they do not have multiplicative
+inverses in general.
 
-Now having seen how we can embed proposition logic,
-predicate logic, and set theory in Lean, we turn to
-the definition of more abstract mathematics, namely
-basic *abstract algebra*, in Lean.
+So now suppose you have as a proof goal to show that two, e.g.,
+polynomial expressions are mathematically equal. A proof could
+require an involved and tedious sesquence of steps involving
+such mundane concepts as operator associativity, commutativity,
+reduction of operation applications, and so forth. By contrast,
+the *ring* tactic in Lean will assuredly reduce both sides of
+the equality proposition to *normalized* forms that will be
+equal if and only if the terns are mathematically equal.
 
-## A Robot Vacuum
+TODO: Better example perhaps
+
+
+The lesson is that these *ad hoc* generalizations provide huge
+intellectual and now mechanical reasoning leverage, enabling one
+to treat a huge range of phenomena through its mapping into such
+a structure. Immedaitely a wealth of knowledge applies to the case
+at hand.  And, again, there's a massive universe of abstractions:
+group, ring, torsor, topological space, etc.
+
+
+## Robot Vacuum CLeaner
 
 While abstract algebra sounds, well, abstract, it has
 immediate practical applications. Imaging we have the
@@ -70,44 +102,51 @@ it has to do is rotate in place before heading off in a
 new direction.
 
 In this chapter we will develop an algebraic structure
-called a torsor, comprising rotational actions that turn
-a robot from one orientation to another. We will cast the
-the rotations of a robot as a group of *actions* that in
-turn change the robot's *orientations* (the directions it
-points in).
+called a torsor, comprising rotational actions, that you
+can think of as being like *vectors* in a vector space,
+that act on a robot to turn it, like a clock hand, from
+one orientation to another.
 
 To keep things simple, let's that there are only three
-directions, indicated by the vertices of an equilateral
-triangle, initially pointing "north." In this setting,
-we can also imaging a rotation that, when *applied* to
-an orientation, changes it to another orientation. We
-can imagine a *unit* orientation that rotates the robot
-by just one orientation going counter-clockwise.
+orientations, indicated by the vertices of an equilateral
+triangle: initially pointing "north for noon." Now imagine
+a *unit rotatation*, one that rotates the robot just one
+step (we'll take positive rotations as counter-clockwise).
 
-Just as before, we can now think of rotations as a group.
-What are the orientations? Well, they aren't a group, as
-it makes no sense to add or multiply orientations in the
-way we can do with rotations. On the other hand, we can
-take the difference of two orientations defined to be the
-rotation that makes the robot turn from the first to the
-second orientation.
+Just as before, as long as we fic the number of orientations
+of the clock-hand-like robot (e.g., 12 for hours or 3 for the
+positions of our robot ), we can now think of rotations as a
+group. From here out, we'll assume just three hand positions,
+and a *unit* rotation by *120 degrees*. Our objects are now
+the possible rotations: by 0, 120, and 240 degrees, with one
+more taking leaving robot back in initial orientation.
 
 When we have a set of actions operating on a set of points
-(here orientations), following certain rules, one has what
-in geometry is called a torsor. In this chapter, we will
-thus introduce the formalization of abstract algebra in
-Lean through the simple example of a torsor with rotations
-as *actions,* and orientations as *points*, with actions
-acting on points by rotating them around in a circle with
-three designated positions.
+(here orientations). An hour is an action, like a vector: a
+difference. It acts on a point in time, e.g., 2PM, by turning
+into the next time on the dial: 0/noon if on a three position
+clock, or to 3PM on an ordinary 12-hour clock.
+
+When we have a set of *points* (e.g., in time or geometric
+space), with differences between points forming actions that
+transform one to the other, all following certain sensible
+generalized rules, then one has a *torsor*.
+
+In this chapter, we will thus introduce the formalization
+of abstract algebra, and abstract mathematics more broadly,
+in Lean through this example of a torsor with orientations
+as *points*, and *actions* as rotations by fixed amounts,
+essentially moving points around in a discretized circle.
 
 What we'll have by the end of this chapter is the algebraic
-architecture of a robot that can only rotate (and only to a
-few fixed orientations), but not one that can move in straight
-lines. We'll fix that in the next chapter by defining a new
-torsor, where the actions are *linear* translations, and the
-points are all of the points of an n-dimensional linear space.
-such as a line, plane, or 3-D Euclidean space.
+architecture of a (early prototype) robot that can rotate to
+just three fixed orientations), but not one that can move at
+all yet in a straight line. We'll need actions that linearly
+translate points. That will be the topic of the next chapter
+where we'll introduce a few important design patterns, aimed
+at easing autmoated formal reasoning about these particular
+structures. By the end we'll have the robot algebra for both
+rotation (change of direction) and linear translation.
 
 ```lean
 namespace DMT1.Lecture.classes.groups
