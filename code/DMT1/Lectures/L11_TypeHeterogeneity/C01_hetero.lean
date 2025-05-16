@@ -1,4 +1,7 @@
 /- @@@
+
+DRAFT: STILL DEVELOPING.
+
 # Heterogeneous Collections (Lists, Tuples, etc.)
 
 So far we have seen parametric polymorphism, which enables
