@@ -156,7 +156,7 @@ inductive MyDyn where
 - Interfacing with external data or plugin systems.
 
 
-## Type-Aligned Vectors
+## Dependently Typed (Heterogeneous) Vectors
 
 ```lean
 inductive DVec : (n : Nat) → (σ : Fin n → Type u) → Type (u + 1)
