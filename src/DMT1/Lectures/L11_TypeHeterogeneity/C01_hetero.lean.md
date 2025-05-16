@@ -1,7 +1,7 @@
 
-DRAFT: STILL DEVELOPING.
-
 # Heterogeneous Collections (Lists, Tuples, etc.)
+
+DRAFT: STILL DEVELOPING.
 
 So far we have seen parametric polymorphism, which enables
 the definition of terms that can be parameterized to deal with
