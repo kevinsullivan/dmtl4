@@ -80,6 +80,7 @@
   - [Heterogeneous Vectors](./DMT1/Lectures/L11_TypeHeterogeneity/C04_heteroVector.lean.md)
   - [Sigma Chains](./DMT1/Lectures/L11_TypeHeterogeneity/C05_sigmaChain.lean.md)
   - [Custom Dynamic Types](./DMT1/Lectures/L11_TypeHeterogeneity/C06_dynTypes.lean.md)
+  - [Existential Wrappers](./DMT1/Lectures/L11_TypeHeterogeneity/C07_existsWrappers.lean.md)
   
 <!-- - [Assignments](){-}
   - [Lean and VSCode](./Assignments/a1.md)
