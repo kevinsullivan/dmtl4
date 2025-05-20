@@ -82,14 +82,6 @@
   - [Heterogeneous Vectors](./DMT1/Lectures/L11_TypeHeterogeneity/C05_heteroVector.lean.md)
   - [Sigma Chains](./DMT1/Lectures/L11_TypeHeterogeneity/C06_sigmaChain.lean.md)
   
-<!-- - [Assignments](){-}
-  - [Lean and VSCode](./Assignments/a1.md)
-  - [Syntax of Propositional Logic](./Assignments/a2.md)
-  - [Semantics of Propositional Logic](./Assignments/a3.md)
-  - [The Language of Arithmetic](./Assignments/a4.md)
-  - [HW #8 Propositions as Types](./DMT1/hw/hw8/hw8.lean.md)
-  - [HW #10 Negation and Classical Reasoning](./DMT1/hw/hw10/hw10.lean.md) -->
-
 ---
 
 [Set Up for This Course](./build.md)
