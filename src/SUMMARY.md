@@ -79,7 +79,7 @@
   - [Heterogeneous Signatures](./DMT1/Lectures/L11_TypeHeterogeneity/C03_heteroSig.lean.md)
   - [Heterogeneous Vectors](./DMT1/Lectures/L11_TypeHeterogeneity/C04_heteroVector.lean.md)
   - [Sigma Chains](./DMT1/Lectures/L11_TypeHeterogeneity/C05_sigmaChain.lean.md)
-  - [Existential Wrapping](./DMT1/Lectures/L11_TypeHeterogeneity/C06_existentialWrapping.lean.md)
+  - [Custom Dynamic Types](./DMT1/Lectures/L11_TypeHeterogeneity/C06_dynTypes.lean.md)
   
 <!-- - [Assignments](){-}
   - [Lean and VSCode](./Assignments/a1.md)

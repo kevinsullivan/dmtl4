@@ -6,6 +6,8 @@ Here we convert an n-Sig to such a Type by recursion on n.
 ```lean
 namespace DMT1.Lecture.hetero.hetero
 
+def Sig (n : Nat) := Fin n → Type
+
 -- A heterogeneous n-tuple based on a type signature σ : Fin n → Type
 def HChain : (n : Nat) → (σ : Sig n) → Type
   | 0,     _ => Unit
@@ -20,7 +22,7 @@ Good for modeling recursive structures or sequences
 Hard to work with.
 No constant-time access
 Not supportiveo of size-polymorphism
-Niche use in specific induction-based constructions.
+Usea in specific induction-based constructions
 
 ```lean
 end DMT1.Lecture.hetero.hetero
