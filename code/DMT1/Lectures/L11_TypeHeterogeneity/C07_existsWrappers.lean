@@ -32,7 +32,7 @@ type-specific manner.
 
 
 /- @@@
-### Exanple
+## Exanple
 With that, as an example we can maintain a List of
 uniformly-typed Showables hiding heterogeneously typed
 values along with applicable instance-provided metadata

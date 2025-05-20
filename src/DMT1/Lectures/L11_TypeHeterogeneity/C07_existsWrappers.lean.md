@@ -29,7 +29,7 @@ while still providing means to operate on each value in a
 type-specific manner.
 
 
-### Exanple
+## Exanple
 With that, as an example we can maintain a List of
 uniformly-typed Showables hiding heterogeneously typed
 values along with applicable instance-provided metadata
