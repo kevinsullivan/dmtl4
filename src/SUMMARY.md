@@ -74,13 +74,13 @@
   - [Affine](./DMT1/Lectures/L10_algebra/affine/affine.lean.md)
   
 - [Type Heterogeneity](./hetero)
-  - [Heterogeneous Collections](./DMT1/Lectures/L11_TypeHeterogeneity/C01_heteroIntro.lean.md)
-  - [Heterogeneous Lists](./DMT1/Lectures/L11_TypeHeterogeneity/C02_heteroList.lean.md)
+  - [Heterogeneous Collections](./DMT1/Lectures/L11_TypeHeterogeneity/C00_heteroIntro.lean.md)
+  - [Custom Dynamic Types](./DMT1/Lectures/L11_TypeHeterogeneity/C01_dynTypes.lean.md)
+  - [Existential Wrappers](./DMT1/Lectures/L11_TypeHeterogeneity/C02_existsWrappers.lean.md)
   - [Heterogeneous Signatures](./DMT1/Lectures/L11_TypeHeterogeneity/C03_heteroSig.lean.md)
-  - [Heterogeneous Vectors](./DMT1/Lectures/L11_TypeHeterogeneity/C04_heteroVector.lean.md)
-  - [Sigma Chains](./DMT1/Lectures/L11_TypeHeterogeneity/C05_sigmaChain.lean.md)
-  - [Custom Dynamic Types](./DMT1/Lectures/L11_TypeHeterogeneity/C06_dynTypes.lean.md)
-  - [Existential Wrappers](./DMT1/Lectures/L11_TypeHeterogeneity/C07_existsWrappers.lean.md)
+  - [Heterogeneous Lists](./DMT1/Lectures/L11_TypeHeterogeneity/C04_heteroList.lean.md)
+  - [Heterogeneous Vectors](./DMT1/Lectures/L11_TypeHeterogeneity/C05_heteroVector.lean.md)
+  - [Sigma Chains](./DMT1/Lectures/L11_TypeHeterogeneity/C06_sigmaChain.lean.md)
   
 <!-- - [Assignments](){-}
   - [Lean and VSCode](./Assignments/a1.md)
