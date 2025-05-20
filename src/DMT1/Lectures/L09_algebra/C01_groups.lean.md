@@ -2,6 +2,8 @@
 import Mathlib.Algebra.Group.Defs
 ```
 
+THIS ENTIRE SECTION 09 STILL NEEDS EDITING. SORRY.
+
 <!-- toc -->
 
 # Groups

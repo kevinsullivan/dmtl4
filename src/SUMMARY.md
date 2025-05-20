@@ -74,8 +74,13 @@
   - [Affine](./DMT1/Lectures/L10_algebra/affine/affine.lean.md)
   
 - [Type Heterogeneity](./hetero)
-  - [Six Methods](./DMT1/Lectures/L11_TypeHeterogeneity/C01_hetero.lean.md)
-
+  - [Heterogeneous Collections](./DMT1/Lectures/L11_TypeHeterogeneity/C01_heteroIntro.lean.md)
+  - [Heterogeneous Lists](./DMT1/Lectures/L11_TypeHeterogeneity/C02_heteroList.lean.md)
+  - [Heterogeneous Signatures](./DMT1/Lectures/L11_TypeHeterogeneity/C03_heteroSig.lean.md)
+  - [Heterogeneous Vectors](./DMT1/Lectures/L11_TypeHeterogeneity/C04_heteroVector.lean.md)
+  - [Sigma Chains](./DMT1/Lectures/L11_TypeHeterogeneity/C05_sigmaChain.lean.md)
+  - [Existential Wrapping](./DMT1/Lectures/L11_TypeHeterogeneity/C06_existentialWrapping.lean.md)
+  
 <!-- - [Assignments](){-}
   - [Lean and VSCode](./Assignments/a1.md)
   - [Syntax of Propositional Logic](./Assignments/a2.md)
