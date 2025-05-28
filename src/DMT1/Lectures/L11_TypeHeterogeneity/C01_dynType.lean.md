@@ -80,7 +80,7 @@ def dynTypeToString : DynType → String
 We model a signature as a function from position/index
 to DynType. These are the type tag,s not wrapped values.
 ```lean
-def Sig (n : ℕ) := Fin n → DynType
+def Sig (n : Nat) := Fin n → DynType
 
 
 -- Example: (Nat, Bool)
@@ -364,11 +364,10 @@ namespace DMT1.Lecture.hetero.hetero
 
 - Store heterogeneous values in (List MyDyn).
 - Loses static type information
-- Must downcast to use values
+- Must either downcast to use or package instances with values
 - Useful with JSON-style serialization
 - Dynamic modules or configurations
 - Interfacing with external systems
-- Must either package instances
 
 ```lean
 end DMT1.Lecture.hetero.hetero

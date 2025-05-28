@@ -90,11 +90,7 @@ def showables := [ natShowable,  boolShowable, stringShowable ]
 #eval List.map toTypedValString showables
 
 /- @@@
-## Modeling Signatures
-@@@ -/
-
-/- @@@
-## Signature: n-tuple of Showables
+## Signature: N-tuple of Showables
 
 We model a signature as a function from position/index
 to Showable.
@@ -112,6 +108,14 @@ def aSig : Sig 3 := ![natShowable, boolShowable, stringShowable]
 -- Convert to String
 #eval showSig aSig
 -- Output: "[Nat : 42, Bool : true, String : hello]"
+
+/- @@@
+## Modeling Modules
+
+From here, we represent a module as a tuple of signatures.
+
+TODO.
+@@@ -/
 
 
 /- @@@
